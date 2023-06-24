@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  rickytech.tcm.presentation:
+    image: ${DOCKER_REGISTRY-}rickytechtcmpresentation
+    build:
+      context: .
+      dockerfile: Rickytech.TCM.Presentation/Dockerfile
+
+  mssql:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    #image: mcr.microsoft.com/mssql/server:2017-CU11-ubuntu
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Thot2020.."
+    ports:
+      - 1433:1433
+    volumes:
+      - my-volume:/var/opt/mssql
+      
+volumes:
+  my-volume:

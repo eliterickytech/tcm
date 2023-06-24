@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "_LayoutLogout";
+}
+
+<div class="area_login">
+    <div class="logo">
+        <img width="100px" height="100px" src="img/Logo.png" alt="Patisserie">
+    </div>
+    <form method="POST">
+        <div id="email-group" class="area_form">
+            <label for="name" class="username">
+                Email
+            </label>
+            <input type="text" id="email" name="email" placeholder="enter your e-mail address" autocomplete="off" onkeypress="validateLogin()" onblur="validateLogin()">
+            <span class="errorData" role="alert" id="emailError" aria-hidden="true"></span>
+        </div>
+        <div id="password-group" class="area_form">
+            <label for="Password" class="password">
+                Password
+            </label>
+            <input type="password" id="password" name="password" placeholder="enter your password" autocomplete="off" onkeypress="validateLogin()">
+            <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
+        </div>
+        <div class="info">
+            <p>Forgot your password? Tap <a id="forgot" target="_self" style="color:#C0694E;" href="#"><b>here.</b></a></p>
+        </div>
+        <input type="submit" name="submit" class="submit" value="SIGN IN">
+        <div class="sign_up">
+            <p>New here? Tap to <a target="_self" href="https://thechefmelo.com/sign-up-user.php"><b>sign up.</b></a></p>
+        </div>
+    </form>
+    <style>
+        #setup_button {
+            display: block;
+        }
+    </style>
+</div>

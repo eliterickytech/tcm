@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+
+        <title>Login</title>
+        <link rel="stylesheet" href="~/css/style.css">
+        <style>
+            #addHome {
+                display: none;
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css" />
+        
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/forms.js"></script>
+@*        <script type="text/javascript" src="js/login-check.js"></script>
+        <script type="text/javascript" src="js/time.js"></script>*@
+
+        <script type="text/javascript" language="javascript">
+
+
+            // Add manifest
+            const manifestLink = document.createElement('link');
+            manifestLink.href = 'manifest.json';
+            manifestLink.rel = 'manifest';
+            document.head.appendChild(manifestLink);
+
+            // Add meta tag for theme
+            const metaThemeColor = document.createElement('meta');
+            metaThemeColor.name = 'theme-color';
+            metaThemeColor.content = '#ffffff';
+            document.head.appendChild(metaThemeColor);
+
+            // Add meta tag for viewport
+            const metaViewport = document.createElement('meta');
+            metaViewport.name = 'viewport';
+            metaViewport.content = 'width=device-width, initial-scale=1, shrink-to-fit=no';
+            document.head.appendChild(metaViewport);
+
+        </script>
+    </head>
+    <body class="access">
+        <section id="container_login">
+            <div class="container_login">
+                <div class="container_login_int">
+                    @RenderBody()
+                </div>
+            </div>
+            <footer>
+                <div class="collectibles">
+                    <img width="20px" height="20px" src="~/img/logo_collectibles.png" alt="">
+                    <h2>My Collectibles</h2>
+                </div>
+            </footer>
+            <div id="loader"></div>
+        </section>
+
+    </body>
+</html>

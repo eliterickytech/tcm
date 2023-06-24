@@ -1,0 +1,251 @@
+body {
+  width: 100%;
+	max-width: 425px;
+	height: 100%;
+	margin: 0 auto;	
+	display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.logo-icon {
+  position: absolute;
+  height: 12.32%;
+  width: 26.67%;
+  top: 6.16%;
+  right: 36.53%;
+  bottom: 81.53%;
+  left: 36.8%;
+  border-radius: var(--br-md);
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+#loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.75) url(../img/Logo.png) no-repeat center center;
+  z-index: 10000;
+}
+.add-a-new-admin,
+.add-a-new-admin1,
+.admins {
+  position: absolute;
+  top: 39.04%;
+  left: 3.73%;
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: none;
+}
+.add-a-new-admin,
+.add-a-new-admin1 {
+  top: 48.15%;
+  text-decoration: none;
+}
+.add-a-new-admin1 {
+  top: 78.82%;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #1e1e1e;
+  text-decoration: none;
+}
+.examplemailmailcom,
+.tap-the-delete-button-to-chang {
+  display: flex;
+  flex-wrap: wrap;
+  top: 42.61%;
+  left: 3.73%;
+  position: absolute;
+  margin: 0;
+}
+.tap-the-delete-button-to-chang {
+  height: 3.2%;
+  width: 93.6%;
+  top: 32.14%;
+  font-size: var(--font-size-sm);
+}
+.confirm-your-password {
+  position: absolute;
+  top: 70.2%;
+  left: 3.73%;
+  display: inline-block;
+}
+.enter-password-child {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-sm);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+}
+.the-same-password-you-use-to-l {
+  position: absolute;
+  top: 26.47%;
+  left: 3.38%;
+  font-weight: 300;
+  background: linear-gradient(#585858, #585858), #585858;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.enter-password {
+  position: absolute;
+  height: 4.19%;
+  width: 94.67%;
+  top: 72.91%;
+  right: 1.6%;
+  bottom: 22.91%;
+  left: 3.73%;
+}
+.my-collectibles {
+  position: absolute;
+  top: 10%;
+  left: 28.1%;
+  display: inline-block;
+}
+.logo-icon1 {
+  position: absolute;
+  height: 100%;
+  width: 16.53%;
+  top: 0;
+  right: 83.47%;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-md);
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+.my-collectibles-parent,
+.permissions {
+  position: absolute;
+  color: var(--color-gray-300);
+}
+.my-collectibles-parent {
+  height: 2.46%;
+  width: 32.27%;
+  top: 95.44%;
+  right: 62.67%;
+  bottom: 2.09%;
+  left: 5.07%;
+  text-align: center;
+}
+.permissions {
+  top: 28.33%;
+  left: 3.73%;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+}
+.edit-icon {
+  height: 1.23%;
+  width: 2.67%;
+  top: 42.86%;
+  right: 54.67%;
+  bottom: 55.91%;
+  left: 42.67%;
+
+}
+.close-icon,
+.edit-icon,
+.permissions-1-child {
+  position: absolute;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.close-icon {
+  height: 1.23%;
+  width: 2.67%;
+  top: 6.16%;
+  right: 3.2%;
+  bottom: 92.61%;
+  left: 94.13%;
+
+}
+.permissions-1-child {
+  height: 1.27%;
+  width: 1.56%;
+  top: 6.14%;
+  right: 93.29%;
+  bottom: 92.59%;
+  left: 5.15%;
+}
+.permissions-1-item {
+  position: absolute;
+  height: 3.45%;
+  width: 100%;
+  top: 21.18%;
+  right: 0;
+  bottom: 75.37%;
+  left: 0;
+  background-color: #ecb59e;
+}
+.e-mail,
+.tap-here-to-insert-their-e-mai {
+  position: absolute;
+  top: 51.72%;
+  left: 3.73%;
+  display: inline-block;
+}
+.tap-here-to-insert-their-e-mai {
+  top: 26.47%;
+  left: 3.38%;
+  font-weight: 300;
+}
+.enter-username {
+  position: absolute;
+  height: 4.19%;
+  width: 94.67%;
+  top: 54.93%;
+  right: 1.6%;
+  bottom: 40.89%;
+  left: 3.73%;
+  color: #585858;
+}
+.confirm-your-e-mail {
+  position: absolute;
+  top: 60.96%;
+  left: 3.73%;
+  display: inline-block;
+}
+.enter-username1 {
+  position: absolute;
+  height: 4.19%;
+  width: 94.67%;
+  top: 64.16%;
+  right: 1.6%;
+  bottom: 31.65%;
+  left: 3.73%;
+}
+.admin-console {
+  position: absolute;
+  width: 37.6%;
+  top: 22.04%;
+  left: 31.2%;
+  text-transform: lowercase;
+  color: var(--color-gray-300);
+  text-align: center;
+  display: inline-block;
+}
+.permissions-1 {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 812px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-400);
+  font-family: var(--font-inter);
+}
