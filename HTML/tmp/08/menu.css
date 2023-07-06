@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.close-icon,
+.logo-icon {
+  position: absolute;
+  max-height: 100%;
+  object-fit: cover;
+}
+.logo-icon {
+  height: 12.32%;
+  top: 10.1%;
+  bottom: 77.59%;
+  left: 60px;
+  border-radius: var(--br-md);
+  width: 100px;
+  cursor: pointer;
+}
+.close-icon {
+  height: 1.23%;
+  top: 6.16%;
+  bottom: 92.61%;
+  left: 199px;
+  width: 10px;
+}
+.my-collectibles {
+  position: absolute;
+  top: 10%;
+  left: 34px;
+  display: inline-block;
+}
+.logo-icon1 {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-md);
+  max-height: 100%;
+  width: 20px;
+  object-fit: cover;
+}
+.my-collectibles-parent {
+  position: absolute;
+  height: 2.46%;
+  top: 95.44%;
+  bottom: 2.09%;
+  left: 19px;
+  width: 121px;
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+.menu-operador-child,
+.menu-operador-inner,
+.menu-operador-item {
+  position: absolute;
+  height: 2.46%;
+  top: 25.49%;
+  bottom: 72.04%;
+  left: 71px;
+  max-height: 100%;
+  width: 20px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.menu-operador-inner,
+.menu-operador-item {
+  left: 100px;
+}
+.menu-operador-inner {
+  left: 129px;
+}
+.rectangle-div {
+  position: absolute;
+  height: 3.45%;
+  top: 31.65%;
+  bottom: 64.9%;
+  left: 0;
+  background-color: #ecb59e;
+  width: 221px;
+}
+.admin-console,
+.manage-collections {
+  position: absolute;
+  top: 38.79%;
+  left: 32px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.admin-console {
+  top: 32.51%;
+  left: 69px;
+  font-size: var(--font-size-sm);
+  text-transform: lowercase;
+}
+.configurations,
+.manage-banners,
+.permissions,
+.send-delights,
+.support {
+  position: absolute;
+  top: 43.97%;
+  left: 32px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.configurations,
+.manage-banners,
+.permissions,
+.support {
+  top: 49.14%;
+  width: 132px;
+}
+.configurations,
+.permissions,
+.support {
+  top: 54.31%;
+  width: 138px;
+}
+.permissions,
+.support {
+  top: 59.48%;
+}
+.support {
+  top: 64.66%;
+}
+.menu-operador {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  height: 812px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray);
+  font-family: var(--font-inter);
+}

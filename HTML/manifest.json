@@ -1,0 +1,51 @@
+{  
+    "background_color": "#ffffff",
+    "description": "The Chef Melo APP",
+    "dir": "ltr",
+    "display": "standalone",
+    "name": "thechefmelo",
+    "orientation": "any",
+    "short_name": "thechefmelo",
+    "id": "/login-view.php?homescreen=1",
+    "scope": "/",
+    "start_url": "./?homescreen=true",
+    "display_override": ["minimal-ui"],
+    "theme_color": "#ffffff",
+    "categories": [
+    "food"
+    ],
+    "screenshots": [],
+    "icons": [
+        {
+          "src": "https://thechefmelo.com/img/icon-192x192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+            "src": "https://thechefmelo.com/img/icon-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+      ],
+    "shortcuts": [
+    {
+        "name": "The Chef Melo",
+        "short_name": "Chef Melo",
+        "description": "APP The Chef Melo",
+        "url": "https://thechefmelo.com/login-view.php",
+        "icons": [
+            {
+                "src": "https://thechefmelo.com/img/icon-96x96.png", "sizes": "96x96"
+            }
+        ]
+    }
+    ],
+    "protocol_handlers": [
+        {
+          "protocol": "login",
+          "url": "/login.php?v=%s"
+        }
+      ],
+    "lang": "en",
+    "prefer_related_applications": false
+}

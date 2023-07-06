@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
+
+
+
+    <link rel="stylesheet" href="./13.css" />
+
+    <link rel="stylesheet" href="./13_b.css" />
+
+    
+    <link
+
+      rel="stylesheet"
+
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+
+    />
+
+  </head>
+
+
+
+  <body>
+
+    <div class="profile-exemplo-pgina-com">
+
+      <div class="profile-exemplo-pgina-com-child"></div>
+
+      <div class="profile-exemplo-pgina-com-item"></div>
+
+      <div class="hello-michael-hamilton">Hello, michael_hamilton</div>
+
+      <div class="my-collectible-delights">My collectible delights</div>
+
+      <div class="page-1">Page 1</div>
+
+      <div class="collectibles">collectibles</div>
+
+      <div class="connections">connections</div>
+
+      <div class="chats">chats</div>
+
+      <div class="parent">
+
+        <div class="div">4</div>
+
+        <img class="group-child" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/ba4901f5-81e3-474c-a0dc-7bb35559a9a7_1672278629997824304?Expires=-62135596800&Signature=HSFgnpznJWCexlPZYDn21D8vgydJJEO9nhjlMbRmL3UA~A5uNgs4BIdQiuJvM4B8dacoZpg~qN0C8To6vH2qS~tgGNXq6VqFtb~qalJfWw~554JdO4I31PXP3vcMGd5L-4EHK1WrJEr~HqVB-JrD6SGeQDLQN4RJw7VGfb~xL89wd2k1KMKsVkNGBQP0UOW~IG4dqbLr3fJ9tV3UlG7Ka6sB-1MFPVh4mwDFG8zSjXsLM3-Y7wG2hY9OKGTbRRjk6ohtP0-n96R3EaPBPQTUu6EsmErl-ZrSNLn6uvagOW~y5zQT46BfcfvfQYAmsDRX~I8iNZw~OUVFfyDKft02FA__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      </div>
+
+      <div class="group">
+
+        <div class="div1">11</div>
+
+        <img class="group-item" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/647aa3fd-5235-4acc-9398-20cb6631caf0_1672278629998000939?Expires=-62135596800&Signature=KneymWPiIN15dF7rGYkCxqIYwH~tvjqEE7mLJQL1~AI~snBhdE1hooZojP2ajFhtsXvHH8RIUcj19H7BzQ81y9B52t2bJwqNMsbI62Mgep14hycRadQzQX8jaEGGrVA6I-9~JFJXG5lrpU8dlq5NdfdLCbqhg2ZgXFSAhI9ZlMVBEvzOenROzTPEmK76Iom5gqclUNwEOd546gegHElpmgHVqHSAKkUuYCfo0UKM~zLZ4ZbeLK2FdbMjjtG9lVDeMuu4erSxFuFvs4AAiRppwKBYaCWwKnR9bi2-jBSAHdwTXf2w5aAN~a3J-Gj4xJzhSwEnPdqEtPjgS61zghmaZQ__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      </div>
+
+      <div class="container">
+
+        <div class="div2">2</div>
+
+        <img id="chat" class="group-inner" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/a4073f57-636a-43f7-8cb9-e0a5e1996d70_1672278629998086929?Expires=-62135596800&Signature=VnQsH4QakRgeg4K897xdByErvhjNBbTqA7XeQITCgwoi91Wuug4jcPj2kFokLtqiDESnGROaUSOOenocXn83oVzSYD95N-S2qUgAxrL8pnhrkHWcPjR5ioB~B-q9LL4PzCV8qFKk79Es9IVlBDT-wIQdRIrRNiKzCS4GW~IXfwoHJDOlv-fBvNe5Wn-ZWrfSRsBd94kxhxBzs0JhXXzpX51qKCfuWems36cTSxuSaEALzhsXY43s96GA6efLV9-ANICfPYhIA2Zrr1GFrYbka6v87tI-OH~XPXCa-eKFyp10q6B~uLOegfnpmR1mhb6S7TwSoYqVaZ6wMlrmGOENdA__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      </div>
+
+      <div class="vancouver-desserts">Vancouver desserts</div>
+
+      <img
+
+        class="profile-exemplo-pgina-com-inner"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/fb494072-74a5-4ba4-8c68-e7256592c7ad_1672278629998178691?Expires=-62135596800&Signature=S0nsxvUANfM-JrM6-6oi8~FuEO6HbPUdASFRt36IIsCWuBHCWMONIUxaFK5a4CjR8VdOsM77BN7FkHq9XUz~MWSuGDI7oZcipitlxpnJwD2~o9QyrHbnU6Uv6HeuiVrgPJT55-18dZ--6VggPMrberMd0mZHw8-yhNEd85aLvjP25z-ZPwtmu5t2CrGQ31nLgeIPMRHCKKTTSr2A2KrhnhvrpCKyDUREWcRrWfh283PJMqqnSYeB2ukKxUTSkwMeYyA8UoTpvbtvbnmmyyZ33kcXhtjbnohed8~U5ZIIawMk-3Cb5mAm21cW-39iY~tN09Ib20VXgAhR9m5P9VMmiA__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img
+
+        class="rectangle-icon"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/5796b68d-2fe6-4a22-8114-dc8e0497d17d_1672278629998261541?Expires=-62135596800&Signature=L0ajBOl~KdBHvw3~pIQrkOHpHTSWwJmgDt6zoUuX-0E2PErhDcbOUcabDm0Zn7ELc8bOW1DYI-wANi1mWwx22pMvKfoRvtjhuxuTbAd748Svu2aSbBUJ8XDgdAmbmYozFZjrJlFZvCase4Sj8UckHksae3uKdeH8X~QQDWoleGvol4469HWz~Ntje0sEGNYvLuUAiKRDUK4HT1X~9kO2ycuKCy2K~-gPtOKeWO01HrGw9NkU5mzkHociS7kL7azH8dazywe1l6nZ0BEDZt24fXAjCgxqQeaG3BpIxd8PDav0qbYh5jI6xxGS0hoC9-w-dQtVytj9MDparFxK6P87JQ__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img
+
+        class="profile-exemplo-pgina-com-child1"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/05de29a4-b211-4da8-9818-f2bffdb448bc_1672278629998376878?Expires=-62135596800&Signature=GAa6k3d~Ons38MTo-Dtcr57Lv3m51MUU705rhMAZtY-Pllz99ieEHymvNN3M6MIvTq-Ixj9k4LEyUu5nDwWYXGXSdipdhULveUivYOP0r06dw4nVtB~eHYXGHOU75fgmZ8vJSnsnzayifQ3d8537Iqlmn7wGiRIptfB82TukB6mAXYcfdMl3u-PHYq0WtSNH63qP3vteIlNrTOvlpLl3guUWgWRQedJsE432LyM6dH68-5QmXw8NjdjnBIo367xEqhfKLht-9OGd1paHDTG36d8yCN~i5jZZif2FfIhr0mJGYnRvJ1kK2sUU4u6jybHd~~QAr23-5XNKStRAsKcUCw__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img
+
+        class="profile-exemplo-pgina-com-child2"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/17d67129-6a65-4588-b582-da512245e952_1672278629998455275?Expires=-62135596800&Signature=hGqtAM6NfgwRR7bg-Oera0k0Ca8O77jB~HiB2MJppYb~F0c4NkHTf8VJ~F6qixyi-TdaeHV~SHoyTT9gUbaXdlqoSKmpv2ME3JDXiP2lv39Xlz9r~0IkVpJw1KVT9onNBTy7kyTaYRzjRDtTMhyLmmK0XRSnfHT3x0vqvIlfPYHLjkgW5t-vFb3-T~4npneXg52kztPF5cNNCqKoLdx2vT94OPy7ygDse--pFuTG9N47ij2C4Gy7JRwkEeig1CmmTt6t2exX5ydlbrxYFqg--AK2R3W6cAp6pcIUPgtS89UfN7cTEBgu1saKn4QhriObLKTnyqftN1X1-Pyr7~ISzA__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img class="menu-icon" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63ad95cc2434a4e554746314/1a6815ae-f4b0-43d0-b393-f883b12874af_1672320469888561936?Expires=-62135596800&Signature=RIKhvnIPmjKjySKz9NXQJE7kkcjXwnDDUWOtAFnBpfyxDiaHVN2ze2TWRDi-G-ZKOWqbiCix-rztSiz8TmByOPGbqW81o~5gmiR5h33aFvmtamWg1eSVx~iOcKXx--AkeiMB2NUt6GFYsD7bU47degywvpxGjHLINQdVbZ4ghC83CRzLhVjEf4g3FWfJkKRU5E12LnWKJu9qsQKNJrAxafMi0K5N8kE3fOCRJ2r1-L0PmhLvv0H3W44Cz~8cx8YyPYnC9W3Bh4Eok2Yt0FEhKpAovahOKubGK0yPVhv~w0b2wR12q~7nyy4LTJQoefo5poIcmdGCoE8LTfeHulN4Ww__&Key-Pair-Id=K1P54FZWCHCL6J" /><img
+
+        class="icon-new-treat"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/fff39344-c425-4d72-b976-5dc7688c2970_1672278629998603423?Expires=-62135596800&Signature=sTkcWFTmd5c0BZdueTM0k-NBY70xwBs5XUNHo7dBALC~1PZFWHcce22HsecK27AmuhLYQqt6wyV-dzQaK3BKpP8D-2ksaKtBDMwXgu7p4LnYGBX37kQc~r3gcLpZjK6BGc~4QTcZEAtX9b4f7-iWSiZm~5YtVgj9kvTNifHr0ZqU6Vos2Ib~yNAMPDgYpWMdX3k9mLGeOD9mS7JxIXKCBWs32kIBTmQc3OXOn-nhDDGNGaX5Hd0K8dVE129hDpnaBogrU0KaSRcVGaYRypxP5pKnLZ7tVciYojEVv1KL3NGjUIF3eHTKunROBfMjqK5PO1zOIGkvsU~1pmC2abpChQ__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img
+
+        class="profile-exemplo-pgina-com-child3"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63ad95cc2434a4e554746314/d825aaaf-433f-47bb-90d3-ffc173ac637c_1672320469889016661?Expires=-62135596800&Signature=VKrnXJ7h~t9RBflLL6-4MWGWETUIdgPEIAeOmKXyDCZtgClxa1i6XUKkR~D43QhWmvkfQb6drBb7T~Q6Fo2RQSta7T9pfVsnvafEsM1wPyScN1MvM6hj4XrdssZH0keG6bIos16Y5mLOOd2nUucP1~6C3bAmLIhBzGLBWqCmZ7YDsCPVSqt1f9c7nK4xGY310USzRRW~~dfobcRgGykkTc2L~XhUklDW3Pi2CBeCdTWATtz2l96ejGGznVUeY8p27vuyfL2N8UeYsGImkbOAM2eNvn7yGBPCc8RaZvnmMcXBK1ujGcbh8FWQAn1pokRyzgy3aDuLKcZkL3zlt4IfeA__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img class="edit-icon" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63ad95cc2434a4e554746314/38e67f40-2638-42b5-a562-c9d75f0ff206_1672320469888282945?Expires=-62135596800&Signature=jl9iQdm~dDlZHzPSYezXr8I8rIiybTSD17n-ACTgaWJiw-GzEm-px7rMuECC5nT5eaVFAAM~XU26GMZTYRFHGoeVQAfiHaoH1QImxP86~4AOiI0QSNx41~p163-iyKNCbCr2xkm4nvl-00F7VnfK8Ct25ljGh0bwLYDwTzXJFEV-M5aCs-y9Y10z7ARX4RnNBU-pygie5IPCn51do5xvrW2sDoQHfHdIHgelUJfa1rSGYWL859oxNUl50rYnKyl52s7~iKD2qrR8K961EuYdtE-kWXe3usniNNxlE5gwqU-psDqjBT0U11Yrf12YPBefS7zRChbAZysIpgLVMNE7aw__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      <div class="fixed-itens-bg-superior"></div>
+
+      <div
+
+      form id="search" class="search-bar">
+
+        <div class="barra-de-pesquisa"></div>
+
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search">
+
+        <a href="#"></a>
+
+      </form>
+
+     </div>
+
+      <img class="icon-side-menu" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/f8491da2-3b82-44fa-a12c-507e834c5db5_1672325708144518547?Expires=-62135596800&Signature=Gtn31AYH2D5zFfIIhObRPjBuVQsKP3E3g28JSXbKCi0GIMby6cgbggHGBk-UPdDcyTS6eLyOtBAD5LLLVXzCcpJEabt5UrZbDVYb3V4z16RlwrAiFTtlVw5BJjPjjDC4ukkSZwUZTltYbS7Tt1d9Ovpz2JDR8H0hA4~6s8BPgB93kr0A1WOP-glcKYz6nXY6xXwKTovEbc~Vz3NiwmYPLHWvXRpzBiTRJPTvTNXKnaK9GMZzLAjSKPPS2kbZr4spgLYXZc9wLJlWe0hfo-Y2xOpJJ0HkjffsKJo-mSQ0iy4Kutuq4ywgRd4ZB~UPStsKxexF53~D6mwhWDe4nv5s1g__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      <div class="menu-inferior"></div>
+
+      <div class="icon-home-in-parent">
+
+        <img id="home" class="icon-home-in" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/6da7898c-e90e-4e1d-a4ae-a309d998dab9_1672278629998979100?Expires=-62135596800&Signature=Dj5JCeXb~Hr9oP4hgPA0Ws4iB1qV8KvayaS9pygXh1FfbEhjpqE2jrlDT0TjWueEkBPGV74pOxgST6wQuKeo8YQwA1bXFQmQ~Q94-k0IJ5U7LQ5Sd9nELSPM3prl9FMvDf9gkYoxZr8cXoRszGNKL6h1W0HgqP3Bpe1uYv~qYsvgerxFXWf1G0yVuC~7Htj8eboAII5~p8ttYU5z09ToqNPzQpj-umKK5jSUEXn0cxCsIZZ-ARgUmKNlR-sMD9Nv1Y2m9-fRHoDdJkwBmTmV3kuXEWBuGBK1lZiGRj2AUZnMjOKkTRNOqZhAXybwIzkqprceUsFWvzgN6ysY4Ie0wg__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+        <div class="home">Home</div>
+
+      </div>
+
+      <div class="profile">
+
+        <img id="pvdu"
+
+          class="icon-profile-out"
+
+          alt=""
+
+          src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/0c8de492-5925-4aaf-b685-45dae14d5ed8_1672278629999053069?Expires=-62135596800&Signature=E3cFnOuMcO8Y~0filOVxunjXj8NsV9bd612UkUkAlHErrxmzOYj4No7~7ur5hcjz2d~w~TorPLeykF7pGGR~Jr8rjqzL7nl1EF0Vkpzkgv3nMBbnZze7IpCKguhNzkRkf~60KdYvMoIU0IPrxbZE6W5wYp5DLx4iGeGnvkGbotjdBRwkolE98GBRivQpfQ1wcPSyCuK2OaXSZCmZB0MYRXNxHRDRAZayn4VCohOpOQgl4J~gHdfsEWXZNNrhqLQUCXiiDe5XpH-zXiLhaunSt80zjs8gRZSfUBscjAwC0sTRxN6UE51-qheGJ9Pnhd5bkrN1MgGy4A0nHqjsLov4EQ__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+        />
+
+        <div class="profile1">Profile</div>
+
+      </div>
+
+      <div class="profile2">
+
+        <img id="usuarioc"
+
+          class="icon-profile-out1"
+
+          alt=""
+
+          src="https://d1xzdqg8s8ggsr.cloudfront.net/63acf25c33a79ad2d31d77dc/4d2ff057-c449-4d18-a3b6-1fc13d704d8a_1672278629999125314?Expires=-62135596800&Signature=bCb8PeezvWZV2eDFeVFF6l4glEHjKm6uLg66yZ2JZCJSzUQBJPh05mSpLmWD8NMpLPQ2X8WPvSBUmrNDdA05VEC5yDVVS~QrNgP~RHs~IxryPmv3lMSDig0jB99BuGuDeCKgBlWQtXyPh1aRW9BEsosmSb76kMbL-QZ3FBgZH5GQnmdTsjaKGQmsQCJgfIC0Jx7Vqc-E0YjdoABASSFfpewFPG45r0ZzwMxwra74tWMGK6AoRIsUFq8E0uIa3dZ07-fiR6vaMZTCfDXdkc4n4qy90sShCzuW5XvAQqS-48VbzC42esmTC33nnqZFyFQrTHmLSF6EyEFJcDVD8j4I6Q__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+        />
+
+        <div class="home">Community</div>
+
+      </div>
+
+      <div class="rectangle-parent">
+
+        <img class="group-child1" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/8bac4b22-f62a-4ec4-aa00-c38f8dd30c1d_1672325708144887253?Expires=-62135596800&Signature=tbbbpMI1M47NmNK9v1fNoP0yCz2L4yEMgKEwuIYBX0hOyehfutJL7fwyhIHiet~52TKd1xF0MuaO-Zs0OlqEOo0GtneZvE-5Kzvimbt97e5FF54Hs~BkO4G5PK3~EfcyXNA11MtThjdo6BnfZf3cEUAaMdjKsV17NlbnE5KNcNJeptJSvsK4ui59OGMNby~KolG1ynUYkhVB2F9o4C7BLdREdbNOnDajgq5V99p44mOrabNcnQuLASr5eIJsb85Tt2UmNP~OSV4IWj7np7B7nsZTls4NcPp16ralYAgcKDlTPAIyhTO5BM12R3zJEVOuD7~jsqKXuMRFIAGICj3zqQ__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+        <div class="my-collectibles">My Collectibles</div>
+
+      </div>
+
+    </div>
+
+    <script>    
+
+      var chat = document.getElementById("chat");
+
+      if (chat) {
+
+        chat.addEventListener("click", function () {
+
+          window.open("chats.html");
+
+        });
+
+      }
+
+      var usuarioc = document.getElementById("usuarioc");
+
+      if (usuarioc) {
+
+        usuarioc.addEventListener("click", function () {
+
+          window.open("usuarioc.html");
+
+        });
+
+      }
+
+      var pvdu = document.getElementById("pvdu");
+
+      if (pvdu) {
+
+        pvdu.addEventListener("click", function () {
+
+          window.open("pvdu.html");
+
+        });
+
+      }
+
+      var home = document.getElementById("home");
+
+      if (home) {
+
+        home.addEventListener("click", function () {
+
+          window.open("pvdu.html");
+
+        });
+
+      }
+
+      </script>
+
+  <body>
+
+</html>
+

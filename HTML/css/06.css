@@ -1,0 +1,292 @@
+body {
+  width: 100%;
+	max-width: 425px;
+	height: 100%;
+	margin: 0 auto;	
+	display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.all-chats,
+.chat-with-us,
+.unread {
+  position: absolute;
+  display: inline-block;
+}
+.chat-with-us {
+  top: 85.59%;
+  left: 34.93%;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  text-align: center;
+}
+.all-chats,
+.unread {
+  top: 18.1%;
+  left: 18.13%;
+  color: var(--color-gray-300);
+}
+.unread {
+  left: 69.6%;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+.chats-unread-child,
+.chats-unread-item {
+  position: absolute;
+  height: 0.25%;
+  width: 50.53%;
+  top: 21.43%;
+  right: 49.73%;
+  bottom: 78.33%;
+  left: -0.27%;
+  border-top: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+}
+.chats-unread-item {
+  right: -0.4%;
+  left: 49.87%;
+  border-top: 2px solid var(--color-brown);
+}
+.user-name1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 500;
+  display: inline-block;
+}
+.div,
+.message-preview-324mpx-or-abo {
+  position: absolute;
+  font-weight: 300;
+  display: inline-block;
+}
+.message-preview-324mpx-or-abo {
+  height: 42.86%;
+  width: 93.1%;
+  top: 57.14%;
+  left: 0;
+}
+.div {
+  top: 8.57%;
+  left: 87.07%;
+  font-size: var(--font-size-sm);
+}
+.group-child {
+  position: absolute;
+  height: 37.14%;
+  width: 3.74%;
+  top: 60%;
+  right: 0;
+  bottom: 2.86%;
+  left: 96.26%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.div1 {
+  position: absolute;
+  top: 65.71%;
+  left: 97.7%;
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  color: var(--color-gray-100);
+  display: inline-block;
+}
+.user-name1-parent {
+  position: absolute;
+  height: 4.31%;
+  width: 92.8%;
+  top: 23.4%;
+  right: 3.47%;
+  bottom: 72.29%;
+  left: 3.73%;
+  color: var(--color-gray-300);
+}
+.div3 {
+  position: absolute;
+  top: 65.71%;
+  left: 97.41%;
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  color: var(--color-gray-100);
+  display: inline-block;
+}
+.user-name2-parent {
+  position: absolute;
+  height: 4.31%;
+  width: 92.8%;
+  top: 29.56%;
+  right: 3.47%;
+  bottom: 66.13%;
+  left: 3.73%;
+  color: var(--color-gray-300);
+}
+.barra-de-pesquisa,
+.fixed-itens-bg-superior {
+  position: absolute;
+  height: 16.63%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 83.37%;
+  left: 0;
+  background-color: var(--color-white);
+}
+
+
+.icon-side-menu,
+.search-bar {
+  position: absolute;
+  height: 4.19%;
+  width: 94.67%;
+  top: 11.21%;
+  right: 2.67%;
+  bottom: 84.61%;
+  left: 2.67%;
+}
+.icon-side-menu {
+  height: 3.33%;
+  width: 7.2%;
+  top: 6.65%;
+  right: 89.07%;
+  bottom: 90.02%;
+  left: 3.73%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+.menu-inferior {
+  position: absolute;
+  height: 10.1%;
+  width: 100%;
+  top: 89.9%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px #d9d9d9 inset;
+}
+.icon-home-in {
+  position: absolute;
+  height: 58.33%;
+  width: 79.41%;
+  top: 0;
+  right: 11.76%;
+  bottom: 41.67%;
+  left: 8.82%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+.home {
+  position: absolute;
+  top: 68.75%;
+  left: 0;
+  display: inline-block;
+}
+.icon-home-in-parent {
+  position: absolute;
+  height: 5.91%;
+  width: 9.07%;
+  top: 91.75%;
+  right: 45.6%;
+  bottom: 2.34%;
+  left: 45.33%;
+}
+.icon-profile-out {
+  position: absolute;
+  height: 58.33%;
+  width: 72.97%;
+  top: 0;
+  right: 16.22%;
+  bottom: 41.67%;
+  left: 10.81%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+.profile {
+  position: absolute;
+  height: 5.91%;
+  width: 9.87%;
+  top: 91.75%;
+  right: 84.27%;
+  bottom: 2.34%;
+  left: 5.87%;
+  text-align: center;
+}
+.icon-profile-out1 {
+  position: absolute;
+  height: 58.33%;
+  width: 40.3%;
+  top: 0;
+  right: 31.34%;
+  bottom: 41.67%;
+  left: 28.36%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+.community {
+  position: absolute;
+  top: 68.75%;
+  left: 0;
+  font-weight: 600;
+  display: inline-block;
+}
+.profile2 {
+  position: absolute;
+  height: 5.91%;
+  width: 17.87%;
+  top: 92%;
+  right: 3.47%;
+  bottom: 2.09%;
+  left: 78.67%;
+  text-align: center;
+}
+.group-inner {
+  position: absolute;
+  height: 100%;
+  width: 22.9%;
+  top: 0;
+  right: 77.1%;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+
+}
+.my-collectibles {
+  position: absolute;
+  top: 26.67%;
+  left: 33.59%;
+  display: inline-block;
+}
+.rectangle-parent {
+  position: absolute;
+  height: 3.69%;
+  width: 34.93%;
+  top: 5.91%;
+  right: 32.53%;
+  bottom: 90.39%;
+  left: 32.53%;
+  text-align: center;
+  color: #111;
+}
+.chats-unread {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 812px;
+  overflow-x: auto;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-200);
+  font-family: var(--font-inter);
+}

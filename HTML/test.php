@@ -1,0 +1,5 @@
+<?php 
+$access_token = gzdeflate("eyJ1c2VyX2lkIjowLCJsb2dpbl9jb2RlIjo5NDQ4NzUsInVzZXJfZW1haWwiOiJqanNlcnZpY29zcm5AZ21haWwuY29tIiwiYWNjZXNzIjoiNUdlVFNkNCtMKlB3XC9Xc19KWkQ2SG90MGx5LmJPN1I5VSIsImRhdGEiOnsiMCI6Ik1qRTJOUT09IiwidXNlcl9wYXNzd29yZCI6Ik1qRTJOUT09IiwiMSI6Impqc2Vydmljb3NybkBnbWFpbC5jb20iLCJ1c2VyX2VtYWlsIjoiampzZXJ2aWNvc3JuQGdtYWlsLmNvbSIsIjIiOiI5OTg4Nzc2NiIsInVzZXJfcGhvbmUiOiI5OTg4Nzc2NiJ9fQ==",  9);
+$access_token = gzdeflate($access_token, 9);
+echo $access_token;
+?>

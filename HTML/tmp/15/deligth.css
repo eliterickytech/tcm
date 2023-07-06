@@ -1,0 +1,476 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.profile-new-delight-2-child {
+  position: absolute;
+  height: 15.76%;
+  width: 100%;
+  top: 16.63%;
+  right: 0;
+  bottom: 67.61%;
+  left: 0;
+  background-color: var(--color-white);
+}
+.profile-new-delight-2-item {
+  position: absolute;
+  height: 0.99%;
+  width: 100%;
+  top: 33.62%;
+  right: 0;
+  bottom: 65.39%;
+  left: 0;
+  background-color: #d9d9d9;
+}
+.menu-icon {
+  position: absolute;
+  height: 1.11%;
+  width: 19.55%;
+  top: 86.33%;
+  right: 39.92%;
+  bottom: 12.56%;
+  left: 40.53%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.a-delightful-christmas {
+  position: absolute;
+  top: 84.85%;
+  left: 72%;
+  font-size: 8px;
+  letter-spacing: 0.02em;
+  text-align: right;
+  display: inline-block;
+}
+.hello-michael-hamilton {
+  position: absolute;
+  top: 17.86%;
+  left: 4.53%;
+  color: var(--color-gray-200);
+  display: inline-block;
+}
+.edit-icon {
+  position: absolute;
+  height: 1.23%;
+  width: 2.67%;
+  top: 18.1%;
+  right: 55.47%;
+  bottom: 80.67%;
+  left: 41.87%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.v {
+  color: var(--color-gray-100);
+}
+.my-collectibles-delights,
+.page-1-v {
+  position: absolute;
+  top: 36.82%;
+  left: 80.8%;
+  display: inline-block;
+  color: var(--color-gray-200);
+}
+.my-collectibles-delights {
+  left: 3.73%;
+}
+.collectionables,
+.connections {
+  top: 29.43%;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+}
+.collectionables {
+  position: absolute;
+  left: 3.73%;
+  display: inline-block;
+}
+.connections {
+  left: 41.87%;
+  text-align: center;
+}
+.connections,
+.discussions,
+.div {
+  position: absolute;
+  display: inline-block;
+}
+.discussions {
+  top: 29.43%;
+  left: 79.73%;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.div {
+  top: 30.95%;
+  left: 74.6%;
+  font-weight: 300;
+}
+.group-child {
+  height: 90.48%;
+  width: 76.19%;
+  top: 0;
+  right: 23.81%;
+  bottom: 9.52%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.div1,
+.group-child,
+.parent {
+  position: absolute;
+}
+.parent {
+  height: 5.17%;
+  width: 16.8%;
+  top: 22.91%;
+  right: 78.13%;
+  bottom: 71.92%;
+  left: 5.07%;
+  font-size: var(--font-size-lg);
+  color: var(--color-brown);
+}
+.div1 {
+  top: 34.09%;
+  left: 69.44%;
+  font-weight: 300;
+  display: inline-block;
+}
+.group-item {
+  height: 90.91%;
+  width: 61.11%;
+  top: 0;
+  right: 38.89%;
+  bottom: 9.09%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.div2,
+.group,
+.group-item {
+  position: absolute;
+}
+.group {
+  height: 5.42%;
+  width: 19.2%;
+  top: 22.91%;
+  right: 40.27%;
+  bottom: 71.67%;
+  left: 40.53%;
+  font-size: var(--font-size-lg);
+  color: var(--color-brown);
+}
+.div2 {
+  top: 34.09%;
+  left: 76.56%;
+  font-weight: 300;
+  display: inline-block;
+}
+.group-inner {
+  position: absolute;
+  height: 90.91%;
+  width: 68.75%;
+  top: 0;
+  right: 31.25%;
+  bottom: 9.09%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.container {
+  position: absolute;
+  height: 5.42%;
+  width: 17.07%;
+  top: 22.91%;
+  right: 4.8%;
+  bottom: 71.67%;
+  left: 78.13%;
+  font-size: var(--font-size-lg);
+  color: var(--color-brown);
+}
+.profile-new-delight-2-inner {
+  position: absolute;
+  height: 13.67%;
+  width: 29.6%;
+  top: 41.5%;
+  right: 66.67%;
+  bottom: 44.83%;
+  left: 3.73%;
+  border-radius: var(--br-md) 0 0 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.rectangle-icon {
+  top: 41.5%;
+  right: 35.2%;
+  bottom: 44.83%;
+  left: 35.2%;
+}
+.profile-new-delight-2-child1,
+.profile-new-delight-2-child2,
+.profile-new-delight-2-child3,
+.rectangle-icon {
+  position: absolute;
+  height: 13.67%;
+  width: 29.6%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile-new-delight-2-child1 {
+  top: 41.5%;
+  right: 3.73%;
+  bottom: 44.83%;
+  left: 66.67%;
+  border-radius: 0 var(--br-md) 0 0;
+}
+.profile-new-delight-2-child2,
+.profile-new-delight-2-child3 {
+  top: 56.03%;
+  right: 35.2%;
+  bottom: 30.3%;
+  left: 35.2%;
+}
+.profile-new-delight-2-child3 {
+  right: 3.73%;
+  left: 66.67%;
+}
+.profile-new-delight-2-child4,
+.profile-new-delight-2-child5,
+.profile-new-delight-2-child6 {
+  position: absolute;
+  height: 13.67%;
+  width: 29.6%;
+  top: 70.57%;
+  bottom: 15.76%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile-new-delight-2-child4 {
+  right: 66.67%;
+  left: 3.73%;
+  border-radius: 0 0 0 var(--br-md);
+}
+.profile-new-delight-2-child5,
+.profile-new-delight-2-child6 {
+  right: 35.2%;
+  left: 35.2%;
+}
+.profile-new-delight-2-child6 {
+  right: 3.73%;
+  left: 66.67%;
+  border-radius: 0 0 var(--br-md) 0;
+}
+.rectangle-div {
+  position: absolute;
+  height: 73.28%;
+  width: 100%;
+  top: 16.63%;
+  right: 0;
+  bottom: 10.1%;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.profile-new-delight-2-child7 {
+  position: absolute;
+  height: 42.86%;
+  width: 92.8%;
+  top: 25.86%;
+  right: 3.47%;
+  bottom: 31.28%;
+  left: 3.73%;
+  border-radius: 10px;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.dessert-is-an-opportunity-to-m,
+.melopassion-dessert {
+  position: absolute;
+  left: 5.33%;
+  color: var(--color-gray-200);
+  display: inline-block;
+}
+.melopassion-dessert {
+  top: 71.06%;
+  font-size: 14px;
+  font-weight: 600;
+}
+.dessert-is-an-opportunity-to-m {
+  height: 11.82%;
+  width: 90.13%;
+  top: 74.01%;
+}
+.barra-de-pesquisa,
+.fixed-itens-bg-superior {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.fixed-itens-bg-superior {
+  height: 16.63%;
+  bottom: 83.37%;
+  background-color: var(--color-white);
+}
+
+.icon-side-menu {
+  position: absolute;
+  height: 4.19%;
+  width: 94.67%;
+  top: 11.21%;
+  right: 2.67%;
+  bottom: 84.61%;
+  left: 2.67%;
+}
+.icon-side-menu {
+  height: 3.33%;
+  width: 7.2%;
+  top: 6.65%;
+  right: 89.07%;
+  bottom: 90.02%;
+  left: 3.73%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.menu-inferior {
+  position: absolute;
+  height: 10.1%;
+  width: 100%;
+  top: 89.9%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px #d9d9d9 inset;
+}
+.icon-home-in {
+  position: absolute;
+  height: 58.33%;
+  width: 79.41%;
+  top: 0;
+  right: 8.82%;
+  bottom: 41.67%;
+  left: 11.76%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.home {
+  position: absolute;
+  top: 68.75%;
+  left: 0;
+  display: inline-block;
+}
+.icon-home-in-parent {
+  position: absolute;
+  height: 5.91%;
+  width: 9.07%;
+  top: 91.75%;
+  right: 45.33%;
+  bottom: 2.34%;
+  left: 45.6%;
+}
+.icon-profile-out {
+  position: absolute;
+  height: 58.33%;
+  width: 71.05%;
+  top: 0;
+  right: 15.79%;
+  bottom: 41.67%;
+  left: 13.16%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile1 {
+  position: absolute;
+  top: 68.75%;
+  left: 0;
+  font-weight: 600;
+  display: inline-block;
+}
+.profile {
+  position: absolute;
+  height: 5.91%;
+  width: 10.13%;
+  top: 91.75%;
+  right: 84.27%;
+  bottom: 2.34%;
+  left: 5.6%;
+  text-align: center;
+}
+.icon-profile-out1 {
+  position: absolute;
+  height: 58.33%;
+  width: 41.54%;
+  top: 0;
+  right: 30.77%;
+  bottom: 41.67%;
+  left: 27.69%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile2 {
+  position: absolute;
+  height: 5.91%;
+  width: 17.33%;
+  top: 92%;
+  right: 3.73%;
+  bottom: 2.09%;
+  left: 78.93%;
+  text-align: center;
+}
+.group-child1 {
+  position: absolute;
+  height: 100%;
+  width: 22.9%;
+  top: 0;
+  right: 77.1%;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.my-collectibles {
+  position: absolute;
+  top: 26.67%;
+  left: 33.59%;
+  display: inline-block;
+}
+.rectangle-parent {
+  position: absolute;
+  height: 3.69%;
+  width: 34.93%;
+  top: 5.91%;
+  right: 32.53%;
+  bottom: 90.39%;
+  left: 32.53%;
+  text-align: center;
+  color: var(--color-gray-200);
+}
+.profile-new-delight-2 {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 812px;
+  overflow-x: auto;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-100);
+  font-family: var(--font-inter);
+}

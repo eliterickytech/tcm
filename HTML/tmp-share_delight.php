@@ -1,0 +1,88 @@
+<?php
+//####################################################
+//####################################################
+//####################################################
+//Projeto Contratado Via Workana
+//Desenvolvedor Giovanni Barbosa
+//https://www.workana.com/freelancer/8f1f0c0f1e3374c5aecbd8edb6a19a06
+//#####################################################
+//#####################################################
+//#####################################################
+require_once("header.php");
+//####################################
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Share delight</title>
+    <link rel="stylesheet" href="css/style.css?<?php echo $time;?>">
+</head>
+
+<body>
+
+    <section id="delight">
+
+        <div class="delight">
+            <div class="delight_int">
+
+                <div class="area_delight">
+
+                    <div class="close_email">
+                        <img width="10px" height="10px" src="img/Close.png" alt="">
+                    </div>
+
+                    <div class="logo_share">
+                        <img width="100px" height="100px" src="img/Logo.png" alt="Patisserie">
+                    </div>
+
+                    <div class="share_delight_img">
+                        <img width="230px" height="230px" src="img/share_delight.png" alt="">
+                    </div>
+
+
+                    <div class="area_texts_delight_share">
+
+                        <div class="title_description_delight_share">
+                            <h2>Write them a special message:</h2>
+                        </div>
+
+                        <div class="info_delight_share">
+                            <p>
+                                Optional. Only them can read your message.
+                            </p>
+                        </div>
+
+                        <form action="#" method="POST">
+                            <textarea name="message" id="message" placeholder="Write your short message here."></textarea>
+                        </form>
+
+                        <div class="activity_share">
+                            <p>NEXT</p>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="collectibles">
+                <img width="20px" height="20px" src="img/logo_collectibles.png" alt="">
+                <h2>My Collectibles</h2>
+            </div>
+        </footer>
+    </section>
+
+
+
+</body>
+
+</html>

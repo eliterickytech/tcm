@@ -1,0 +1,273 @@
+<?php
+//####################################################
+//####################################################
+//####################################################
+//Projeto Contratado Via Workana
+//Desenvolvedor Giovanni Barbosa
+//https://www.workana.com/freelancer/8f1f0c0f1e3374c5aecbd8edb6a19a06
+//#####################################################
+//#####################################################
+//#####################################################
+require_once("header.php");
+//####################################
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Profile new delight</title>
+    <link rel="stylesheet" href="css/style.css?<?php echo $time;?>">
+</head>
+
+<body style="background-color: #ffffff;">
+
+
+    <section id="modal_new_delight">
+        <div class="modal_new_delight">
+
+            <div class="area_new_delight">
+    
+                <img src="img/new_delight.png" alt="">
+    
+                <div class="title_new_delight">
+                    <h2>MeloPassion Dessert</h2>
+                </div>
+    
+                <div class="sub_title_new_delight">
+                    <p>
+                        Dessert is an opportunity to make something beautiful as well as delicious.
+                        This is the process of the preparation of our most passionate piece: layers of chocolate sponge
+                        cake, passion fruit cream and special chocolate for a mouthwatering experience.
+                    </p>
+                </div>
+    
+    
+            </div>
+    
+    
+        </div>
+    </section>
+
+    <section id="container_home">
+
+        <div class="container_home">
+            <div class="container_home_int">
+                <div class="area_home">
+
+                    <div class="menu_header">
+                        <div class="icon_menu">
+                            <nav class="nav">
+                                <input type="checkbox" class="checkbox" id="checkbox">
+                                <label for="checkbox" class="label_menu">
+                                    <span class="menu_hamburguer"></span>
+                                </label>
+
+                                <div class="container_menu home">
+                                    <div class="container_menu_int">
+
+                                        <div class="area_menu">
+                                            <div class="logo_menu">
+                                                <img width="100px" height="100px" src="img/Logo.png" alt="Patisserie">
+                                            </div>
+                                            <div class="social_icons">
+                                                <img src="img/instagram.png" alt="">
+                                                <img src="img/facebook.png" alt="">
+                                                <img src="img/world.png" alt="">
+
+                                            </div>
+
+                                            <div class="admin">
+                                                <h2>admin console</h2>
+                                            </div>
+
+                                            <nav>
+                                                <ul>
+                                                    <a href="#">
+                                                        <li>MANAGE COLLECTIONS</li>
+                                                    </a>
+                                                    <a href="#">
+                                                        <li>SEND DELIGHTS</li>
+                                                    </a>
+                                                    <li>MANAGE BANNERS</li>
+                                                    <a href="#">
+                                                        <li>configurations</li>
+                                                    </a>
+                                                    <li>Permissions</li>
+                                                    <a href="#">
+                                                        <li>Support</li>
+                                                    </a>
+                                                </ul>
+                                            </nav>
+
+                                        </div>
+
+                                    </div>
+                                    <footer>
+                                        <div class="collectibles">
+                                            <img width="20px" height="20px" src="img/logo_collectibles.png" alt="">
+                                            <h2>My Collectibles</h2>
+                                        </div>
+                                    </footer>
+                                </div>
+
+                            </nav>
+                        </div>
+
+                        <div class="logo_home">
+                            <img width="30px" height="30px" src="img/logo_small.png" alt="Patisserie">
+                            <div class="collectibles_home">
+                                <h2>My Collectibles</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <form action="#" method="POST">
+                        <div class="area_form">
+                            <input type="text" name="search" class="search" placeholder="Search">
+                            <img class="icon_search" src="img/Icon_Search.png" alt="">
+                        </div>
+                    </form>
+
+
+                    <div class="area_profile">
+                        <div class="area_profile_int">
+
+                            <div class="title_profile">
+                                <h2>Hello, michael_hamilton</h2>
+                                <img width="10px" height="10px" src="img/edit.png" alt="">
+                            </div>
+
+
+                            <div class="icons_profile">
+
+                                <div class="icons_collectibles">
+                                    <div class="area_icons_collectibles">
+                                        <img src="img/collectibles.png" alt="">
+                                        <h2>4</h2>
+                                    </div>
+
+                                    <div class="title_icons_collectibles">
+                                        <p>collectibles</p>
+                                    </div>
+                                </div>
+
+                                <div class="icons_connections">
+                                    <div class="area_icons_connections">
+                                        <img src="img/connections.png" alt="">
+                                        <h2>11</h2>
+                                    </div>
+
+                                    <div class="title_icons_connections">
+                                        <p>collectibles</p>
+                                    </div>
+                                </div>
+
+                                <div class="icons_chats">
+                                    <div class="area_icons_chats">
+                                        <img src="img/chats.png" alt="">
+                                        <h2>2</h2>
+                                    </div>
+
+                                    <div class="title_icons_chats">
+                                        <p>chats</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="bar"></div>
+
+
+                    <div class="area_grid_collectible">
+                        <div class="area_grid_collectible_int">
+
+                            <div class="area_texts_collectible">
+
+                                <div class="title_collectible">
+                                    <h2>My collectible delights</h2>
+                                </div>
+
+                                <div class="page_collectible">
+                                    <p>Page 1 </p>
+                                    <img src="img/arrow_down.png" alt="">
+                                </div>
+
+                            </div>
+
+                            <div class="grid_template_collectible">
+
+                                <img src="img/box_1.png" alt="">
+                                <img src="img/box_2.png" alt="">
+                                <img src="img/box_3.png" alt="">
+
+                                <img src="img/box_2.png" alt="">
+                                <img src="img/box_2.png" alt="">
+                                <img src="img/box_2.png" alt="">
+
+                                <img src="img/box_2.png" alt="">
+                                <img src="img/box_2.png" alt="">
+                                <img src="img/box_2.png" alt="">
+
+                            </div>
+                            <div class="collection_name">
+                                <h2>Collection Name</h2>
+                            </div>
+                            <div class="area_dots">
+                                <div class="dot active"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="menu_footer">
+                        <div class="menu_footer_int">
+
+                            <div class="area_menu_footer">
+                                <a href="#">
+                                    <div class="menu_f">
+                                        <img width="27px" height="28px" src="img/Icon-Profile-In.png" alt="">
+                                        <h2>Profile</h2>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="menu_f">
+                                        <img width="27px" height="28px" src="img/Icon-Home-Out.png" alt="">
+                                        <h2><b>Home</b></h2>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="menu_f">
+                                        <img width="27px" height="28px" src="img/Icon_community.png" alt="">
+                                        <h2>Community</h2>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+</body>
+
+</html>

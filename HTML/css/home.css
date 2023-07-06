@@ -1,0 +1,394 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.current,
+.manage-banners {
+  position: absolute;
+  top: 14.29%;
+  left: 4.53%;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  display: inline-block;
+}
+.current {
+  top: 18.92%;
+}
+.advertising-icon {
+  position: absolute;
+  height: 19.88%;
+  width: 94.8%;
+  top: 50.55%;
+  right: 2.54%;
+  bottom: 29.57%;
+  left: 2.67%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.home-375x70,
+.new-upload {
+  position: absolute;
+  font-weight: 500;
+  display: inline-block;
+}
+.new-upload {
+  top: 47.49%;
+  left: 4.53%;
+  font-size: var(--font-size-lg);
+}
+.home-375x70 {
+  top: 14.38%;
+  left: 64%;
+  text-align: right;
+}
+.manage-banners-home-355x200-child {
+  position: absolute;
+  height: 0.79%;
+  width: 2.13%;
+  top: 14.78%;
+  right: 4%;
+  bottom: 84.43%;
+  left: 93.87%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.linkexample,
+.redirect-to {
+  position: absolute;
+  top: 43.45%;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+  display: inline-block;
+}
+.redirect-to {
+  left: 4.53%;
+  font-weight: 500;
+}
+.linkexample {
+  left: 23.73%;
+}
+.manage-banners-home-355x200-item {
+  position: absolute;
+  height: 2.46%;
+  width: 74.67%;
+  top: 42.86%;
+  right: 4%;
+  bottom: 54.68%;
+  left: 21.33%;
+  border-radius: var(--br-md);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+}
+.add-icon {
+  position: absolute;
+  height: 5.57%;
+  width: 15.08%;
+  top: 57.73%;
+  right: 42.52%;
+  bottom: 36.69%;
+  left: 42.4%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.confirm-password {
+  position: absolute;
+  top: 76%;
+  left: 2.67%;
+  color: #050427;
+  display: inline-block;
+}
+.enter-password-child {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-md);
+  border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+}
+.div {
+  position: absolute;
+  top: 26.47%;
+  left: 3.38%;
+  font-weight: 300;
+  background: linear-gradient(#585858, #585858), #585858;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.cta1,
+.enter-password {
+  position: absolute;
+  height: 3.35%;
+  width: 94.67%;
+  top: 79%;
+  right: 2.67%;
+  bottom: 11.23%;
+  left: 2.67%;
+}
+.cta1 {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 25px;
+  background-color: #8d7249;
+}
+.save-changes {
+  position: absolute;
+  top: 30%;
+  left: 23.89%;
+  display: inline-block;
+}
+.cta,
+.sign-in-cta {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.sign-in-cta {
+  height: 3.94%;
+  width: 48%;
+  top: 84%;
+  right: 26.13%;
+  bottom: 3.84%;
+  left: 25.87%;
+  text-align: center;
+  color: var(--color-white);
+}
+.manage-banners-home-355x200-inner,
+.video-icon {
+  position: absolute;
+  height: 19.88%;
+  width: 94.8%;
+  top: 21.98%;
+  right: 2.54%;
+  bottom: 58.14%;
+  left: 2.67%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.manage-banners-home-355x200-inner {
+  height: 9.53%;
+  width: 25.33%;
+  top: 62.76%;
+  right: 0;
+  bottom: 27.71%;
+  left: 74.67%;
+}
+.admin-view {
+  position: absolute;
+  top: 71%;
+  left: 80%;
+  text-transform: lowercase;
+  display: inline-block;
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+}
+.barra-de-pesquisa,
+.fixed-itens-bg-superior {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.fixed-itens-bg-superior {
+  height: 13.3%;
+  bottom: 86.7%;
+  background-color: var(--color-white);
+}
+.rectangle-div {
+  position: absolute;
+  height: 2.46%;
+  width: 74.67%;
+  top: 77.34%;
+  right: 4%;
+  bottom: 14.58%;
+  left: 21.33%;
+  border-radius: var(--br-md);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+}
+.icon-side-menu {
+  position: absolute;
+  height: 2.66%;
+  width: 7.2%;
+  top: 5.32%;
+  right: 89.07%;
+  bottom: 92.02%;
+  left: 3.73%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.menu-inferior {
+  position: absolute;
+  height: 8.08%;
+  width: 100%;
+  top: 93%;
+  right: 0;
+  bottom: 25.32%;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px #d9d9d9 inset;
+}
+.icon-home-in {
+  position: absolute;
+  height: 58.33%;
+  width: 77.14%;
+  top: 0;
+  right: 14.29%;
+  bottom: 41.67%;
+  left: 8.57%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.home {
+  position: absolute;
+  top: 68.75%;
+  left: 0;
+  font-weight: 600;
+  display: inline-block;
+}
+.icon-home-in-parent {
+  position: absolute;
+  height: 4.73%;
+  width: 9.33%;
+  top: 95%;
+  right: 45.33%;
+  bottom: 16.45%;
+  left: 45.33%;
+  color: var(--color-gray-100);
+}
+.icon-profile-out {
+  position: absolute;
+  height: 58.33%;
+  width: 72.97%;
+  top: 0;
+  right: 16.22%;
+  bottom: 41.67%;
+  left: 10.81%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile {
+  position: absolute;
+  height: 4.73%;
+  width: 9.87%;
+  top: 95%;
+  right: 84.27%;
+  bottom: 16.45%;
+  left: 5.87%;
+  text-align: center;
+  color: var(--color-gray-100);
+}
+.icon-profile-out1 {
+  position: absolute;
+  height: 58.33%;
+  width: 41.54%;
+  top: 0;
+  right: 30.77%;
+  bottom: 41.67%;
+  left: 27.69%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.community {
+  position: absolute;
+  top: 68.75%;
+  left: 0;
+  display: inline-block;
+}
+.profile2 {
+  position: absolute;
+  height: 4.73%;
+  width: 17.33%;
+  top: 95%;
+  right: 3.73%;
+  bottom: 16.26%;
+  left: 78.93%;
+  text-align: center;
+  color: var(--color-gray-100);
+}
+.group-child {
+  position: absolute;
+  height: 100%;
+  width: 22.9%;
+  top: 0;
+  right: 77.1%;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.my-collectibles {
+  position: absolute;
+  top: 26.67%;
+  left: 33.59%;
+  display: inline-block;
+}
+.rectangle-parent {
+  position: absolute;
+  height: 2.96%;
+  width: 34.93%;
+  top: 4.73%;
+  right: 32.53%;
+  bottom: 92.32%;
+  left: 32.53%;
+  text-align: center;
+}
+.redirect-to1,
+.tap-to-insert-a-link {
+  position: absolute;
+  top: 72.81%;
+  left: 4.53%;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  display: inline-block;
+}
+.tap-to-insert-a-link {
+  left: 23.73%;
+  font-weight: 200;
+}
+.rectangle-div {
+  position: absolute;
+  height: 2.46%;
+  width: 74.67%;
+  top: 72.22%;
+  right: 4%;
+  bottom: 25.32%;
+  left: 21.33%;
+  border-radius: var(--br-md);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+}
+.manage-banners-home-355x200 {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 1015px;
+  overflow-x: auto;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-200);
+  font-family: var(--font-inter);
+}

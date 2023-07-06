@@ -4,7 +4,7 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "rickytech.tcm.presentation": "StartDebugging"
+        "tcm.presentation.site": "StartDebugging"
       }
     }
   }

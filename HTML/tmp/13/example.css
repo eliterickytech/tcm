@@ -1,0 +1,428 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.profile-exemplo-pgina-com-child {
+  position: absolute;
+  height: 15.76%;
+  width: 100%;
+  top: 16.63%;
+  right: 0;
+  bottom: 67.61%;
+  left: 0;
+  background-color: var(--color-white);
+}
+.profile-exemplo-pgina-com-item {
+  position: absolute;
+  height: 0.99%;
+  width: 100%;
+  top: 33.62%;
+  right: 0;
+  bottom: 65.39%;
+  left: 0;
+  background-color: #d9d9d9;
+}
+.hello-michael-hamilton,
+.my-collectible-delights,
+.page-1 {
+  position: absolute;
+  height: 1.85%;
+  color: var(--color-gray-200);
+  display: inline-block;
+}
+.hello-michael-hamilton {
+  width: 35.73%;
+  top: 19%;
+  left: 4.53%;
+}
+.my-collectible-delights,
+.page-1 {
+  top: 36.82%;
+}
+.my-collectible-delights {
+  width: 34.4%;
+  left: 3.73%;
+  font-weight: 500;
+}
+.page-1 {
+  width: 10.13%;
+  left: 80.8%;
+}
+.collectibles,
+.connections {
+  height: 1.48%;
+  top: 29.43%;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+}
+.collectibles {
+  position: absolute;
+  width: 14.93%;
+  left: 5.6%;
+  display: inline-block;
+}
+.connections {
+  width: 16%;
+  left: 41.87%;
+  text-align: center;
+}
+.chats,
+.connections,
+.div {
+  position: absolute;
+  display: inline-block;
+}
+.chats {
+  height: 1.48%;
+  width: 7.2%;
+  top: 29.43%;
+  left: 84%;
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.div {
+  height: 69.05%;
+  width: 25.4%;
+  top: 30.95%;
+  left: 74.6%;
+  font-weight: 300;
+}
+.group-child {
+  height: 90.48%;
+  width: 76.19%;
+  top: 0;
+  right: 23.81%;
+  bottom: 9.52%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.div1,
+.group-child,
+.parent {
+  position: absolute;
+}
+.parent {
+  height: 5.17%;
+  width: 16.8%;
+  top: 22.91%;
+  right: 78.13%;
+  bottom: 71.92%;
+  left: 5.07%;
+  font-size: var(--font-size-lg);
+  color: var(--color-brown);
+}
+.div1 {
+  height: 65.91%;
+  width: 30.56%;
+  top: 34.09%;
+  left: 69.44%;
+  font-weight: 300;
+  display: inline-block;
+}
+.group-item {
+  height: 90.91%;
+  width: 61.11%;
+  top: 0;
+  right: 38.89%;
+  bottom: 9.09%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.div2,
+.group,
+.group-item {
+  position: absolute;
+}
+.group {
+  height: 5.42%;
+  width: 19.2%;
+  top: 22.91%;
+  right: 40.27%;
+  bottom: 71.67%;
+  left: 40.53%;
+  font-size: var(--font-size-lg);
+  color: var(--color-brown);
+}
+.div2 {
+  height: 65.91%;
+  width: 23.44%;
+  top: 34.09%;
+  left: 76.56%;
+  font-weight: 300;
+  display: inline-block;
+}
+.group-inner {
+  position: absolute;
+  height: 90.91%;
+  width: 68.75%;
+  top: 0;
+  right: 31.25%;
+  bottom: 9.09%;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.container {
+  position: absolute;
+  height: 5.42%;
+  width: 17.07%;
+  top: 22.91%;
+  right: 4.8%;
+  bottom: 71.67%;
+  left: 78.13%;
+  font-size: var(--font-size-lg);
+  color: var(--color-brown);
+}
+.vancouver-desserts {
+  position: absolute;
+  height: 1.23%;
+  width: 20.8%;
+  top: 84.85%;
+  left: 74.4%;
+  font-size: 8px;
+  letter-spacing: 0.02em;
+  text-align: right;
+  display: inline-block;
+}
+.profile-exemplo-pgina-com-child1,
+.profile-exemplo-pgina-com-child2,
+.profile-exemplo-pgina-com-inner,
+.rectangle-icon {
+  position: absolute;
+  height: 21.43%;
+  width: 46.4%;
+  top: 41.5%;
+  right: 49.87%;
+  bottom: 37.07%;
+  left: 3.73%;
+  border-radius: var(--br-md) 0 0 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile-exemplo-pgina-com-child1,
+.profile-exemplo-pgina-com-child2,
+.rectangle-icon {
+  right: 3.47%;
+  left: 50.13%;
+  border-radius: 0 var(--br-md) 0 0;
+}
+.profile-exemplo-pgina-com-child1,
+.profile-exemplo-pgina-com-child2 {
+  top: 62.93%;
+  right: 49.87%;
+  bottom: 15.64%;
+  left: 3.73%;
+  border-radius: 0 0 0 var(--br-md);
+}
+.profile-exemplo-pgina-com-child2 {
+  right: 3.47%;
+  left: 50.13%;
+  border-radius: 0 0 var(--br-md) 0;
+}
+.edit-icon,
+.icon-new-treat,
+.menu-icon,
+.profile-exemplo-pgina-com-child3 {
+  position: absolute;
+  height: 1.11%;
+  width: 18.93%;
+  top: 86.33%;
+  right: 40.53%;
+  bottom: 12.56%;
+  left: 40.53%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.edit-icon,
+.icon-new-treat,
+.profile-exemplo-pgina-com-child3 {
+  height: 7.39%;
+  width: 16%;
+  top: 81.9%;
+  right: 0.27%;
+  bottom: 10.71%;
+  left: 83.73%;
+}
+.edit-icon,
+.profile-exemplo-pgina-com-child3 {
+  height: 0.99%;
+  width: 2.13%;
+  top: 37.32%;
+  right: 4.8%;
+  bottom: 61.7%;
+  left: 93.07%;
+}
+.edit-icon {
+  height: 1.23%;
+  width: 2.67%;
+  top: 19%;
+  right: 55.47%;
+  bottom: 80.67%;
+  left: 41.87%;
+}
+.barra-de-pesquisa,
+.fixed-itens-bg-superior {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.fixed-itens-bg-superior {
+  height: 16.63%;
+  bottom: 83.37%;
+  background-color: var(--color-white);
+}
+
+.group-child1,
+.icon-side-menu {
+  position: absolute;
+  height: 3.33%;
+  width: 7.2%;
+  top: 6.65%;
+  right: 89.07%;
+  bottom: 90.02%;
+  left: 3.73%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.group-child1 {
+  height: 100%;
+  width: 22.9%;
+  top: 0;
+  right: 77.1%;
+  bottom: 0;
+  left: 0;
+}
+.my-collectibles {
+  position: absolute;
+  height: 50%;
+  width: 66.41%;
+  top: 26.67%;
+  left: 33.59%;
+  display: inline-block;
+}
+.rectangle-parent {
+  position: absolute;
+  height: 3.69%;
+  width: 34.93%;
+  top: 5.91%;
+  right: 32.53%;
+  bottom: 90.39%;
+  left: 32.53%;
+  text-align: center;
+  color: var(--color-gray-200);
+}
+.menu-inferior {
+  position: absolute;
+  height: 10.1%;
+  width: 100%;
+  top: 89.9%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 2px #d9d9d9 inset;
+}
+.icon-home-in {
+  position: absolute;
+  height: 58.33%;
+  width: 79.41%;
+  top: 0;
+  right: 8.82%;
+  bottom: 41.67%;
+  left: 11.76%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.home {
+  position: absolute;
+  height: 31.25%;
+  width: 100%;
+  top: 68.75%;
+  left: 0;
+  display: inline-block;
+}
+.icon-home-in-parent {
+  position: absolute;
+  height: 5.91%;
+  width: 9.07%;
+  top: 91.75%;
+  right: 45.33%;
+  bottom: 2.34%;
+  left: 45.6%;
+}
+.icon-profile-out {
+  position: absolute;
+  height: 58.33%;
+  width: 71.05%;
+  top: 0;
+  right: 15.79%;
+  bottom: 41.67%;
+  left: 13.16%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile1 {
+  position: absolute;
+  height: 31.25%;
+  width: 100%;
+  top: 68.75%;
+  left: 0;
+  font-weight: 600;
+  display: inline-block;
+}
+.profile {
+  position: absolute;
+  height: 5.91%;
+  width: 10.13%;
+  top: 91.75%;
+  right: 84.27%;
+  bottom: 2.34%;
+  left: 5.6%;
+  text-align: center;
+}
+.icon-profile-out1 {
+  position: absolute;
+  height: 58.33%;
+  width: 41.54%;
+  top: 0;
+  right: 30.77%;
+  bottom: 41.67%;
+  left: 27.69%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.profile2 {
+  position: absolute;
+  height: 5.91%;
+  width: 17.33%;
+  top: 92%;
+  right: 3.73%;
+  bottom: 2.09%;
+  left: 78.93%;
+  text-align: center;
+}
+.profile-exemplo-pgina-com {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-100);
+  font-family: var(--font-inter);
+}

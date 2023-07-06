@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+
+
+    <link rel="stylesheet" href="./12.css" />
+
+    <link rel="stylesheet" href="./12_b.css" />
+
+    <link
+
+      rel="stylesheet"
+
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+
+    />
+
+  </head>
+
+  <body>
+
+    <div class="permissions-1">
+
+      <img class="logo-icon" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/b2c6d3b9-f4e3-43d2-9f38-08dcc3431953_1672367280526570597?Expires=-62135596800&Signature=I-3R2lXjr4CHoVX8aIdA4arC7sE8rL1KdqolbJ59G4GMMEogzQixbTWWCaYwN1-~RjC-DymIpg6DeT7lJ-9TzWvVnFqEGPWpv0TrK3Sj-RmAtnOHzDboDB1-EVd8pwCfZUaTjZVMk5PgRq8faLOsBtlJrWQzW0fzU-y1JaG6iZH5SpW~mkzwU~pXkoyM0GiUTzW~4UpZaRLsKfVrwUkzfHtFIjEM-cR2JlYLg-yxis1vaL3G5y9daB4PtfKpdRch~DD5sKnNOTnpDHfp6JUgy7a04nyqMSioKaCmpay~vtWLiunTH2nKBmz0UOyPIte3EwcfQehoEPQctd~EQaYepQ__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      <div class="admins">Admins</div>
+
+      <div class="add-a-new-admin">Add a new admin</div>
+
+      <div class="add-a-new-admin1">Add a new admin</div>
+
+      <div class="examplemailmailcom">examplemail@mail.com</div>
+
+      <div class="tap-the-delete-button-to-chang">
+
+        Tap the delete button to change the app permissions or add a new admin
+
+        and confirm your password to apply the changes.
+
+      </div>
+
+      <div class="confirm-your-password">Confirm your password*</div>
+
+      <div class="enter-password">
+
+        <div class="enter-password-child"></div>
+
+        <div class="the-same-password-you-use-to-l">
+
+          The same password you use to log in the app
+
+        </div>
+
+      </div>
+
+      <div class="my-collectibles-parent">
+
+        <div class="my-collectibles">My Collectibles</div>
+
+        <img class="logo-icon1" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/deaeb9ff-5217-4ed2-abe8-8b625a28c77b_1672367280526745873?Expires=-62135596800&Signature=W7GCkGsVNmPZNwl~tckTc62Wr2poofHym8liZXAFATMbcXeyutQ0K~oEm3~zyWCL4moHrAfyQEO08qVHuejz-n8oI~82ZwyKEs-8GFrjJIbchgacaii6VHRFaRfnmcAt8~o5zG7OumtuFzvGdRSYxSI8luN8X3-8DbJcVVqY0zDzitngmz3kwGTMJ~c9Syq90anWPh-FYqVN6acTHt69MnzdNMBkaobyJGQDyT2NDfOu3Jls7LIPP0O~KRnFBd6vO0vamxRJK0GkWkS5eZ6FJwJfqPd-Bf1V1Sq~2aD~kZi7rIqwYSSH-aqoeu30X1xATSK9BFliEFm5tMgmeqwKCw__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      </div>
+
+      <div class="permissions">Permissions</div>
+
+      <img class="edit-icon" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/12759770-c98d-43c3-9eae-3a3ff6579b1a_1672367280526837777?Expires=-62135596800&Signature=cHO6selJcMPRodZ~xfL9vru4jvV1uK45EbMipDsmgarj1TFE4HfDk678xxo2Juvr5ahsZeAtxGYIDjU-pGPqQ1vRoKVgv9YBsTdyU-7eI1ndqEAb3JLGHCJtqOB6TDf~X-SY4J1HVQjLvP8kfMqbN~iA8oUVA6QrilyipH83kACnB5DX8fcFwaqYTr6ToAZOzQASy7oJY6taUBAm~sRGtb7Qtxo9Jg7yNyl9EXeukaBuL2upXoMSHNjY5Xmv7sb1NCWHmBHpWvqav4OwVsmHm3SQyB7r~QViBUPp42-d8L9DyahMcZhSdofh2cnQB-NzCN0R2DhNMbRaAZ0gu0XzeA__&Key-Pair-Id=K1P54FZWCHCL6J" /><img
+
+        class="close-icon"
+
+        alt=""
+
+        src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/583c22c2-ea83-416f-9181-ed4cbc770b94_1672367280526936988?Expires=-62135596800&Signature=lm3MfQec~-lXqjSM-nuUufXR2xvtonJiSzLr9z8WGPTwCXL8xR~m8ae4FZRL4sA~NH-sLp9jtfpxgIwOo~p7yw0XesmxdtELUxMs1ncpo3hETcb9AgKeriPeCNdIUXEJ06bDsO74wau-GBtUVOD8CjlmwVY5TwV3G7G2d2-bAPIoC4Y2wnXmsEZsuEnupXbL5s0JTNP1uRkUM2CJrrh9qPItHs8WV2nKBxpxWRoBFgsVcaRCMhjfc2hO3Vz-CdhG6MzwCMMibns-06HStjs-uNTt0Ua6AYPGxPJFsrvKSM-qhFeWZlLSpdp-GdXV81pW86EOodSUWgws6gGsciGSBg__&Key-Pair-Id=K1P54FZWCHCL6J"
+
+      /><img class="permissions-1-child" alt="" src="https://d1xzdqg8s8ggsr.cloudfront.net/63adaa2b2434a4e554746687/4e1fec21-2f08-48e5-ad88-ef16458c7754_1672367280527018387?Expires=-62135596800&Signature=SnQjWl5A~TtJnvwleERnORwAPjqR9Md10Z1teLy19ebS6xyXE89XJZumn~-wmizk0VnwSIYUyB23HkSxz3xtDvVyQHaQ4ef6wksijK~fglkfpuXaP~W3vWhEGclC~SVy8UJaAZsk8pBvk94EloKEIa8vH1uE3KrnzcQrCz~KSjxeBx1AFVnJF3wUbqHnN1bS3GFqc3iHG8V-oBe~xHvw~s8sOkejshw6Whge8vH8RPihOh390bqA-J6M2sE-zfl1gfW7kPT20nXoHs-8XNaMQ1lZFTgxD15I5KuYzNBac2Bypn2pSx8qrhCtVFpn1z3ss-56tOXNBDbMCLBxuh8trg__&Key-Pair-Id=K1P54FZWCHCL6J" />
+
+      <div class="permissions-1-item"></div>
+
+      <div class="e-mail">E-mail</div>
+
+      <div class="enter-username">
+
+        <div class="enter-password-child"></div>
+
+        <div class="tap-here-to-insert-their-e-mai">
+
+          Tap here to insert their e-mail
+
+        </div>
+
+      </div>
+
+      <div class="confirm-your-e-mail">Confirm your e-mail</div>
+
+      <div class="enter-username1">
+
+        <div class="enter-password-child"></div>
+
+        <div class="the-same-password-you-use-to-l">
+
+          The same e-mail you use to log in the app
+
+        </div>
+
+      </div>
+
+      <div class="admin-console">admin console</div>
+
+    </div>
+
+  </body>
+
+</html>
+
