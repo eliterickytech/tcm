@@ -20,9 +20,19 @@ namespace TCM.Presentation.Site.Controllers
             _connectionService = connectionService;
         }
 
-        public IActionResult Index(List<ConnectionModel> models)
+        public IActionResult Index()
         {
-            return View(models);
+            List<ConnectionModel> models = new List<ConnectionModel>();
+
+            ViewBag.Connection = models;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index([FromBody] List<ConnectionModel> models)
+        {
+            ViewBag.Connection = models;
+            return View();
         }
 
         [HttpGet]
@@ -46,15 +56,16 @@ namespace TCM.Presentation.Site.Controllers
                     StatusCode = result.Any() ? HttpStatusCode.OK : HttpStatusCode.InternalServerError,
                     IsOK = true,
                     Data = result,
-                    Redirect = "/Invitation/InvitationUsers"
+                    Redirect = "/Invitation"
 
                 });
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> InvitationUsers([FromBody] List<ConnectionModel> models)
-        {
-            return PartialView("InvitationUsers", models);
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> InvitationUsers([FromBody] List<ConnectionModel> models)
+        //{
+
+        //    return View("~/Views/Connection/Index.cshtml");
+        //}
     }
 }
