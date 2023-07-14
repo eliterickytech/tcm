@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/3-Infrastructure/3.2-TCM.Infra.BaseDados/TCM.Infrastructure.Data.Base/TCM.Infrastructure.Data.Base.sqlproj
