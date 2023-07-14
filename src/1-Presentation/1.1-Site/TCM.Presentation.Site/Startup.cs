@@ -17,6 +17,8 @@ using TCM.CrossCutting.Model;
 using TCM.Infra.Repository;
 using TCM.Infra.Reposisitory;
 using TCM.CrossCutting.Helpers;
+using Microsoft.AspNetCore.Identity;
+using TCM.Infrastructure.Data.Reposisitory;
 
 namespace TCM.Presentation
 {
@@ -38,9 +40,13 @@ namespace TCM.Presentation
 
             services.AddScoped<ICodeServices, CodeServices>();
             services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<IBannerServices, BannerServices>();  
+            services.AddScoped<IConnectionServices, ConnectionServices>();
 
             services.AddScoped<ICodeRepository, CodeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBannerRepository, BannerRepository>();
+            services.AddScoped<IConnectionRepository, ConnectionRepository>();
 
             services.AddSingleton(config);
             services.AddScoped<SendMail>();

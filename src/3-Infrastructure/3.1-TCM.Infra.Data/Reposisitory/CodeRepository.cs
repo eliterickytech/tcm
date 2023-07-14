@@ -20,40 +20,23 @@ namespace TCM.Infra.Repository
 
         public async Task<int> SaveCodeAsync(string user, string code)
         {
-            var query = @"
-                DECLARE @UserId INT
-                SELECT @UserId = Id FROM Users WHERE Email = @User AND Enabled = 1
-
-                INSERT INTO MFACode
-                    (UserId, Code)
-                VALUES
-                    (@Userid, @Code)
-            ";
+            var query = @"PR_Code_Insert";
 
             var parameters = new DynamicParameters();
             parameters.Add("@User", user, System.Data.DbType.String);
             parameters.Add("@Code", code, System.Data.DbType.String);
-            return await ExecuteAsync(query, parameters); 
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
         }
 
         public async Task<CodeModel> GetCodeByUserAsync(string user)
         {
-            var query = @"
-                DECLARE @UserId INT
-                SELECT @UserId = Id FROM Users WHERE Email = @User AND Enabled = 1
-
-                SELECT TOP 1
-                    Id
-                ,   UserId
-                ,   Code
-                ,   CreatedDate
-                FROM
-                    MFACode
-                WHERE
-                    UserId  = @UserId
-
-                ORDER BY Id DESC
-            ";
+            var query = @"PR_Code_Select";
 
             var parameters = new DynamicParameters();
             parameters.Add("@User", user, System.Data.DbType.String);

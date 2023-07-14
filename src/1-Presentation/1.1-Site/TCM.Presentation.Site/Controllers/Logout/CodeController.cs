@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TCM.CrossCutting.Helpers;
-using TCM.Presentation.Models;
+
 using TCM.Services.Interfaces.Services;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using TCM.Services.Services;
+using TCM.Services.Model;
 
 namespace TCM.Presentation.Controllers.Logout
 {
@@ -24,7 +25,7 @@ namespace TCM.Presentation.Controllers.Logout
             return View();
         }
 
-        public async  Task< IActionResult> Mail(string token)
+        public async Task< IActionResult> Mail(string token)
         {
 
             var parameters = ExtractValueFromKey.Extract(token);
@@ -37,18 +38,30 @@ namespace TCM.Presentation.Controllers.Logout
          }
 
         [HttpPost]
-        public async Task<bool> Validate(string token, string code)
+        public async Task<JsonResult> Validate(string token, string code)
         {
-            var result = false;
+            var resultModel = new ResultModel();
+
             var parameters = ExtractValueFromKey.Extract(token);
 
-            var codeUser = await _codeServices.GetCodeByUserAsync(parameters.User);
+            var result = await _codeServices.GetCodeByUserAsync(parameters.User);
 
-            if (codeUser == null) result = false;
+            if (result is null) return default;
 
-            if (code == codeUser.Code) result = true;
+            if (code == result.Code)
+            {
+                resultModel.StatusCode = System.Net.HttpStatusCode.OK;
+                resultModel.Data = result;
+                resultModel.IsOK = true;
+                resultModel.Redirect = "/Home";
+            }
+            else
+            {
+                resultModel.StatusCode = System.Net.HttpStatusCode.InternalServerError;
+                resultModel.IsOK = false;
+            }
 
-            return result;
+            return new JsonResult(resultModel);
         }
 
     }

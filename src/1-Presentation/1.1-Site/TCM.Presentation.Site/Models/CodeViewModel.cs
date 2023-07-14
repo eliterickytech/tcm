@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace TCM.Presentation.Models
+namespace TCM.Presentation.Site.Models
 {
     public class CodeViewModel
     {

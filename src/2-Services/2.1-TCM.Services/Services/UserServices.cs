@@ -4,23 +4,24 @@ using TCM.Services.Interfaces.Repository;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
 using Microsoft.Extensions.Configuration;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TCM.Services.Services
 {
     public class UserServices : IUserServices
     {
         private readonly IUserRepository _userRepository;
-        private readonly IConfiguration _configuration;
 
-        public UserServices(IUserRepository userRepository, IConfiguration configuration)
+        public UserServices(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _configuration = configuration;
         }
 
-        public async Task<UserModel> GetUserAsync(string user, string password)
-        {
-            return await _userRepository.GetUserAsync(user, password);
-        }
+        public async Task<UserModel> GetLoginAsync(string user, string password) => await _userRepository.GetLoginAsync(user, password);
+
+        public async Task<IEnumerable<UserModel>> GetUserAsync(UserModel user) => await _userRepository.GetUserAsync(user);
+
+        public async Task<int> AddUserAsync(UserModel userModel) => await _userRepository.AddUserAsync(userModel);
     }
 }

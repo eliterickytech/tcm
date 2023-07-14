@@ -1,1 +1,0 @@
-/opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P Thot2020.. -d master -i /tmp/Load.sql

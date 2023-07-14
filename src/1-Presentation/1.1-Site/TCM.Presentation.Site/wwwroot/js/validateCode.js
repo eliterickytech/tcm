@@ -1,61 +1,70 @@
 function AjaxSucceeded(result) {
-    alert(result);
-    if (result == true) {
+
+    var form = $("#formCode")
+    var spinner = $('#loader');
+
+    if (!result.isOK) {
+        if (result.errors != null) {
+
+            $("#password-group").addClass("has-error");
+            $("#password-group").append(
+                '<div style="color:#C0694E;" class="help-block">' + result.errors + "</div>"
+            )
+        };
+    }
+    else {
+
         $(".access").remove();
-        window.location = "/Home/Index"
+        window.location.href = result.redirect;
+        spinner.hide();
     }
 }
 
 function AjaxFailed(result) {
+
     spinner.hide();
-    if (data.errors.password) {
+    if (data.errors != null) {
 
         $("#password-group").addClass("has-error");
         $("#password-group").append(
-            '<div style="color:#C0694E;" class="help-block">' + data.errors.password + "</div>"
+            '<div style="color:#C0694E;" class="help-block">' + data.errors + "</div>"
         )
     };
-
-    if (data.errors.username) {
-        $("#email-group").addClass("has-error");
-        $("#email-group").append(
-            '<div style="color:#C0694E;" class="help-block">' + data.errors.username + "</div>"
-        );
-    }
-
-    if (data.errors.mobile) {
-        $("#mobile-group").addClass("has-error");
-        $("#mobile-group").append(
-            '<div style="color:#C0694E;" class="help-block">' + data.errors.mobile + "</div>"
-        );
-    }
 }
 $(document).ready(function () {
 
-    $("form").submit(function (event) {
+    $("#formCode").submit(function (event) {
         var spinner = $('#loader');
 
-        var formData = {
-            code: $("#code").val(),
-            token: $("#token").val()
-        };
+        var form = $("#formCode")
+        if (form[0].checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+        else {
 
-        var code = $("#code").val();
-        var token = $("#token").val();
+            var formData = {
+                code: $("#code").val(),
+                token: $("#token").val()
+            };
 
-        var dados = JSON.stringify(formData);
+            var code = $("#code").val();
+            var token = $("#token").val();
 
-        spinner.show();
+            var dados = JSON.stringify(formData);
 
-        $.ajax({
-            type: "POST",
-            url: `/Code/Validate`,
-            data: formData,
-            dataType: "json",
-            encode: true,
-            success: AjaxSucceeded,
-            error: AjaxFailed
-        });
+            spinner.show();
+
+            $.ajax({
+                type: "POST",
+                url: "/Code/Validate",
+                data: formData,
+                dataType: "json",
+                encode: true,
+                success: AjaxSucceeded,
+                error: AjaxFailed
+            });
+        }
       event.preventDefault();
     });
   });

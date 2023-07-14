@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[ConnectionStatus]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1)
+,	[Name] VARCHAR(100)
+,	[Enabled] BIT NOT NULL DEFAULT(1)
+,	CreatedDate DATETIME NOT NULL DEFAULT(GETDATE())
+)

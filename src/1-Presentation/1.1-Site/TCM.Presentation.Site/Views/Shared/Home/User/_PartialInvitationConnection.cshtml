@@ -1,0 +1,51 @@
+﻿@model List<TCM.Services.Model.ConnectionModel>
+
+<div class="area_chats_all">
+    <div class="area_texts_chats">
+
+@*        <div class="all_chats_unread">
+            <a href="chats.html">
+                <h2>All chats</h2>
+                <div class="border_unread_c"></div>
+            </a>
+        </div>*@
+
+        <div class="my_invitations">
+            <a href="chats_unread.html">
+                <h2>My Invitations</h2>
+                <div class="border_unread_u"></div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="area_user_chats">
+
+    @foreach(var item in Model.ToList())
+    {
+        <div class="area_user_name_total">
+            <div class="user_name_chat">
+                <div class="user_name_text">
+                    <h2>user_name1</h2>
+                </div>
+                <div class="date_chat">
+                    <p>09/08/2022</p>
+                </div>
+            </div>
+
+            <div class="user_name_chat">
+                <div class="message_chat">
+                    <h2>Message preview. 324mpx or about 57 characters long... </h2>
+                </div>
+                <div class="number_message">
+                    <p>1</p>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<input type="submit" name="submit" class="submit" value="SEND A NEW INVITATION">

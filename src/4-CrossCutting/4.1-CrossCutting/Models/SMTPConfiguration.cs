@@ -13,8 +13,11 @@ namespace TCM.CrossCutting.Model
         public string UserName { get; set; }
         public string Password { get; set; }
         public string SubjectVerification { get; set; }
+
+        public string SubjectWelcome { get; set; }
         public string Mail { get; set; }
         public string HTMLVerification { get; set; }
+        public string HTMLWelcome { get; set; }
 
         public string ApiKey { get; set; }
 

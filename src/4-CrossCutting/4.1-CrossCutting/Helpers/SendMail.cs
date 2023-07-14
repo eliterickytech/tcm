@@ -34,6 +34,21 @@ namespace TCM.CrossCutting.Helpers
 
             var response = await sendGridClient.SendEmailAsync(msg);
         }
+
+        public async Task SendWelcomeAsync(string mailTo, string fullname)
+        {
+            var sendGridClient = new SendGridClient(_smtpConfiguration.ApiKey);
+
+            var from = new EmailAddress(_smtpConfiguration.Mail);
+
+            var to = new EmailAddress(mailTo);
+
+            var plainTextContent = Regex.Replace(ReadHtmlFile(_smtpConfiguration.HTMLVerification).ToString().Replace("@fullname@", fullname), "<[^>]*>", "");
+
+            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectWelcome, plainTextContent, ReadHtmlFile(_smtpConfiguration.HTMLWelcome).ToString().Replace("@fullname@", fullname));
+
+            var response = await sendGridClient.SendEmailAsync(msg);
+        }
         private string ReadHtmlFile(string filePath)
         {
             using (StreamReader sr = new StreamReader(filePath))

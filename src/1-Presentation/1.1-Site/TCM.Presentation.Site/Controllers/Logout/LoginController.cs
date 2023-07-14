@@ -25,20 +25,35 @@ namespace TCM.Presentation.Controllers.Logout
             return View();
         }
 
-        public async Task<UserModel> GetUser(string user, string password)
+        public async Task<JsonResult> GetUser(string user, string password)
         {
-            var result = await _userServices.GetUserAsync(user, password);
-            
-            if (result is null) return default;
+            var result = await _userServices.GetLoginAsync(user, password);
 
-            var code = Code.GeneratedCode(6);
+            var resultModel = new ResultModel();
 
-            var resultCode = await _codeServices.SaveCodeAsync(user, code);
+            if (result is null)
+            {
+                resultModel.StatusCode = System.Net.HttpStatusCode.OK;
+                resultModel.Errors = "Usuário/Senha inválido!";
+                resultModel.Type = "InvalidPassword";
+                resultModel.IsOK = false;
+            }
+            else
+            {
+                var code = Code.GeneratedCode(6);
 
-            if (result.ProfileId == Profile.User)
-                result.Redirect = GeneratedToken(user, code);
+                var resultCode = await _codeServices.SaveCodeAsync(user, code);
 
-            return result;
+                if (result.ProfileId == Profile.User && resultCode > 0)
+                {
+                    resultModel.StatusCode = System.Net.HttpStatusCode.OK;
+                    resultModel.Data = result;
+                    resultModel.IsOK = true;
+                    resultModel.Redirect = GeneratedToken(user, code);
+                }
+            }
+
+            return new JsonResult(resultModel);
         }
 
         private string GeneratedToken(string user, string code)

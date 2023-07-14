@@ -6,19 +6,19 @@
     <div class="logo">
         <img width="100px" height="100px" src="img/Logo.png" alt="Patisserie">
     </div>
-    <form method="POST">
+    <form id="formLogin" name="formLogin" class="needs-validation" novalidate>
         <div id="email-group" class="area_form">
             <label for="name" class="username">
-                Email
+                Email*
             </label>
-            <input type="text" id="email" name="email" placeholder="enter your e-mail address" autocomplete="off" onkeypress="validateLogin()" onblur="validateLogin()">
+            <input type="text" id="email" class="form-control" name="email" placeholder="enter your e-mail address" autocomplete="off" required>
             <span class="errorData" role="alert" id="emailError" aria-hidden="true"></span>
         </div>
         <div id="password-group" class="area_form">
             <label for="Password" class="password">
-                Password
+                Password*
             </label>
-            <input type="password" id="password" name="password" placeholder="enter your password" autocomplete="off" onkeypress="validateLogin()">
+            <input type="password" id="password" class="form-control" name="password" placeholder="enter your password" autocomplete="off" required>
             <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
         </div>
         <div class="info">
@@ -26,7 +26,7 @@
         </div>
         <input type="submit" name="submit" class="submit" value="SIGN IN">
         <div class="sign_up">
-            <p>New here? Tap to <a target="_self" href="https://thechefmelo.com/sign-up-user.php"><b>sign up.</b></a></p>
+            <p>New here? Tap to <a target="_self" asp-action="Index" asp-controller="CreateAccount"><b>sign up.</b></a></p>
         </div>
     </form>
     <style>
@@ -35,3 +35,25 @@
         }
     </style>
 </div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+<script type="text/javascript" src="js/login.js"></script>

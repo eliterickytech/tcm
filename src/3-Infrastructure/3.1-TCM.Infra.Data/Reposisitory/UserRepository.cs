@@ -20,34 +20,56 @@ namespace TCM.Infra.Reposisitory
         
         }
 
-        public async Task<UserModel> GetUserAsync(string user, string password)
+        public async Task<UserModel> GetLoginAsync(string user, string password)
         {
-            var query = @"
-                SELECT 
-                    Id
-                ,   UserName
-                ,   Email
-                ,   MobilePhone
-                ,   Enabled
-                ,   CreatedDate
-                ,   ChangedDate
-                ,   ProfileId
-                FROM
-                    Users
-                WHERE
-                    Enabled  = 1
-                AND    
-                    Email = @UserName
-                AND
-                    Password = @Password
-            ";
+            var query = @"PR_Login_Select";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@UserName", user, System.Data.DbType.String);
+            parameters.Add("Email", user, System.Data.DbType.String);
             parameters.Add("Password", password, System.Data.DbType.String);
+            try
+            {
+                var result = await QueryFirstOrDefaultAsync<UserModel>(query, parameters);  
+                return result;
 
-            return await 
-                QueryFirstOrDefaultAsync<UserModel>(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                return default;
+            }
+
+        }
+
+        public async Task<IEnumerable <UserModel>> GetUserAsync(UserModel user)
+        {
+            var query = @"PR_User_Select";
+            var parameters = new DynamicParameters();
+
+            parameters.Add("@UserName", user.UserName, System.Data.DbType.String);
+            parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
+            parameters.Add("@Email", user.Email, System.Data.DbType.String);
+            parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
+
+            return await QueryAsync<UserModel>(query, parameters);
+        }
+
+        public async Task<int> AddUserAsync(UserModel userModel)
+        {
+            var query = @"PR_User_Insert";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Email", userModel.Email, System.Data.DbType.String);
+            parameters.Add("@Username", userModel.UserName, System.Data.DbType.String);
+            parameters.Add("@Password", userModel.Password, System.Data.DbType.String);
+            parameters.Add("@Mobile", userModel.MobilePhone, System.Data.DbType.Int64);
+            parameters.Add("@Fullname", userModel.FullName, System.Data.DbType.String);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch(Exception ex) { return default; }
         }
     }
 }

@@ -8,12 +8,12 @@
             <img width="100px" height="100px" src="~/img/Logo.png" alt="Patisserie">
         </a>
     </div>
-    <form method="POST">
+    <form id="formCode" name="formCode" class="needs-validation" novalidate>
         <div id="code-group" class="area_form">
             <label for="code" class="code">
                 <span id="timer"></span><span id="insert_code"></span>
             </label>
-            <input class="code_input" type="text" id="code" name="code" placeholder="_ _ _ _ _ _" maxlength="6" autocomplete="off">
+            <input class="form-control code_input" type="text" id="code" name="code" placeholder="_ _ _ _ _ _" maxlength="6" autocomplete="off" required>
             <span class="errorData" role="alert" id="codenumberError" aria-hidden="true"></span>
             <input type="hidden" name="token" id="token" value="@ViewBag.Token" />
         </div>
@@ -23,3 +23,25 @@
         </div>
     </form>
 </div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+<script type="text/javascript" src="~/js/validateCode.js"></script>

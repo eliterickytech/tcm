@@ -33,7 +33,7 @@ namespace TCM.Infra.Repository
             using (var conn = CreateConnection())
             {
                 conn.Open();
-                return await conn.QueryAsync<T>(query, parameters);
+                return await conn.QueryAsync<T>(query, parameters, commandType: CommandType.StoredProcedure);
             }
 
         }
@@ -44,7 +44,7 @@ namespace TCM.Infra.Repository
             using (var conn = CreateConnection())
             {
                 conn.Open();
-                return await conn.QueryFirstOrDefaultAsync<T>(query, parameters);
+                return await conn.QueryFirstOrDefaultAsync<T>(query, parameters, commandType: CommandType.StoredProcedure);
             }
 
         }
@@ -55,7 +55,7 @@ namespace TCM.Infra.Repository
             using (var conn = CreateConnection())
             {
                 conn.Open();
-                return await conn.ExecuteAsync(query, parameters);
+                return await conn.ExecuteAsync(query, parameters, commandType: CommandType.StoredProcedure);
             }
 
         }

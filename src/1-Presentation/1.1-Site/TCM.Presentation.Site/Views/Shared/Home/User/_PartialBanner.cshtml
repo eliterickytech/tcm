@@ -1,0 +1,9 @@
+﻿@model List<TCM.Services.Model.BannerModel>
+@{
+    var topBanner = Model.Where(x => x.BannerTypeId == 1).FirstOrDefault();
+}
+<div class="banner_home">
+    <a href="@topBanner.BannerRedirectTo">
+        <img width="@topBanner.BannerTypeWidth" height="@topBanner.BannerTypeHeight" src="@topBanner.BannerUrl" alt="">
+    </a>
+</div>

@@ -165,32 +165,21 @@ form {
 
 
 input {
-
     background: #D9D9D9;
-
-    border-radius: 5px;
-
-    outline: none;
-
-    border: none;
-
-    width: 100%;
-
-    max-width: 480px;
-
-    height: 35px;
-
+    border-radius: 5px ;
+    outline: none ;
+    border: none ;
+    width: 100% ;
+    max-width: 480px ;
+    height: 35px ;
     color: var(--color-font-form);
-
     font-weight: var(--font-weight-1);
-
-    font-size: var(--font-small);
-
-    padding: 0px 10px;
-
+    font-size: var(--font-small) !important;
+    padding: 0px 10px ;
 }
 
 
+.email,
 
 .username,
 
@@ -202,7 +191,7 @@ input {
 
     font-size: var(--font-small);
 
-    color: var(--color-font);
+    color: var(--color-font) !important;
 
 }
 
@@ -693,7 +682,9 @@ label svg {
     margin-bottom: 3px;
 
 }
-
+.help-block{
+    font-size: 10px !important
+}
 
 
 .container_menu.home {
@@ -1132,6 +1123,25 @@ nav ul li {
 
 }
 
+.btn_home_send_invitation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 205px;
+    height: 40px;
+    background: var(--color-main);
+    border-radius: 25px;
+    margin: 0px auto;
+}
+
+
+
+    .btn_home_send_invitation h2 {
+        color: #fff !important;
+        font-weight: var(--font-bold) !important;
+        font-size: var(--font-small) !important;
+    }
+
 
 
 .bar {
@@ -1246,6 +1256,25 @@ nav ul li {
 
 }
 
+
+.btn_home_3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 205px;
+    height: 40px;
+    background: var(--color-main);
+    border-radius: 25px;
+    margin: 20px 0px;
+}
+
+
+
+    .btn_home_3 h2 {
+        color: #fff !important;
+        font-weight: var(--font-bold) !important;
+        font-size: var(--font-small) !important;
+    }
 
 
 .menu_footer {
@@ -3684,6 +3713,7 @@ nav ul li {
 
 
 
+
 .btn_home_1 h2 {
 
     color: #fff;
@@ -4056,39 +4086,6 @@ nav ul li {
 
 }
 
-
-
-.btn_home_2 {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 180px;
-
-    height: 40px;
-
-    background: var(--color-main);
-
-    border-radius: 25px;
-
-    margin: 20px 0px;
-
-}
-
-
-
-.btn_home_2 h2 {
-
-    color: #fff;
-
-    font-weight: var(--font-bold);
-
-    font-size: var(--font-small);
-
-}
 
 
 
@@ -4922,7 +4919,19 @@ footer {
 
 }
 
+.area_connection_all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
+.area_invitation_all {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+}
 
 .area_texts_chats {
 
@@ -4936,7 +4945,19 @@ footer {
 
 }
 
+.area_texts_connection {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
 
+.area_texts_invitation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
 
 .all_chats {
 
