@@ -24,37 +24,46 @@
 
 
     <div class="area_user_chats">
-
-        @if (_connectionModels.Any())
-            {
-                foreach (var item in _connectionModels)
+        <form method="post">
+            @if (_connectionModels.Any())
                 {
-                    <div class="area_user_name_total">
-                        <div class="user_name_chat">
-                            <div class="user_name_text">
-                                <h2>user_name1</h2>
+                    foreach (var item in _connectionModels)
+                    {
+                        <div class="area_user_name_total">
+                            <div class="user_name_chat">
+                                <div class="user_name_text">
+                                    <h2>@item.UserUsername</h2>
+                                </div>
+                                <div class="text_color_beige">
+                                    <p>
+                                    @{
+                                        if (item.ConnectionUserConnectionStatusId == null)
+                                        {
+                                            <button class="invitation-circle-send" type="submit">
+                                                <i class="bi bi-send-plus-fill"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="index" asp-controller="profile">View their profile</a>                                            
+                                        }
+                                    }
+                                    </p>
+                                </div>
                             </div>
-                            <div class="date_chat">
-                                <p>09/08/2022</p>
-                            </div>
+                        </div>
+                    <div class="user_name_chat">
+                        <div class="message_chat">
+                            <h2>@item.ConnectionStatusUserName</h2>
                         </div>
 
-                        <div class="user_name_chat">
-                            <div class="message_chat">
-                                <h2>Message preview. 324mpx or about 57 characters long... </h2>
-                            </div>
-                            <div class="number_message">
-                                <p>1</p>
-                            </div>
-                        </div>
                     </div>
+                    }
                 }
-            }
-        
+        </form>
 
     </div>
 
-    <input type="submit" name="submit" class="submit" value="SEND A NEW INVITATION">
 
     @await Html.PartialAsync("~/Views/Shared/Home/User/_PartialFooter.cshtml")
 </div>

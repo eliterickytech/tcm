@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
@@ -10,7 +8,7 @@ using TCM.Services.Interfaces.Services;
 
 namespace TCM.Presentation.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IBannerServices _bannerServices;
@@ -21,19 +19,15 @@ namespace TCM.Presentation.Controllers
 			_logger = logger;
 			_bannerServices = bannerServices;
 		}
-
-		public async Task<IActionResult> Index()
+        [Authorize]
+        public async Task<IActionResult> Index()
 		{
+			if (User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
 			HomeViewModel model = new HomeViewModel();
 			var banners = await _bannerServices.GetBannerAsync();
             model.BannersModel = banners.ToList();
 			return View(model);
 		}
-
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
 	}
 }

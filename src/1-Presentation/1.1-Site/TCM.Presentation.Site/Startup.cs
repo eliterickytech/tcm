@@ -19,6 +19,11 @@ using TCM.Infra.Reposisitory;
 using TCM.CrossCutting.Helpers;
 using Microsoft.AspNetCore.Identity;
 using TCM.Infrastructure.Data.Reposisitory;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using static Dapper.SqlMapper;
+using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace TCM.Presentation
 {
@@ -38,6 +43,9 @@ namespace TCM.Presentation
 
             Configuration.Bind("SmtpConfiguration", config);
 
+            var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Secret:Authentication").Value);
+            services.AddSession();
+
             services.AddScoped<ICodeServices, CodeServices>();
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IBannerServices, BannerServices>();  
@@ -50,6 +58,27 @@ namespace TCM.Presentation
 
             services.AddSingleton(config);
             services.AddScoped<SendMail>();
+            services.AddScoped<Utils>();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+            .AddJwtBearer(x =>
+                {
+
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             services.AddControllersWithViews();
         }
@@ -72,13 +101,31 @@ namespace TCM.Presentation
 
             app.UseRouting();
 
+            app.UseSession();
+
+            app.Use(async (context, next) =>
+            {
+                var token = context.Session.GetString("Token");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+                }
+                await next();
+            });
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

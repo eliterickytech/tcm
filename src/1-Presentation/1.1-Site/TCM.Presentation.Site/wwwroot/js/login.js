@@ -36,6 +36,7 @@ $(document).ready(function () {
     $("#formLogin").submit(function (event) {
 
         var spinner = $('#loader');
+        spinner.show();
 
         var form = $("#formLogin")
         if (form[0].checkValidity() === false) {
@@ -53,7 +54,7 @@ $(document).ready(function () {
 
             var dados = JSON.stringify(formData);
 
-            spinner.show();
+
 
             $.ajax({
                 type: "GET",

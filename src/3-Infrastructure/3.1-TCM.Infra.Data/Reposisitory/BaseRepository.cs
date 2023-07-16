@@ -26,7 +26,6 @@ namespace TCM.Infra.Repository
             return new SqlConnection(_configuration.GetSection("ConnectionStrings:SQL_TCM").Value);
         }
 
-
         public async Task<IEnumerable<T>> QueryAsync<T>(string query, object parameters = null)
         {
 

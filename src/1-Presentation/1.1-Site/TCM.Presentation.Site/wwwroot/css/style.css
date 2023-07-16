@@ -5184,6 +5184,20 @@ footer {
 }
 
 
+.text_color_beige a {
+    font-weight: var(--font-weight-3);
+    font-size: var(--font-small);
+    color: #964E38;
+    margin: 0px;
+}
+.text_color_beige a:hover {
+    font-weight: var(--font-weight-3);
+    font-size: var(--font-small);
+    color: #964E38;
+    margin: 0px;
+}
+
+
 
 .date_chat p {
 
@@ -6587,7 +6601,12 @@ footer {
 
 }
 
-
-
-
-
+.invitation-circle-send {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: lightgray;
+    color: white;
+    font-size: 18px;
+    border-width: 0;
+}

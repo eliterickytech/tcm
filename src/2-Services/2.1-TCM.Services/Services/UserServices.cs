@@ -23,5 +23,7 @@ namespace TCM.Services.Services
         public async Task<IEnumerable<UserModel>> GetUserAsync(UserModel user) => await _userRepository.GetUserAsync(user);
 
         public async Task<int> AddUserAsync(UserModel userModel) => await _userRepository.AddUserAsync(userModel);
+
+
     }
 }

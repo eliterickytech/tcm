@@ -47,7 +47,7 @@ $(document).ready(function () {
                 "Fullname": $("#fullname").val(),
                 "Email": $("#email").val(),
                 "Username": $("#username").val(),
-                "Mobile": $("#mobile").val(),
+                "MobilePhone": $("#mobile").val().replace(/[+()\s-]/g, ''),
                 "Password": $("#password").val(),
                 "ConfirmPassword": $("#confirmPassword").val(),
             };

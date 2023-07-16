@@ -24,6 +24,8 @@ namespace TCM.Services.Model
 
         public Profile ProfileId { get; set; }
 
+        public string Profile { get; set; }
+
         public bool Enabled { get; set; }
 
         public DateTime CreatedDate { get; set; }
@@ -31,6 +33,8 @@ namespace TCM.Services.Model
         public DateTime ChangedDate { get; set; }
 
         public string Redirect { get; set; }
+
+
     }
 
     public enum Profile

@@ -20,5 +20,7 @@ namespace TCM.Services.Model
         public object Data { get; set; }
 
         public string Redirect { get; set; }
+
+        public string Token { get; set; }
     }
 }
