@@ -71,5 +71,25 @@ namespace TCM.Infra.Repository
             }
             catch(Exception ex) { return default; }
         }
+
+        public async Task<int> ChangeUserAsync(UserModel userModel)
+        {
+            var query = @"PR_User_Update";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", userModel.Id, System.Data.DbType.Int32);
+            parameters.Add("@Email", userModel.Email, System.Data.DbType.String);
+            parameters.Add("@Password", userModel.Password, System.Data.DbType.String);
+            parameters.Add("@Mobile", userModel.MobilePhone, System.Data.DbType.Int64);
+            parameters.Add("@Fullname", userModel.FullName, System.Data.DbType.String);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
     }
 }

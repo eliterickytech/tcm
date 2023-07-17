@@ -1,0 +1,87 @@
+﻿@{
+    Layout = "_LayoutLogout";
+    var emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    var canadaPhonePattern = @"^\+1 \(\d{3}\) \d{3}-\d{4}$";
+    var usaPhonePattern = @"^\+1 \(\d{3}\) \d{3}-\d{4}$";
+    var brazilPhonePattern = @"^\+55 \(\d{2}\) \d{4,5}-\d{4}$";
+}
+<div class="area_login">
+    <div class="logo">
+        <img width="100px" height="100px" src="img/Logo.png" alt="Patisserie">
+    </div>
+    <form id="formUser" name="formUser" class="needs-validation" novalidate>
+        <div id="fullname-group" class="area_form">
+            <label for="fullname" class="password">
+                Fullname*
+            </label>
+            <input type="text" id="fullname" maxlength="100" class="form-control" name="fullname" placeholder="enter your fullname" autocomplete="off" required data-error="Firstname is required.">
+            <span class="errorData" role="alert" id="fullnameError" aria-hidden="true"></span>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div id="email-group" class="area_form">
+            <label for="email" class="password">
+                E-mail*
+            </label>
+            <input type="email" pattern="@emailPattern" id="email" maxlength="100" class="form-control" name="email" placeholder="enter your e-mail address" autocomplete="off" required>
+            <span class="errorData" role="alert" id="emailError" aria-hidden="true"></span>
+        </div>
+        <div id="user-group" class="area_form">
+            <label for="userName" class="password">
+                Username*
+            </label>
+            <input type="text" id="username" maxlength="25" class="form-control" name="username" placeholder="create a username" autocomplete="off" required disabled>
+            <span class="errorData" role="alert" id="usernameError" aria-hidden="true"></span>
+        </div>
+        <div id="mobile-group" class="area_form">
+            <label for="mobile" class="password">
+                Mobile*
+            </label>
+            <input type="tel" pattern="@canadaPhonePattern" id="mobile" name="mobile" class="form-control" placeholder="enter a valid mobile number" autocomplete="off" required>
+            <span class="errorData" role="alert" id="mobileError" aria-hidden="true"></span>
+        </div>
+        <div id="password-group" class="area_form">
+            <label for="Password" class="password">
+                Password*
+            </label>
+            <input type="password" minlength="8" maxlength="25" id="password" class="form-control" name="password" placeholder="enter your 8 characters password" autocomplete="off" required>
+            <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
+        </div>
+        <div id="confirm-group" class="area_form">
+            <label for="ConfirmPassword" class="password">
+                Confirm password*
+            </label>
+            <input type="password" minlength="8" maxlength="25" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="repeat your 8 characters password" required autocomplete="off">
+            <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
+        </div>
+        <input type="submit" name="submit" class="submit" value="Change" />
+
+    </form>
+    <style>
+        #setup_button {
+            display: block;
+        }
+    </style>
+</div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    $('#mobile').inputmask('+1 (999) 999-9999');
+</script>
+<script type="text/javascript" src="js/changeUser.js"></script>

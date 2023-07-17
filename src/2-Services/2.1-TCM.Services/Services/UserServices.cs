@@ -24,6 +24,6 @@ namespace TCM.Services.Services
 
         public async Task<int> AddUserAsync(UserModel userModel) => await _userRepository.AddUserAsync(userModel);
 
-
+        public async Task<int> ChangeUserAsync(UserModel userModel) => await _userRepository.ChangeUserAsync(userModel);
     }
 }

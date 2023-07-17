@@ -10,6 +10,7 @@ namespace TCM.Services.Interfaces.Services
     public interface IUserServices
     {
         Task<int> AddUserAsync(UserModel userModel);
+        Task<int> ChangeUserAsync(UserModel userModel);
         Task<UserModel> GetLoginAsync(string user, string password);
         Task<IEnumerable<UserModel>> GetUserAsync(UserModel user);
     }

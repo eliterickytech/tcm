@@ -17,25 +17,33 @@
                             <img src="img/facebook.png" alt="">
                             <img src="img/world.png" alt="">
                         </div>
-                        <div class="admin">
+@*                        <div class="admin">
                             <h2>admin console</h2>
-                        </div>
+                        </div>*@
                         <nav>
                             <ul>
-                                <a href="#">
-                                <li>MANAGE COLLECTIONS</li>
+                                <a asp-controller="Collectible">
+                                    <li>MY COLLECTIBLES</li>
                                 </a>
-                                <a href="#">
-                                <li>SEND DELIGHTS</li>
+
+                                <a asp-controller="Connection">
+                                    <li>MY CONNECTIONS</li>
                                 </a>
-                                <li>MANAGE BANNERS</li>
-                                <a href="#">
-                                <li>configurations</li>
+
+                                <a asp-controller="Chat">
+                                    <li>CHATS</li>
                                 </a>
-                                <li>Permissions</li>
-                                <a href="#">
-                                <li>Support</li>
+
+                                <a asp-controller="User">
+                                    <li>CONFIGURATIONS</li>
                                 </a>
+
+                                <a asp-controller="Invitation">
+                                    <li>MY INVITATIONS</li>
+                                </a>
+
+                                <li>SUPPORT</li>
+
                             </ul>
                         </nav>
                     </div>

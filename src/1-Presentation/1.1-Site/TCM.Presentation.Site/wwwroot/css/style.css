@@ -3467,25 +3467,6 @@ nav ul li {
 }
 
 
-
-.container_home_int {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    max-width: 480px;
-
-    width: 100%;
-
-    padding: 20px 0px;
-
-}
-
-
-
 .collectibles_home h2 {
 
     color: #111111;
