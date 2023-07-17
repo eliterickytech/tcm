@@ -25,7 +25,7 @@ namespace TCM.Infra.Repository
             var query = @"PR_Login_Select";
 
             var parameters = new DynamicParameters();
-            parameters.Add("Email", user, System.Data.DbType.String);
+            parameters.Add("Username", user, System.Data.DbType.String);
             parameters.Add("Password", password, System.Data.DbType.String);
             try
             {
