@@ -15,15 +15,16 @@ using TCM.Services.Services;
 using TCM.Services.Interfaces.Repository;
 using TCM.CrossCutting.Model;
 using TCM.Infra.Repository;
-using TCM.Infra.Reposisitory;
+using TCM.Infra.Repository;
 using TCM.CrossCutting.Helpers;
 using Microsoft.AspNetCore.Identity;
-using TCM.Infrastructure.Data.Reposisitory;
+using TCM.Infrastructure.Data.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using static Dapper.SqlMapper;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebSockets;
 
 namespace TCM.Presentation
 {
@@ -50,11 +51,19 @@ namespace TCM.Presentation
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IBannerServices, BannerServices>();  
             services.AddScoped<IConnectionServices, ConnectionServices>();
+            services.AddScoped<IChatServices, ChatServices>();
+            services.AddScoped<ICollectionServices, CollectionServices>();
+            services.AddScoped<ICollectionItemServices, CollectionItemServices>();
+            services.AddScoped<ICollectionItemUserServices, CollectionItemUserServices>();
 
             services.AddScoped<ICodeRepository, CodeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBannerRepository, BannerRepository>();
             services.AddScoped<IConnectionRepository, ConnectionRepository>();
+            services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<ICollectionRepository, CollectionRepository>();
+            services.AddScoped<ICollectionItemRepository, CollectionItemRepository>();
+            services.AddScoped<ICollectionItemUserRepository, CollectionItemUserRepository>();
 
             services.AddSingleton(config);
             services.AddScoped<SendMail>();
@@ -125,7 +134,7 @@ namespace TCM.Presentation
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

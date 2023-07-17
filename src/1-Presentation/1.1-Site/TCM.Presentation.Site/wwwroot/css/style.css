@@ -69,19 +69,6 @@ a {
 }
 
 
-
-.container_login {
-
-    display: flex;
-
-    justify-content: center;
-
-    width: 100%;
-
-}
-
-
-
 .container_login_int {
 
     display: flex;
@@ -128,25 +115,10 @@ a {
 
 }
 
-
-
-#form {
-
-    padding: 0px;
-
-}
-
-
-
 form {
-
-    padding: 0px 10px;
-
     width: 100%;
-
+    padding: 0px;
 }
-
-
 
 .area_login {
 
@@ -367,7 +339,7 @@ footer {
 
     color: #111111;
 
-    font-weight: var(--font-weight-2);
+    font-weight: var(--font-bold);
 
     font-size: var(--font-small);
 
@@ -1445,10 +1417,7 @@ nav ul li {
 
     flex-direction: column;
 
-    gap: 15px;
-
 }
-
 
 
 .area_icons_collectibles,
@@ -1653,21 +1622,6 @@ nav ul li {
 
 }
 
-
-
-.area_dots {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 6px;
-
-    margin-bottom: 20px;
-
-}
 
 
 
@@ -3037,7 +2991,7 @@ nav ul li {
 
     width: 100%;
 
-    margin: 26px 0px 0px 0px;
+    margin: 15px 0px 0px 0px;
 
 }
 
@@ -3052,9 +3006,6 @@ nav ul li {
     display: flex;
 
     align-items: flex-end;
-
-    gap: 6px;
-
 }
 
 
@@ -3069,7 +3020,7 @@ nav ul li {
 
     font-size: 24px;
 
-    font-weight: var(--font-weight-1);
+    font-weight: var(--font-bold);
 
     margin: 0px;
 
@@ -3087,21 +3038,17 @@ nav ul li {
 
     font-size: 10px;
 
-    font-weight: var(--font-weight-2);
+    font-weight: var(--font-bold);
 
     margin: 0px;
 
 }
-
-
 
 .area_grid_collectible {
 
     display: block;
 
 }
-
-
 
 .area_grid_collectible_int {
 
@@ -3307,8 +3254,6 @@ nav ul li {
 
 }
 
-
-
 .area_dots {
 
     display: flex;
@@ -3322,8 +3267,6 @@ nav ul li {
     margin-bottom: 20px;
 
 }
-
-
 
 .dot.active {
 

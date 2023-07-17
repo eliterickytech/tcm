@@ -20,14 +20,26 @@ namespace TCM.Services.Services
             _userRepository = userRepository;
         }
 
-        public async Task<List<ConnectionModel>> GetUserConnectionAsync(string email)
+        public async Task<List<ConnectionModel>> GetUserConnectionAsync(string userName)
         {
             var result = await _connectionRepository.GetConnectionAsync(new ConnectionModel()
             {
-                UserEmail = email
+                UserUsername = userName
             });
 
             return result.ToList();
         } 
+
+        public async Task<List<ConnectionModel>> GetConnectionAsync(int userId) 
+        { 
+            var result = await _connectionRepository.GetConnectionAsync(new ConnectionModel() { UserId = userId });
+            return result.ToList();
+        }
+
+        public async Task<int> GetCountConnectionAsync(int userId)
+        {
+            var result = await GetConnectionAsync(userId);
+            return result.Where(x => x.ConnectionUserConnectionStatusId == 2).Count();  
+        }
     }
 }

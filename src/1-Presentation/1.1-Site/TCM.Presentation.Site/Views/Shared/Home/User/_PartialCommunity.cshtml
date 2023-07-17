@@ -1,0 +1,22 @@
+﻿@model List<TCM.Services.Model.CollectionItemModel>
+
+<div class="bar"></div>
+<div class="title_community">
+    <h2>Collectible delights in the Community</h2>
+</div>
+<div id="carouselExample" class="area_community" data-bs-touch="true">
+    @foreach(var collectionItem in Model)
+    {
+        <div class="carousel-inner">
+            <div class="community">
+   
+                <img 
+                    width="@string.Concat(collectionItem.CollectionItemTypeWidth, "px")" 
+                    height="@string.Concat(collectionItem.CollectionItemTypeHeigh, "px")" 
+                    src="@collectionItem.Url" alt="">
+                <h2>@collectionItem.CollectionItemName</h2>
+
+            </div>
+        </div>
+    }
+</div>

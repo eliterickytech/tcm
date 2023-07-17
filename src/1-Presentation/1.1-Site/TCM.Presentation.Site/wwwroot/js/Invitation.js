@@ -17,13 +17,6 @@ function AjaxSucceeded(result) {
         var dados = JSON.stringify(result.data);
         console.log(dados)
 
-        //$(".area_user_chats").load(result.redirect, dados, function (response, status, xhr) {
-        //    if (status == "error") {
-        //        var msg = "Sorry but there was an error: ";
-        //        alert(msg + xhr.status + " " + xhr.statusText);
-        //    }
-        //});
-
         $.ajax({
             type: "POST",
             url: result.redirect,
@@ -71,15 +64,15 @@ $(document).ready(function () {
         }
         else {
             var formData = {
-                email: $("#txtSearch").val()
+                userName: $("#txtSearch").val()
             };
-            var email = $("#txtSearch").val();
+            var userName = $("#txtSearch").val();
             var dados = JSON.stringify(formData);
             spinner.show();
 
             $.ajax({
                 type: "GET",
-                url: `/Invitation/GetUser?Email=${email}`,
+                url: `/User/GetUserConnection?UserName=${userName}`,
                 data: email,
                 //dataType: "json",
                 encode: true,

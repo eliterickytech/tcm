@@ -36,37 +36,6 @@ namespace TCM.Presentation.Site.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetUser([FromQuery]string email)
-        {
-            var result = await _connectionService.GetUserConnectionAsync(email);
 
-            if (!result.Any())
-            {
-                return new JsonResult(new ResultModel()
-                {
-                    StatusCode = HttpStatusCode.InternalServerError,
-                    IsOK = false,
-                    Errors = "Não foi encontrado nenhum usuário"
-                });
-            }
-            else
-            {
-                return new JsonResult(new ResultModel()
-                {
-                    StatusCode = result.Any() ? HttpStatusCode.OK : HttpStatusCode.InternalServerError,
-                    IsOK = true,
-                    Data = result,
-                    Redirect = "/Invitation"
-
-                });
-            }
-        }
-        //[HttpPost]
-        //public async Task<IActionResult> InvitationUsers([FromBody] List<ConnectionModel> models)
-        //{
-
-        //    return View("~/Views/Connection/Index.cshtml");
-        //}
     }
 }

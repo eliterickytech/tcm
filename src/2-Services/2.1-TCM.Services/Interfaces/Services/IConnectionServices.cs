@@ -9,6 +9,8 @@ namespace TCM.Services.Interfaces.Services
 {
     public interface IConnectionServices
     {
-        Task<List<ConnectionModel>> GetUserConnectionAsync(string email);
+        Task<List<ConnectionModel>> GetConnectionAsync(int userId);
+        Task<int> GetCountConnectionAsync(int userId);
+        Task<List<ConnectionModel>> GetUserConnectionAsync(string userName);
     }
 }

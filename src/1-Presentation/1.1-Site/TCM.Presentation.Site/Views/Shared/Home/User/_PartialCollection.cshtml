@@ -1,0 +1,73 @@
+﻿@{
+    var model = (TCM.Presentation.Site.Models.HomeViewModel)TempData["Model"];
+}
+@inject TCM.Services.Interfaces.Services.ICollectionItemServices _collectionItemServices
+@inject TCM.Services.Interfaces.Services.ICollectionItemUserServices _collectionItemUserServices
+
+<div class="area_grid_collectible">
+    <div class="area_grid_collectible_int">
+        <!-- Carousel -->
+        <div class="carousel slide" data-bs-ride="carousel">
+
+            <!-- Indicators/dots -->
+            <div class="area_dots carousel-indicators">
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="dot active"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="1" class="dot"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="2" class="dot"></button>
+            </div>
+
+            <div class="area_texts_collectible">
+
+                <div class="title_collectible">
+                    <h2>Collections</h2>
+                </div>
+
+@*                <div class="page_collectible">
+                    <p>Page 1</p>
+                    <img src="img/arrow_down.png" alt="">
+                </div>*@
+
+            </div>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+                    @foreach (var collection in model.CollectionsModel)
+                    {
+                        var collectionItems = await _collectionItemServices.GetCollectionItemAsync(collection.Id);
+
+
+
+                        var styleGrid = "";
+
+                        if (collection.CollectionTypeQuantity == 1)
+                        {
+                            styleGrid = "grid-auto-columns-1";
+                        }
+                        else if (collection.CollectionTypeQuantity == 4)
+                        {
+                            styleGrid = "grid_template_collectible_2x2";
+                            }
+                        else if (collection.CollectionTypeQuantity == 9)
+                        {
+                            styleGrid = "grid_template_collectible";
+                        }
+
+                        <div class="carousel-item active">
+                            <div class="@styleGrid">
+
+                                @foreach (var collectionItem in collectionItems.Where(x=>x.CollectionItemTypeIsCollectible))
+                                {
+                                    <img src="@collectionItem.Url" 
+                                         alt="@collectionItem.Description"
+                                         width="@collectionItem.CollectionItemTypeWidth"
+                                         height="@collectionItem.CollectionItemTypeHeigh"/>
+                                }
+                            
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+

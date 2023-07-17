@@ -1173,19 +1173,16 @@ nav ul li {
 }
 
 
-
 .area_community {
-
     display: flex;
-
     align-items: center;
-
     gap: 30px;
-
     padding-left: 10px;
-
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
 }
-
 
 
 .community {
@@ -4010,25 +4007,7 @@ nav ul li {
 
 
 
-.area_community {
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 30px;
-
-    padding-left: 10px;
-
-    overflow-x: auto;
-
-    overflow-y: hidden;
-
-    white-space: nowrap;
-
-    width: 100%;
-
-}
 
 
 

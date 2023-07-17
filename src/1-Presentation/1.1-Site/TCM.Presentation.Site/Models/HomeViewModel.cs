@@ -7,5 +7,10 @@ namespace TCM.Presentation.Site.Models
     {
         public List<BannerModel> BannersModel { get; set; } = new List<BannerModel>();
 
+        public List<CollectionModel> CollectionsModel { get; set; } = new List<CollectionModel>();
+
+        public List<CollectionItemModel> CollectionsItemModel { get; set; } = new List<CollectionItemModel>();
+
+        public List<CollectionItemUserModel> CollectionItemUsersModel { get; set; } = new List<CollectionItemUserModel>();
     }
 }
