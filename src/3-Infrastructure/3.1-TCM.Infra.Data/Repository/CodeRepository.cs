@@ -18,12 +18,12 @@ namespace TCM.Infra.Repository
 
         } 
 
-        public async Task<int> SaveCodeAsync(string user, string code)
+        public async Task<int> SaveCodeAsync(int? userId, string code)
         {
             var query = @"PR_Code_Insert";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@User", user, System.Data.DbType.String);
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
             parameters.Add("@Code", code, System.Data.DbType.String);
             try
             {

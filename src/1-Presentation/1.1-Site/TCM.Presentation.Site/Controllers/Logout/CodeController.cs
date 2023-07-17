@@ -51,8 +51,8 @@ namespace TCM.Presentation.Controllers.Logout
             var resultModel = new ResultModel();
 
             var parameters = ExtractValueFromKey.Extract(token);
-
-            var result = await _codeServices.GetCodeByUserAsync(parameters.User);
+            var user = await _userServices.GetUserAsync(new UserModel() { Email = parameters.User });
+            var result = await _codeServices.GetCodeByUserAsync(user.FirstOrDefault().UserName);
 
             if (result is null) return default;
             

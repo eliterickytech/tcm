@@ -10,6 +10,6 @@ namespace TCM.Services.Interfaces.Services
     public interface ICodeServices
     {
         Task<CodeModel> GetCodeByUserAsync(string user);
-        Task<int> SaveCodeAsync(string user, string code);
+        Task<int> SaveCodeAsync(int? userId, string code);
     }
 }

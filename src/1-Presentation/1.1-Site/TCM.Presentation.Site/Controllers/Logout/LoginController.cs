@@ -42,14 +42,14 @@ namespace TCM.Presentation.Controllers.Logout
             {
                 var code = Code.GeneratedCode(6);
 
-                var resultCode = await _codeServices.SaveCodeAsync(user, code);
+                var resultCode = await _codeServices.SaveCodeAsync(result?.Id, code);
 
                 if (result.ProfileId == Profile.User && resultCode > 0)
                 {
                     resultModel.StatusCode = System.Net.HttpStatusCode.OK;
                     resultModel.Data = result;
                     resultModel.IsOK = true;
-                    resultModel.Redirect = GeneratedToken(user, code);
+                    resultModel.Redirect = GeneratedToken(result.Email, code);
                 }
             }
 

@@ -18,9 +18,9 @@ namespace TCM.Services.Services
             _codeRepository = codeRepository;
         }
 
-        public async Task<int> SaveCodeAsync(string user, string code)
+        public async Task<int> SaveCodeAsync(int? userId, string code)
         {
-            return await _codeRepository.SaveCodeAsync(user, code);
+            return await _codeRepository.SaveCodeAsync(userId, code);
         }
 
 
