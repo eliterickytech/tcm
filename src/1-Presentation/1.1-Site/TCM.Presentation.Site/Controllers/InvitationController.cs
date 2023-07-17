@@ -25,14 +25,14 @@ namespace TCM.Presentation.Site.Controllers
         {
             List<ConnectionModel> models = new List<ConnectionModel>();
 
-            ViewBag.Connection = models;
+            TempData["Connection"] = models;
             return View();
         }
 
         [HttpPost]
         public IActionResult Index([FromBody] List<ConnectionModel> models)
         {
-            ViewBag.Connection = models;
+            TempData["Connection"] = models;
             return View();
         }
 

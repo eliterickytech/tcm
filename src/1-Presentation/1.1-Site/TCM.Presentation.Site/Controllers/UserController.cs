@@ -94,7 +94,7 @@ namespace TCM.Presentation.Site.Controllers
                     IsOK = false
                 });
 
-            var result = await _userServices.AddUserAsync(userModel);
+            var result = await _userServices.ChangeUserAsync(userModel);
 
             return new JsonResult(new ResultModel()
             {

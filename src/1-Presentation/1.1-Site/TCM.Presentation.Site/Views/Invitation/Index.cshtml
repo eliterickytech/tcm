@@ -3,7 +3,7 @@
 }
 @using System.Linq;
 @{
-    var _connectionModels = (List<TCM.Services.Model.ConnectionModel>)ViewBag.Connection;
+    var _connectionModels = (List<TCM.Services.Model.ConnectionModel>)TempData["Connection"];
 }
 <div class="area_home">
     @await Html.PartialAsync("~/Views/Shared/Home/User/_PartialMenu.cshtml")
