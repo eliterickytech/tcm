@@ -21,7 +21,6 @@ namespace TCM.Services.Services
             _collectionRepository = collectionRepository;
             _collectionItemUserServices = collectionItemUserServices;
         }
-
         public async Task<int> AddCollectionAsync(CollectionModel model) => await _collectionRepository.AddCollectionAsync(model);
         
         public async Task<IEnumerable<CollectionModel>> GetCollectionAsync() => await _collectionRepository.GetCollectionAsync();

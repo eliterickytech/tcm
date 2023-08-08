@@ -8,6 +8,8 @@ using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
 using System.Collections.Generic;
 using TCM.Presentation.Site.Models;
+using Microsoft.VisualBasic;
+using System;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -27,31 +29,43 @@ namespace TCM.Presentation.Site.Controllers
             _chatServices = chatServices;
             _collectionItemServices = collectionItemServices;
             _collectionItemUserServices = collectionItemUserServices;
-        }
 
-        public async Task<IActionResult> Index()
+        }
+        public async Task<IActionResult> Index(bool isConnection)
         {
-            await FillProfiles(1);
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+
+            await FillProfiles(Convert.ToInt32(id), isConnection);
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(int connectionUserId, bool isConnection)
+        {
+            await FillProfiles(connectionUserId, isConnection);
 
             return View();
         }
 
-        private async Task FillProfiles(int userId)
+
+        private async Task FillProfiles(int userId, bool isConnection)
         {
             HomeViewModel model = new HomeViewModel();
 
             var countCollectionCompleted =await _collectionServices.GetCountCollectionCompletedAsync(userId);
             var countConnection = await _connectionServices.GetCountConnectionAsync(userId);
             var countChateUnRead = await _chatServices.GetCountChatUnReadAsync(userId);
-
+            var connection = await _connectionServices.GetConnectionAsync(userId);
             var collections = await _collectionServices.GetCollectionAsync();
 
             model.CollectionsModel = collections.ToList();
-
-            TempData["CountCollectionCompleted"] = countConnection;
+            TempData["ConnectionDate"] = connection.FirstOrDefault().ConnectionUserCreatedDate;
+            TempData["NameConnection"] = connection.FirstOrDefault().UserConnectionUsername;
+            TempData["CountCollectionCompleted"] = countCollectionCompleted;
             TempData["CountConnections"] = countConnection;
             TempData["CountChatsUnRead"] = countChateUnRead;
 
+            TempData["IsConnection"] = isConnection;
             TempData["Model"] = model;
         }
     }

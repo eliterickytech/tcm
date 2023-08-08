@@ -1,0 +1,36 @@
+﻿@{
+    var isConneciton = ((bool)TempData["IsConnection"]);
+    var connectionDate = (DateTime)TempData["ConnectionDate"];
+    var countCollectionCompleted = (int)TempData["CountCollectionCompleted"];
+
+    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+}
+<div class="area_profile_null" style=@(isConneciton == true ? "display:block" : "display:none")>
+    <div class="area_profile_null_int">
+        <div class="area_texts_profile_null">
+            <div class="profile_null_text_1">
+                <div class="user_name">
+                    <h2>@(isConneciton ? TempData["NameConnection"].ToString() : "")</h2>
+                </div>
+                <div class="date">
+                    <p>Connected since @(isConneciton ? connectionDate.ToString("MMMM yy", culture) : "")</p>
+                </div>
+            </div>
+            <div class="profile_null_text_2">
+                <div class="user_name_completed">
+                    <h2>@(isConneciton ? string.Concat(TempData["NameConnection"].ToString(), " has ", countCollectionCompleted.ToString() , " completed collection") : "")</h2>
+                </div>
+                <div class="connections">
+                    <p>They have 0 mutual connections with you.</p>
+                </div>
+            </div>
+        </div>
+        <div class="icons_profile_null">
+            <img src="~/img/add.png" alt="">
+            <img src="~/img/block.png" alt="">
+        </div>
+        <div class="chat_with_then">
+            <p>Chat with then</p>
+        </div>
+    </div>
+</div>

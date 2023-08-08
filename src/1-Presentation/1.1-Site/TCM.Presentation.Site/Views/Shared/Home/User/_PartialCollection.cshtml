@@ -7,19 +7,20 @@
 <div class="area_grid_collectible">
     <div class="area_grid_collectible_int">
         <!-- Carousel -->
-        <div class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselCollectionIndicators" class="carousel" data-bs-ride="carousel">
 
             <!-- Indicators/dots -->
-            <div class="area_dots carousel-indicators">
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="dot active"></button>
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="1" class="dot"></button>
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="2" class="dot"></button>
+            <div class="carousel-indicators" id="carouselIndicators">
+                @for (int i = 0; i < model.CollectionsModel.Count; i++)
+                {
+                    <li data-bs-target="#carouselCollectionIndicators" data-bs-slide-to="@i" @(i == 0 ? "class=active" : "")></li>
+                }
             </div>
 
             <div class="area_texts_collectible">
 
                 <div class="title_collectible">
-                    <h2>Collections</h2>
+                    <h2>My collectable delights</h2>
                 </div>
 
 @*                <div class="page_collectible">
@@ -29,43 +30,52 @@
 
             </div>
 
+
             <!-- The slideshow/carousel -->
-            <div class="carousel-inner">
-                    @foreach (var collection in model.CollectionsModel)
+            <div class="carousel-inner" id="carouselInner">
+                @for (int i = 0; i < model.CollectionsModel.Count; i++)
+                {                    
+                    var collectionItems = await _collectionItemServices.GetCollectionItemAsync(model.CollectionsModel[i].Id);
+
+                    var styleGrid = "";
+                    var colspanGrid = 0;
+
+                    if (model.CollectionsModel[i].CollectionTypeQuantity == 1)
                     {
-                        var collectionItems = await _collectionItemServices.GetCollectionItemAsync(collection.Id);
+                       styleGrid = "grid-auto-columns-1";
+                    }
+                    else if (model.CollectionsModel[i].CollectionTypeQuantity == 4)
+                    {
+                        styleGrid = "grid_template_collectible_2x2";
+                        colspanGrid = 2;
+                    }
+                    else if (model.CollectionsModel[i].CollectionTypeQuantity == 9)
+                    {
+                        styleGrid = "grid_template_collectible_3x3";
+                        colspanGrid = 3;
+                    }
 
-
-
-                        var styleGrid = "";
-
-                        if (collection.CollectionTypeQuantity == 1)
-                        {
-                            styleGrid = "grid-auto-columns-1";
-                        }
-                        else if (collection.CollectionTypeQuantity == 4)
-                        {
-                            styleGrid = "grid_template_collectible_2x2";
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="@styleGrid">
+                            @{
+                                var collectionItemUsers = await _collectionItemUserServices.GetCollectionItemUserAsync(model.CollectionsModel[i].Id, 1);
                             }
-                        else if (collection.CollectionTypeQuantity == 9)
-                        {
-                            styleGrid = "grid_template_collectible";
-                        }
-
-                        <div class="carousel-item active">
-                            <div class="@styleGrid">
-
-                                @foreach (var collectionItem in collectionItems.Where(x=>x.CollectionItemTypeIsCollectible))
-                                {
-                                    <img src="@collectionItem.Url" 
-                                         alt="@collectionItem.Description"
-                                         width="@collectionItem.CollectionItemTypeWidth"
-                                         height="@collectionItem.CollectionItemTypeHeigh"/>
-                                }
-                            
+                            @foreach (var collectionItem in collectionItems.Where(x=>x.CollectionItemTypeIsCollectible))
+                            {
+                                var existsCollectionItem = collectionItemUsers.Where(x => x.CollectionItemId == collectionItem.Id).Any();
+                               
+                                <img src="@collectionItem.Url"
+                                @(!existsCollectionItem ? "style=opacity:0.3" : "")
+                                    alt="@collectionItem.Description"
+                                    width="@collectionItem.CollectionItemTypeWidth"
+                                    height="@collectionItem.CollectionItemTypeHeigh"/>
+                            }
+                            <div style="grid-column: span @colspanGrid" class="text_delightful">
+                                <h2>@string.Format( model.CollectionsModel[i].CollectionName)</h2>
                             </div>
                         </div>
-                    }
+                    </div>
+                }
             </div>
         </div>
     </div>

@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
+using TCM.Services.Model.Enum;
 
 namespace TCM.Presentation.Controllers
 {
@@ -32,7 +34,7 @@ namespace TCM.Presentation.Controllers
 
 			HomeViewModel model = new HomeViewModel();
 
-			var banners = await _bannerServices.GetBannerAsync();
+            var banners = await _bannerServices.GetBannerAsync();
 
             model.BannersModel = banners.ToList();
 
@@ -44,7 +46,7 @@ namespace TCM.Presentation.Controllers
             {
                 var collectionItems = await _collectionItemServices.GetCollectionItemAsync(collection.Id);
 
-                var collectionItem = collectionItems.Where(x => x.CollectionItemTypeId == 4).FirstOrDefault();
+                var collectionItem = collectionItems.Where(x => x.CollectionItemTypeId == (int) CollectionItemType.MiniImage).FirstOrDefault();
 
                 model.CollectionsItemModel.Add(collectionItem);
             }

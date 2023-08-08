@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,8 @@ namespace TCM.Infrastructure.Data.Repository
         {
 
         }
+
+
 
         public async Task<int> AddCollectionAsync(CollectionModel model)
         {

@@ -1,14 +1,23 @@
-﻿@{
+﻿@using TCM.Services.Model.Enum;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     Layout = "_LayoutLogin";
 }
+
 @using System.Linq;
 @{
     var _connectionModels = (List<TCM.Services.Model.ConnectionModel>)TempData["Connection"];
+    List<TCM.Services.Model.ResultSearchModel> searchUsers = new List<TCM.Services.Model.ResultSearchModel>();
+
+    if (TempData["SearchInvitationUser"] != null)
+    {
+        searchUsers = (List<TCM.Services.Model.ResultSearchModel>)TempData["SearchInvitationUser"];
+    }
 }
 <div class="area_home">
     @await Html.PartialAsync("~/Views/Shared/Home/User/_PartialMenu.cshtml")
 
-    @await Html.PartialAsync("~/Views/Shared/Home/User/_PartialSearchConnection.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/Home/User/_PartialSearchInvitation.cshtml")
 
     <div class="area_chats_all">
         <div class="area_texts_chats">
@@ -22,39 +31,61 @@
         </div>
     </div>
 
-
     <div class="area_user_chats">
         <form method="post">
-            @if (_connectionModels.Any())
+            @if (searchUsers.Any())
                 {
-                    foreach (var item in _connectionModels)
+                foreach (var item in searchUsers)
                     {
                         <div class="area_user_name_total">
                             <div class="user_name_chat">
                                 <div class="user_name_text">
-                                    <h2>@item.UserUsername</h2>
+                                <h2>@item.Username</h2>
                                 </div>
                                 <div class="text_color_beige">
-                                    <p>
+                                <p>
                                     @{
-                                        if (item.ConnectionUserConnectionStatusId == null)
+                                        if (item.IsConnection && item.ConnectionStatus == (int)ConnectionStatusType.Requested)
                                         {
-                                            <button class="invitation-circle-send" type="submit">
-                                                <i class="bi bi-send-plus-fill"></i>
+                                            <button class="invitation-circle-send" type="button" disabled title="Request already sent">
+                                                <i class="bi bi-person-fill-exclamation"></i>
+                                            </button>
+                                        }
+                                        else if (item.IsConnection && item.ConnectionStatus == (int)ConnectionStatusType.Pending)
+                                        {
+                                            <button class="invitation-circle-send" type="button" disabled title="Pending request">
+                                                <i class="bi bi-person-fill-exclamation"></i>
+                                            </button>
+
+                                        }
+                                        else if (item.IsConnection && item.ConnectionStatus == (int)ConnectionStatusType.Blocked)
+                                        {
+                                            <button class="invitation-circle-send" type="button" disabled title="Blocked user">
+                                                <i class="bi bi-person-fill-slash"></i>
+                                            </button>
+                                        }
+                                        else if (item.IsConnection && item.ConnectionStatus == (int)ConnectionStatusType.Approved)
+                                        {
+                                            <button class="invitation-circle-send" disabled type="button" title="Connection approved">
+                                                <i class="bi bi-people-fill"></i>
                                             </button>
                                         }
                                         else
                                         {
-                                            <a asp-action="index" asp-controller="profile">View their profile</a>                                            
+                                            <input type="hidden" id="ConnectionUserId" name="ConnectionUserId" value="@item.ConnectionUserId" />
+                                            <button data-connetionuserid="@item.ConnectionUserId" class="invitation-circle-send" type="submit" title="Add Connection">
+                                                <i class="bi bi-person-fill-add"></i>
+                                            </button>
                                         }
+
                                     }
-                                    </p>
+                                </p>
                                 </div>
                             </div>
                         </div>
                     <div class="user_name_chat">
                         <div class="message_chat">
-                            <h2>@item.ConnectionStatusUserName</h2>
+                            <h2>@Enum.GetName(typeof(ConnectionStatusType), item.ConnectionStatus) </h2>
                         </div>
 
                     </div>
@@ -63,7 +94,6 @@
         </form>
 
     </div>
-
 
     @await Html.PartialAsync("~/Views/Shared/Home/User/_PartialFooter.cshtml")
 </div>
@@ -88,4 +118,4 @@
         })
     })()
 </script>
-<script type="text/javascript" src="~/js/Invitation.js"></script>
+

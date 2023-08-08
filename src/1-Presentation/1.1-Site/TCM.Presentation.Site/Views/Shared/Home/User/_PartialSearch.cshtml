@@ -1,9 +1,41 @@
-﻿<form id="formSearch" name="formSearch" novalidate class="needs-validation" method="post">
+﻿
+<form id="formSearch" name="formSearch" novalidate class="needs-validation" data-ajax-method="Post" asp-controller="ResultSearch" asp-action="Results"
+        data-ajax="true"
+        data-ajax-mode="replace"
+        data-ajax-loading="#loader"
+      data-ajax-success="Success">
     <div id="email-group" class="area_form">
         <div class="input-group mb-3">
-            <input type="text"  class="form-control" id="txtSearch" name="txtSearch" aria-label="Example text with button addon" aria-describedby="btnSearch" placeholder="Search for a username to send new connection request" required>
+            <input type="text" class="form-control" id="SearchText" name="SearchText" aria-label="Example text with button addon" aria-describedby="btnSearch" placeholder="Search for a username to send new connection request" required>
             <button class="btn btn-outline-secondary" style="height:35px" type="submit" id="btnSearch"><i class="bi bi-search"></i></button>
             <span class="errorData" role="alert" id="emailError" aria-hidden="true"></span>
         </div>
     </div>
 </form>
+
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    function Success(data){
+        window.location.href = "/ResultSearch/Index"
+    }
+
+</script> 

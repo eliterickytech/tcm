@@ -17,24 +17,7 @@ namespace TCM.Infrastructure.Data.Repository
         {
 
         }
-        public async Task<IEnumerable<int>> GetCollectionItemUserAsync(int collectionid, int userId)
-        {
-            var query = @"PR_CollectionItemUser_Select";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("@CollectionId", collectionid, System.Data.DbType.Int32);
-            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
-
-            try
-            {
-                var result = await QueryAsync<int>(query, parameters);
-                return result;
-
-            }
-            catch (Exception ex) { return default; }
-        }
-
-        public async Task<IEnumerable<CollectionItemUserModel>> GetCollectionItemUserByUserIdCollectionIdAsync(int collectionid, int userId)
+        public async Task<IEnumerable<CollectionItemUserModel>> GetCollectionItemUserAsync(int collectionid, int userId)
         {
             var query = @"PR_CollectionItemUser_Select";
 

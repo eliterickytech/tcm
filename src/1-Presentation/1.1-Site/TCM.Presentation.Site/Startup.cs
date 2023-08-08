@@ -15,7 +15,6 @@ using TCM.Services.Services;
 using TCM.Services.Interfaces.Repository;
 using TCM.CrossCutting.Model;
 using TCM.Infra.Repository;
-using TCM.Infra.Repository;
 using TCM.CrossCutting.Helpers;
 using Microsoft.AspNetCore.Identity;
 using TCM.Infrastructure.Data.Repository;
@@ -55,6 +54,7 @@ namespace TCM.Presentation
             services.AddScoped<ICollectionServices, CollectionServices>();
             services.AddScoped<ICollectionItemServices, CollectionItemServices>();
             services.AddScoped<ICollectionItemUserServices, CollectionItemUserServices>();
+            services.AddScoped<ISearchServices, SearchServices>();
 
             services.AddScoped<ICodeRepository, CodeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

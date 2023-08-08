@@ -10,6 +10,8 @@ namespace TCM.Services.Interfaces.Repository
     public interface IConnectionRepository
     {
         Task<int> AddConnectionAsync(ConnectionModel connectionModel);
+        Task<int> DeleteConnectionAsync(int id, int connectionStatusId);
         Task<IEnumerable<ConnectionModel>> GetConnectionAsync(ConnectionModel connectionModel);
+        Task<int> UpdateStatusConnectionAsync(int id, int ConnectionStatusId);
     }
 }

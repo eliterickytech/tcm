@@ -9,8 +9,7 @@ namespace TCM.Services.Interfaces.Services
 {
     public interface ICollectionItemUserServices
     {
-        Task<IEnumerable<int>> GetCollectionItemUserAsync(int collectionId, int id);
-        Task<IEnumerable<CollectionItemUserModel>> GetCollectionItemUserByUserIdCollectionIdAsync(int collectionId, int userId);
+        Task<IEnumerable<CollectionItemUserModel>> GetCollectionItemUserAsync(int collectionId, int id);
         Task<int> GetCountCollectionItemUserAsync(int collectionId, int userId);
     }
 }

@@ -8,14 +8,14 @@ namespace TCM.Services.Model
 {
     public class CollectionItemUserModel
     {
-        public int Id { get; set; } 
+        public int CollectionUserId { get; set; } 
 
         public int CollectionItemId { get; set; }
 
         public int CollectionId { get; set; }
 
-        public int userId { get; set; }
+        public int UserId { get; set; }
 
-        public bool Enabled { get; set; }
+        public bool Enabled { get; set; } = true;
     }
 }

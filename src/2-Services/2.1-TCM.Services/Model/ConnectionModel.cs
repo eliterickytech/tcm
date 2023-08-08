@@ -9,7 +9,6 @@ namespace TCM.Services.Model
     public class ConnectionModel
     {
 
-        public int? Id { get; set; } = null;
 
         public int? UserId { get; set; } = null;
 

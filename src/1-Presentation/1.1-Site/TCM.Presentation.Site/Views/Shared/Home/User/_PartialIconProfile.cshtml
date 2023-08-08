@@ -1,18 +1,18 @@
 ﻿@using System.Security.Claims;
 
-<div class="area_profile">
+<div class="area_profile" style=@(((bool)TempData["IsConnection"]) == true ? "display:none" : "display:block")>
     <div class="area_profile_int">
 
         <div class="title_profile">
             <h2>Hello, @User.Identity.Name</h2>
-            <img width="10px" height="10px" src="img/edit.png" alt="">
+            <img width="10px" height="10px" src="~/img/edit.png" alt="">
         </div>
 
         <div class="icons_profile">
 
             <div class="icons_collectibles">
                 <div class="area_icons_collectibles">
-                    <img src="img/collectibles.png" alt="">
+                    <img src="~/img/collectibles.png" alt="">
                     <h2>@TempData["CountCollectionCompleted"].ToString()</h2>
                 </div>
 
@@ -23,7 +23,7 @@
 
             <div class="icons_connections">
                 <div class="area_icons_connections">
-                    <img src="img/connections.png" alt="">
+                    <img src="~/img/connections.png" alt="">
                     <h2>@TempData["CountConnections"].ToString()</h2>
                 </div>
 
@@ -34,7 +34,7 @@
 
             <div class="icons_chats">
                 <div class="area_icons_chats">
-                    <img src="img/chats.png" alt="">
+                    <img src="~/img/chats.png" alt="">
                     <h2>@TempData["CountChatsUnRead"].ToString()</h2>
                 </div>
 
