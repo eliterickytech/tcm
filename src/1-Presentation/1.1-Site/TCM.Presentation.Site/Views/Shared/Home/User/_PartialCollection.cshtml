@@ -64,8 +64,8 @@
                             {
                                 var existsCollectionItem = collectionItemUsers.Where(x => x.CollectionItemId == collectionItem.Id).Any();
                                
-                                <img src="@collectionItem.Url"
-                                @(!existsCollectionItem ? "style=opacity:0.3" : "")
+                                <img id="imgCollectionItem" src="@collectionItem.Url" data-id="@collectionItem.Id"
+                                @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
                                     alt="@collectionItem.Description"
                                     width="@collectionItem.CollectionItemTypeWidth"
                                     height="@collectionItem.CollectionItemTypeHeigh"/>
@@ -80,4 +80,5 @@
         </div>
     </div>
 </div>
+<script src="~/js/profile.js"></script>
 

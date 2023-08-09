@@ -42,7 +42,7 @@ namespace TCM.Presentation.Site.Controllers
 
             if (!string.IsNullOrEmpty(search.SearchText))
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
                 results = await _searchServices.SearchUserAsync(search.SearchText, Convert.ToInt32(id));
             }

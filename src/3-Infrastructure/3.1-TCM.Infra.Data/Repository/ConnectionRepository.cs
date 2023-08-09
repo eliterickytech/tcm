@@ -18,7 +18,7 @@ namespace TCM.Infrastructure.Data.Repository
         {
 
         }
-        public async Task<int> UpdateStatusConnectionAsync(int id, int ConnectionStatusId)
+        public async Task<int> UpdateStatusConnectionAsync(int id,  int ConnectionStatusId)
         {
             var query = "PR_Connection_Status_Update";
 

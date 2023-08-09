@@ -3,7 +3,7 @@
     var middleBanner = Model.Where(x => x.BannerTypeId == 2).FirstOrDefault();
 }
 <div class="area_video">
-    <img width="100px" height="100px" class="play" src="img/play.png" alt="">
+    <img width="100px" height="100px" class="play" src="../../img/play.png" alt="">
     @if (middleBanner.BannerVideo)
     {
         <video controls autoplay width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")">
@@ -17,6 +17,6 @@
     }
     else
     {
-        <img width="@middleBanner.BannerTypeWidth" height="@middleBanner.BannerTypeHeight" src="img/video_home.png" alt="">
+        <img width="@middleBanner.BannerTypeWidth" height="@middleBanner.BannerTypeHeight" src="../../img/video_home.png" alt="">
     }
 </div>

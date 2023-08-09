@@ -1765,20 +1765,6 @@ nav ul li {
 
 }
 
-
-
-.area_delight {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-}
-
-
-
 .delight_img {
 
     width: 100%;
@@ -3874,9 +3860,6 @@ nav ul li {
 #delight {
 
     height: 100%;
-
-    margin-top: 20px;
-
     background: rgba(255, 255, 255, 0.9);
 
 }
@@ -3925,7 +3908,7 @@ nav ul li {
 
     width: 100%;
 
-    padding: 20px 10px;
+    padding: 20px;
 
 }
 
@@ -4721,7 +4704,10 @@ footer {
 
 }
 
-
+.border_unread_u {
+    border: 2px solid #964E38;
+    margin-top: 10px;
+}
 
 .chats_unread h2 {
 
@@ -6323,4 +6309,11 @@ footer {
     border-radius: 50%;
     width: 25px;
     height: 25px;
+}
+.opacityImage-collection-item {
+    opacity: 0.3;
+}
+.opacityImage-collection-item-display-full {
+    opacity: 1;
+    cursor:pointer;
 }

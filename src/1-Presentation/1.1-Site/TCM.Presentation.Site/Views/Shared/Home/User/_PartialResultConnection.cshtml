@@ -46,12 +46,16 @@
                         </div>
                         <div class="text_color_beige">
                             <p>
-                                <button @((int)ConnectionStatusType.Blocked != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert" ) id="block" data-value="@((int)ConnectionStatusType.Blocked)" type="button" title="Request block">
-                                    <i class="bi bi-person-fill-slash"></i>
-                                </button>
-                                <button @((int)ConnectionStatusType.Canceled != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="cancel" data-value="@((int)ConnectionStatusType.Canceled)" type="button" title="Request cancel">
-                                    <i class="bi bi-person-fill-x"></i>
-                                </button>
+                                @if (item.ConnectionUserId != 1)
+                                {
+                                    <button @((int)ConnectionStatusType.Blocked != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="block" data-value="@((int)ConnectionStatusType.Blocked)" type="button" title="Request block">
+                                        <i class="bi bi-person-fill-slash"></i>
+                                    </button>
+                                    <button @((int)ConnectionStatusType.Canceled != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="cancel" data-value="@((int)ConnectionStatusType.Canceled)" type="button" title="Request cancel">
+                                        <i class="bi bi-person-fill-x"></i>
+                                    </button>
+                                }
+
                                 <input type="hidden" id="ConnectionId" value="@item.ConnectionId" />
                             </p>
                         </div>

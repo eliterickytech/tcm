@@ -21,5 +21,8 @@ namespace TCM.Services.Services
         public async Task<int> AddCollectionItemAsync(CollectionItemModel model) => await _collectionItemRepository.AddCollectionItemAsync(model);
 
         public async Task<IEnumerable<CollectionItemModel>> GetCollectionItemAsync(int id) => await _collectionItemRepository.GetCollectionItemAsync(id);
+
+        public async Task<CollectionItemModel> GetCollectionItemDetailsAsync(int id) => await _collectionItemRepository.GetCollectionItemDetailsAsync(id);
+
     }
 }

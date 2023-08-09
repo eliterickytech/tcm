@@ -11,6 +11,7 @@ using TCM.CrossCutting.Helpers;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
+using TCM.Services.Model.Enum;
 using TCM.Services.Services;
 
 namespace TCM.Presentation.Site.Controllers
@@ -30,13 +31,54 @@ namespace TCM.Presentation.Site.Controllers
             _searchServices = searchServices;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("SearchInvitationUser") != null)
             {
                 TempData["SearchInvitationUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchInvitationUser"));
+                HttpContext.Session.Remove("SearchInvitationUser");
             }
+            else
+            {
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
+                var resultSearchModels = new List<ResultSearchModel>();
+                var resultUsers = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
+
+                //var resultConnections = await _connectionService.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(id) });
+
+                resultUsers.ToList().Where(x =>
+                (x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Pending ||
+                x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Requested)).ToList().ForEach(x =>
+                {
+                    resultSearchModels.Add(new ResultSearchModel()
+                    {
+                        ConnectionId = x.ConnectionUserId ?? 0,
+                        ConnectionStatus = x.ConnectionUserConnectionStatusId,
+                        ConnectionUserId = x.UserConnectionId,
+                        Username = x.UserConnectionUsername,
+                        CountCollection = 0,
+                    });
+                });
+
+                //resultConnections.ToList().Where(x =>
+                //(x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Pending ||
+                //x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Requested)).ToList().ForEach(x =>
+                //{
+                //    resultSearchModels.Add(new ResultSearchModel()
+                //    {
+                //        ConnectionId = x.ConnectionUserId ?? 0,
+                //        ConnectionStatus = x.ConnectionUserConnectionStatusId,
+                //        ConnectionUserId = x.UserId,
+                //        Username = x.UserUsername,
+                //        CountCollection = 0,
+                //    });
+                //});
+
+                HttpContext.Session.SetString("SearchInvitationUser", Newtonsoft.Json.JsonConvert.SerializeObject(resultSearchModels));
+
+                TempData["SearchInvitationUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchInvitationUser"));
+            }
             return View();
         }
 
@@ -52,7 +94,7 @@ namespace TCM.Presentation.Site.Controllers
         {
             if (connetionuserid.ConnectionUserId > 0) 
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
                 var result = await _connectionService.AddConnectionAsync(Convert.ToInt32(id), connetionuserid.ConnectionUserId);
 
                 return new JsonResult(new ResultModel()
@@ -77,7 +119,7 @@ namespace TCM.Presentation.Site.Controllers
 
             if (!string.IsNullOrEmpty(search.SearchText))
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
                 results = await _searchServices.SearchUserAsync(search.SearchText, Convert.ToInt32(id));
             }
@@ -85,5 +127,6 @@ namespace TCM.Presentation.Site.Controllers
             HttpContext.Session.SetString("SearchInvitationUser", Newtonsoft.Json.JsonConvert.SerializeObject(results));
             return results;
         }
+
     }
 }

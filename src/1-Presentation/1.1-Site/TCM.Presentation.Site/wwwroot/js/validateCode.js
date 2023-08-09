@@ -13,7 +13,6 @@ function AjaxSucceeded(result) {
         };
     }
     else {
-
         $(".access").remove();
         window.location.href = result.redirect;
         spinner.hide();

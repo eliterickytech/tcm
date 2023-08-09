@@ -56,7 +56,7 @@ namespace TCM.Presentation.Controllers.Logout
 
             if (result is null) return default;
             
-            if (code == result.Code)
+            if (code.ToUpper() == result.Code)
             {
                 
                 var userMode = await _userServices.GetUserAsync(new UserModel() { Id = result.UserId } );

@@ -30,22 +30,42 @@ namespace TCM.Presentation.Site.Controllers
             if (HttpContext.Session.GetString("SearchRequestUser") != null)
             {
                 TempData["SearchRequestUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchRequestUser"));
+                HttpContext.Session.Remove("SearchRequestUser");
             }
             else
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
                 var resultSearchModels = new List<ResultSearchModel>(); 
-                var results = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
+                var resultsUser = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
 
-                results.ToList().Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Pending || x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Requested).ToList().ForEach(x =>
+                var resultConnections = await _connectionService.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(id) });
+
+                resultsUser.ToList().Where(x => 
+                x.ConnectionUserId == Convert.ToInt32(id) &&
+                (x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Pending || 
+                x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Requested)).ToList().ForEach(x =>
                 {
                     resultSearchModels.Add(new ResultSearchModel()
                     {
                         ConnectionId = x.ConnectionUserId ?? 0,
                         ConnectionStatus = x.ConnectionUserConnectionStatusId,
                         ConnectionUserId = x.UserConnectionId,
-                        Username = x.UserConnectionUsername,
+                        Username = x.UserUsername,
+                        CountCollection = 0,
+                    });
+                });
+
+                resultConnections.ToList().Where(x =>
+                (x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Pending ||
+                x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Requested)).ToList().ForEach(x =>
+                {
+                    resultSearchModels.Add(new ResultSearchModel()
+                    {
+                        ConnectionId = x.ConnectionUserId ?? 0,
+                        ConnectionStatus = x.ConnectionUserConnectionStatusId,
+                        ConnectionUserId = x.UserId,
+                        Username = x.UserUsername,
                         CountCollection = 0,
                     });
                 });
@@ -92,7 +112,7 @@ namespace TCM.Presentation.Site.Controllers
             {
                 await _connectionService.DeleteConnectionAsync(connectionId, connectionStatusId);
             }
-            else if (connectionStatusId == (int)ConnectionStatusType.Blocked)
+            else if (connectionStatusId == (int)ConnectionStatusType.Blocked || connectionStatusId == (int)ConnectionStatusType.Approved)
             {
                 await _connectionService.UpdateStatusConnectionAsync(connectionId, connectionStatusId);
             }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using TCM.Presentation.Site.Models;
 using Microsoft.VisualBasic;
 using System;
+using TCM.Services.Model.Enum;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -33,7 +34,7 @@ namespace TCM.Presentation.Site.Controllers
         }
         public async Task<IActionResult> Index(bool isConnection)
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
             await FillProfiles(Convert.ToInt32(id), isConnection);
 
@@ -58,9 +59,9 @@ namespace TCM.Presentation.Site.Controllers
             var connection = await _connectionServices.GetConnectionAsync(userId);
             var collections = await _collectionServices.GetCollectionAsync();
 
-            model.CollectionsModel = collections.ToList();
-            TempData["ConnectionDate"] = connection.FirstOrDefault().ConnectionUserCreatedDate;
-            TempData["NameConnection"] = connection.FirstOrDefault().UserConnectionUsername;
+            model.CollectionsModel = collections?.ToList();
+            TempData["ConnectionDate"] = connection?.Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate;
+            TempData["NameConnection"] = connection?.Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionUsername;
             TempData["CountCollectionCompleted"] = countCollectionCompleted;
             TempData["CountConnections"] = countConnection;
             TempData["CountChatsUnRead"] = countChateUnRead;

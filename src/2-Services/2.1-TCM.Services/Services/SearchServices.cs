@@ -39,12 +39,14 @@ namespace TCM.Services.Services
 
                 var connections = await _connectionServices.GetConnectionAsync(userId);
 
-                resultSearchModels.Add(new ResultSearchModel() { 
-                    Username = user.UserName, 
+                resultSearchModels.Add(new ResultSearchModel()
+                {
+                    Username = user.UserName,
                     CountCollection = collection,
-                    ConnectionStatus = connections?.FirstOrDefault()?.ConnectionUserConnectionStatusId,
-                    ConnectionUserId= user.Id,
-                    IsConnection = connections?.FirstOrDefault()?.UserConnectionId == user.Id.Value });
+                    ConnectionStatus = connections?.Where(x => x.UserId == user.Id || x.UserConnectionId == user.Id).FirstOrDefault()?.ConnectionUserConnectionStatusId,
+                    ConnectionUserId = user.Id,
+                    IsConnection = connections.Where(x => x.UserConnectionId == user.Id).Any()
+                });
             };
 
             return resultSearchModels;

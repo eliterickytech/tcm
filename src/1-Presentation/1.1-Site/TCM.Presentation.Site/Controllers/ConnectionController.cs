@@ -32,15 +32,21 @@ namespace TCM.Presentation.Site.Controllers
             if (HttpContext.Session.GetString("SearchConnectionUser") != null)
             {
                 TempData["SearchConnectionUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchConnectionUser"));
+                HttpContext.Session.Remove("SearchConnectionUser");
             }
             else
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
                 var resultSearchModels = new List<ResultSearchModel>();
-                var results = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
+                var resultUsers = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
 
-                results.ToList().Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Canceled || x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved || x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Blocked).ToList().ForEach(x =>
+                var resultConnections = await _connectionService.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(id) });
+
+                resultUsers.ToList().Where(x => 
+                    x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Canceled || 
+                    x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved || 
+                    x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Blocked).ToList().ForEach(x =>
                 {
                     resultSearchModels.Add(new ResultSearchModel()
                     {
@@ -52,6 +58,21 @@ namespace TCM.Presentation.Site.Controllers
                     });
                 });
 
+                resultConnections.ToList().Where(x =>
+                    x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Canceled ||
+                    x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved ||
+                    x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Blocked).ToList().ForEach(x =>
+                    {
+                    resultSearchModels.Add(new ResultSearchModel()
+                    {
+                        ConnectionId = x.ConnectionUserId ?? 0,
+                        ConnectionStatus = x.ConnectionUserConnectionStatusId,
+                        ConnectionUserId = x.UserId,
+                        Username = x.UserUsername,
+                        CountCollection = 0,
+                    });
+                });
+
                 HttpContext.Session.SetString("SearchConnectionUser", Newtonsoft.Json.JsonConvert.SerializeObject(resultSearchModels));
 
                 TempData["SearchConnectionUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchConnectionUser"));
@@ -59,22 +80,6 @@ namespace TCM.Presentation.Site.Controllers
             }
             return View();
         }
-
-        //[HttpPost]
-        //public async Task<List<ResultSearchModel>> RequestResults(SearchModel search)
-        //{
-        //    List<ResultSearchModel> results = new List<ResultSearchModel>();
-
-        //    if (!string.IsNullOrEmpty(search.SearchText))
-        //    {
-        //        var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "1";
-
-        //        results = await _searchServices.SearchUserAsync(search.SearchText, Convert.ToInt32(id));
-        //    }
-
-        //    HttpContext.Session.SetString("SearchConnectionUser", Newtonsoft.Json.JsonConvert.SerializeObject(results));
-        //    return results;
-        //}
 
         [HttpPost]
         public async Task<List<ResultSearchModel>> ConnectionResults(SearchModel search)
