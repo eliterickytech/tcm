@@ -9,6 +9,9 @@ using TCM.Services.Services;
 using TCM.Services.Model;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using System;
+using TCM.CrossCutting.Models;
 
 namespace TCM.Presentation.Controllers.Logout
 {
@@ -19,13 +22,14 @@ namespace TCM.Presentation.Controllers.Logout
         private readonly SendMail _sendMail;
         private readonly IUserServices _userServices;
         private readonly Utils _utils;
-        
-        public CodeController(ICodeServices codeServices, SendMail sendMail, IUserServices userServices, Utils utils)
+        private readonly ILogger<CodeController> _logger;
+        public CodeController(ICodeServices codeServices, SendMail sendMail, IUserServices userServices, Utils utils, ILogger<CodeController> logger)
         {
             _codeServices = codeServices;
             _sendMail = sendMail;
             _userServices = userServices;
             _utils = utils;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -35,12 +39,29 @@ namespace TCM.Presentation.Controllers.Logout
 
         public async Task< IActionResult> Mail(string token)
         {
+            Parameter parameters = null;
+            try
+            {
+                parameters = ExtractValueFromKey.Extract(token);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error extract parameters: {ex.StackTrace}");
+            }
 
-            var parameters = ExtractValueFromKey.Extract(token);
 
             ViewBag.Token = token;
 
-            await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
+            try
+            {
+                await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Error sendmail: {ex.StackTrace}");
+
+            }
+
 
             return View();
          }
