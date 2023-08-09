@@ -49,6 +49,8 @@ $(document).ready(function () {
                 "MobilePhone": $("#mobile").val().replace(/[+()\s-]/g, ''),
                 "Password": $("#password").val(),
                 "ConfirmPassword": $("#confirmPassword").val(),
+                "Id": $("#submit").data("id")
+
             };
 
             spinner.show();

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TCM.CrossCutting.Helpers;
 using TCM.Services.Interfaces.Services;
@@ -19,9 +21,12 @@ namespace TCM.Presentation.Site.Controllers
             _userServices = userServices;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
+            var user = (await _userServices.GetUserAsync(new UserModel() { Id = Convert.ToInt32(id) })).FirstOrDefault();
+            return View(user);
         }
         public IActionResult Change() 
         {
