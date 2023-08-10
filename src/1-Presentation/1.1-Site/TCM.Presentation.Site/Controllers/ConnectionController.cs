@@ -55,6 +55,7 @@ namespace TCM.Presentation.Site.Controllers
                         ConnectionUserId = x.UserConnectionId,
                         Username = x.UserConnectionUsername,
                         CountCollection = 0,
+                        MyUserId = Convert.ToInt32(id)
                     });
                 });
 
@@ -70,10 +71,11 @@ namespace TCM.Presentation.Site.Controllers
                         ConnectionUserId = x.UserId,
                         Username = x.UserUsername,
                         CountCollection = 0,
+                        MyUserId = Convert.ToInt32(id)
                     });
                 });
 
-                HttpContext.Session.SetString("SearchConnectionUser", Newtonsoft.Json.JsonConvert.SerializeObject(resultSearchModels));
+                HttpContext.Session.SetString("SearchConnectionUser", Newtonsoft.Json.JsonConvert.SerializeObject(resultSearchModels.OrderBy(x => x.ConnectionUserId)));
 
                 TempData["SearchConnectionUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchConnectionUser"));
 

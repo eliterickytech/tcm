@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     var model = (TCM.Presentation.Site.Models.HomeViewModel)TempData["Model"];
 }
 @inject TCM.Services.Interfaces.Services.ICollectionItemServices _collectionItemServices
@@ -58,7 +59,7 @@
                     <div class="carousel-item @(i == 0 ? "active" : "")">
                         <div class="@styleGrid">
                             @{
-                                var collectionItemUsers = await _collectionItemUserServices.GetCollectionItemUserAsync(model.CollectionsModel[i].Id, 1);
+                                var collectionItemUsers = await _collectionItemUserServices.GetCollectionItemUserAsync(model.CollectionsModel[i].Id, model.Id);
                             }
                             @foreach (var collectionItem in collectionItems.Where(x=>x.CollectionItemTypeIsCollectible))
                             {

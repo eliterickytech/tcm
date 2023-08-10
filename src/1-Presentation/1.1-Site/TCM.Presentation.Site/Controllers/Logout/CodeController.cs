@@ -47,6 +47,7 @@ namespace TCM.Presentation.Controllers.Logout
             catch(Exception ex)
             {
                 _logger.LogError($"Error extract parameters: {ex.StackTrace}");
+                throw ex;
             }
 
 
@@ -59,7 +60,7 @@ namespace TCM.Presentation.Controllers.Logout
             catch(Exception ex)
             {
                 _logger.LogError($"Error sendmail: {ex.StackTrace}");
-
+                throw ex;
             }
 
 

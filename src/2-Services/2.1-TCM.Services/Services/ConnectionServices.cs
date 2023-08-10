@@ -51,12 +51,6 @@ namespace TCM.Services.Services
             return distinct.ToList();
         }
 
-        public async Task<int> GetCountConnectionAsync(int userId)
-        {
-            var result = await GetConnectionAsync(userId);
-            return result.Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved).Count();  
-        }
-
         public async Task<int> AddConnectionAsync(int userId, int connectionUserId)
         {
             return await _connectionRepository.AddConnectionAsync(new ConnectionModel() { UserId = userId, ConnectionUserId = connectionUserId, ConnectionUserConnectionStatusId = (int) ConnectionStatusType.Requested });

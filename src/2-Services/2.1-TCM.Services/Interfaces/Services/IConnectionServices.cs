@@ -13,7 +13,6 @@ namespace TCM.Services.Interfaces.Services
         Task<int> DeleteConnectionAsync(int id, int connectionStatusId);
         Task<List<ConnectionModel>> GetConnectionAsync(int userId);
         Task<List<ConnectionModel>> GetConnectionAsync(ConnectionModel model);
-        Task<int> GetCountConnectionAsync(int userId);
         Task<List<ConnectionModel>> GetUserConnectionAsync(string userName);
         Task<int> UpdateStatusConnectionAsync(int id, int connectionStatusId);
     }

@@ -5,7 +5,9 @@
 
         <div class="title_profile">
             <h2>Hello, @User.Identity.Name</h2>
-            <img width="10px" height="10px" src="~/img/edit.png" alt="">
+            <a asp-controller="User">
+                <img width="10px" height="10px"  src="~/img/edit.png" alt="">
+            </a>
         </div>
 
         <div class="icons_profile">

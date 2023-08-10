@@ -12,5 +12,9 @@ namespace TCM.Presentation.Site.Models
         public List<CollectionItemModel> CollectionsItemModel { get; set; } = new List<CollectionItemModel>();
 
         public List<CollectionItemUserModel> CollectionItemUsersModel { get; set; } = new List<CollectionItemUserModel>();
+
+        public int Id { get; set; }
+
+        public int ConnectionMulti { get; set; } = 0;
     }
 }

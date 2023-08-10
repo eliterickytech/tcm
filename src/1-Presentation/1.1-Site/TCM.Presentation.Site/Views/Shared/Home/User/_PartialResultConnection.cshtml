@@ -46,6 +46,9 @@
                         </div>
                         <div class="text_color_beige">
                             <p>
+                                <button @((int)ConnectionStatusType.Approved == @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="approved" data-userid="@item.ConnectionUserId" data-value="@((int)ConnectionStatusType.Approved)" type="button" title="View profile">
+                                    <i class="bi bi-eye-fill"></i>
+                                </button>
                                 @if (item.ConnectionUserId != 1)
                                 {
                                     <button @((int)ConnectionStatusType.Blocked != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="block" data-value="@((int)ConnectionStatusType.Blocked)" type="button" title="Request block">
@@ -53,9 +56,8 @@
                                     </button>
                                     <button @((int)ConnectionStatusType.Canceled != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="cancel" data-value="@((int)ConnectionStatusType.Canceled)" type="button" title="Request cancel">
                                         <i class="bi bi-person-fill-x"></i>
-                                    </button>
-                                }
-
+                                    </button>                                    
+                                }                                
                                 <input type="hidden" id="ConnectionId" value="@item.ConnectionId" />
                             </p>
                         </div>
@@ -77,16 +79,21 @@
         $(".invitation-circle-send").click(function () {
             var connectionStatusId = $(this).data("value");
             var connectionId = $("#ConnectionId").val()
+            var userId = $(this).data("userid");
             var dinamicText = ""
 
-            if (connectionStatusId == @((int)ConnectionStatusType.Blocked)) {
+            if (connectionStatusId == @((int)ConnectionStatusType.Approved)) {
+                window.location.href = `/Profile/?connectionUserId=${userId}&isConnection=true&fill=true`
+                return;
+            }
+
+            else if (connectionStatusId == @((int)ConnectionStatusType.Blocked)) {
                 sucessText = 'Blocked!'
                 dinamicText = "Do you really want to block this user?"
             }
             else if (connectionStatusId == @((int)ConnectionStatusType.Canceled)) {
                 sucessText = 'Canceled!'
                 dinamicText = "Do you really want to cancel this user?"
-
             }
 
             Swal.fire({

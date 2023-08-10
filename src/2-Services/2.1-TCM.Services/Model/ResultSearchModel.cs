@@ -20,5 +20,7 @@ namespace TCM.Services.Model
 
         public int? ConnectionStatus { get; set; }
 
+        public int MyUserId { get; set; }
+
     }
 }

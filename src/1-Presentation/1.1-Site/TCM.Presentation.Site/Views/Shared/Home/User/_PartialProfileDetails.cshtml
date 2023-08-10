@@ -1,36 +1,144 @@
-﻿@{
+﻿@using TCM.Services.Model.Enum;
+@using System.Security.Claims;
+@{
     var isConneciton = ((bool)TempData["IsConnection"]);
     Nullable<DateTime> connectionDate = TempData["ConnectionDate"] != null ? (DateTime)TempData["ConnectionDate"] : null;
     var countCollectionCompleted = (int)TempData["CountCollectionCompleted"];
-
+    HomeViewModel model = TempData["Model"] != null ? (HomeViewModel)TempData["Model"] : null;
     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
 }
 <div class="area_profile_null" style=@(isConneciton == true ? "display:block" : "display:none")>
-    <div class="area_profile_null_int">
-        <div class="area_texts_profile_null">
-            <div class="profile_null_text_1">
-                <div class="user_name">
-                    <h2>@(isConneciton ? TempData["NameConnection"].ToString() : "")</h2>
-                </div>
-                <div class="date">
-                    <p>Connected since @(isConneciton ? connectionDate?.ToString("MMMM yy", culture) : "")</p>
+    @if ((int)TempData["ConnectionUserId"] == 1)
+    {
+        <div class="area_profile_int">
+
+            <div class="profile_principal">
+                <img src="~/img/profile.png" alt="">
+
+                <div class="area_texts_profile">
+                    <div class="profile_name">
+                        <h2>@(isConneciton ? TempData["NameConnection"].ToString() : "")</h2>
+                    </div>
+                    <div class="profile_collections">
+                        <p>
+                            @(model.CollectionsModel.Count()) collections available.
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="profile_null_text_2">
-                <div class="user_name_completed">
-                    <h2>@(isConneciton ? string.Concat(TempData["NameConnection"].ToString(), " has ", countCollectionCompleted.ToString() , " completed collection") : "")</h2>
+            <div class="area_user_profile">
+                <div class="info_user_profile">
+                    <h2>
+                        Nice to see you here, @User.Identity.Name!
+                    </h2>
                 </div>
-                <div class="connections">
-                    <p>They have 0 mutual connections with you.</p>
+
+                <div class="info_name_collection_profile">
+                    <p>
+                        Did you get the page of my newest collection, <b>@(model.CollectionsModel.FirstOrDefault().CollectionName)?</b> Tap the button to get the page and start collecting today.
+                    </p>
                 </div>
             </div>
+
         </div>
-        <div class="icons_profile_null">
-            <img src="~/img/add.png" alt="">
-            <img src="~/img/block.png" alt="">
+    }
+    else
+    {
+        <div class="area_profile_null_int">
+            <div class="area_texts_profile_null">
+                <div class="profile_null_text_1">
+                    <div class="user_name">
+                        <h2>@(isConneciton ? TempData["NameConnection"].ToString() : "")</h2>
+                    </div>
+                    <div class="date">
+                        <p>Connected since @(isConneciton ? connectionDate?.ToString("MMMM yy", culture) : "")</p>
+                    </div>
+                </div>
+                <div class="profile_null_text_2">
+                    <div class="user_name_completed">
+                        <h2>@(isConneciton ? string.Concat(TempData["NameConnection"].ToString(), " has ", countCollectionCompleted.ToString(), " completed collection") : "")</h2>
+                    </div>
+                    <div class="connections">
+                        <p>They have @(isConneciton ? TempData["connectionMult"] : "") mutual connections with you.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="icons_profile_null" style="@((int)TempData["ConnectionUserId"] != 1 ? "display:block" : "display:none")">
+                <button @(isConneciton ? (int)ConnectionStatusType.Approved == (int)TempData["ConnectionUserConnectionStatusId"] ? "disabled class=invitation-circle-send-disabled send_alert" : "class=invitation-circle-send send_alert" : "") id="approved" data-userid="@(isConneciton ? (int)TempData["ConnectionUserId"] : 0)" data-value="@((int)ConnectionStatusType.Approved)" type="button" title="View profile">
+                    <i class="bi bi-eye-fill"></i>
+                </button>
+                <button @(isConneciton ? (int)ConnectionStatusType.Blocked == (int)TempData["ConnectionUserConnectionStatusId"] ? "disabled class=invitation-circle-send-disabled send_alert" : "class=invitation-circle-send send_alert" : "") id="blocked" data-userid="@(isConneciton ? (int)TempData["ConnectionUserId"] : 0)" data-value="@((int)ConnectionStatusType.Blocked)" type="button" title="Request block">
+                    <i class="bi bi-person-fill-slash"></i>
+                </button>
+            </div>
+            <div class="chat_with_then">
+                <p>Chat with then</p>
+            </div>
         </div>
-        <div class="chat_with_then">
-            <p>Chat with then</p>
-        </div>
-    </div>
+    }
+
 </div>
+<script>
+    $(document).ready(function () {
+
+        $(".invitation-circle-send").click(function () {
+            var connectionStatusId = $(this).data("value");
+            var connectionId = $("#ConnectionId").val()
+            var userId = $(this).data("userid");
+            var dinamicText = ""
+
+            if (connectionStatusId == @((int)ConnectionStatusType.Approved)) {
+                window.location.href = `/Profile/?connectionUserId=${userId}&isConnection=true&fill=true`
+                return;
+            }
+
+            else if (connectionStatusId == @((int)ConnectionStatusType.Blocked)) {
+                sucessText = 'Blocked!'
+                dinamicText = "Do you really want to block this user?"
+            }
+            else if (connectionStatusId == @((int)ConnectionStatusType.Canceled)) {
+                sucessText = 'Canceled!'
+                dinamicText = "Do you really want to cancel this user?"
+            }
+
+            Swal.fire({
+                title: 'Are you sure?',
+                title: dinamicText,
+                icon: 'warning',
+                showCloseButton: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Close',
+                allowOutsideClick: () => !Swal.isLoading(),
+                allowEscapeKey: false
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    var url = '/Connection/Action?connectionStatusId=' + connectionStatusId + '&connectionId=' + connectionId
+
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function (data) {
+                            if (connectionStatusId == @((int)ConnectionStatusType.Approved)) {
+                                window.location.href = '/Connection/Index'
+                            }
+                            else {
+                                Swal.fire(sucessText, '', 'success').then((sucess) => {
+                                    window.location.href = '/Connection/Index'
+                                });
+                            }
+
+                        },
+                        error: function (xhr, status, error) {
+                            Swal.fire('Error', '', 'error')
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+</script>
