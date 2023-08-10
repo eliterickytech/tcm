@@ -33,6 +33,11 @@ namespace TCM.CrossCutting.Helpers
             var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectVerification, plainTextContent, ReadHtmlFile(_smtpConfiguration.HTMLVerification).ToString().Replace("@AccessCode@", code));
 
             var response = await sendGridClient.SendEmailAsync(msg);
+
+            if (response.StatusCode != HttpStatusCode.Accepted)
+            {
+                throw new Exception(response.StatusCode.ToString() + ": " + response.Body);
+            }
         }
 
         public async Task SendWelcomeAsync(string mailTo, string fullname)

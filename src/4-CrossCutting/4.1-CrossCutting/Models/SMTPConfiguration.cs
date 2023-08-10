@@ -21,6 +21,8 @@ namespace TCM.CrossCutting.Model
 
         public string ApiKey { get; set; }
 
+        public string ConnectionString { get; set; }
+
         public SMTPConfiguration() { }
 
     }
