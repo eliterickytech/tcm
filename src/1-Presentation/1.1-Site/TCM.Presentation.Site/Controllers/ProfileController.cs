@@ -47,7 +47,8 @@ namespace TCM.Presentation.Site.Controllers
         {
             if (!isConnection)
             {
-                connectionUserId = int.Parse( HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2");
+                if (connectionUserId != 1)
+                    connectionUserId = int.Parse( HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2");
             }
             await FillProfiles(connectionUserId, isConnection);
 
@@ -94,19 +95,28 @@ namespace TCM.Presentation.Site.Controllers
             var collections = await _collectionServices.GetCollectionAsync();
 
             model.CollectionsModel = collections?.ToList();
-            
-            TempData["ConnectionDate"] = userId == 1 ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate : !isConnection ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate : results?.Where(x => x.ConnectionUserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate;
-            TempData["NameConnection"] = userId == 1 ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserUsername : !isConnection ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserUsername : results?.Where(x => x.ConnectionUserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionUsername;
-            TempData["ConnectionUserConnectionStatusId"] = userId == 1 ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId : !isConnection ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId :  results?.Where(x => x.ConnectionUserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId;
-            
-            TempData["ConnectionUserId"] = userId == 1 ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserId : !isConnection ? results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionId : results?.Where(x => x.ConnectionUserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionId;
+
             TempData["CountCollectionCompleted"] = countCollectionCompleted;
             TempData["CountConnections"] = countConnection;
             TempData["CountChatsUnRead"] = countChateUnRead;
-
             TempData["IsConnection"] = isConnection;
             TempData["Model"] = model;
             TempData["connectionMult"] = connectionMult;
+
+            if (isConnection)
+            {
+                TempData["ConnectionDate"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate;
+                TempData["NameConnection"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionUsername;
+                TempData["ConnectionUserConnectionStatusId"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId;
+                TempData["ConnectionUserId"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionId;
+            }
+            else
+            {
+                TempData["ConnectionDate"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate;
+                TempData["NameConnection"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserUsername;
+                TempData["ConnectionUserConnectionStatusId"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId;
+                TempData["ConnectionUserId"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserId;
+            }
         }
     }
 }

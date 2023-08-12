@@ -32,8 +32,6 @@ namespace TCM.Services.Model
         public bool Enabled { get; set; }
 
         public string CollectionItemName { get; set; }
-
-        public int Quantity { get; set; }
     }
    
 }

@@ -6,9 +6,11 @@
     var countCollectionCompleted = (int)TempData["CountCollectionCompleted"];
     HomeViewModel model = TempData["Model"] != null ? (HomeViewModel)TempData["Model"] : null;
     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
+    var userId = (int)TempData["ConnectionUserId"];
+    if (userId == (int)UserType.Administrative) isConneciton = true;
 }
 <div class="area_profile_null" style=@(isConneciton == true ? "display:block" : "display:none")>
-    @if ((int)TempData["ConnectionUserId"] == 1)
+    @if (userId == (int)UserType.Administrative)
     {
         <div class="area_profile_int">
 

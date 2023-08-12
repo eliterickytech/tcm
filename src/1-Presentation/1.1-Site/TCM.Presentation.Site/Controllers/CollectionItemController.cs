@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
+using TCM.Services.Services;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -15,12 +16,14 @@ namespace TCM.Presentation.Site.Controllers
         private readonly ICollectionItemServices _collectionItemServices;
         private readonly ICollectionServices _collectionServices;
         private readonly ICollectionItemUserServices _collectionUserServices;
+        private readonly ICollectionItemSharedServices _collectionItemSharedServices;
 
-        public CollectionItemController(ICollectionItemServices collectionItemServices, ICollectionServices collectionServices, ICollectionItemUserServices collectionUserServices)
+        public CollectionItemController(ICollectionItemServices collectionItemServices, ICollectionServices collectionServices, ICollectionItemUserServices collectionUserServices, ICollectionItemSharedServices collectionItemSharedServices)
         {
             this._collectionItemServices = collectionItemServices;
             this._collectionServices = collectionServices;
             this._collectionUserServices = collectionUserServices;
+            this._collectionItemSharedServices = collectionItemSharedServices;
         }
 
         public async Task<IActionResult> Index(int id)
@@ -38,13 +41,13 @@ namespace TCM.Presentation.Site.Controllers
             var collections = await _collectionServices.GetCollectionAsync();
 
             var collectionItem = await _collectionItemServices.GetCollectionItemDetailsAsync(itemId);
-
+            var collectionItemShared = await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { CollectionItemId = itemId });
             return new CollectionDetails()
             {
-                CollectionId = collectionItem.CollectionId,
+                CollectionId = collectionItem.CollectionId, 
                 CollectionItemDescription = collectionItem.Description,
                 Id = collectionItem.Id,
-                Quantity = collectionItem.Quantity,
+                Quantity = collectionItemShared.Count(),
                 UrlImage = collectionItem.Url,
                 Height = collectionItem.CollectionItemTypeHeigh,
                 Width = collectionItem.CollectionItemTypeWidth,

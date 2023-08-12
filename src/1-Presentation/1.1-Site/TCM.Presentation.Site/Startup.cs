@@ -55,6 +55,7 @@ namespace TCM.Presentation
             services.AddScoped<ICollectionItemServices, CollectionItemServices>();
             services.AddScoped<ICollectionItemUserServices, CollectionItemUserServices>();
             services.AddScoped<ISearchServices, SearchServices>();
+            services.AddScoped<ICollectionItemSharedServices, CollectionItemSharedServices >();
 
             services.AddScoped<ICodeRepository, CodeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -64,6 +65,7 @@ namespace TCM.Presentation
             services.AddScoped<ICollectionRepository, CollectionRepository>();
             services.AddScoped<ICollectionItemRepository, CollectionItemRepository>();
             services.AddScoped<ICollectionItemUserRepository, CollectionItemUserRepository>();
+            services.AddScoped<ICollectionItemSharedRepository, CollectionItemSharedRepository>();
 
             services.AddSingleton(config);
             services.AddScoped<SendMail>();

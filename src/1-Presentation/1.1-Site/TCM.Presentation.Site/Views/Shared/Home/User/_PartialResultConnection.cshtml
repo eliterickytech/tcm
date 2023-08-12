@@ -81,9 +81,9 @@
             var connectionId = $("#ConnectionId").val()
             var userId = $(this).data("userid");
             var dinamicText = ""
-
+            var isConnection = userId == @((int)UserType.Administrative) ? false : true;
             if (connectionStatusId == @((int)ConnectionStatusType.Approved)) {
-                window.location.href = `/Profile/?connectionUserId=${userId}&isConnection=true&fill=true`
+                window.location.href = `/Profile/?connectionUserId=${userId}&isConnection=${isConnection}&fill=true`
                 return;
             }
 
