@@ -21,11 +21,5 @@ namespace TCM.Services.Services
         public async Task<int> AddChatAsync(ChatModel model) => await _chatRepository.AddChatAsync(model);
         
         public async Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model) => await _chatRepository.GetChatAsync(model);
-
-        public async Task<int> GetCountChatUnReadAsync(int connectionUserId)
-        {
-            var result = await GetChatAsync(new ChatModel() { ChatConnectionUserId = connectionUserId });
-            return result.Where(x => !x.ChatIsRead).Count();
-        }
     }
 }

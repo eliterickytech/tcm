@@ -14,7 +14,7 @@ namespace TCM.Services.Model
 
         public string ChatMessage { get; set; }
 
-        public bool ChatIsRead { get; set; }
+        public bool? ChatIsRead { get; set; }
 
         public DateTime? ChatCreatedDate { get; set; }
 

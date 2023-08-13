@@ -11,6 +11,5 @@ namespace TCM.Services.Interfaces.Services
     {
         Task<int> AddChatAsync(ChatModel model);
         Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model);
-        Task<int> GetCountChatUnReadAsync(int connectionUserId);
     }
 }

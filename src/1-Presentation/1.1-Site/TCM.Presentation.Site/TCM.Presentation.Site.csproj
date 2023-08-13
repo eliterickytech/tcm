@@ -56,7 +56,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Error\" />
-    <Folder Include="Views\Shared\Home\Operator\" />
+    <Folder Include="Views\Shared\Operator\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

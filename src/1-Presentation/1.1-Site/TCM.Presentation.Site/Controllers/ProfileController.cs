@@ -12,6 +12,7 @@ using Microsoft.VisualBasic;
 using System;
 using TCM.Services.Model.Enum;
 using TCM.Services.Services;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -90,7 +91,7 @@ namespace TCM.Presentation.Site.Controllers
 
             var countCollectionCompleted =await _collectionServices.GetCountCollectionCompletedAsync(userId);
             var countConnection = results.Count();
-            var countChateUnRead = await _chatServices.GetCountChatUnReadAsync(userId);
+            var countChateUnRead = (await GetChatCountUnreadAsync(userId)).Count();
             var connection = await _connectionServices.GetConnectionAsync(userId);
             var collections = await _collectionServices.GetCollectionAsync();
 
@@ -117,6 +118,15 @@ namespace TCM.Presentation.Site.Controllers
                 TempData["ConnectionUserConnectionStatusId"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId;
                 TempData["ConnectionUserId"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserId;
             }
+        }
+
+        private async Task<List<ChatModel>> GetChatCountUnreadAsync(int userId)
+        {
+            var resultUser = (await _chatServices.GetChatAsync(new ChatModel() { ChatUserId = userId } )).ToList();
+
+            var resultConnection = (await _chatServices.GetChatAsync(new ChatModel() { ChatConnectionUserId = userId } )).ToList();
+
+            return resultUser.Concat(resultConnection).ToList().Where(x => !x.ChatIsRead.Value).ToList();
         }
     }
 }

@@ -3,13 +3,13 @@
 }
 @model TCM.Presentation.Site.Models.HomeViewModel
 
-@await Html.PartialAsync("~/Views/Shared/Home/User/_PartialMenu.cshtml")
+@await Html.PartialAsync("~/Views/Shared/User/_PartialMenu.cshtml")
 
-@await Html.PartialAsync("~/Views/Shared/Home/User/_PartialSearch.cshtml")
+@await Html.PartialAsync("~/Views/Shared/User/_PartialSearch.cshtml")
 
-@await Html.PartialAsync("~/Views/Shared/Home/User/_PartialBanner.cshtml", Model.BannersModel)
+@await Html.PartialAsync("~/Views/Shared/User/_PartialBanner.cshtml", Model.BannersModel)
 
-@await Html.PartialAsync("~/Views/Shared/Home/User/_PartialVideo.cshtml", Model.BannersModel)
+@await Html.PartialAsync("~/Views/Shared/User/_PartialVideo.cshtml", Model.BannersModel)
 
 <a href="#">
     <div class="btn_home_1">
@@ -17,12 +17,12 @@
     </div>
 </a>
 
-@await Html.PartialAsync("~/Views/Shared/Home/User/_PartialCommunity.cshtml", Model.CollectionsItemModel.OrderByDescending(x => x.CollectionId).ToList())
+@await Html.PartialAsync("~/Views/Shared/User/_PartialCommunity.cshtml", Model.CollectionsItemModel.OrderByDescending(x => x.CollectionId).ToList())
 
-<a asp-controller="Chat">
+<a asp-controller="Chat" asp-action="All">
     <div class="btn_home_2">
         <h2>CHAT WITH US</h2>
     </div>
 </a>
 
-@await Html.PartialAsync("~/Views/Shared/Home/User/_PartialFooter.cshtml")
+@await Html.PartialAsync("~/Views/Shared/User/_PartialFooter.cshtml")

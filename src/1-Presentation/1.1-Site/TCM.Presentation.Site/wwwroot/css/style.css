@@ -1263,7 +1263,7 @@ nav ul li {
 
     position: fixed;
 
-    bottom: 5px;
+    bottom: 3px;
 
     background-color: #ffffff;
 
@@ -4957,7 +4957,7 @@ footer {
 
     color: #F8F8F8;
 
-    margin: 0px;
+    margin: 1px 3px;
 
 }
 
@@ -6310,10 +6310,51 @@ footer {
     width: 25px;
     height: 25px;
 }
+ 
 .opacityImage-collection-item {
     opacity: 0.3;
 }
+
 .opacityImage-collection-item-display-full {
     opacity: 1;
     cursor:pointer;
 }
+
+card {
+    width: 50% !important;
+    margin-bottom: 10px !important;
+}
+
+.bg-question {
+    background-color:lightgray
+}
+
+.bg-response {
+    background-color: #964E38
+}
+
+.text-box-chat-add {
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    padding-left: 10px;
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 387px;
+    box-shadow: inset 0px 2px 4px rgb(0 0 0 / 10%);
+    position: fixed;
+    bottom: 73px;
+    background-color: #ffffff;
+    z-index: 99;
+}
+
+.textbox-chat-add {
+
+    width: 95%;
+    border: none;
+    max-height: 30px;
+    background-color:white
+}
+

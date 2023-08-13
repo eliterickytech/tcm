@@ -3,24 +3,12 @@
 @{
     Layout = "_LayoutLogin";
 }
-@using System.Linq;
-@{
-    var _connectionModels = (List<TCM.Services.Model.ConnectionModel>)TempData["Connection"];
-    List<TCM.Services.Model.ResultSearchModel> searchConnectionUsers = new List<TCM.Services.Model.ResultSearchModel>();
-
-
-    if (TempData["SearchRequestUser"] != null)
-    {
-        searchConnectionUsers = (List<TCM.Services.Model.ResultSearchModel>)TempData["SearchRequestUser"];
-    }
-
-}
 <div class="area_home">
     @await Html.PartialAsync("~/Views/Shared/User/_PartialMenu.cshtml")
 
-    @await Html.PartialAsync("~/Views/Shared/User/_PartialSearchRequest.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/User/_PartialSearchChat.cshtml")
 
-    @await Html.PartialAsync("~/Views/Shared/User/_PartialResultRequest.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/User/_PartialChatUnRead.cshtml")
 
     @await Html.PartialAsync("~/Views/Shared/User/_PartialFooter.cshtml")
 </div>

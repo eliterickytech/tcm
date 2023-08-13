@@ -1,0 +1,45 @@
+﻿@{
+	var chats = (List<ChatViewModel>)TempData["ChatDetails"];
+}
+
+<span><< @chats.Where(x => x.Question == false).FirstOrDefault().Username</span>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+	        @{foreach (var chat in chats.OrderBy(x => x.DateMessage).ToList())
+	            {
+                    @if(chat.Question == true)
+                    {
+                        <div class="card border-0 bg-question">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-start">
+                                    <div class="p-2 bg-question text-black rounded">
+                                        <p>@chat.Message</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-start mt-2">
+                                    <small class="text-muted fs-6 text">@chat.DateMessage.ToString("MM/dd/yyyy HH:mm")</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card mt-3 border-0 bg-response">
+                            <div class="card-body ">
+                                <div class="d-flex justify-content-end">
+                                    <div class="p-2 bg-response text-black rounded">
+                                       <p>@chat.Message</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end mt-2">
+                                    <small class="text-muted fs-6 text">@chat.DateMessage.ToString("MM/dd/yyyy HH:mm")</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+ 		        }
+	        }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@{
+    var chats = (List<ChatViewModel>)TempData["ChatDetails"];
+    var question = chats.Where(x => x.Question == true).FirstOrDefault();
+    var response = chats.Where(x => x.Question == false).FirstOrDefault();
+}
+
+<form id="formSearch" name="formSearch" novalidate class="needs-validation" data-ajax-method="Post" asp-controller="Chat" asp-action="Add"
+      data-ajax="true"
+      data-ajax-mode="replace"
+      data-ajax-loading="#loader"
+      data-ajax-success="Success">
+    <div id="email-group" class="area_form">
+        <div class="text-box-chat-add">
+            <input type="text" name="txtMessage" id="txtMessage" class="textbox-chat-add" placeholder="Tap here to write your message" />
+            <button class="btn btn-outline-secondary" data-userid="@question.UserId" data-connectionid="@response.UserId" style="height:35px" type="button" id="btnAdd"><i class="bi bi-send-plus-fill"></i></button>
+        </div>
+    </div>
+</form>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    function Success(data) {
+        window.location.href = "/Chat/Details?userId=" + @(((List<ChatViewModel>)TempData["ChatDetails"]).Where(x=>x.Question == false).FirstOrDefault().UserId)
+    }
+
+</script> 
+<script>
+    $(document).ready(function () {
+        var spinner = $('#loader');
+        $("#btnAdd").click(function () {
+            var connectionId = $(this).data("connectionid");
+            var userId = $(this).data("userid");
+            var message = $("#txtMessage").val();
+
+            var formData = {
+                "UserId": connectionId,
+                "Message": message,
+                "Id": userId
+            };
+
+            console.log(formData);
+            alert(JSON.stringify(formData))
+            spinner.show();
+            event.preventDefault()
+
+            $.ajax({
+                url: "/Chat/Add",
+                type: "POST",
+                data: formData,
+                success: function (data) {
+                    spinner.hide();
+                    window.location.href = '/Chat/Detail?userId=' + connectionId
+                },
+                error: function (xhr, status, error) {
+                    spinner.hide();
+                    console.log(xhr)
+                    console.log(status)
+                    console.log(error)
+                }
+            });
+        });
+    });
+
+</script>
