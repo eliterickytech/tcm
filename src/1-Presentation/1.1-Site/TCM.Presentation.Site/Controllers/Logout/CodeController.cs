@@ -56,6 +56,7 @@ namespace TCM.Presentation.Controllers.Logout
             try
             {
                 await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
+                _logger.LogInformation($"Envio Email: {parameters.User}: Code: {parameters.Code}");
             }
             catch(Exception ex)
             {

@@ -56,43 +56,23 @@ namespace TCM.Presentation.Site.Controllers
             return View();
         }
 
-
         private async Task FillProfiles(int userId, bool isConnection)
         {
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
             HomeViewModel model = new HomeViewModel();
-            var connectionMult = 0;
+
             model.Id = userId;
 
-            var resultUsers = (await _connectionServices.GetConnectionAsync(Convert.ToInt32(userId))).Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved);
-            var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(userId) })).Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved);
-            var results = resultUsers.Concat(resultConnections).ToList();
+            var resultUsers = (await _connectionServices.GetConnectionAsync(Convert.ToInt32(userId)));
+
+            var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(userId) }));
             
-            if (isConnection)
-            {
-                var resultUsersMulti = (await _connectionServices.GetConnectionAsync(Convert.ToInt32(model.Id))).Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved);
-                var resultConnectionsMulti = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(model.Id) })).Where(x => x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved);
-                var resultMulti = resultUsersMulti.Concat(resultConnectionsMulti);
-
-                results.ForEach(x =>
-                {
-                    connectionMult += resultMulti.Where(y => y.ConnectionUserId == x.ConnectionUserId).Count();
-                });
-                if (connectionMult > 1)
-                {
-                    if (userId > 1)
-                    {
-                        connectionMult -= 1;
-                    }
-                }
-
-            }
-
-            model.ConnectionMulti = connectionMult;
+            var results = resultUsers.Concat(resultConnections).ToList();
 
             var countCollectionCompleted =await _collectionServices.GetCountCollectionCompletedAsync(userId);
             var countConnection = results.Count();
             var countChateUnRead = (await GetChatCountUnreadAsync(userId)).Count();
-            var connection = await _connectionServices.GetConnectionAsync(userId);
             var collections = await _collectionServices.GetCollectionAsync();
 
             model.CollectionsModel = collections?.ToList();
@@ -102,14 +82,10 @@ namespace TCM.Presentation.Site.Controllers
             TempData["CountChatsUnRead"] = countChateUnRead;
             TempData["IsConnection"] = isConnection;
             TempData["Model"] = model;
-            TempData["connectionMult"] = connectionMult;
 
-            if (isConnection)
+            if (userId.ToString() == id)
             {
-                TempData["ConnectionDate"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserCreatedDate;
-                TempData["NameConnection"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionUsername;
-                TempData["ConnectionUserConnectionStatusId"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId;
-                TempData["ConnectionUserId"] = results?.Where(x => x.UserConnectionId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserConnectionId;
+                TempData["ConnectionUserId"] = userId;
             }
             else
             {
@@ -118,6 +94,7 @@ namespace TCM.Presentation.Site.Controllers
                 TempData["ConnectionUserConnectionStatusId"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.ConnectionUserConnectionStatusId;
                 TempData["ConnectionUserId"] = results?.Where(x => x.UserId == userId && x.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved)?.FirstOrDefault()?.UserId;
             }
+
         }
 
         private async Task<List<ChatModel>> GetChatCountUnreadAsync(int userId)

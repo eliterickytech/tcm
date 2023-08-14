@@ -107,10 +107,10 @@
             var userId = $(this).data("userid");
             var dinamicText = ""
 
-            if (connectionStatusId == @((int)ConnectionStatusType.Approved)) {
-                window.location.href = `/Profile/?connectionUserId=${userId}&isConnection=true&fill=true`
-                return;
-            }
+            //if (connectionStatusId == @((int)ConnectionStatusType.Approved)) {
+            //    window.location.href = `/Profile/?connectionUserId=${userId}&isConnection=true&fill=true`
+            //    return;
+            //}
 
             else if (connectionStatusId == @((int)ConnectionStatusType.Blocked)) {
                 sucessText = 'Blocked!'
