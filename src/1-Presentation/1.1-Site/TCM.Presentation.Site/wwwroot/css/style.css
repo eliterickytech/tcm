@@ -6379,3 +6379,17 @@ card {
         font-weight: var(--font-weight-2);
         margin: 0px;
     }
+
+.user-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-email {
+    margin-right: 10px;
+}
+
+.new-line {
+    clear: both;
+}

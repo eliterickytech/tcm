@@ -11,12 +11,19 @@
     <div class="float-start text-font-medium text-weight-bold mb-3">
         Admin
     </div>
-    <div class="text-default d-flex  mb-3">
+
+    <div class="text-default mb-3">
         @foreach (var user in users.Where(x => x.Id != 1))
         {
-            <div class="p-2">@user.Email</div>
-
-            <div class="p-2"><a id="deleteUser" href="#" data-userid="@user.Id"><i class="bi bi-trash3-fill"></i></a> </div>
+            <div class="user-container">
+                <div class="user-email">@user.Email</div>
+                <div>
+                    <a id="deleteUser" href="#" data-userid="@user.Id">
+                        <i class="bi bi-trash3-fill"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="new-line"></div>
         }
     </div>
 
