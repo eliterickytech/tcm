@@ -23,7 +23,7 @@ namespace TCM.Services.Model
 
         public string ConfirmPassword { get; set; }
 
-        public UserType ProfileId { get; set; }
+        public UserType? ProfileId { get; set; }
 
         public string Profile { get; set; }
 

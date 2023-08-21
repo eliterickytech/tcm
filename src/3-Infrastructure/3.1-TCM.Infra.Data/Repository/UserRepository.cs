@@ -49,6 +49,7 @@ namespace TCM.Infra.Repository
             parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
             parameters.Add("@Email", user.Email, System.Data.DbType.String);
             parameters.Add("@Password", user.Password, System.Data.DbType.String);
+            parameters.Add("@ProfileId", user.ProfileId == null ? null : ((int) user.ProfileId), System.Data.DbType.Int32);
             parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
 
             return await QueryAsync<UserModel>(query, parameters);
@@ -92,5 +93,33 @@ namespace TCM.Infra.Repository
             catch (Exception ex) { return default; }
         }
 
+        public async Task<int> DeleteAdmAsync(int userId)
+        {
+            var query = @"PR_User_Adm_Delete";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", userId, System.Data.DbType.Int32);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }        
+        public async Task<int> AddAdmAsync(int userId)
+        {
+            var query = @"PR_User_Adm_Insert";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", userId, System.Data.DbType.Int32);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
     }
 }

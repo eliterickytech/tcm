@@ -7,10 +7,10 @@
     HomeViewModel model = TempData["Model"] != null ? (HomeViewModel)TempData["Model"] : null;
     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
     var userId = (int)TempData["ConnectionUserId"];
-    if (userId == (int)UserType.Administrative) isConneciton = true;
+    if (userId == 1) isConneciton = true;
 }
 <div class="area_profile_null" style=@(isConneciton == true ? "display:block" : "display:none")>
-    @if (userId == (int)UserType.Administrative)
+    @if (userId == 1)
     {
         <div class="area_profile_int">
 

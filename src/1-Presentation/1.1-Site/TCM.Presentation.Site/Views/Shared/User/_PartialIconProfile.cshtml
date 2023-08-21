@@ -1,7 +1,7 @@
 ﻿@using System.Security.Claims;
 @using TCM.Services.Model.Enum;
 
-<div class="area_profile" style=@(((bool)TempData["IsConnection"]) == true || (((int)TempData["ConnectionUserId"] == (int) UserType.Administrative)) ? "display:none" : "display:block")>
+<div class="area_profile" style=@(((bool)TempData["IsConnection"]) == true || (((int)TempData["ConnectionUserId"] == 1)) ? "display:none" : "display:block")>
     <div class="area_profile_int">
 
         <div class="title_profile">

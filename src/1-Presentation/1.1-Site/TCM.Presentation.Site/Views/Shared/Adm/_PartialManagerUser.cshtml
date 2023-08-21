@@ -1,0 +1,145 @@
+﻿@{
+    var users = (List<TCM.Services.Model.UserModel>)TempData["Users"];
+}
+<div class="row">
+    <div class="clearfix align-top mb-3 float-start text-font-medium text-weight-bold">
+        Permissions
+    </div>
+    <div class="text-default mb-3">
+        Tap the delete button to change the app permissions or add a new admin and confirm your password to apply the changes 
+    </div>
+    <div class="float-start text-font-medium text-weight-bold mb-3">
+        Admin
+    </div>
+    <div class="text-default d-flex  mb-3">
+        @foreach (var user in users.Where(x => x.Id != 1))
+        {
+            <div class="p-2">@user.Email</div>
+
+            <div class="p-2"><a id="deleteUser" href="#" data-userid="@user.Id"><i class="bi bi-trash3-fill"></i></a> </div>
+        }
+    </div>
+
+    <div class="float-start text-font-medium text-weight-bold mb-3">
+        Admin a new admin
+    </div>
+    <div>
+        <form novalidate class="needs-validation"
+            data-ajax="true"
+            data-ajax-mode="replace"
+            data-ajax-loading="#loader"             
+            asp-action="ProcessForm"
+            asp-controller="ManagerUser"
+            data-ajax-update="#result">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label class="form-label text-default text-weight-bold" for="redirectTo">Email*</label>
+                <input type="text" class="form-control" name="email" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-default text-weight-bold" for="redirectTo">Confirm Email*</label>
+                <input type="text" class="form-control" name="confirmEmail" id="confirmEmail" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-default text-weight-bold" for="password">Confirm password*</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <div class="mb-3">
+                <input type="hidden" id="userid" name="userid" value=""/>
+                <input type="submit" id="submit" name="submit" class="submit" style="background-color:gray" disabled value="Save Changes"  />
+            </div>
+
+        </form>
+        <div class="mb-3" id="result"></div>
+    </div>
+
+</div>
+<script>
+
+    $(document).ready(function () {
+        $(document).on('ajaxComplete', function (event, xhr, settings) {
+            if (settings.url.indexOf("ProcessForm") > -1) {
+                var response = xhr.responseJSON;
+                if (response && response.isOK === false) {
+                    $('#result').html('<div class="alert alert-danger">' + response.errors + '</div>');
+                }
+                else {
+                    $('#result').html('<div class="alert alert-success mb-3">' + response.data + '</div>');
+                    window.location.href = response.redirect
+                }
+            }
+        });
+        function checkEmails() {
+            var password = $("#email").val();
+            var confirmPassword = $("#confirmEmail").val();
+            var userid = $("#userid").val();
+
+            if (password === confirmPassword && userid) {
+                $("#submit").removeAttr("disabled");
+                $("#submit").removeAttr("style");
+            } else {
+                $("#submit").attr("disabled", "true");
+                $("#submit").css("background-color", "gray");
+            }
+        }
+
+        $("#email").on("input", checkEmails);
+        $("#confirmEmail").on("input", checkEmails);
+
+        const searchInput = document.querySelector('#email');
+
+        searchInput.addEventListener('blur', () => {
+            const query = searchInput.value;
+            var spinner = $('#loader');
+            spinner.show();
+            $.ajax({
+                url: "/ManagerUser/SearchUser",
+                type: "POST",
+                data: { "email": query },
+                success: function (data) {
+                    if (data && data.isOK === false) {
+                        $('#result').html('<div class="alert alert-danger">' + data.errors + '</div>');
+                        spinner.hide();
+                    }
+                    else {
+                        $('#result').html('');
+                        $("#submit").attr("data-userid", data.id);
+                        $("#userid").val(data.id);
+                        spinner.hide();
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                    spinner.hide();
+                    console.log(xhr);
+                    console.log(error)
+                }
+            });
+        });
+
+        $("#deleteUser").click(function () {
+            var userId = $(this).data("userid");
+            var dinamicText = ""
+
+            var spinner = $('#loader');
+            spinner.show();
+            $.ajax({
+                url: "/ManagerUser/DeleteAdm",
+                type: "POST",
+                data: {"userId": userId},
+                success: function (data) {
+                    spinner.hide();
+                    window.location.href="/ManagerUser/Adm";
+                },
+                error: function (xhr, status, error) {
+                    spinner.hide();
+                    console.log(xhr);
+                    console.log(error)
+                }
+            });
+
+        });
+    });
+
+</script>
