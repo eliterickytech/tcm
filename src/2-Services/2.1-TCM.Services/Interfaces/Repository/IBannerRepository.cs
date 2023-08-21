@@ -9,6 +9,7 @@ namespace TCM.Services.Interfaces.Repository
 {
     public interface IBannerRepository
     {
+        Task<int> AddBannerAsync(BannerModel banner);
         Task<IEnumerable<BannerModel>> GetBannerAsync();
     }
 }

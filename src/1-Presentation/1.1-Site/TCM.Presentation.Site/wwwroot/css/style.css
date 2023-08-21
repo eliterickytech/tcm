@@ -13,27 +13,17 @@
 
 
 :root {
-
     --color-font: #050427;
-
     --color-font-form: #585858;
-
     --color-main: #8D7249;
-
     --color-home: #B0B0B0;
-
+    --color-admin: #ECB59E;
     --font-weight-1: 300;
-
     --font-weight-2: 400;
-
     --font-weight-3: 600;
-
     --font-bold: 700;
-
     --font-small: 12px;
-
     --font-medium: 14px;
-
 }
 
 
@@ -137,7 +127,6 @@ form {
 
 
 input {
-    background: #D9D9D9;
     border-radius: 5px ;
     outline: none ;
     border: none ;
@@ -3844,17 +3833,6 @@ nav ul li {
 
 
 
-
-.area_admin_view {
-
-    width: 100%;
-
-    position: relative;
-
-}
-
-
-
 /*Delight profile*/
 
 #delight {
@@ -6358,3 +6336,46 @@ card {
     background-color:white
 }
 
+.text-default {
+    font-weight: var(--font-weight-1) ;
+    font-size: var(--font-small) !important;
+    color: var(--color-font) ;
+}
+    .text-default a {
+        color: var(--color-font) !important;
+    }
+.text-color-burnt-sienna {
+    color: var(--color-main) !important;
+}
+.text-weight-bold {
+    font-weight: var(--font-weight-3) !important;
+}
+.text-font-medium {
+    font-weight: var(--font-weight-1) ;
+    font-size: var(--font-medium) !important;
+    color: var(--color-font);
+}
+.nav-link {
+    color: var(--color-font) !important
+}
+
+#nav {
+    --bs-nav-link-padding-x: -1rem !important
+}
+.admin_profile {
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    background: var(--color-admin);
+    width: 425px;
+    height: 28px;
+}
+
+
+
+    .admin_profile h2 {
+        color: var(--color-font);
+        font-size: var(--font-small);
+        font-weight: var(--font-weight-2);
+        margin: 0px;
+    }

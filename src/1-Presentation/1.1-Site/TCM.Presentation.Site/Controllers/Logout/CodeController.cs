@@ -40,30 +40,14 @@ namespace TCM.Presentation.Controllers.Logout
         public async Task< IActionResult> Mail(string token)
         {
             Parameter parameters = null;
-            try
-            {
-                parameters = ExtractValueFromKey.Extract(token);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError($"Error extract parameters: {ex.StackTrace}");
-                throw ex;
-            }
-
 
             ViewBag.Token = token;
 
-            try
-            {
-                await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
-                _logger.LogInformation($"Envio Email: {parameters.User}: Code: {parameters.Code}");
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError($"Error sendmail: {ex.StackTrace}");
-                throw ex;
-            }
+            parameters = ExtractValueFromKey.Extract(token);
 
+            await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
+
+            _logger.LogInformation($"Envio Email: {parameters.User}: Code: {parameters.Code}");
 
             return View();
          }
@@ -91,7 +75,15 @@ namespace TCM.Presentation.Controllers.Logout
                 resultModel.Data = result;
                 resultModel.IsOK = true;
                 resultModel.Token = tokenJWT;
-                resultModel.Redirect = "/Home";
+                
+                if(userMode.FirstOrDefault().ProfileId == Services.Model.Enum.UserType.User)
+                {
+                    resultModel.Redirect = "/Home";
+                }
+                else
+                {
+                    resultModel.Redirect = "/Home/Adm";
+                }
             }
             else
             {

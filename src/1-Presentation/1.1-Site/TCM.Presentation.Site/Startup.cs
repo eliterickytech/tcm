@@ -3,27 +3,25 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using TCM.Services.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Refit;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Services;
 using TCM.Services.Interfaces.Repository;
 using TCM.CrossCutting.Model;
 using TCM.Infra.Repository;
 using TCM.CrossCutting.Helpers;
-using Microsoft.AspNetCore.Identity;
+
 using TCM.Infrastructure.Data.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using static Dapper.SqlMapper;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.WebSockets;
+
+using TCM.Presentation.Site.Middleware;
+using TCM.CrossCutting.Shared;
+using Microsoft.Extensions.Logging;
+using Serilog.Events;
+using Serilog;
 
 namespace TCM.Presentation
 {
@@ -66,6 +64,7 @@ namespace TCM.Presentation
             services.AddScoped<ICollectionItemRepository, CollectionItemRepository>();
             services.AddScoped<ICollectionItemUserRepository, CollectionItemUserRepository>();
             services.AddScoped<ICollectionItemSharedRepository, CollectionItemSharedRepository>();
+            services.AddScoped<IBaseNotification, BaseNotification>();
 
             services.AddSingleton(config);
             services.AddScoped<SendMail>();
@@ -92,21 +91,31 @@ namespace TCM.Presentation
                 });
 
             services.AddControllersWithViews();
+
+            services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddSerilog();
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
+
+            app.UseStatusCodePages();
+            app.UseGlobalExceptionHandler();
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

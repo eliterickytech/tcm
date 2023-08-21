@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "_LayoutLogin";
+}
+
+@await Html.PartialAsync("~/Views/Shared/Adm/_PartialMenu.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/adm/_PartialAdm.cshtml")
+
+@{
+    if (TempData["BannerTop"] != null)
+    {
+        @await Html.PartialAsync("~/Views/Shared/Adm/_PartialBannerTop.cshtml");
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Views/Shared/Adm/_PartialBannerMiddle.cshtml");
+    }
+}
+
+@await Html.PartialAsync("~/Views/Shared/User/_PartialFooter.cshtml")
+
+
+
+
+
+
+

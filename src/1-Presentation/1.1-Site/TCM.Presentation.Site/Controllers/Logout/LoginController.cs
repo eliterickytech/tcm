@@ -5,6 +5,7 @@ using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
 using System;
 using System.Threading.Tasks;
+using TCM.Services.Model.Enum;
 
 namespace TCM.Presentation.Controllers.Logout
 {
@@ -44,7 +45,7 @@ namespace TCM.Presentation.Controllers.Logout
 
                 var resultCode = await _codeServices.SaveCodeAsync(result?.Id, code);
 
-                if (result.ProfileId == Profile.User && resultCode > 0)
+                if (resultCode > 0)
                 {
                     resultModel.StatusCode = System.Net.HttpStatusCode.OK;
                     resultModel.Data = result;
@@ -58,7 +59,7 @@ namespace TCM.Presentation.Controllers.Logout
 
         private string GeneratedToken(string user, string code)
         {
-            var url = $"Code/Mail?";
+            var url = $"/Code/Mail?";
 
             var param = $"user={user}&code={code}";
 

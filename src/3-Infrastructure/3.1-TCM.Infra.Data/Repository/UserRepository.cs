@@ -48,6 +48,7 @@ namespace TCM.Infra.Repository
             parameters.Add("@UserName", user.UserName, System.Data.DbType.String);
             parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
             parameters.Add("@Email", user.Email, System.Data.DbType.String);
+            parameters.Add("@Password", user.Password, System.Data.DbType.String);
             parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
 
             return await QueryAsync<UserModel>(query, parameters);

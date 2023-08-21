@@ -29,7 +29,7 @@ $(document).ready(function(){
                 $("#banner-group").removeClass("has-error");
                 $(".help-block").remove();
                 document.getElementById("imageid").src = user.file;
-                document.getElementById("img_new_banner").value = 'https://thechefmelo.com/' + user.file;
+                document.getElementById("img_new_banner").value = 'http://homolocao.thechefmelo.com/' + user.file;
                 if(!user.file){
                     alert('Error dont send image');
                 } else {

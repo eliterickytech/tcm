@@ -1,0 +1,91 @@
+﻿@{
+    var banner = (List<TCM.Services.Model.BannerModel>)TempData["BannerTop"];
+    var topBanner = banner?.Where(x => x.BannerTypeId == (int)TCM.Services.Model.Enum.BannerType.Top)?.FirstOrDefault();
+}
+
+<div class="row">
+    <div class="clearfix align-top">
+        <p class="float-start text-font-medium text-weight-bold">Manage banners</p>
+        <ul id="nav" class="nav float-end">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-font-medium text-weight-bold"
+                href="#" id="bannerTypeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Banner Type
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="bannerTypeDropdown">
+                    <li><a class="dropdown-item text-weight-bold text-default" href="/Banner/AdmRequest?bannerTypeId=@((int)TCM.Services.Model.Enum.BannerType.Top)">375 x 70</a></li>
+                    <li><a class="dropdown-item text-weight-bold text-default" href="/Banner/AdmRequest?bannerTypeId=@((int)TCM.Services.Model.Enum.BannerType.Middle)">375 x 200</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="text-font-medium text-weight-bold">Current</div>
+    <img class="mb-3" src="@topBanner.BannerUrl" width="@topBanner.BannerTypeWidth" height="@topBanner.BannerTypeHeight" />
+    <div class="text-default mb-3">
+        Redirect to: <span class="text-color-burnt-sienna text-weight-bold">@topBanner.BannerRedirectTo</span>
+    </div>
+    <hr />
+    <div>
+        <form novalidate class="needs-validation" enctype="multipart/form-data"
+                data-ajax="true"
+              data-ajax-mode="replace"
+              data-ajax-loading="#loader"             
+              asp-action="ProcessForm"
+              asp-controller="Banner"
+              data-ajax-update="#result">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label class="form-label text-default text-weight-bold" for="imageUpload">New Upload</label>
+                <input type="file" class="form-control" name="imageUpload" id="imageUpload" required">
+            </div>
+            <div class="mb-3">   
+                <label class="form-label text-default text-weight-bold" for="redirectTo">Redirect To*</label>
+                <input type="text" class="form-control" name="redirectTo" id="redirectTo" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label text-default text-weight-bold" for="password">Confirm password*</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <input type="hidden" name="bannertype" id="bannertype" value="@TCM.Services.Model.Enum.BannerType.Top"/>
+            <input type="submit" id="submit" name="submit" class="submit mb-3" value="Save Changes" />
+
+        </form>
+        <div class="mb-3" id="result"></div>
+    </div>
+</div>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+    $(document).ready(function () {
+        $(document).on('ajaxComplete', function (event, xhr, settings) {
+            if (settings.url.indexOf("ProcessForm") > -1) {
+                var response = xhr.responseJSON;
+                if (response && response.isOK === false) {
+                    $('#result').html('<div class="alert alert-danger">' + response.errors + '</div>');
+                }
+                else{
+                    $('#result').html('<div class="alert alert-success mb-3">' + response.data + '</div>');
+                    window.location.href=response.redirect
+                }
+            }
+        });
+    });
+</script>

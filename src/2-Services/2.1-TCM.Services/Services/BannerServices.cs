@@ -19,5 +19,7 @@ namespace TCM.Services.Services
         }
 
         public async Task<IEnumerable<BannerModel>> GetBannerAsync() => await _bannerRepository.GetBannerAsync();
+
+        public async Task<int> AddBannerAsync(BannerModel banner) => await _bannerRepository.AddBannerAsync(banner);
     }
 }

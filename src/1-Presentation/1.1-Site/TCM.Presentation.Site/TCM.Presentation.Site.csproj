@@ -10,6 +10,33 @@
 
   <ItemGroup>
     <None Include="Views\Home\Index.cshtml" />
+    <None Include="wwwroot\HTML\Incoming\Incomming.html" />
+    <None Include="wwwroot\HTML\Incoming\Logo.png" />
+    <None Include="wwwroot\HTML\Incoming\style.css" />
+    <None Include="wwwroot\HTML\VerificationCode\css\main.css" />
+    <None Include="wwwroot\HTML\VerificationCode\images\footer.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\Group 1.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\top.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v12_23.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v16_27.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v18_43.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v18_47.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v18_48.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v18_49.png" />
+    <None Include="wwwroot\HTML\VerificationCode\images\v1_12.png" />
+    <None Include="wwwroot\HTML\VerificationCode\index.html" />
+    <None Include="wwwroot\HTML\Welcome\css\main.css" />
+    <None Include="wwwroot\HTML\Welcome\images\footer.png" />
+    <None Include="wwwroot\HTML\Welcome\images\Group 1.png" />
+    <None Include="wwwroot\HTML\Welcome\images\top.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v12_23.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v16_27.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v18_43.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v18_47.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v18_48.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v18_49.png" />
+    <None Include="wwwroot\HTML\Welcome\images\v1_12.png" />
+    <None Include="wwwroot\HTML\Welcome\index.html" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -39,12 +66,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Flunt" Version="2.0.5" />
     <PackageReference Include="jQuery.Ajax.Unobtrusive" Version="2.0.20710" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
     <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
   </ItemGroup>
 
@@ -55,8 +87,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\banner\middle\" />
+    <Folder Include="wwwroot\img\banner\top\" />
+    <Folder Include="wwwroot\Logs\" />
     <Folder Include="Views\Error\" />
-    <Folder Include="Views\Shared\Operator\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

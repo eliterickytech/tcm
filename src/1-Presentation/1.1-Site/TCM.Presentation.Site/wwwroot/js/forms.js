@@ -68,7 +68,7 @@ function validateLogin() {
         document.getElementById("emailError").innerHTML = "";
         var versionUpdate = (new Date()).getTime();  
         const session = document.querySelector('[name="session"]').value;
-        document.getElementById("forgot").href = "https://thechefmelo.com/forgot_password.php?email=" + email + "&session=" + session + "&v=" + versionUpdate; 
+        document.getElementById("forgot").href = "http://homolocao.thechefmelo.com/forgot_password.php?email=" + email + "&session=" + session + "&v=" + versionUpdate; 
     }
     
 

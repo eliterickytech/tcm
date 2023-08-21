@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCM.Services.Model.Enum;
 
 namespace TCM.Services.Model
 {
@@ -22,7 +23,7 @@ namespace TCM.Services.Model
 
         public string ConfirmPassword { get; set; }
 
-        public Profile ProfileId { get; set; }
+        public UserType ProfileId { get; set; }
 
         public string Profile { get; set; }
 
@@ -35,11 +36,5 @@ namespace TCM.Services.Model
         public string Redirect { get; set; }
 
 
-    }
-
-    public enum Profile
-    {
-        Administrator = 1,
-        User = 2
     }
 }

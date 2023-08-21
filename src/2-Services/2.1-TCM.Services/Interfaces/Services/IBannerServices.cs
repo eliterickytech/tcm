@@ -9,6 +9,7 @@ namespace TCM.Services.Interfaces.Services
 {
     public interface IBannerServices
     {
+        Task<int> AddBannerAsync(BannerModel banner);
         Task<IEnumerable<BannerModel>> GetBannerAsync();
     }
 }
