@@ -23,6 +23,8 @@ namespace TCM.Services.Services
         }
         public async Task<int> AddCollectionAsync(CollectionModel model) => await _collectionRepository.AddCollectionAsync(model);
         
+        public async Task<int> UpdateCollecitonAsync(CollectionModel model) => await _collectionRepository.UpdatedCollectionAsync(model);
+
         public async Task<IEnumerable<CollectionModel>> GetCollectionAsync() => await _collectionRepository.GetCollectionAsync();
 
         public async Task<int> GetCountCollectionCompletedAsync(int userId)
@@ -41,5 +43,7 @@ namespace TCM.Services.Services
             }
             return count;
         }
+
+        public async Task<int> RemoveCollectionAsync(int id) => await _collectionRepository.RemoveCollectionAsync(id);
     }
 }

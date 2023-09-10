@@ -58,5 +58,16 @@ namespace TCM.Infra.Repository
             }
 
         }
+
+        public async Task<int> ExecuteScalarAsync(string query, object parameters = null)
+        {
+
+            using (var conn = CreateConnection())
+            {
+                conn.Open();
+                return await conn.ExecuteScalarAsync<int>(query, parameters, commandType: CommandType.StoredProcedure);
+            }
+
+        }
     }
 }

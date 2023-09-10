@@ -29,8 +29,8 @@ $(document).ready(function(){
                 $("#collection_miniature-group").removeClass("has-error");
                 $(".help-block").remove();
                 document.getElementById("collection_miniature").src = user.file;
-                document.getElementById("img_new_miniature").value = 'http://homolocao.thechefmelo.com/' + user.file;
-                document.getElementById("img_new_banner").value = 'http://homolocao.thechefmelo.com/' + user.file;
+                document.getElementById("img_new_miniature").value = 'http://homologacao.thechefmelo.com/' + user.file;
+                document.getElementById("img_new_banner").value = 'http://homologacao.thechefmelo.com/' + user.file;
                 if(!user.file){
                     alert('Error dont send image');
                 } else {

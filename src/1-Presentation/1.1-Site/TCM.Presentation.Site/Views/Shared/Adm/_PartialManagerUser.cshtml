@@ -17,8 +17,8 @@
         {
                 
             <div class="col-md-6">@user.Email</div>
-            <div class="col-md-6">
-                <a id="deleteUser" href="#" data-userid="@user.Id">
+            <div class="col-md-6" >
+                <a id="deleteUser" class="delete-user" href="#" data-userid="@user.Id">
                     <i class="bi bi-trash3-fill"></i>
                 </a>
             </div>
@@ -63,6 +63,30 @@
 <script>
 
     $(document).ready(function () {
+        $(".delete-user").click(function (event) {
+            event.preventDefault();
+            var userId = $(this).data("userid");
+            var dinamicText = ""
+
+            var spinner = $('#loader');
+            spinner.show();
+            $.ajax({
+                url: "/ManagerUser/DeleteAdm",
+                type: "POST",
+                data: { "userId": userId },
+                success: function (data) {
+                    spinner.hide();
+                    window.location.href = "/ManagerUser/Adm";
+                },
+                error: function (xhr, status, error) {
+                    spinner.hide();
+                    console.log(xhr);
+                    console.log(error)
+                }
+            });
+
+        });
+
         $(document).on('ajaxComplete', function (event, xhr, settings) {
             if (settings.url.indexOf("ProcessForm") > -1) {
                 var response = xhr.responseJSON;
@@ -123,28 +147,7 @@
             });
         });
 
-        $("#deleteUser").click(function () {
-            var userId = $(this).data("userid");
-            var dinamicText = ""
 
-            var spinner = $('#loader');
-            spinner.show();
-            $.ajax({
-                url: "/ManagerUser/DeleteAdm",
-                type: "POST",
-                data: {"userId": userId},
-                success: function (data) {
-                    spinner.hide();
-                    window.location.href="/ManagerUser/Adm";
-                },
-                error: function (xhr, status, error) {
-                    spinner.hide();
-                    console.log(xhr);
-                    console.log(error)
-                }
-            });
-
-        });
     });
 
 </script>

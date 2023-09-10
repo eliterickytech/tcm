@@ -10,16 +10,21 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using TCM.Services.Model;
+using System.Drawing;
+using System.Drawing.Imaging;
+using Microsoft.AspNetCore.Hosting;
+using System.Drawing.Drawing2D;
 
 namespace TCM.CrossCutting.Helpers
 {
     public class Utils
     {
         private readonly IConfiguration _configuration;
-
-        public Utils(IConfiguration configuration)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public Utils(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public string GenerateToken(UserModel user)
@@ -44,6 +49,74 @@ namespace TCM.CrossCutting.Helpers
         public string GetToken()
         {
             return _configuration.GetSection("Secret:Authentication").Value;
+        }
+
+        public void CreateStructureFolder(string path, bool isDelete)
+        {
+            if (isDelete)
+            {
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        public List<string> SplitImage(string originFilePath, string destinationFolderPath, int partsCount)
+        {
+            List<string> result = new List<string>();
+
+            using (Bitmap imageOriginal = new Bitmap(originFilePath))
+            {
+                int partWidth = imageOriginal.Width / partsCount;
+                int partHeight = imageOriginal.Height / partsCount;
+
+                int order = 1;
+
+                for (int i = 0; i < partsCount; i++)
+                {
+                    for (int j = 0; j < partsCount; j++)
+                    {
+                        Rectangle partRect = new Rectangle(j * partWidth, i * partHeight, partWidth, partHeight);
+                        using (Bitmap part = new Bitmap(partWidth, partHeight))
+                        {
+                            using (Graphics graphics = Graphics.FromImage(part))
+                            {
+                                graphics.DrawImage(imageOriginal, new Rectangle(0, 0, partWidth, partHeight), partRect, GraphicsUnit.Pixel);
+                            }
+
+                            string fileName = Path.Combine(destinationFolderPath, $"{order.ToString().PadLeft(2, '0')}.png");
+                            part.Save(fileName, ImageFormat.Png);
+                            result.Add(fileName);
+                        }
+
+                        order += 1;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public void ResizeImage(string sourceImagePath, string destinationImagePath, int width, int height)
+        {
+            using (var sourceImage = Image.FromFile(sourceImagePath))
+            {
+                using (var resizedImage = new Bitmap(width, height))
+                {
+                    using (var graphics = Graphics.FromImage(resizedImage))
+                    {
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.DrawImage(sourceImage, 0, 0, width, height);
+                    }
+
+                    resizedImage.Save(destinationImagePath, sourceImage.RawFormat);
+                }
+            }
         }
     }
 }

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  tcm.presentation.site:
+    image: ${DOCKER_REGISTRY-}tcm-site
+    build:
+      context: .
+      dockerfile: src/1-Presentation/1.1-Site/TCM.Presentation.Site/Dockerfile

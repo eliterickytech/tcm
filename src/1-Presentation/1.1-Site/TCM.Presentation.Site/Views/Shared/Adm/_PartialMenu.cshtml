@@ -3,7 +3,6 @@
         <nav class="nav">
             <input type="checkbox" class="checkbox" id="checkbox">
             <label for="checkbox" class="label_menu">
-                <!--<img width="27px" height="27px" src="img/Icon_Menu.png" alt="">-->
                 <span class="menu_hamburguer"></span>
             </label>
             <div class="container_menu home">
@@ -22,7 +21,7 @@
                         </div>
                         <nav>
                             <ul>
-                                <a href="#">
+                                <a asp-action="AddCollection" asp-controller="ManagerCollection">
                                     <li>MANAGE COLLECTIONS</li>
                                 </a>
                                 <a href="#">
@@ -32,13 +31,13 @@
                                     <li>MANAGE BANNERS</li>
                                 </a>
                                 <a href="#">
-                                <li>configurations</li>
+                                <li>CONFIGURATIONS</li>
                                 </a>
                                 <a asp-action="adm" asp-controller="ManagerUser">
-                                    <li>Permissions</li>
+                                    <li>PERMISSIONS</li>
                                 </a>
                                 <a href="#">
-                                <li>Support</li>
+                                <li>SUPPORT</li>
                                 </a>
                             </ul>
                         </nav>

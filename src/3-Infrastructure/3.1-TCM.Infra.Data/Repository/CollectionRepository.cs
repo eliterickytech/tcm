@@ -27,7 +27,26 @@ namespace TCM.Infrastructure.Data.Repository
             var query = @"PR_Collection_Insert";
 
             var parameters = new DynamicParameters();
-            parameters.Add("ColletionTypeId", model.CollectionTypeId, System.Data.DbType.Int32);
+            parameters.Add("CollectionTypeId", model.CollectionTypeId, System.Data.DbType.Int32);
+            parameters.Add("Name", model.CollectionName, System.Data.DbType.String);
+            parameters.Add("AvailableDate", model.AvailableDate, System.Data.DbType.DateTime);
+            parameters.Add("IsPhysicalAward", model.IsPhysicalAward, System.Data.DbType.Boolean);
+            try
+            {
+                var result = await ExecuteScalarAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<int> UpdatedCollectionAsync(CollectionModel model)
+        {
+            var query = @"PR_Collection_Update";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("CollectionId", model.Id, System.Data.DbType.Int32);
+            parameters.Add("CollectionTypeId", model.CollectionTypeId, System.Data.DbType.Int32);
             parameters.Add("Name", model.CollectionName, System.Data.DbType.String);
             parameters.Add("AvailableDate", model.AvailableDate, System.Data.DbType.DateTime);
             parameters.Add("IsPhysicalAward", model.IsPhysicalAward, System.Data.DbType.Boolean);
@@ -68,6 +87,22 @@ namespace TCM.Infrastructure.Data.Repository
             }
             catch (Exception ex) { return default; }
             
+        }
+
+        public async Task<int> RemoveCollectionAsync(int id)
+        {
+            var query = @"PR_Collection_Delete";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", id, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
         }
     }
 }

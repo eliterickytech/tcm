@@ -17,12 +17,12 @@
     "screenshots": [],
     "icons": [
         {
-          "src": "http://homolocao.thechefmelo.com/img/icon-192x192.png",
+          "src": "http://homologacao.thechefmelo.com/img/icon-192x192.png",
           "type": "image/png",
           "sizes": "192x192"
         },
         {
-            "src": "http://homolocao.thechefmelo.com/img/icon-512x512.png",
+            "src": "http://homologacao.thechefmelo.com/img/icon-512x512.png",
             "type": "image/png",
             "sizes": "512x512"
         }
@@ -32,10 +32,10 @@
         "name": "The Chef Melo",
         "short_name": "Chef Melo",
         "description": "APP The Chef Melo",
-        "url": "http://homolocao.thechefmelo.com/login-view.php",
+        "url": "http://homologacao.thechefmelo.com/login-view.php",
         "icons": [
             {
-                "src": "http://homolocao.thechefmelo.com/img/icon-96x96.png", "sizes": "96x96"
+                "src": "http://homologacao.thechefmelo.com/img/icon-96x96.png", "sizes": "96x96"
             }
         ]
     }

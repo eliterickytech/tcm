@@ -1,0 +1,249 @@
+﻿
+
+    <div class="container">
+        <table width="100%">
+            <tr>
+                <td>
+                    <form novalidate class="needs-validation" enctype="multipart/form-data"
+                          data-ajax="true"
+                          data-ajax-mode="replace"
+                          data-ajax-loading="#loader"
+                          asp-action="ProcessForm"
+                          asp-controller="ManagerCollection"
+                          data-ajax-success="Success">
+                        @Html.AntiForgeryToken()
+                        <table id="Upload" style="width:100%">
+                            <tr>
+                                <td class="title_collectible" style="width:50%;">
+                                    <h2>Add collection</h2>
+                                </td>
+                                <td style="width:50%;">
+                                    <ul id="nav" class="nav float-end">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle text-default"
+                                               href="#" id="bannerTypeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Page <span id="page">1x1</span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="bannerTypeDropdown">
+                                                <li><a class="dropdown-item text-weight-bold text-default" href="#" data-collectiontypeid="@((int)TCM.Services.Model.Enum.CollectionType.SinglePage)">1x1</a></li>
+                                                <li><a class="dropdown-item text-weight-bold text-default" href="#" data-collectiontypeid="@((int)TCM.Services.Model.Enum.CollectionType.Grid2x2)">2x2</a></li>
+                                                <li><a class="dropdown-item text-weight-bold text-default" href="#" data-collectiontypeid="@((int)TCM.Services.Model.Enum.CollectionType.Grid3x3)">3x3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="file" class="form-control mb-3" name="imagemInput" id="imagemInput" required">
+
+                                    <input type="hidden" id="collectiontypeid" name="collectiontypeid" value="1" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="align-items:center" align="center">
+                                    <div id="resizeImage" class="area_collection_single"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <table width="350px">
+                                        <tr>
+                                            <td colspan="2">
+                                                &nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="area_next" style="margin:0 0 0 0 !important">
+                                                <input type="text" class="collection_next" id="collectionName" name="collectionName"
+                                                       placeholder="Tap to give your collection a name*" required />
+                                            </td>
+                                            <td style="align-items:flex-end">
+                                                <input type="submit" value="NEXT" id="next" class="next operador">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </form>
+                    <form novalidate class="needs-validation" enctype="multipart/form-data"
+                          data-ajax="true"
+                          data-ajax-mode="replace"
+                          data-ajax-loading="#loader"
+                          asp-action="InsertCollection"
+                          asp-controller="ManagerCollection"
+                          data-ajax-success="SuccessInsert">
+                        @await Html.PartialAsync("~/Views/Shared/adm/_PartialAddCollectionSingle.cshtml")
+
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+    $(document).ready(function () {
+        $("#scheduled").mask("00/00/0000 00:00");
+        $("#container1x1").attr("style", "display:none");
+        $("#container2x2").attr("style", "display:none");
+        $("#container3x3").attr("style", "display:none");
+        $("#containerSave").attr("style", "display:none");
+        $("#containerVideo").attr("style", "display:none");
+        
+        $('#scheduledDate').inputmask('99/99/9999 99:99', { placeholder: 'dd/mm/yyyy hh:mm' });
+
+        $('#video').click(function () {
+            $('#fileInput').click();
+        });
+
+        $('#fileInput').change(function () {
+            var fileName = $(this).val().split('\\').pop();
+            var fileExtension = fileName.split('.').pop().toLowerCase();
+
+            if (fileExtension !== 'mp4' && fileExtension !== 'gif') {
+                alert('Apenas arquivos .mp4 e .gif são permitidos.');
+                $(this).val(''); // Limpa o campo de entrada de arquivo
+                return;
+            }
+
+            $('#video').text(fileName);
+        });
+
+        $(document).on('ajaxSuccess', function (event, xhr, settings) {
+            if (settings.url.indexOf("ProcessForm") > -1) {
+                var response = xhr.responseJSON;
+                if (response && response.isOK === false) {
+                    $('#result').html('<div class="alert alert-danger">' + response.errors + '</div>');
+                }
+
+            }
+        });
+
+        $(".dropdown-item").click(function (event) {
+            event.preventDefault();
+
+            var collectionTypeId = $(this).data("collectiontypeid");
+            var text = $(this).text();
+            if (collectionTypeId == 1) {
+                $("#collectiontypeid").val(collectionTypeId);
+
+            } else if (collectionTypeId == 2) {
+                $("#collectiontypeid").val(collectionTypeId);
+            } else if (collectionTypeId == 3) {
+                $("#collectiontypeid").val(collectionTypeId);
+            }
+            $("#page").text(text);
+        });
+
+
+    });
+
+
+    $("#imagemInput").change(function () {
+        var inputFile = this;
+        if (inputFile.files && inputFile.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var imagePreview = $("#resizeImage");
+                imagePreview.empty();
+                var imageMiniature = $("#imageMini");
+                imageMiniature.empty();
+
+                var img = $("<img>");
+                img.attr("src", e.target.result);
+                img.css("width", "350px");
+                img.css("height", "350px");
+
+                imagePreview.append(img);
+            };
+
+            reader.readAsDataURL(inputFile.files[0]);
+        }
+    });
+
+    function Success(data) {
+        var response = JSON.parse(JSON.stringify(data.data));
+
+        //var imageMiniature = $("#imageMini");
+        //imageMiniature.empty();
+        //var imgMiniature = document.createElement("img");
+        //imgMiniature.src = response.urlResize
+        //imageMiniature.append(imgMiniature);
+
+        if (response.collectionTypeId == 1) {
+            $("#container1x1").attr("style", "display:block");
+        }
+        else if (response.collectionTypeId == 2) {
+            $("#container1x1").attr("style", "display:block");
+            $("#container2x2").attr("style", "display:block");
+
+        } else if (response.collectionTypeId == 3) {
+            $("#container1x1").attr("style", "display:block");
+            $("#container2x2").attr("style", "display:block");
+            $("#container3x3").attr("style", "display:block");
+        }
+        $("#containerSave").attr("style", "display:block");
+        $("#containerVideo").attr("style", "display:block");
+        
+        loadImages(response);
+
+        $("#Upload").attr("Style", "display:none");
+    }
+
+    function SuccessInsert(data) {
+        window.location.href = "/Home/adm";
+    }
+
+    function loadImages(response) {
+        const imageMini =$('#imageMini');
+        const imagePiece1 = $('#imagePiece1');
+
+        var imagePreview = $("#resizeImage");
+        imagePreview.empty();
+        var imageMiniature = $("#imageMini");
+        imageMiniature.empty();
+
+        const fileReader = new FileReader();
+        const fileReader1 = new FileReader();
+
+        // Carregar a primeira imagem
+        fileReader.onload = function (e) {
+            imageMini.src = e.target.result;
+        };
+
+        fileReader.readAsDataURL(new Blob([response.urlResize]));
+
+        if (response.collectionTypeId == 1) 
+        {
+            // Carregar a segunda imagem
+            fileReader1.onload = function (e) {
+                imagePiece1.src = e.target.result;
+            };
+
+            fileReader1.readAsDataURL(new Blob([response.splitImages[0]]));
+        }
+    }        
+
+</script>

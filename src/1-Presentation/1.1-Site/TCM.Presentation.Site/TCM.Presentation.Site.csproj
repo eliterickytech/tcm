@@ -89,6 +89,10 @@
   <ItemGroup>
     <Folder Include="wwwroot\img\banner\middle\" />
     <Folder Include="wwwroot\img\banner\top\" />
+    <Folder Include="wwwroot\img\collection\000001\origin\" />
+    <Folder Include="wwwroot\img\collection\000002\origin\" />
+    <Folder Include="wwwroot\img\collection\000003\origin\" />
+    <Folder Include="wwwroot\img\collection\000004\origin\" />
     <Folder Include="wwwroot\Logs\" />
     <Folder Include="Views\Error\" />
     <Folder Include="wwwroot\Images\" />

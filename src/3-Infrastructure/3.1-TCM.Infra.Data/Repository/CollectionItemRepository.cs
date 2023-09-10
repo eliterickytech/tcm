@@ -24,11 +24,12 @@ namespace TCM.Infrastructure.Data.Repository
             var query = @"PR_CollectionItem_Insert";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@CollectionId", model.CollectionItemTypeId, System.Data.DbType.Int32);
-            parameters.Add("@CollectionItemTypeId", model.CollectionItemTypeName, System.Data.DbType.Int32);
+            parameters.Add("@CollectionId", model.CollectionId, System.Data.DbType.Int32);
+            parameters.Add("@CollectionItemTypeId", model.CollectionItemTypeId, System.Data.DbType.Int32);
             parameters.Add("@Sort", model.Sort, System.Data.DbType.Int32);
             parameters.Add("@Url", model.Url, System.Data.DbType.String);
             parameters.Add("@Description", model.Description, System.Data.DbType.String);
+
 
             try
             {
@@ -70,5 +71,7 @@ namespace TCM.Infrastructure.Data.Repository
             }
             catch (Exception ex) { return default; }
         }
+
+
     }
 }

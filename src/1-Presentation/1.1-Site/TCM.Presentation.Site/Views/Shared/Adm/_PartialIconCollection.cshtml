@@ -1,0 +1,62 @@
+﻿@using System.Security.Claims;
+@{
+    var countCollection = (int)TempData["CountCollection"];
+    var id = Convert.ToInt32(TempData["Id"]);
+}
+<div class="area_profile_single">
+    <div class="area_profile_int_single">
+        <div class="profile_single_admin">
+            <div class="title_profile_single">
+                @{if (id == 1){<img width = "30" height = "30" src = "~/img/profile.png" alt = "" >}}
+                <div class="texts_profile_single">
+                    <h2>@User.Identity.Name</h2>
+                    <p>@countCollection.ToString() collections available.</p>
+                </div>
+            </div>
+        </div>
+        <div class="icons_profile_single">
+            <div class="icons_collectibles" style="cursor:pointer" onclick="javascript: redirectToAddCollection();">
+                <div id="icon_add" class="area_icons_collectibles" >
+                    <img src="~/img/collectibles.png" alt="">
+                    <h2>+</h2>
+                </div>
+                <div class="title_icons_collectibles">
+                    <p>add collection</p>
+                </div>
+            </div>
+            <div class="icons_collectibles" style="cursor:pointer" onclick="javascript: redirectToRemoveCollection();">
+                <div id="icon_remove" class="area_icons_collectibles" >
+                    <img src="~/img/delete_collection.png" alt="">
+                    <h2>-</h2>
+                </div>
+                <div class="title_icons_collectibles">
+                    <p>delete collection</p>
+                </div>
+            </div>
+            <div class="icons_chats">
+                <div class="area_icons_chats">
+                    <img src="~/img/send_delights.png" alt="">
+                    <h2>></h2>
+                </div>
+                <div class="title_icons_chats">
+                    <p>send delights</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bar"></div>
+<script>
+    $(document).ready(function(){
+        $(".area_icons_collectibles").attr("style", "cursor:pointer");
+    })
+    function redirectToRemoveCollection() {
+        window.location.href = "/ManagerCollection/RemoveCollection"
+
+    }
+
+    function redirectToAddCollection() {
+        window.location.href = "/ManagerCollection/AddCollection"
+
+    }
+</script>
