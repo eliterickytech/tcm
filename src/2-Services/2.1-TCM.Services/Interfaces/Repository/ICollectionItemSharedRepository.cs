@@ -10,5 +10,6 @@ namespace TCM.Services.Interfaces.Repository
     public interface ICollectionItemSharedRepository
     {
         Task<IEnumerable<CollectionItemSharedModel>> GetCollectionItemSharedAsync(CollectionItemSharedModel model);
+        Task<int> InsertCollectionItemSharedAsync(CollectionItemSharedModel model);
     }
 }

@@ -35,5 +35,23 @@ namespace TCM.Infrastructure.Data.Repository
             catch (Exception ex) { return default; }
         }
 
+        public async Task<int> InsertCollectionItemSharedAsync(CollectionItemSharedModel model)
+        {
+            var query = "PR_CollectionItemShared_Insert";
+
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@UserId", model.UserId, System.Data.DbType.Int32);
+            parameters.Add("@ConnectionUserId", model.ConnectionUserId, System.Data.DbType.Int32);
+            parameters.Add("@CollectionItemId", model.CollectionItemId, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
     }
 }

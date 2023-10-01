@@ -33,6 +33,26 @@ namespace TCM.Infrastructure.Data.Repository
             }
             catch (Exception ex) { return default; }
         }
+
+        public async Task<int> InsertCollectionItemUserAsync(int collectionId, int collectionItemId, int userId)
+        {
+            var query = @"PR_CollectionItemUser_Insert";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@CollectionId", collectionId, System.Data.DbType.Int32);
+            parameters.Add("@CollectionItemId", collectionItemId, System.Data.DbType.Int32);
+
+            parameters.Add("@UsersId", userId, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
         
     }
 }

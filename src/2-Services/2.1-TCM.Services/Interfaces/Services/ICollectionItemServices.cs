@@ -10,7 +10,7 @@ namespace TCM.Services.Interfaces.Services
     public interface ICollectionItemServices
     {
         Task<int> AddCollectionItemAsync(CollectionItemModel model);
-        Task<IEnumerable<CollectionItemModel>> GetCollectionItemAsync(int id);
+        Task<IEnumerable<CollectionItemModel>> GetCollectionItemAsync(int collectionId);
         Task<CollectionItemModel> GetCollectionItemDetailsAsync(int id);
     }
 }

@@ -33,9 +33,9 @@
                     <p>delete collection</p>
                 </div>
             </div>
-            <div class="icons_chats">
+            <div class="icons_chats" style="cursor:pointer" onclick="javascript: redirectToSentCollection();">
                 <div class="area_icons_chats">
-                    <img src="~/img/send_delights.png" alt="">
+                    <img src="~/img/send_delights.png" alt="" >
                     <h2>></h2>
                 </div>
                 <div class="title_icons_chats">
@@ -59,4 +59,9 @@
         window.location.href = "/ManagerCollection/AddCollection"
 
     }
+    function redirectToSentCollection() {
+        window.location.href = "/SentCollection/Index"
+
+    }
+    
 </script>

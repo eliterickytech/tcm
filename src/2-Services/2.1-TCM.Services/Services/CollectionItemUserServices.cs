@@ -26,5 +26,7 @@ namespace TCM.Services.Services
             var result = await _collectionItemUserRepository.GetCollectionItemUserAsync(collectionId, userId);
             return result.Count();
         }
+
+        public async Task<int> InsertCollectionItemUserAsync(int collectionid, int collectionItemId, int userId) => await _collectionItemUserRepository.InsertCollectionItemUserAsync(collectionid, collectionItemId, userId);
     }
 }

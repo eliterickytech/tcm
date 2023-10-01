@@ -22,5 +22,10 @@ namespace TCM.Services.Services
         {
             return await _collectionItemSharedRepository.GetCollectionItemSharedAsync(model);
         }
+
+        public async Task<int> InsertCollectionItemSharedAsync(CollectionItemSharedModel model) =>
+            await _collectionItemSharedRepository.InsertCollectionItemSharedAsync(model);
+
+
     }
 }

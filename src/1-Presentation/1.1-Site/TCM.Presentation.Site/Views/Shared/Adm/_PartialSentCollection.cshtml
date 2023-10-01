@@ -1,0 +1,97 @@
+﻿<div class="container">
+    <form novalidate class="needs-validation" enctype="multipart/form-data"
+          data-ajax="true"
+          data-ajax-mode="replace"
+          data-ajax-loading="#loader"
+          asp-action="SentCollection"
+          asp-controller="SentCollection"
+          data-ajax-success="Success">
+        @Html.AntiForgeryToken()
+        <table width="100%">
+            <tr>
+                <td class="text-default text-weight-bold">
+                    Sent delights
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="next operador" value="SEND RANDOMLY" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table width="100%" border="1">
+        <tr>
+            <td>
+                Choose by username
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select id="searchUser" style="width:300px">
+                    <option value=""></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    function Success(data) {
+        var response = JSON.parse(JSON.stringify(data.data));
+        Swal.fire(
+            'Success',
+            response + ' collection items were distributed',
+            'Success'
+        ).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Home/adm";
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('#searchUser').empty();
+        // Inicialize o Select2 no elemento select
+        $('#searchUser').select2({
+
+            placeholder: 'Select user',
+            minimumInputLength: 5,
+            ajax: {
+                url: '/SentCollection/ListUsers',
+                dataType: 'json',
+                delay: 250
+            },
+            data: function (params) {
+                return {
+                    q:params.term
+                }
+            },
+            processResults: function (data) {
+                // Processa os resultados do servidor
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        });
+    });
+</script>

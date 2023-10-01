@@ -55,6 +55,13 @@ namespace TCM.Infra.Repository
             return await QueryAsync<UserModel>(query, parameters);
         }
 
+        public async Task<IEnumerable<UserModel>> ListUserAsync()
+        {
+            var query = @"PR_User_Select";
+
+            return await QueryAsync<UserModel>(query);
+        }
+
         public async Task<int> AddUserAsync(UserModel userModel)
         {
             var query = @"PR_User_Insert";

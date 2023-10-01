@@ -15,5 +15,6 @@ namespace TCM.Services.Interfaces.Repository
         Task<int> DeleteAdmAsync(int userId);
         Task<UserModel> GetLoginAsync(string user, string password);
         Task<IEnumerable<UserModel>> GetUserAsync(UserModel user);
+        Task<IEnumerable<UserModel>> ListUserAsync();
     }
 }

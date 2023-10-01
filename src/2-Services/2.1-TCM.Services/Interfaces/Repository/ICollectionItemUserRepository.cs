@@ -10,5 +10,6 @@ namespace TCM.Services.Interfaces.Repository
     public interface ICollectionItemUserRepository
     {
         Task<IEnumerable<CollectionItemUserModel>> GetCollectionItemUserAsync(int collectionId, int userId);
+        Task<int> InsertCollectionItemUserAsync(int collectionId, int collectionItemId, int userId);
     }
 }

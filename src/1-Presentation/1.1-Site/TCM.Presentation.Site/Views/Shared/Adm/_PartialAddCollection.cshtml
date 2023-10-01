@@ -184,8 +184,9 @@
     });
 
     function Success(data) {
+        console.log(data)
         var response = JSON.parse(JSON.stringify(data.data));
-
+        console.log(response);
         //var imageMiniature = $("#imageMini");
         //imageMiniature.empty();
         //var imgMiniature = document.createElement("img");
@@ -206,8 +207,10 @@
         }
         $("#containerSave").attr("style", "display:block");
         $("#containerVideo").attr("style", "display:block");
-        
-        loadImages(response);
+
+        console.log("Antes do loadImages")
+        //loadImages(response);
+        console.log("depois do loadImages")
 
         $("#Upload").attr("Style", "display:none");
     }

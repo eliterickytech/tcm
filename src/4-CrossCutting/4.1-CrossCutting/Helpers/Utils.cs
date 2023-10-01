@@ -118,5 +118,21 @@ namespace TCM.CrossCutting.Helpers
                 }
             }
         }
+
+        public List<int> Randomize(List<int> ints)
+        {
+            Random random = new Random();
+
+            List<int> list = new List<int>();
+
+            while (ints.Count > 0)
+            {
+                int index = random.Next(0, ints.Count);
+                list.Add(ints[index]);
+                ints.RemoveAt(index);
+            }
+
+            return list;
+        }
     }
 }
