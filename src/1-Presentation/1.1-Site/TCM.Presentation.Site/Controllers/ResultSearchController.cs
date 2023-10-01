@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,7 +26,7 @@ namespace TCM.Presentation.Site.Controllers
             _logger = logger;
             _searchServices = searchServices;
         }
-
+        //[Authorize]
         public async Task<IActionResult> Index()
         { 
             if (HttpContext.Session.GetString("SearchUser") != null)

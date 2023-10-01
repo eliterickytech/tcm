@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,12 +8,10 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TCM.CrossCutting.Helpers;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
 using TCM.Services.Model.Enum;
-using TCM.Services.Services;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -30,7 +29,7 @@ namespace TCM.Presentation.Site.Controllers
             _logger = logger;
             _searchServices = searchServices;
         }
-
+        //[Authorize]
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("SearchInvitationUser") != null)

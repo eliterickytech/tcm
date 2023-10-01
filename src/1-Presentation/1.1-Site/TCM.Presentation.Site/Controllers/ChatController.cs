@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace TCM.Presentation.Site.Controllers
             _chatServices = chatServices;
             _logger = logger;
         }
-
+        //[Authorize]
         public async Task<IActionResult> Unread()
         {
 
@@ -49,7 +50,7 @@ namespace TCM.Presentation.Site.Controllers
 
             return View();
         }
-
+        //[Authorize]
         public async Task<IActionResult> All()
         {
 
@@ -75,7 +76,7 @@ namespace TCM.Presentation.Site.Controllers
 			return View();
 
         }
-
+        //[Authorize]
         public async Task<IActionResult> Details(int userId)
         {
 			var questions = (await GetChatQuestionAsync(userId)).ToList();
@@ -88,8 +89,8 @@ namespace TCM.Presentation.Site.Controllers
 
             return View();
         }
-
-		public async Task<JsonResult> Add(ChatViewModel model)
+        //[Authorize]
+        public async Task<JsonResult> Add(ChatViewModel model)
 		{
             var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
@@ -104,7 +105,7 @@ namespace TCM.Presentation.Site.Controllers
 			return new JsonResult(result);
 
 		}
-
+        //[Authorize]
         private async Task<Dictionary<string, List<ChatViewModel>>> GroupDataQuestion()
         {
             id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
@@ -134,8 +135,8 @@ namespace TCM.Presentation.Site.Controllers
 			return groupedDataQuestion;
 
 		}
-
-		private async Task<Dictionary<string, List<ChatViewModel>>> GroupDataResponse()
+        //[Authorize]
+        private async Task<Dictionary<string, List<ChatViewModel>>> GroupDataResponse()
 		{
 			id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
@@ -163,8 +164,8 @@ namespace TCM.Presentation.Site.Controllers
 
 			return groupedDataResponse;
 		}
-
-		private async Task<List<ChatViewModel>> GetChatQuestionAsync(int userId)
+        //[Authorize]
+        private async Task<List<ChatViewModel>> GetChatQuestionAsync(int userId)
 		{
 			var questions =(await _chatServices.GetChatAsync(new Services.Model.ChatModel() { ChatConnectionUserId = userId })).ToList();
 
@@ -185,7 +186,7 @@ namespace TCM.Presentation.Site.Controllers
 
 			return chats;
         }
-
+        //[Authorize]
         private async Task<List<ChatViewModel>> GetChatResponseAsync(int userId)
         {
             var questions = (await _chatServices.GetChatAsync(new Services.Model.ChatModel() { ChatUserId = userId })).ToList();

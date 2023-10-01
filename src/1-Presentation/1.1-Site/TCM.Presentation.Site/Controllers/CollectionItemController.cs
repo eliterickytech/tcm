@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
-using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
-using TCM.Services.Services;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -25,14 +23,14 @@ namespace TCM.Presentation.Site.Controllers
             this._collectionUserServices = collectionUserServices;
             this._collectionItemSharedServices = collectionItemSharedServices;
         }
-
+        //[Authorize]
         public async Task<IActionResult> Index(int id)
         {
             var collectionDetails = await Details(id);
 
             return View(collectionDetails);
         }
-
+        //[Authorize]
         private async Task<CollectionDetails> Details(int itemId) 
         {
 

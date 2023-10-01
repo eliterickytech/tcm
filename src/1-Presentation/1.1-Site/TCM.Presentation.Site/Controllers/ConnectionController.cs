@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using TCM.Services.Interfaces.Services;
 using System.Security.Claims;
 using TCM.Services.Model.Enum;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -26,7 +27,7 @@ namespace TCM.Presentation.Site.Controllers
             _logger = logger;
             _searchServices = searchServices;
         }
-
+        //[Authorize]
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("SearchConnectionUser") != null)

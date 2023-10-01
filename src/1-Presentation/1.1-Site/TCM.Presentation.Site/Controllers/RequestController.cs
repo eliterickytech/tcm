@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using TCM.Services.Interfaces.Services;
 using System.Security.Claims;
 using TCM.Services.Model.Enum;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -25,6 +26,7 @@ namespace TCM.Presentation.Site.Controllers
             _logger = logger;
             _searchServices = searchServices;
         }
+        //[Authorize]
         public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetString("SearchRequestUser") != null)
@@ -77,7 +79,6 @@ namespace TCM.Presentation.Site.Controllers
 
             return View();
         }
-
         [HttpPost]
         public async Task<List<ResultSearchModel>> Results(SearchModel search)
         {
@@ -104,7 +105,6 @@ namespace TCM.Presentation.Site.Controllers
             return results;
 
         }
-
         [HttpGet]
         public async Task Action(int connectionStatusId, int connectionId)
         {

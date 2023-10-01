@@ -12,17 +12,32 @@ namespace TCM.Services.Services
     public class UserServices : IUserServices
     {
         private readonly IUserRepository _userRepository;
+        private readonly IConnectionRepository _connectionRepository;
 
-        public UserServices(IUserRepository userRepository)
+        public UserServices(IUserRepository userRepository, IConnectionRepository connectionRepository)
         {
             _userRepository = userRepository;
+            _connectionRepository = connectionRepository;
         }
 
         public async Task<UserModel> GetLoginAsync(string user, string password) => await _userRepository.GetLoginAsync(user, password);
 
         public async Task<IEnumerable<UserModel>> GetUserAsync(UserModel user) => await _userRepository.GetUserAsync(user);
 
-        public async Task<int> AddUserAsync(UserModel userModel) => await _userRepository.AddUserAsync(userModel);
+        public async Task<int> AddUserAsync(UserModel userModel) 
+        {
+            await _userRepository.AddUserAsync(userModel);
+            var userConnection = new ConnectionModel()
+            {
+                ConnectionUserId = 1,
+                UserId = userModel.Id,
+                ConnectionUserConnectionStatusId = 2
+
+            };
+            await _connectionRepository.AddConnectionAsync(userConnection);
+
+            return await _userRepository.AddUserAsync(userModel);
+        }
 
         public async Task<int> ChangeUserAsync(UserModel userModel) => await _userRepository.ChangeUserAsync(userModel);
 

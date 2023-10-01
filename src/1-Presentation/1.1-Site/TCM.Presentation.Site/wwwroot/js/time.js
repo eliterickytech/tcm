@@ -12,7 +12,7 @@ function startTimer(duration, display, insert_code) {
         seconds = parseInt(timer % 60, 10);
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = "Your code should arrive yout e-mail at 00:" + seconds + "s";
+        display.textContent = "Your code should arrive your e-mail at 00:" + seconds + "s";
         if (--timer < 0) {
             timer = duration;
             display.remove();

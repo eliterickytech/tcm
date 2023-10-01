@@ -34,7 +34,6 @@ namespace TCM.Presentation.Site.Controllers
             _collectionItemUserServices = collectionItemUserServices;
 
         }
-
         [HttpPost]
         public async Task<IActionResult> Index(int connectionUserId, bool isConnection)
         {
@@ -55,7 +54,7 @@ namespace TCM.Presentation.Site.Controllers
 
             return View();
         }
-
+        //[Authorize]
         private async Task FillProfiles(int userId, bool isConnection)
         {
             var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
@@ -96,7 +95,7 @@ namespace TCM.Presentation.Site.Controllers
             }
 
         }
-
+        //[Authorize]
         private async Task<List<ChatModel>> GetChatCountUnreadAsync(int userId)
         {
             var resultUser = (await _chatServices.GetChatAsync(new ChatModel() { ChatUserId = userId } )).ToList();

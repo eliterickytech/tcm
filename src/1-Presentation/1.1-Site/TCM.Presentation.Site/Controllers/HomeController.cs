@@ -32,7 +32,7 @@ namespace TCM.Presentation.Controllers
             _collectionItemServices = collectionItemServices;
             _userServices = userServices;
         }
-        [AllowAnonymous]
+        //[Authorize]
         public async Task<IActionResult> Index()
 		{
             //if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
@@ -62,6 +62,7 @@ namespace TCM.Presentation.Controllers
 
             return View(model);
 		}
+        //[Authorize]
         public async Task<IActionResult> Adm()
         {
             var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
