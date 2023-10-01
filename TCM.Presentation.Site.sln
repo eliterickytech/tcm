@@ -31,7 +31,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-base", "5-base", "{3C8C0998-74D1-4AA2-BF2D-A3D385DEE473}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TCM.Infrastructure.Data.Base", "..\tcmBase\src\3-Infrastructure\3.2-TCM.Infra.BaseDados\TCM.Infrastructure.Data.Base\TCM.Infrastructure.Data.Base.sqlproj", "{EB2C0933-B991-4F5A-BB13-9B26DB677B1B}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TCM.Infrastructure.Data.Base", "src\3-Infrastructure\3.2-TCM-Base\TCM.Infrastructure.Data.Base\TCM.Infrastructure.Data.Base.sqlproj", "{EB2C0933-B991-4F5A-BB13-9B26DB677B1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
