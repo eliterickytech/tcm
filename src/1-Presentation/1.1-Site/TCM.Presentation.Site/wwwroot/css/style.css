@@ -1145,6 +1145,29 @@ nav ul li {
 
 
 
+.subtitle_community {
+    color: #111111;
+    font-size: var(--font-medium);
+}
+
+    .subtitle_community p {
+        font-weight: var(--font-weight-2);
+    }
+
+
+.subtitle_community h2 {
+    color: #111111;
+    font-weight: var(--font-weight-3);
+    font-size: var(--font-medium);
+    padding: 0px 0px;
+    margin: 20px 0px;
+}
+
+.subtitle_community h2 span {
+    color: #964E38;
+   
+}
+
 .area_community {
 
     display: flex;
@@ -5144,7 +5167,17 @@ footer {
 }
 
 
-
+/*Links Redirect*/
+.link {
+    width: 100%;
+}
+.link h5 {
+    font-weight: var(--font-weight-2);
+    font-size: var(--font-medium);
+    text-align: right;
+    color: #964E38;
+    padding: 0px 20px;
+}
 
 
 /*My connections*/
@@ -5168,9 +5201,13 @@ footer {
     padding: 0px 20px;
 
 }
-
-
-
+    .invitations h5 {
+        font-weight: var(--font-weight-2);
+        font-size: 8px;
+        text-align: right;
+        color: #964E38;
+        padding: 0px 20px;
+    }
 .area_user_connections {
 
     display: flex;
@@ -5407,8 +5444,6 @@ footer {
     transition: all ease-out 200ms;
 
 }
-
-
 
 
 

@@ -63,10 +63,14 @@ namespace TCM.Presentation.Site.Controllers
 
             model.Id = userId;
 
-            var resultUsers = (await _connectionServices.GetConnectionAsync(Convert.ToInt32(userId)));
+            var resultUsers = (await _connectionServices.GetConnectionAsync(Convert.ToInt32(userId)))
+                                .Where(connection => connection.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved).ToList();
+
 
             var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(userId) }));
             
+
+
             var results = resultUsers.Concat(resultConnections).ToList();
 
             var countCollectionCompleted =await _collectionServices.GetCountCollectionCompletedAsync(userId);

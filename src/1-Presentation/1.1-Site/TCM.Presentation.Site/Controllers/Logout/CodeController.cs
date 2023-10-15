@@ -45,7 +45,7 @@ namespace TCM.Presentation.Controllers.Logout
 
             parameters = ExtractValueFromKey.Extract(token);
 
-            await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
+ //           await _sendMail.SendCodeAsync(parameters.User, parameters.Code);
 
             _logger.LogInformation($"Envio Email: {parameters.User}: Code: {parameters.Code}");
 
