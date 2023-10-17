@@ -1,0 +1,44 @@
+﻿@{
+    List<TCM.Presentation.Site.Models.FriendsActivities> friendsActivities = new List<TCM.Presentation.Site.Models.FriendsActivities>();
+
+    if (TempData["FriendsActivities"] != null)
+    {
+        friendsActivities = (List<TCM.Presentation.Site.Models.FriendsActivities>)TempData["FriendsActivities"];
+    }
+}
+<div class="bar"></div>
+<div class="title_community">
+
+    <div class="title_friends_community"><h2>Friend's activity</h2></div>
+    
+    <div class="friends_community">
+
+        <div class="user_name_community">
+            <p class=""><strong>FriendName</strong> FriendActionDescription</p>
+        </div>
+        <div class="date_community"><p>16/08/2023</p></div>
+       
+    </div>
+    <div class="area_user_name_community">
+    @foreach (var activity in friendsActivities)
+    {
+            <div class="friends_community">
+
+                <div class="user_name_community">
+                    <p class=""><strong>@activity.FriendName</strong> @activity.FriendActionDescription</p>
+                </div>
+                <div class="date_community"><p>@activity.FriendActionDate</p></div>
+
+            </div>
+    }
+    </div>
+</div>
+    <div class="link">
+        <a asp-controller="Connection">
+        <h5>See all your connections</h5>
+        </a>
+    </div>
+
+
+
+

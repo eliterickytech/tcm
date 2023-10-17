@@ -3489,13 +3489,11 @@ nav ul li {
 
 
 .friends_community {
-
     display: flex;
-
-    flex-direction: column;
-
+    /*flex-direction: column;*/
+    justify-content: space-between;
     padding: 0px 15px;
-
+    margin: 0px 0px 0px 5px;
 }
 
 
@@ -3525,17 +3523,13 @@ nav ul li {
 
 
 .user_name_community {
-
-    display: flex;
-
+    /*display: flex;
+          gap: 10px;
+       */
+    flex:10;
     align-items: center;
-
     justify-content: space-between;
-
     margin: 0px 0px 10px 0px;
-
-    gap: 10px;
-
 }
 
 
@@ -3556,10 +3550,8 @@ nav ul li {
 
 
 
-.user_name_community p b {
-
-    color: #C0694E;
-
+.user_name_community p strong {
+    color: #964E38;
 }
 
 
@@ -3584,18 +3576,16 @@ nav ul li {
 
 }
 
+.date_community{
+    flex:2;
+}
 
 
 .date_community p {
-
     font-weight: var(--font-weight-1);
-
     font-size: 8px;
-
     color: #1E1E1E;
-
     margin: 0px;
-
 }
 
 

@@ -89,7 +89,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\img\banner\middle\" />
     <Folder Include="wwwroot\img\banner\top\" />
     <Folder Include="wwwroot\img\collection\000001\origin\" />

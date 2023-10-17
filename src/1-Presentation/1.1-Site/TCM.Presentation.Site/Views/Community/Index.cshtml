@@ -9,6 +9,7 @@
 
 @await Html.PartialAsync("~/Views/Shared/User/_PartialCommunity.cshtml", Model.CollectionsItemModel.OrderByDescending(x => x.CollectionId).ToList())
 
+@await Html.PartialAsync("~/Views/FriendsActivities/index.cshtml")
 @await Html.PartialAsync("~/Views/Shared/User/_PartialCommunityChatUnread.cshtml")
 
 @await Html.PartialAsync("~/Views/Shared/User/_PartialFooter.cshtml")
