@@ -39,9 +39,8 @@ body {
 
 
 a {
-
-    text-decoration: none !important;
-
+    color: inherit !important;
+    text-decoration: inherit !important;
 }
 
 /*Frames entregues no outro projeto*/
@@ -3550,9 +3549,9 @@ nav ul li {
 
 
 
-.user_name_community p strong {
-    color: #964E38;
-}
+    .user_name_community p strong a {
+        color: #964E38;
+    }
 
 
 

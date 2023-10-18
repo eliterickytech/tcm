@@ -20,7 +20,7 @@ namespace TCM.Infrastructure.Data.Repository
 
         public async Task<IEnumerable<ActivityUserModel>> GetActivityFriendUserAsync(int userId)
         {
-            var query = @"PR_ActivityFriendUser_Select";
+            var query = @"PR_ActivityFriendsUser_Select";
 
             var parameters = new DynamicParameters();
             parameters.Add("@UserId", userId, System.Data.DbType.Int32);

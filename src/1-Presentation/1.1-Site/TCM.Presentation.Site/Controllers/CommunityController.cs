@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog.Core;
 using System;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
+using TCM.Services.Model;
 using TCM.Services.Model.Enum;
 
 namespace TCM.Presentation.Site.Controllers
@@ -20,6 +22,7 @@ namespace TCM.Presentation.Site.Controllers
         private readonly ICollectionItemServices _collectionItemServices;
         private readonly IUserServices _userServices;
         private readonly IChatServices _chatServices;
+        private readonly IActivityUserServices _activityUserServices;
 
         private string id = string.Empty;
 
@@ -28,7 +31,8 @@ namespace TCM.Presentation.Site.Controllers
             ICollectionServices collectionServices,
             ICollectionItemServices collectionItemServices,
             IUserServices userServices,
-            IChatServices chatServices)
+            IChatServices chatServices,
+            IActivityUserServices activityUserServices)
         {
             _logger = logger;
             _bannerServices = bannerServices;
@@ -36,7 +40,7 @@ namespace TCM.Presentation.Site.Controllers
             _collectionItemServices = collectionItemServices;
             _userServices = userServices;
             _chatServices = chatServices;
-
+            _activityUserServices = activityUserServices;
         }
         public async Task<IActionResult> Index()
         {
@@ -66,7 +70,21 @@ namespace TCM.Presentation.Site.Controllers
 
             TempData["ChatsUnread"] = model.CountUnreadChats;
 
-          
+
+            //      var responseUserActivity = await _activityUserServices.GetActivityFriendUserAsync(Convert.ToInt32(id));
+            //       HttpContext.Session.SetString("FriendsActivities", Newtonsoft.Json.JsonConvert.SerializeObject(responseUserActivity.OrderByDescending(a => a.ActivityDate)));
+            var responseUserActivity = new List<ActivityUserModel>
+            {
+                new ActivityUserModel{ ActivityDate = DateTime.Now ,ActivityDescription = "Just shared " ,ProfileId = 2,UserName = "Ricardo", UserId = 2}
+            };
+
+        
+            HttpContext.Session.SetString("FriendsActivities", Newtonsoft.Json.JsonConvert.SerializeObject(responseUserActivity));
+
+               TempData["FriendsActivities"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ActivityModel>>(HttpContext.Session.GetString("FriendsActivities"));
+
+
+
             return View(model);
         }
 
@@ -81,7 +99,6 @@ namespace TCM.Presentation.Site.Controllers
            
             return resultConnection.Count;
         }
-
 
     }
 }
