@@ -105,6 +105,10 @@
     <Build Include="Scripts\Procedures\PR_Collection_Update.sql" />
     <Build Include="Scripts\Procedures\PR_Collection_Delete.sql" />
     <Build Include="Scripts\Procedures\PR_CollectionItemUser_Insert.sql" />
+    <Build Include="Tables\ActivityUser.sql" />
+    <Build Include="Scripts\Procedures\PR_ActivityUser_Insert.sql" />
+    <Build Include="Scripts\Procedures\PR_ActivityFriendUser_Select.sql" />
+    <Build Include="Scripts\Procedures\PR_ActivityUser_Select.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Pos-Deployment\Scripts.sql" />
