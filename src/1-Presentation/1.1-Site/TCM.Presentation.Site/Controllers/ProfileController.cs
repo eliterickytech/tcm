@@ -24,15 +24,16 @@ namespace TCM.Presentation.Site.Controllers
         private readonly ICollectionItemUserServices _collectionItemUserServices;
         private readonly IConnectionServices _connectionServices;
         private readonly IChatServices _chatServices;
+        private readonly IUserServices _userServices;
 
-        public ProfileController(ICollectionServices collectionServices, IConnectionServices connectionServices, IChatServices chatServices, ICollectionItemServices collectionItemServices, ICollectionItemUserServices collectionItemUserServices)
+        public ProfileController(ICollectionServices collectionServices, IConnectionServices connectionServices, IChatServices chatServices, ICollectionItemServices collectionItemServices, ICollectionItemUserServices collectionItemUserServices, IUserServices userServices)
         {
             _collectionServices = collectionServices;
             _connectionServices = connectionServices;
             _chatServices = chatServices;
             _collectionItemServices = collectionItemServices;
             _collectionItemUserServices = collectionItemUserServices;
-
+            _userServices = userServices;
         }
         [HttpPost]
         public async Task<IActionResult> Index(int connectionUserId, bool isConnection)
@@ -63,9 +64,18 @@ namespace TCM.Presentation.Site.Controllers
 
             model.Id = userId;
 
+            UserModel userModel = new UserModel();
+            userModel.Id = userId;
+            var resultUser = (await _userServices.GetUserAsync(userModel)).Where(u => u.Id == userId);
+
+            if (resultUser != null)
+            {
+                var user = resultUser.FirstOrDefault(u => u.Id == userId);
+                TempData["NameConnection"] = user.FullName;
+            }
             var resultUsers = (await _connectionServices.GetConnectionAsync(Convert.ToInt32(userId)))
                                 .Where(connection => connection.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved).ToList();
-
+            
 
             var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(userId) }));
             

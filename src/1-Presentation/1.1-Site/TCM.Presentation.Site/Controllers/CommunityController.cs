@@ -71,12 +71,12 @@ namespace TCM.Presentation.Site.Controllers
             TempData["ChatsUnread"] = model.CountUnreadChats;
 
 
-            //      var responseUserActivity = await _activityUserServices.GetActivityFriendUserAsync(Convert.ToInt32(id));
+                  var responseUserActivity = await _activityUserServices.GetActivityFriendUserAsync(Convert.ToInt32(id));
             //       HttpContext.Session.SetString("FriendsActivities", Newtonsoft.Json.JsonConvert.SerializeObject(responseUserActivity.OrderByDescending(a => a.ActivityDate)));
-            var responseUserActivity = new List<ActivityUserModel>
-            {
-                new ActivityUserModel{ ActivityDate = DateTime.Now ,ActivityDescription = "Just shared " ,ProfileId = 2,UserName = "Ricardo", UserId = 2}
-            };
+        //    var responseUserActivity = new List<ActivityUserModel>
+        //    {
+        //        new ActivityUserModel{ ActivityDate = DateTime.Now ,ActivityDescription = "Just shared " ,ProfileId = 2,UserName = "Ricardo", UserId = 2}
+        //    };
 
         
             HttpContext.Session.SetString("FriendsActivities", Newtonsoft.Json.JsonConvert.SerializeObject(responseUserActivity));

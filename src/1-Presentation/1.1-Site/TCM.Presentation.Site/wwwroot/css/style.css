@@ -39,7 +39,7 @@ body {
 
 
 a {
-    color: inherit !important;
+    color: inherit;
     text-decoration: inherit !important;
 }
 

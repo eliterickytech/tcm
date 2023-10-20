@@ -8,7 +8,7 @@ namespace TCM.Presentation.Site.Models
 
         public string UserName { get; set; }
         public int ProfileId { get; set; }
-        public string ActivityDescription { get; set; }
-        public DateTime ActivityDate { get; set; }
+        public string ActionDescription { get; set; }
+        public DateTime ActionDate { get; set; }
     }
 }

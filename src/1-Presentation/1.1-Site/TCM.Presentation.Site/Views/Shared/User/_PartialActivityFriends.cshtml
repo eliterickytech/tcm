@@ -19,13 +19,13 @@
 
                 <div class="user_name_community">
                     <p class=""><strong>
-                            <a asp-controller="Profile" asp-action="@activity.ProfileId" style="color:#C0694E;">
+                            <a asp-controller="Profile" asp-action="Index" asp-route-connectionUserId="@activity.ProfileId" style="color:#C0694E;">
                         @activity.UserName
                             </a>
                         
-                    </strong> @activity.ActivityDescription</p>
+                    </strong> @activity.ActionDescription</p>
                 </div>
-                <div class="date_community"><p>@activity.ActivityDate</p></div>
+                <div class="date_community"><p>@activity.ActionDate.ToString("dd/mm/yyyy")</p></div>
 
             </div>
         }

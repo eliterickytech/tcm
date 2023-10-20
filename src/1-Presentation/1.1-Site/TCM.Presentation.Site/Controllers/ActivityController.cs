@@ -27,7 +27,7 @@ namespace TCM.Presentation.Site.Controllers
 
             var responseActivity = await _activityUserServices.GetActivityFriendUserAsync(Convert.ToInt32(id));
            
-            HttpContext.Session.SetString("FriendsActivities", Newtonsoft.Json.JsonConvert.SerializeObject(responseActivity.OrderByDescending(a => a.ActivityDate)));
+            HttpContext.Session.SetString("FriendsActivities", Newtonsoft.Json.JsonConvert.SerializeObject(responseActivity.OrderByDescending(a => a.ActionDate)));
 
             TempData["FriendsActivities"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ActivityUserModel>>(HttpContext.Session.GetString("FriendsActivities"));
 
