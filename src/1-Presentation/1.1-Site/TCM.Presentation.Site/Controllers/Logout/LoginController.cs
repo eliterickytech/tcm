@@ -81,6 +81,7 @@ namespace TCM.Presentation.Controllers.Logout
                 resultModel.IsOK = true;
                 resultModel.Token = tokenJWT;
 
+                await _userServices.UpdateLastAccessDateAsync(result.Id.Value);
 
                 if (result.ProfileId == Services.Model.Enum.UserType.User)
                 {
