@@ -11,6 +11,7 @@ SELECT
 ,   CreatedDate
 ,   ChangedDate
 ,   ProfileId
+,   LastAccessDate
 FROM
     [User]
 WHERE

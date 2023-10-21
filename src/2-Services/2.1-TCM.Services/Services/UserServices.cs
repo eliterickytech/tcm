@@ -6,6 +6,7 @@ using TCM.Services.Model;
 using Microsoft.Extensions.Configuration;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace TCM.Services.Services
 {
@@ -26,7 +27,7 @@ namespace TCM.Services.Services
 
         public async Task<int> AddUserAsync(UserModel userModel) 
         {
-            await _userRepository.AddUserAsync(userModel);
+
             var userConnection = new ConnectionModel()
             {
                 ConnectionUserId = 1,
@@ -46,6 +47,10 @@ namespace TCM.Services.Services
         public async Task<int> AddAdmAsync(int id) => await _userRepository.AddAdmAsync(id);
 
         public async Task<IEnumerable<UserModel>> ListUserAsync() => await _userRepository.ListUserAsync();
+
+        public async Task<DateTime> GetLastAccessDateAsync(int userId) => await _userRepository.GetLastAccessDateAsync(userId);
+
+        public async Task<int> UpdateLastAccessDateAsync(int userId) => await _userRepository.UpdateLastAccessDateAsync(userId);
 
     }
 }

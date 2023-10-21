@@ -128,5 +128,36 @@ namespace TCM.Infra.Repository
             }
             catch (Exception ex) { return default; }
         }
+
+        public async Task<DateTime> GetLastAccessDateAsync(int userId)
+        {
+            var query = @"PR_User_LastAccess_Select";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
+            try
+            {
+                var result = await QueryFirstOrDefaultAsync<DateTime>(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<int> UpdateLastAccessDateAsync(int userId)
+        {
+            var query = @"PR_User_LastAccess_Update";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
     }
 }
