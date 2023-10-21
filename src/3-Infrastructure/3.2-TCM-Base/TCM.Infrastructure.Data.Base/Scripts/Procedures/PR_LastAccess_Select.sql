@@ -8,4 +8,4 @@ FROM
 	[User]
 WHERE
 	Id = @UserId
-AND GETDATE() BETWEEN LastAccessDate AND DATEADD(DAY, 14, LastAccessDate)
+AND GETDATE() BETWEEN LastAccessDate AND DATEADD(DAY, 15, LastAccessDate)

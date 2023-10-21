@@ -60,18 +60,18 @@ namespace TCM.Presentation.Site.Controllers.Logout
                     resultModel.StatusCode = System.Net.HttpStatusCode.OK;
                     resultModel.Data = resultLogin;
                     resultModel.IsOK = true;
-                    resultModel.Redirect = GeneratedToken(resultLogin.Email, code);
+                    resultModel.Redirect = GeneratedToken(resultLogin.Email, code, true);
                 }
             }
 
             return new JsonResult(resultModel);
         }
 
-        private string GeneratedToken(string user, string code)
+        private string GeneratedToken(string user, string code, bool firstAccess)
         {
             var url = $"/Code/Mail?";
 
-            var param = $"user={user}&code={code}";
+            var param = $"user={user}&code={code}&firstaccess={firstAccess}";
 
             return $"{url}token={Encrypt.EncodeBase64(param)}";
         }

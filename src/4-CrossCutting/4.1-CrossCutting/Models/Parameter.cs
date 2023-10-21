@@ -11,5 +11,7 @@ namespace TCM.CrossCutting.Models
         public string User { get; set; }
 
         public string Code { get; set; }
+
+        public bool FirstAccess { get; set; }   
     }
 }

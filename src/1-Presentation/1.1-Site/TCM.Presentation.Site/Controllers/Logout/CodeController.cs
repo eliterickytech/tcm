@@ -78,8 +78,13 @@ namespace TCM.Presentation.Controllers.Logout
                 resultModel.Data = result;
                 resultModel.IsOK = true;
                 resultModel.Token = tokenJWT;
-                
-                if(userMode.FirstOrDefault().ProfileId == Services.Model.Enum.UserType.User)
+
+                if (parameters.FirstAccess)
+                {
+                    if (userMode.Count() > 0) await _sendMail.SendWelcomeAsync(userMode.FirstOrDefault().Email, userMode.FirstOrDefault().FullName);
+                }
+
+                if (userMode.FirstOrDefault().ProfileId == Services.Model.Enum.UserType.User)
                 {
                     resultModel.Redirect = "/Home";
                 }
