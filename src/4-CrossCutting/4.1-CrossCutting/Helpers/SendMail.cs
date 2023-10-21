@@ -25,25 +25,25 @@ namespace TCM.CrossCutting.Helpers
         }
 
         public async Task SendCodeAsync(string mailTo, string code)
-        {
+         {
             string root = _webHostEnvironment.WebRootPath;
 
-            var sendGridClient = new SendGridClient(_smtpConfiguration.ApiKey);
+            MailMessage message = new MailMessage();
 
-            var from = new EmailAddress(_smtpConfiguration.Mail);
+            message.From = new MailAddress(_smtpConfiguration.Mail);
 
-            var to = new EmailAddress(mailTo);
+            message.To.Add(mailTo);
 
-            var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code), "<[^>]*>", "");
+            message.Subject = _smtpConfiguration.SubjectVerification;
 
-            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectVerification, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code));
+             var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code), "<[^>]*>", "");
 
-            var response = await sendGridClient.SendEmailAsync(msg);
+            message.Body = plainTextContent;
 
-            if (response.StatusCode != HttpStatusCode.Accepted)
-            {
-                throw new Exception(response.StatusCode.ToString() + ": " + response.Body);
-            }
+            SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
+
+            smtpClient.Send(message);
+
         }
         //public void SendCode(string mailTo, string code)
         //{

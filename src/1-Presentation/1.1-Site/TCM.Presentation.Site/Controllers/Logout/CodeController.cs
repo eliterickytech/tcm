@@ -58,7 +58,9 @@ namespace TCM.Presentation.Controllers.Logout
             var resultModel = new ResultModel();
 
             var parameters = ExtractValueFromKey.Extract(token);
+
             var user = await _userServices.GetUserAsync(new UserModel() { Email = parameters.User });
+            
             var result = await _codeServices.GetCodeByUserAsync(user.FirstOrDefault().UserName);
 
             if (result is null) return default;
@@ -67,6 +69,7 @@ namespace TCM.Presentation.Controllers.Logout
             {
                 
                 var userMode = await _userServices.GetUserAsync(new UserModel() { Id = result.UserId } );
+
                 var tokenJWT = _utils.GenerateToken(userMode.FirstOrDefault());
 
                 HttpContext.Session.SetString("Token", tokenJWT);

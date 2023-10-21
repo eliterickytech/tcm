@@ -26,7 +26,7 @@ namespace TCM.Services.Services
 
         public async Task<int> AddUserAsync(UserModel userModel) 
         {
-            await _userRepository.AddUserAsync(userModel);
+
             var userConnection = new ConnectionModel()
             {
                 ConnectionUserId = 1,

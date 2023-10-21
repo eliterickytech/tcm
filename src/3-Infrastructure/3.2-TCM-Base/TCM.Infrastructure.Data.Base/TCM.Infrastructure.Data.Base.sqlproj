@@ -105,6 +105,7 @@
     <Build Include="Scripts\Procedures\PR_Collection_Update.sql" />
     <Build Include="Scripts\Procedures\PR_Collection_Delete.sql" />
     <Build Include="Scripts\Procedures\PR_CollectionItemUser_Insert.sql" />
+    <Build Include="Scripts\Procedures\PR_LastAccess_Select.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Pos-Deployment\Scripts.sql" />
