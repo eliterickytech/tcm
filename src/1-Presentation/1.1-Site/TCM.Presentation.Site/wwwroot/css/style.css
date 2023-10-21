@@ -39,9 +39,8 @@ body {
 
 
 a {
-
-    text-decoration: none !important;
-
+    color: inherit;
+    text-decoration: inherit !important;
 }
 
 /*Frames entregues no outro projeto*/
@@ -1144,6 +1143,29 @@ nav ul li {
 }
 
 
+
+.subtitle_community {
+    color: #111111;
+    font-size: var(--font-medium);
+}
+
+    .subtitle_community p {
+        font-weight: var(--font-weight-2);
+    }
+
+
+.subtitle_community h2 {
+    color: #111111;
+    font-weight: var(--font-weight-3);
+    font-size: var(--font-medium);
+    padding: 0px 0px;
+    margin: 20px 0px;
+}
+
+.subtitle_community h2 span {
+    color: #964E38;
+   
+}
 
 .area_community {
 
@@ -3466,13 +3488,11 @@ nav ul li {
 
 
 .friends_community {
-
     display: flex;
-
-    flex-direction: column;
-
+    /*flex-direction: column;*/
+    justify-content: space-between;
     padding: 0px 15px;
-
+    margin: 0px 0px 0px 5px;
 }
 
 
@@ -3502,17 +3522,13 @@ nav ul li {
 
 
 .user_name_community {
-
-    display: flex;
-
+    /*display: flex;
+          gap: 10px;
+       */
+    flex:10;
     align-items: center;
-
     justify-content: space-between;
-
     margin: 0px 0px 10px 0px;
-
-    gap: 10px;
-
 }
 
 
@@ -3533,11 +3549,9 @@ nav ul li {
 
 
 
-.user_name_community p b {
-
-    color: #C0694E;
-
-}
+    .user_name_community p strong a {
+        color: #964E38;
+    }
 
 
 
@@ -3561,18 +3575,16 @@ nav ul li {
 
 }
 
+.date_community{
+    flex:2;
+}
 
 
 .date_community p {
-
     font-weight: var(--font-weight-1);
-
     font-size: 8px;
-
     color: #1E1E1E;
-
     margin: 0px;
-
 }
 
 
@@ -5144,7 +5156,17 @@ footer {
 }
 
 
-
+/*Links Redirect*/
+.link {
+    width: 100%;
+}
+.link h5 {
+    font-weight: var(--font-weight-2);
+    font-size: var(--font-medium);
+    text-align: right;
+    color: #964E38;
+    padding: 0px 20px;
+}
 
 
 /*My connections*/
@@ -5168,9 +5190,13 @@ footer {
     padding: 0px 20px;
 
 }
-
-
-
+    .invitations h5 {
+        font-weight: var(--font-weight-2);
+        font-size: 8px;
+        text-align: right;
+        color: #964E38;
+        padding: 0px 20px;
+    }
 .area_user_connections {
 
     display: flex;
@@ -5407,8 +5433,6 @@ footer {
     transition: all ease-out 200ms;
 
 }
-
-
 
 
 

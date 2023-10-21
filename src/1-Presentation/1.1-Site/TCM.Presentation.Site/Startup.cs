@@ -54,6 +54,7 @@ namespace TCM.Presentation
             services.AddScoped<ICollectionItemUserServices, CollectionItemUserServices>();
             services.AddScoped<ISearchServices, SearchServices>();
             services.AddScoped<ICollectionItemSharedServices, CollectionItemSharedServices >();
+            services.AddScoped<IActivityUserServices, ActivityUserServices>();
 
             services.AddScoped<ICodeRepository, CodeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -64,6 +65,7 @@ namespace TCM.Presentation
             services.AddScoped<ICollectionItemRepository, CollectionItemRepository>();
             services.AddScoped<ICollectionItemUserRepository, CollectionItemUserRepository>();
             services.AddScoped<ICollectionItemSharedRepository, CollectionItemSharedRepository>();
+            services.AddScoped<IActivityUserRepository, ActivityUserRepository>();
             services.AddScoped<IBaseNotification, BaseNotification>();
 
             services.AddSingleton(config);
