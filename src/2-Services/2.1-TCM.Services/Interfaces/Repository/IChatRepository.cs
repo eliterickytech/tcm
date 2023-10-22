@@ -10,6 +10,8 @@ namespace TCM.Services.Interfaces.Repository
     public interface IChatRepository
     {
         Task<int> AddChatAsync(ChatModel model);
+
+        Task<int> AddChatScheduledAsync(ChatModel model);
         Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model);
     }
 }
