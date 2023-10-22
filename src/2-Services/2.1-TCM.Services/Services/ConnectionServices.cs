@@ -57,6 +57,12 @@ namespace TCM.Services.Services
 
         }
 
+        public async Task<int> AddConnectionAsync(int userId, int connectionUserId, ConnectionStatusType connectionStatusType )
+        {
+            return await _connectionRepository.AddConnectionAsync(new ConnectionModel() { UserId = userId, ConnectionUserId = connectionUserId, ConnectionUserConnectionStatusId = (int)connectionStatusType });
+
+        }
+
         public async Task<int> UpdateStatusConnectionAsync(int id, int connectionStatusId) => await _connectionRepository.UpdateStatusConnectionAsync(id, connectionStatusId);
 
         public async Task<int> DeleteConnectionAsync(int id, int connectionStatusId) => await _connectionRepository.DeleteConnectionAsync(id, connectionStatusId);

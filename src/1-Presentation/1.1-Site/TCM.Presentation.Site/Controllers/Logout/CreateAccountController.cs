@@ -17,13 +17,15 @@ namespace TCM.Presentation.Site.Controllers.Logout
     {
         private readonly IUserServices _userServices;
         private readonly ICodeServices _codeServices;
+        private readonly IConnectionServices _connectionServices;
         private readonly SendMail _sendMail;
 
-        public CreateAccountController(IUserServices userServices, SendMail sendMail, ICodeServices codeServices)
+        public CreateAccountController(IUserServices userServices, SendMail sendMail, ICodeServices codeServices, IConnectionServices connectionServices)
         {
             _userServices = userServices;
             _sendMail = sendMail;
             _codeServices = codeServices;
+            _connectionServices = connectionServices;
         }
 
         public IActionResult Index()
@@ -52,6 +54,8 @@ namespace TCM.Presentation.Site.Controllers.Logout
                 var code = Code.GeneratedCode(6);
 
                 var resultLogin = await _userServices.GetLoginAsync(userModel.UserName, userModel.Password);
+
+                await _connectionServices.AddConnectionAsync(1, resultLogin.Id.Value, Services.Model.Enum.ConnectionStatusType.Approved);
 
                 var resultCode = await _codeServices.SaveCodeAsync(resultLogin?.Id, code);
 
