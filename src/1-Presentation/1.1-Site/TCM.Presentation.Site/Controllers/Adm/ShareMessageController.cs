@@ -58,13 +58,13 @@ namespace TCM.Presentation.Site.Controllers.Adm
             return Json(select);
         }
 
-        public async Task<IActionResult> SendShareMessage(string myText, int userOptions, int[] userList, int dateOptions, DateTime date) 
+        public async Task<IActionResult> SendShareMessage(string myText, int userOption, int[] userList, int dateOption, DateTime date) 
         {
             var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
 
             IEnumerable<UserModel> userSendMessage = Enumerable.Empty<UserModel>();
 
-            if (userOptions == 0 && (userList == null || userList.Length == 0))
+            if (userOption == 0 && (userList == null || userList.Length == 0))
             {
                 userSendMessage = await _userServices.ListUserAsync(); 
             }
@@ -79,7 +79,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
                 }
             }
 
-            if(dateOptions == 0) { date =  DateTime.Now; }
+            if(dateOption == 0) { date =  DateTime.Now; }
 
             if (userSendMessage.Any())
             {
