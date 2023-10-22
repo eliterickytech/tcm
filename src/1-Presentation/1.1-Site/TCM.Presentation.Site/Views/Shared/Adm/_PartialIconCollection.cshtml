@@ -42,6 +42,15 @@
                     <p>send delights</p>
                 </div>
             </div>
+            <div class="icons_chats" style="cursor:pointer" onclick="javascript: redirectToShareMessage();">
+                <div class="area_icons_chats">
+                    <img src="~/img/chats.png" alt="">
+                    <h2>+</h2>
+                </div>
+                <div class="title_icons_chats">
+                    <p>share message</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -61,6 +70,10 @@
     }
     function redirectToSentCollection() {
         window.location.href = "/SentCollection/Index"
+
+    }
+    function redirectToShareMessage() {
+        window.location.href = "/ShareMessage"
 
     }
     
