@@ -1728,6 +1728,15 @@ nav ul li {
 
 }
 
+.image-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Impede que as imagens quebrem para a próxima linha */
+}
+
+.image-container {
+    margin-right: 10px; /* Adicione margens entre as imagens conforme necessário */
+}
+
 /* shareMessage*/
 
 .shareMessage {

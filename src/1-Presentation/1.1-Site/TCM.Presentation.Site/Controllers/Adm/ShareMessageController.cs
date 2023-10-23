@@ -64,7 +64,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
             IEnumerable<UserModel> userSendMessage = Enumerable.Empty<UserModel>();
 
-            if (userOption == 0 && (userList == null || userList.Length == 0))
+            if (userOption == 1 && (userList == null || userList.Length == 0))
             {
                 userSendMessage = await _userServices.ListUserAsync(); 
             }
@@ -79,7 +79,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
                 }
             }
 
-            if(dateOption == 0) { date =  DateTime.Now; }
+            if(dateOption == 1) { date =  DateTime.Now; }
 
             if (userSendMessage.Any())
             {
