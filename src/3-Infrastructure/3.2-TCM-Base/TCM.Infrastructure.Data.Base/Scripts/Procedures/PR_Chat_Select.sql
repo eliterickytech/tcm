@@ -28,7 +28,7 @@ WHERE
 	Chat.Enabled					= 1
 AND ChatUser.Enabled				= 1
 AND ConnectionUser.Enabled			= 1
-
+And Chat.CreatedDate >= Getdate()
 AND ((@UserId IS NOT NULL AND Chat.UserId = @UserId) OR (@UserId IS NULL))
 AND ((@ConnectionUserId IS NOT NULL AND Chat.ConnectionUserId = @ConnectionUserId) OR (@ConnectionUserId IS NULL))
 AND ((@IsRead IS NOT NULL AND Chat.IsReaded = @IsRead) OR (@IsRead IS NULL))
