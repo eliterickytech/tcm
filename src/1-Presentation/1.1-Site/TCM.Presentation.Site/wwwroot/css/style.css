@@ -1150,14 +1150,14 @@ nav ul li {
 }
 
     .subtitle_community p {
-        font-weight: var(--font-weight-1);
+        font-weight: var(--font-weight-2);
         font-size: var(--font-small);
     }
 
 
 .subtitle_community h2 {
     color: #111111;
-    font-weight: var(--font-weight-2);
+    font-weight: var(--font-weight-3);
     font-size: var(--font-small);
     padding: 0px 0px;
     margin: 20px 0px;
