@@ -85,15 +85,17 @@ namespace TCM.Presentation.Site.Controllers.Adm
             {
                 foreach (var user in userSendMessage)
                 {
-
-                    var result = await _chatServices.AddChatScheduledAsync(new ChatModel()
+                    if (user.Id != Convert.ToInt32(id))
                     {
-                        ChatConnectionUserId = user.Id,
-                        ChatIsRead = false,
-                        ChatUserId = Convert.ToInt32(id),
-                        ChatMessage = myText,
-                        ChatCreatedDate = date
-                    });
+                        var result = await _chatServices.AddChatScheduledAsync(new ChatModel()
+                        {
+                            ChatConnectionUserId = user.Id,
+                            ChatIsRead = false,
+                            ChatUserId = Convert.ToInt32(id),
+                            ChatMessage = myText,
+                            ChatCreatedDate = date
+                        });
+                    }
                 }
             }          
             return Json(new { StatusCode = System.Net.HttpStatusCode.OK, IsOK = true, Data = userList.Length, Redirect = "" });
