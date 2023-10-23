@@ -13,8 +13,10 @@ namespace TCM.Services.Interfaces.Repository
         Task<int> AddUserAsync(UserModel userModel);
         Task<int> ChangeUserAsync(UserModel userModel);
         Task<int> DeleteAdmAsync(int userId);
+        Task<DateTime> GetLastAccessDateAsync(int userId);
         Task<UserModel> GetLoginAsync(string user, string password);
         Task<IEnumerable<UserModel>> GetUserAsync(UserModel user);
         Task<IEnumerable<UserModel>> ListUserAsync();
+        Task<int> UpdateLastAccessDateAsync(int userId);
     }
 }

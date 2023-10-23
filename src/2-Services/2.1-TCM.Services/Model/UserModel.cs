@@ -35,6 +35,8 @@ namespace TCM.Services.Model
 
         public string Redirect { get; set; }
 
+        public DateTime LastAccessDate { get; set; }
+
 
     }
 }

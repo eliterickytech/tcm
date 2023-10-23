@@ -54,8 +54,6 @@ $(document).ready(function () {
 
             var dados = JSON.stringify(formData);
 
-
-
             $.ajax({
                 type: "GET",
                 url: `Login/GetUser?user=${user}&password=${password}`,

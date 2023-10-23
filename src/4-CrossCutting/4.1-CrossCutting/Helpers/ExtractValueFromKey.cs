@@ -21,14 +21,25 @@ namespace TCM.CrossCutting.Helpers
             }
 
             int codeStartIndex = value.IndexOf("code=") + "code=".Length;
+            int codeEndIndex = value.IndexOf("&", codeStartIndex);
+
+            if (codeEndIndex == -1)
+            {
+                codeEndIndex = value.Length;
+            }
+
+            int firstAccessStartIndex = value.IndexOf("firstaccess=") + "firstaccess=".Length;
+            int firstAccessEndIndex = value.IndexOf("&", firstAccessStartIndex);
 
             string user = value.Substring(userStartIndex, userEndIndex - userStartIndex);
-            string code = value.Substring(codeStartIndex);
+            string code = value.Substring(codeStartIndex, codeEndIndex - codeStartIndex);
+            string firstAccess = value.Substring(firstAccessStartIndex);
 
             return new Parameter()
             {
                 Code = code,
-                User = user
+                User = user,
+                FirstAccess = firstAccess == "True" ? true : false
             };
         }
     }

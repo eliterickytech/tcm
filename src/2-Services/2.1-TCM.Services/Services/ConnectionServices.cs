@@ -37,7 +37,7 @@ namespace TCM.Services.Services
         { 
             var resultUser = await _connectionRepository.GetConnectionAsync(new ConnectionModel() { UserId = userId });
 
-            var distinct = resultUser.Distinct(new ConnectionComparer());
+            var distinct = resultUser.Distinct();
 
             return distinct.ToList();
         }
@@ -46,7 +46,7 @@ namespace TCM.Services.Services
         {
             var resultUser = await _connectionRepository.GetConnectionAsync(model);
 
-            var distinct = resultUser.Distinct(new ConnectionComparer());
+            var distinct = resultUser.DistinctBy(x => x.UserConnectionId).OrderBy(x => x.UserFullName);
 
             return distinct.ToList();
         }
@@ -54,6 +54,12 @@ namespace TCM.Services.Services
         public async Task<int> AddConnectionAsync(int userId, int connectionUserId)
         {
             return await _connectionRepository.AddConnectionAsync(new ConnectionModel() { UserId = userId, ConnectionUserId = connectionUserId, ConnectionUserConnectionStatusId = (int) ConnectionStatusType.Requested });
+
+        }
+
+        public async Task<int> AddConnectionAsync(int userId, int connectionUserId, ConnectionStatusType connectionStatusType )
+        {
+            return await _connectionRepository.AddConnectionAsync(new ConnectionModel() { UserId = userId, ConnectionUserId = connectionUserId, ConnectionUserConnectionStatusId = (int)connectionStatusType });
 
         }
 

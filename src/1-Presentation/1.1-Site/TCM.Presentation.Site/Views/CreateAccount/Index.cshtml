@@ -9,8 +9,8 @@
     <div class="logo">
         <img width="100px" height="100px" src="img/Logo.png" alt="Patisserie">
     </div>
-    <form id="formUser" name="formUser" class="needs-validation" novalidate>
-        <div id="fullname-group" class="area_form" >
+    <form id="formUser" name="formUser" class="needs-validation" onsubmit="return validarSenha();" novalidate>
+        <div id="fullname-group" class="area_form">
             <label for="fullname" class="password">
                 Fullname*
             </label>
@@ -29,7 +29,7 @@
             <label for="userName" class="password">
                 Username*
             </label>
-            <input type="text" id="username"  maxlength="25" class="form-control" name="username" placeholder="create a username" autocomplete="off" required>
+            <input type="text" id="username" maxlength="25" class="form-control" name="username" placeholder="create a username" autocomplete="off" required>
             <span class="errorData" role="alert" id="usernameError" aria-hidden="true"></span>
         </div>
         <div id="mobile-group" class="area_form">
@@ -43,19 +43,19 @@
             <label for="Password" class="password">
                 Password*
             </label>
-            <input type="password" minlength="8" maxlength="25" id="password" class="form-control" name="password" placeholder="enter your 8 characters password" autocomplete="off" required>
+            <input type="password" minlength="5" pattern="[0-9]{5,12}" maxlength="12" id="password" class="form-control" name="password" placeholder="Password must contain 5 to 12 numbers" autocomplete="off" required>
             <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
         </div>
         <div id="confirm-group" class="area_form">
             <label for="ConfirmPassword" class="password">
                 Confirm password*
             </label>
-            <input type="password" minlength="8" maxlength="25" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="repeat your 8 characters password" required autocomplete="off">
+            <input type="password" minlength="5" pattern="[0-9]{5,12}" maxlength="12" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Repeat your password" required autocomplete="off">
             <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
         </div>
         <input type="submit" name="submit" class="submit" value="SIGN UP" />
         <div class="sign_up">
-            <p>New here? Tap to <a target="_self" asp-controller="Login" asp-action="Index" ><b>sign in.</b></a></p>
+            <p>New here? Tap to <a target="_self" asp-controller="Login" asp-action="Index"><b>sign in.</b></a></p>
         </div>
     </form>
     <style>
@@ -85,5 +85,25 @@
         })
     })()
     $('#mobile').inputmask('+1 (999) 999-9999');
+</script>
+
+<script>
+    function validarSenha() {
+        var senha = document.getElementById("password").value;
+        var senhaNumerica = /^[0-9]{5,12}$/;
+
+        if (!senha.match(senhaNumerica)) {
+            $(".help-block").remove();
+
+            $("#password-group").addClass("has-error");
+
+            $("#password-group").append(
+                '<div style="color:#C0694E;" class="help-block">The password must contain only numbers and be a minimum of 5 and a maximum of 12 characters.</div>'
+            )
+
+            return false;
+        }
+        return true;
+    }
 </script>
 <script type="text/javascript" src="js/createUser.js"></script>

@@ -13,6 +13,7 @@ INSERT INTO [User]
 ,	Password
 ,	ProfileId
 ,	UserName
+,	LastAccessDate
 )
 VALUES
 (
@@ -22,4 +23,7 @@ VALUES
 ,	@Password
 ,	2
 ,	@Username
+,	GETDATE()	
 )
+
+
