@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
@@ -25,75 +26,87 @@ namespace TCM.CrossCutting.Helpers
         }
 
         public async Task SendCodeAsync(string mailTo, string code)
-        {
+         {
             string root = _webHostEnvironment.WebRootPath;
 
-            var sendGridClient = new SendGridClient(_smtpConfiguration.ApiKey);
+            MailMessage message = new MailMessage();
 
             var from = new EmailAddress(_smtpConfiguration.Mail);
 
             var to = new EmailAddress(mailTo);
 
-            var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code), "<[^>]*>", "");
+            message.Subject = _smtpConfiguration.SubjectVerification;
+
+             var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code), "<[^>]*>", "");
 
             var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectVerification, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code));
 
-            var response = await sendGridClient.SendEmailAsync(msg);
+            message.To.Add(mailTo);
 
-            if (response.StatusCode != HttpStatusCode.Accepted)
+            message.From = new MailAddress(_smtpConfiguration.Mail);
+
+            message.Body = msg.Contents.LastOrDefault().Value;
+
+            message.IsBodyHtml = true;
+
+            SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
+
+            try
             {
-                throw new Exception(response.StatusCode.ToString() + ": " + response.Body);
+                smtpClient.UseDefaultCredentials = false;
+
+                smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
+
+                smtpClient.EnableSsl = false;
+
+                await smtpClient.SendMailAsync(message);
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
-        //public void SendCode(string mailTo, string code)
-        //{
-        //    string root = _webHostEnvironment.WebRootPath;
-
-        //    MailMessage message = new MailMessage();
-
-        //    message.From = new MailAddress(_smtpConfiguration.Mail);
-
-        //    message.To.Add(mailTo);
-
-        //    message.Subject = _smtpConfiguration.SubjectVerification;
-
-        //    var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code), "<[^>]*>", "");
-
-        //    message.Body = plainTextContent;
-
-        //    message.IsBodyHtml = true;
-
-        //    SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
-
-        //    smtpClient.EnableSsl = true;
-
-        //    smtpClient.UseDefaultCredentials = false;
-
-        //    smtpClient.Send(message);
-
-
-        //}
-
 
         public async Task SendWelcomeAsync(string mailTo, string fullname)
         {
             string root = _webHostEnvironment.WebRootPath;
 
-            var sendGridClient = new SendGridClient(_smtpConfiguration.ApiKey);
+            MailMessage message = new MailMessage();
 
             var from = new EmailAddress(_smtpConfiguration.Mail);
 
             var to = new EmailAddress(mailTo);
 
-            var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@fullname@", fullname), "<[^>]*>", "");
+            message.Subject = _smtpConfiguration.SubjectWelcome;
 
-            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectVerification, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@fullname@", fullname));
+            var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLWelcome)).ToString().Replace("@fullname@", fullname), "<[^>]*>", "");
 
-            var response = await sendGridClient.SendEmailAsync(msg);
+            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectWelcome, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLWelcome)).ToString().Replace("@fullname@", fullname));
 
-            if (response.StatusCode != HttpStatusCode.Accepted)
+            message.To.Add(mailTo);
+
+            message.From = new MailAddress(_smtpConfiguration.Mail);
+
+            message.Body = msg.Contents.LastOrDefault().Value;
+
+            message.IsBodyHtml = true;
+
+            SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
+
+            try
             {
-                throw new Exception(response.StatusCode.ToString() + ": " + response.Body);
+                smtpClient.UseDefaultCredentials = false;
+
+                smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
+
+                smtpClient.EnableSsl = false;
+
+                await smtpClient.SendMailAsync(message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
         private string ReadHtmlFile(string filePath)

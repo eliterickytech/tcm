@@ -109,6 +109,8 @@
     <Build Include="Scripts\Procedures\PR_ActivityUser_Insert.sql" />
     <Build Include="Scripts\Procedures\PR_ActivityFriendUser_Select.sql" />
     <Build Include="Scripts\Procedures\PR_ActivityUser_Select.sql" />
+    <Build Include="Scripts\Procedures\PR_LastAccess_Select.sql" />
+    <Build Include="Scripts\Procedures\PR_LastAccess_Update.sql" />
     <Build Include="Scripts\Procedures\PR_ChatScheduled_Insert.sql" />
   </ItemGroup>
   <ItemGroup>

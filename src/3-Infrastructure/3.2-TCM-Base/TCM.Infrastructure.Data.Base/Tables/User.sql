@@ -8,6 +8,7 @@
 ,   Email           VARCHAR(100) NOT NULL
 ,   MobilePhone     BIGINT NOT NULL
 ,   Enabled         BIT NOT NULL DEFAULT(1)
+,   LastAccessDate  DATETIME NULL
 ,   CreatedDate     DATETIME NOT NULL DEFAULT(GETDATE())
 ,   ChangedDate     DATETIME null
 )
