@@ -1,0 +1,366 @@
+﻿<div class="container">
+    <form novalidate class="needs-validation" enctype="multipart/form-data"
+          data-ajax="true"
+          data-ajax-mode="replace"
+          data-ajax-loading="#loader"
+          asp-action="SendShareMessage"
+          asp-controller="ShareMessage"
+          data-ajax-success="Success">
+        @Html.AntiForgeryToken()
+        <div class="container" style="background-color:#f9f9f9;">
+            <div id="1">
+                <div class="row">
+                    <div class="col-md-12 p-0 mt-2">
+                        <p class="text-default text-weight-bold">Share a private message with community</p>
+                    </div>
+                </div>
+
+                <div class="row" style="background-color:#FFF; border-radius: 8px; ">
+
+                    <textarea id="myText" name="myText" class="shareMessage"></textarea>
+
+                </div>
+                <div class="row m-2 justify-content-between" style="">
+                    <div class="col-md-6 p-0 d-flex justify-content-start">
+                        <button id="addEmoticon" class="emoticon-button" type="button">😀</button>
+                    </div>
+                    <div class="col-md-6 p-0 d-flex justify-content-end" disabled>
+                        <input type="button" id="next1" class="next operador nextItem" value="NEXT" disabled />
+                    </div>
+                </div>
+
+                <!-- Modal para seleção de emoticons -->
+                <div class="modal modal-emoticon" id="emoticonModal">
+                    <div class="modal-emoticon-content">
+                        <h4><i>Selected an Emoticon</i></h4>
+                        <div class="emoticon-list" id="emoticonList">
+                          
+                        </div>
+                        <button id="closeModal" class="next operador emoticon-button-left" type="button">Close</button>
+                    </div>
+                </div>
+            </div>
+            <div id="2" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12 p-0 mt-2">
+                        <p class="text-default text-weight-bold">Share a private message with community</p>
+                    </div>
+                </div>
+
+                <div class="row p-3" style="background-color:#FFF; border-radius: 8px; ">
+                    <div class="row ">
+                        <div id="chatPreview" class="chat-box formatted-text"></div>
+                    </div>
+                    <div class="row m-2 justify-content-between" style="">
+                        <div class="col-md-6 p-0 d-flex justify-content-start ">
+                            <input type="button" class="previous operador previewItem" value="< Back to preview" />
+                        </div>
+                        <div class="col-md-6 p-0 d-flex justify-content-end">
+                            <input type="button" id="next2" class="next operador nextItem" value="NEXT" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="3" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12 col-md-12 p-0 mt-2">
+                        <p class="text-default text-weight-bold">Share this message with</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="containerSelect" style="background-color: #FFF;    border-radius: 8px; ">
+                        <div class="col-md-12 form-inline">
+                            <input type="radio" style="height:auto; width:auto;" name="userOption" value="1" id="allCommunity"> <label style="font-size: 12px;">All Community</label> <br />
+                            <input type="radio" style="height:auto; width:auto;" name="userOption" value="2" id="chooseManually"> <label style="font-size: 12px;">Choose Manually</label><br />
+                        </div>
+                        <div class="col-md-12 " id="listUsers" style="display:none;">
+                            <div class="form-group">
+                                <label for="userList" class="control-label" style="font-size:12px;">Select Users</label><br />
+                                <select id="userList" name="userList" class="form-control select2" multiple="" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 p-0 mt-2">
+                        <p class="text-default text-weight-bold">When</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="containerSend" class="col-md-12" style="background-color: #FFF;    border-radius: 8px;">
+                        <div class="col-md-12">
+                            <div class="form-inline">
+
+                                <input type="radio" style="height:auto; width:auto;" name="dateOption" value="1" id="sendNow">
+                                <label style="font-size: 12px;">Send Now</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-inline">
+
+                                <input type="radio" style="height:auto; width:auto;" name="dateOption" value="2" id="sendAt">
+                                <label style="font-size: 12px;">Send At </label>
+                                <input type="datetime-local" id="dateTime" name="datetime" style="max-width: 150px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-2 justify-content-between" style="">
+                    <div class="col-md-6 p-0 d-flex justify-content-start ">
+                        <input type="button" class="previous operador previewItem" value="< Back to preview" />
+                    </div>
+                    <div class="col-md-6 p-0 d-flex justify-content-end">
+                        <input type="submit" id="submit" class="next operador nextItem" disabled value="DONE" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+<script>
+    (() => {
+        'use strict'
+
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+
+    function Success(data) {
+        //var response = JSON.parse(JSON.stringify(data.data));
+        Swal.fire(
+            'Success',
+            'Message sent',
+           // response + ' share message',
+            'Success'
+        ).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Home/adm";
+            }
+        });
+    }
+        //controle de divs
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentStep = 1;
+
+            function showStep(step) {
+                for (var i = 1; i <= 3; i++) {
+                    var div = document.getElementById(i.toString());
+                    if (i === step) {
+                        div.style.display = "block";
+                    } else {
+                        div.style.display = "none";
+                    }
+                }
+            }
+
+            document.getElementById("next1").addEventListener("click", function () {
+                currentStep = 2;
+                showStep(currentStep);
+            });
+
+            document.getElementById("next2").addEventListener("click", function () {
+                currentStep = 3;
+                showStep(currentStep);
+            });
+
+            document.querySelectorAll(".previous").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    currentStep = Math.max(currentStep - 1, 1);
+                    showStep(currentStep);
+                });
+            });
+
+
+            //div1
+            var textarea = document.getElementById("myText");
+            var nextButton = document.getElementById("next1");
+            var addEmoticonButton = document.getElementById("addEmoticon");
+
+            // Array de emoticons
+            var emoticons = ["🍰", "👍", "🎉", "❤️", "👏", "😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "😉", "😊", "😇", "😍", "🥰", "😘", "😗", "😚", "😋",
+                "😛", "😜", "😝", "🤪", "😎", "🤓", "🧐", "😑", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩",
+                "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😱", "😨", "😰", "😥", "😓", "🤗", "🤔", "🤭",
+                "🤫", "🤥", "😬", "🤐", "🙄", "😯", "😴", "😪", "😇", "🤠", "🤡", "🤥", "🤫", "🤭", "🧐", "🤓", "🤩", "🥳", "🤯"];
+
+            var emoticonButton = document.getElementById("addEmoticon");
+            var emoticonModal = document.getElementById("emoticonModal");
+            var closeModalButton = document.getElementById("closeModal");
+           
+            emoticonButton.addEventListener("click", function () {
+                emoticonModal.style.display = "block";
+                // Limpa a lista de emoticons
+                emoticonList.innerHTML = "";
+
+                // Gera os emoticons a partir do array
+                emoticons.forEach(function (emoticon) {
+                    var span = document.createElement("span");
+                    span.className = "emoticon";
+                    span.textContent = emoticon;
+                    emoticonList.appendChild(span);
+                });
+
+                emoticonModal.style.display = "block";
+            });
+
+            closeModalButton.addEventListener("click", function () {
+                emoticonModal.style.display = "none";
+            });
+
+            emoticonModal.addEventListener("click", function (event) {
+                if (event.target.classList.contains("emoticon")) {
+                    var selectedEmoticon = event.target.textContent;
+                    var currentText = textarea.value;
+                    textarea.value = currentText + selectedEmoticon;
+                    chatPreview.textContent = textarea.value;
+                    emoticonModal.style.display = "none";
+                }
+            });
+
+
+            textarea.addEventListener("input", function () {
+                var text = textarea.value.trim(); // Remove espaços em branco do início e do fim
+                if (text === "") {
+                    nextButton.disabled = true;
+                } else if (text.length >= 5) {
+                   
+                    nextButton.disabled = false;
+                }
+            });
+
+            //div2
+            var chatPreview = document.getElementById("chatPreview");
+
+            textarea.addEventListener("input", function () {
+                chatPreview.textContent = textarea.value;
+            });
+
+           
+        });
+
+
+        // div 3
+
+
+        const allCommunityRadio = document.getElementById("allCommunity");
+        const chooseManuallyRadio = document.getElementById("chooseManually");
+        const userList = document.getElementById("userList");
+        const sendNowRadio = document.getElementById("sendNow");
+        const sendAtRadio = document.getElementById("sendAt");
+        const dateTimeInput = document.getElementById("dateTime");
+        const submitButton = document.getElementById("submit");
+
+
+    allCommunityRadio.addEventListener("change", function () {
+        listUsers.style.display = "none"; 
+    });
+
+    chooseManuallyRadio.addEventListener("change", function () {
+        listUsers.style.display = "block"; 
+    });
+
+        function controlEnableSubmitButton() {
+            if (allCommunityRadio.checked && (sendNowRadio.checked || (sendAtRadio.checked && dateTimeInput.value !== ""))) {
+                enableSubmitButton()
+                return true
+            }
+
+
+            if (chooseManuallyRadio.checked && userList.selectedOptions.length > 0 && (sendNowRadio.checked || (sendAtRadio.checked && dateTimeInput.value !== ""))) {
+                enableSubmitButton()
+                return true
+            }
+
+
+
+            disableSubmitButton();
+        }
+
+        function enableSubmitButton() {
+            submitButton.disabled = false;
+        }
+
+        function disableSubmitButton() {
+            submitButton.disabled = true;
+        }
+
+        allCommunityRadio.addEventListener("change", function () {
+            controlEnableSubmitButton();
+        });
+
+        chooseManuallyRadio.addEventListener("change", function () {
+            controlEnableSubmitButton();
+        });
+
+
+
+        userList.addEventListener("change", function () {
+            controlEnableSubmitButton();
+        });
+
+        sendNowRadio.addEventListener("change", function () {
+            controlEnableSubmitButton();
+        });
+
+        sendAtRadio.addEventListener("change", function () {
+            controlEnableSubmitButton();
+        });
+
+        dateTimeInput.addEventListener("input", function () {
+            controlEnableSubmitButton();
+        });
+
+
+
+
+
+
+    $(document).ready(function () {
+        $('#userList').empty();
+        // Inicialize o Select2 no elemento select
+        $('#userList').select2({
+            width: 'resolve',
+            placeholder: 'Select user',
+            minimumInputLength: 5,
+            ajax: {
+                type: 'GET',
+                url: '/ShareMessage/ListUsers',
+                dataType: 'json',
+                delay: 250
+            },
+            data: function (params) {
+                return {
+                    q: params.term
+                }
+            },
+            processResults: function (data) {
+                // Processa os resultados do servidor
+                return {
+                    results: data
+                };
+            },
+            cache: true,
+            name: 'listUsers'
+        });
+    });
+</script>

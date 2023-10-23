@@ -35,6 +35,23 @@ namespace TCM.Infrastructure.Data.Repository
             }
             catch (Exception ex) { return default; }
         }
+        public async Task<int> AddChatScheduledAsync(ChatModel model)
+        {
+            var query = @"PR_ChatSheduled_Insert";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", model.ChatUserId, System.Data.DbType.Int32);
+            parameters.Add("@ConnectionUserId", model.ChatConnectionUserId, System.Data.DbType.Int32);
+            parameters.Add("@Message", model.ChatMessage, System.Data.DbType.String);
+            parameters.Add("@CreatedDate", model.ChatCreatedDate, System.Data.DbType.DateTime);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
 
         public async Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model)
         {
