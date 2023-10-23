@@ -89,9 +89,9 @@ namespace TCM.Presentation.Site.Controllers.Adm
                     {
                         var result = await _chatServices.AddChatScheduledAsync(new ChatModel()
                         {
-                            ChatConnectionUserId = user.Id,
+                            ChatConnectionUserId = Convert.ToInt32(id),
                             ChatIsRead = false,
-                            ChatUserId = Convert.ToInt32(id),
+                            ChatUserId = user.Id ,
                             ChatMessage = myText,
                             ChatCreatedDate = date
                         });
