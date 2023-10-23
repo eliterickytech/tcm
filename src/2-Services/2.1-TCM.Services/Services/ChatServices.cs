@@ -21,5 +21,8 @@ namespace TCM.Services.Services
         public async Task<int> AddChatAsync(ChatModel model) => await _chatRepository.AddChatAsync(model);
         
         public async Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model) => await _chatRepository.GetChatAsync(model);
+
+        public async Task<int> AddChatScheduledAsync(ChatModel model) => await _chatRepository.AddChatScheduledAsync(model);
+       
     }
 }

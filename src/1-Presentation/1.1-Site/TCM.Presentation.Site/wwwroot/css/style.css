@@ -1146,18 +1146,19 @@ nav ul li {
 
 .subtitle_community {
     color: #111111;
-    font-size: var(--font-medium);
+   
 }
 
     .subtitle_community p {
         font-weight: var(--font-weight-2);
+        font-size: var(--font-small);
     }
 
 
 .subtitle_community h2 {
     color: #111111;
     font-weight: var(--font-weight-3);
-    font-size: var(--font-medium);
+    font-size: var(--font-small);
     padding: 0px 0px;
     margin: 20px 0px;
 }
@@ -1726,6 +1727,109 @@ nav ul li {
 
     cursor: pointer;
 
+}
+
+.image-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Impede que as imagens quebrem para a próxima linha */
+}
+
+.image-container {
+    margin-right: 10px; /* Adicione margens entre as imagens conforme necessário */
+}
+
+/* shareMessage*/
+
+.shareMessage {
+    height: 200px;
+    overflow-y: auto;
+    border: none;
+    resize: none;
+    width: 100%;
+}
+.chat-box {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    height: 200px;
+    overflow-y: auto;
+}
+.formatted-text {
+    white-space: pre-line;
+    /* Outros estilos, se necessário */
+}
+
+.modal-emoticon {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-emoticon-content {
+    background-color: #fff;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.emoticon-button {
+    cursor: pointer;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.emoticon-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.emoticon {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+
+.emoticon-button-left {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+}
+
+.select2{
+    width:100% !important;
+}
+
+.previewItem {
+    color: #C0694E !important;
+    height: 35px !important;
+    background: transparent !important;
+    font-weight: 700 !important;
+}
+
+
+.nextItem {
+    height: 35px;
+}
+
+
+input:disabled {
+    background-color: #ccc !important; /* Cor de fundo para o botão desabilitado */
+    /* Outros estilos, como cor do texto, podem ser adicionados aqui */
 }
 
 
@@ -3529,29 +3633,25 @@ nav ul li {
     align-items: center;
     justify-content: space-between;
     margin: 0px 0px 10px 0px;
-}
-
-
-
-.user_name_community p {
-
-    font-weight: var(--font-weight-2);
-
-    font-size: 10px;
-
-    color: #1E1E1E;
-
-    margin: 0px;
-
-    line-height: 14px;
 
 }
 
 
 
-    .user_name_community p strong a {
-        color: #964E38;
+    .user_name_community p {
+        font-weight: var(--font-weight-2);
+        font-size: var(--font-small);
+        color: #1E1E1E;
+        margin: 0px;
+        line-height: 14px;
     }
+
+
+
+        .user_name_community p strong a {
+            color: #964E38;
+            font-size: var(--font-small);
+        }
 
 
 
@@ -3580,12 +3680,12 @@ nav ul li {
 }
 
 
-.date_community p {
-    font-weight: var(--font-weight-1);
-    font-size: 8px;
-    color: #1E1E1E;
-    margin: 0px;
-}
+    .date_community p {
+        font-weight: var(--font-weight-1);
+        font-size: var(--font-small);
+        color: #1E1E1E;
+        margin: 0px;
+    }
 
 
 

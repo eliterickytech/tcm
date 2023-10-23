@@ -58,21 +58,25 @@
 
                     <div class="carousel-item @(i == 0 ? "active" : "")">
                         <div class="@styleGrid">
+                            <div class="image-grid">
                             @{
                                 var collectionItemUsers = await _collectionItemUserServices.GetCollectionItemUserAsync(model.CollectionsModel[i].Id, model.Id);
                             }
                             @foreach (var collectionItem in collectionItems.Where(x=>x.CollectionItemTypeIsCollectible))
                             {
                                 var existsCollectionItem = collectionItemUsers.Where(x => x.CollectionItemId == collectionItem.Id).Any();
-                               
+                                    <div class="image-container">
                                 <img id="imgCollectionItem" src="@collectionItem.Url" data-id="@collectionItem.Id"
                                 @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
                                     alt="@collectionItem.Description"
                                     width="@collectionItem.CollectionItemTypeWidth"
                                     height="@collectionItem.CollectionItemTypeHeigh"/>
+                                    </div>
                             }
+                           
                             <div style="grid-column: span @colspanGrid" class="text_delightful">
                                 <h2>@string.Format( model.CollectionsModel[i].CollectionName)</h2>
+                            </div>
                             </div>
                         </div>
                     </div>
