@@ -37,7 +37,7 @@ namespace TCM.Infrastructure.Data.Repository
         }
         public async Task<int> AddChatScheduledAsync(ChatModel model)
         {
-            var query = @"PR_ChatSheduled_Insert";
+            var query = @"PR_ChatScheduled_Insert";
 
             var parameters = new DynamicParameters();
             parameters.Add("@UserId", model.ChatUserId, System.Data.DbType.Int32);
