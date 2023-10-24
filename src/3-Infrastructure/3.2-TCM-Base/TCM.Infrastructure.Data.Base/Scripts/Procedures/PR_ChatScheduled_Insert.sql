@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[PR_ChatScheduled_Insert]
 	@UserId					INT
 ,	@ConnectionUserId		INT
-,	@Message				VARCHAR(1000)
+,	@Message				NVARCHAR(1000)
 ,	@CreatedDate			DAteTime
 AS
 INSERT INTO Chat
