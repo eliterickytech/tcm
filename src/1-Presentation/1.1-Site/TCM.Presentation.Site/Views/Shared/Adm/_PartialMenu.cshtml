@@ -12,9 +12,9 @@
                             <img width="100px" height="100px" src="~/img/Logo.png" alt="Patisserie">
                         </div>
                         <div class="social_icons">
-                            <img src="~/img/instagram.png" alt="">
-                            <img src="~/img/facebook.png" alt="">
-                            <img src="~/img/world.png" alt="">
+                            <a href="https://www.instagram.com/melopatisserie/" target="_blank"><img src="~/img/instagram.png" alt=""></a>
+                            <a href="https://web.facebook.com/profile.php?id=100063660664604" target="_blank"><img src="~/img/facebook.png" alt=""></a>
+                            <a href="https://www.melopatisserie.com/" target="_blank"><img src="~/img/world.png" alt=""></a>
                         </div>
                         <div class="admin">
                             <h2>admin console</h2>
@@ -30,14 +30,14 @@
                                 <a asp-action="adm" asp-controller="Banner">
                                     <li>MANAGE BANNERS</li>
                                 </a>
-                                <a href="#">
+                                <a asp-controller="User" asp-action="">
                                 <li>CONFIGURATIONS</li>
                                 </a>
                                 <a asp-action="adm" asp-controller="ManagerUser">
                                     <li>PERMISSIONS</li>
                                 </a>
-                                <a href="#">
-                                <li>SUPPORT</li>
+                                <a asp-controller="User" asp-action="">
+                                <li>CHANGE PASSWORD</li>
                                 </a>
                             </ul>
                         </nav>
