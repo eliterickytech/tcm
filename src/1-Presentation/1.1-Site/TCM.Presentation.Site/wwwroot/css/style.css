@@ -1730,6 +1730,7 @@ nav ul li {
 }
 
 .image-grid {
+
     display: flex;
     flex-wrap: nowrap; /* Impede que as imagens quebrem para a próxima linha */
 }
@@ -3141,18 +3142,17 @@ nav ul li {
     text-align: end;
 }
 
+.imgCollectionItem {
+    max-width: 100%; /* Define a largura máxima como 100% da largura do contêiner pai */
+    height: auto; /* Mantém a proporção original da imagem */
+}
 
 
 .collection_name h2 {
-
     color: var(--color-home);
-
     font-size: 10px;
-
     font-weight: var(--font-weight-2);
-
     margin: 0px;
-
 }
 
 .area_profile_null {
