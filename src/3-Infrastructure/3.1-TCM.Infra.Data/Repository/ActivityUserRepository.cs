@@ -55,18 +55,13 @@ namespace TCM.Infrastructure.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<int> InsertActivityUserAsync(int userId, string description)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<int> InsertCollectionItemUserAsync(int collectionId, int collectionItemId, int userId)
+        public async Task<int> InsertActivityUserAsync(int userId, string description)
         {
             var query = @"PR_ActivityUser_Insert";
 
             var parameters = new DynamicParameters();
-            parameters.Add("@UsersId", userId, System.Data.DbType.Int32);
-            parameters.Add("@ActionDescription", userId, System.Data.DbType.String);
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
+            parameters.Add("@ActionDescription", description, System.Data.DbType.String);
             try
             {
                 var result = await ExecuteAsync(query, parameters);
@@ -75,6 +70,8 @@ namespace TCM.Infrastructure.Data.Repository
             }
             catch (Exception ex) { return default; }
         }
+
+       
 
         
     }

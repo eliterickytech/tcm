@@ -19,12 +19,14 @@ namespace TCM.Presentation.Site.Controllers
         private readonly IConnectionServices _connectionService;
         private readonly ILogger<RequestController> _logger;
         private readonly ISearchServices _searchServices;
+        private readonly IActivityUserServices _activityUserServices;
 
-        public RequestController(IConnectionServices connectionService, ILogger<RequestController> logger, ISearchServices searchServices)
+        public RequestController(IConnectionServices connectionService, ILogger<RequestController> logger, ISearchServices searchServices, IActivityUserServices activityUserServices)
         {
             _connectionService = connectionService;
             _logger = logger;
             _searchServices = searchServices;
+            _activityUserServices = activityUserServices;
         }
         //[Authorize]
         public async Task<IActionResult> Index()
@@ -114,7 +116,23 @@ namespace TCM.Presentation.Site.Controllers
             }
             else if (connectionStatusId == (int)ConnectionStatusType.Blocked || connectionStatusId == (int)ConnectionStatusType.Approved)
             {
-                await _connectionService.UpdateStatusConnectionAsync(connectionId, connectionStatusId);
+                ConnectionModel connectionModel = new ConnectionModel();
+                connectionModel.ConnectionUserId = connectionId;
+
+                var result =  await _connectionService.UpdateStatusConnectionAsync(connectionId, connectionStatusId);
+
+                if(result >=1 && connectionStatusId == (int)ConnectionStatusType.Approved)
+                {
+                    var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
+
+                    var resultConnections = await _connectionService.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(id) });
+
+                    var connection = resultConnections.Where(c => c.ConnectionUserId == connectionId).FirstOrDefault();
+                    await _activityUserServices.InsertActivityUserAsync(Convert.ToInt32(id), $"Approved a new connection with {connection.UserUsername}.");
+                        
+                  
+                }
             }
             TempData["SearchRequestUser"] = null;
             HttpContext.Session.Remove("SearchRequestUser");

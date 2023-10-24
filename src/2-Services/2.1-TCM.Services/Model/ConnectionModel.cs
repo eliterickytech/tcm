@@ -8,8 +8,6 @@ namespace TCM.Services.Model
 {
     public class ConnectionModel
     {
-
-
         public int? UserId { get; set; } = null;
 
         public string? UserFullName { get; set; } = null;
