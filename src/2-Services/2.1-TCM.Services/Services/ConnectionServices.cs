@@ -50,6 +50,14 @@ namespace TCM.Services.Services
 
             return distinct.ToList();
         }
+        public async Task<List<ConnectionModel>> GetConnectionIdAsync(ConnectionModel model)
+        {
+            var resultUser = await _connectionRepository.GetConnectionAsync(model);
+
+            var distinct = resultUser.Where(x => x.ConnectionUserId == model.ConnectionUserId);
+
+            return distinct.ToList();
+        }
 
         public async Task<int> AddConnectionAsync(int userId, int connectionUserId)
         {
