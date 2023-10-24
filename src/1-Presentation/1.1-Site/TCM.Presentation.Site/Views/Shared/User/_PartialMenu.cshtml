@@ -13,20 +13,20 @@
                             <img width="100px" height="100px" src="~/img/Logo.png" alt="Patisserie">
                         </div>
                         <div class="social_icons">
-                            <img src="~/img/instagram.png" alt="">
-                            <img src="~/img/facebook.png" alt="">
-                            <img src="~/img/world.png" alt="">
+                            <a href="https://www.instagram.com/melopatisserie/" target="_blank"><img src="~/img/instagram.png" alt=""></a>
+                            <a href="https://web.facebook.com/profile.php?id=100063660664604" target="_blank"><img src="~/img/facebook.png" alt=""></a>
+                            <a href="https://www.melopatisserie.com/" target="_blank"><img src="~/img/world.png" alt=""></a>
                         </div>
 @*                        <div class="admin">
                             <h2>admin console</h2>
                         </div>*@
                         <nav>
                             <ul>
-                                <a asp-controller="Profile">
+                                <a asp-controller="Profile" asp-action="">
                                     <li>MY COLLECTIBLES</li>
                                 </a>
 
-                                <a asp-controller="Request">
+                                <a asp-controller="Request" asp-action="">
                                     <li>MY CONNECTIONS</li>
                                 </a>
 
@@ -34,14 +34,14 @@
                                     <li>CHATS</li>
                                 </a>
 
-                                <a asp-controller="User">
+                                <a asp-controller="User" asp-action="">
                                     <li>CONFIGURATIONS</li>
                                 </a>
 
-                                <a asp-controller="Invitation">
+                                <a asp-controller="Invitation" asp-action="">
                                     <li>MY INVITATIONS</li>
                                 </a>
-                                <a asp-controller="User">
+                                <a asp-controller="User" asp-action="">
                                     <li>CHANGE PASSWORD</li>
                                 </a>
                             </ul>
