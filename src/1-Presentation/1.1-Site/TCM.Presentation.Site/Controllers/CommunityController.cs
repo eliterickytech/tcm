@@ -48,6 +48,10 @@ namespace TCM.Presentation.Site.Controllers
 
             CommunityModel model = new CommunityModel();
 
+            var banners = await _bannerServices.GetBannerAsync();
+
+            model.BannersModel = banners.ToList();
+
             var collections = await _collectionServices.GetCollectionAsync();
 
             model.CollectionsModel = collections.ToList();

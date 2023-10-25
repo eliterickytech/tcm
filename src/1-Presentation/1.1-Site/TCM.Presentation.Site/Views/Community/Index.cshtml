@@ -1,7 +1,9 @@
 ﻿@model TCM.Presentation.Site.Models.CommunityModel
+
 @{
     Layout = "_LayoutLogin";
 }
+
 
 @await Html.PartialAsync("~/Views/Shared/User/_PartialMenu.cshtml")
 
@@ -11,5 +13,5 @@
 
 @await Html.PartialAsync("~/Views/Shared/User/_PartialActivityFriends.cshtml")
 @await Html.PartialAsync("~/Views/Shared/User/_PartialCommunityChatUnread.cshtml")
-
+@await Html.PartialAsync("~/Views/Shared/User/_PartialBanner.cshtml", Model.BannersModel)
 @await Html.PartialAsync("~/Views/Shared/User/_PartialFooter.cshtml")
