@@ -4747,7 +4747,26 @@ footer {
 
 }
 
+#chatContainer {
+    overflow-y: auto;
+}
+#chatContainer::-webkit-scrollbar {
+    width: 9px; /* Largura da barra de rolagem */
+}
 
+#chatContainer::-webkit-scrollbar-thumb {
+    background-color: #CCC; /* Cor do polegar da barra de rolagem */
+    background-color: #CCC; /* Cor do polegar da barra de rolagem */
+    border-radius: 6px; /* Raio de borda do polegar */
+}
+
+#chatContainer::-webkit-scrollbar-track {
+    background-color: #eee; /* Cor da pista da barra de rolagem */
+}
+
+#chatContainer::-webkit-scrollbar-button {
+    display: none; /* Ocultar os botões de rolagem */
+}
 
 /*Chats unread*/
 

@@ -11,6 +11,7 @@ namespace TCM.Services.Interfaces.Repository
     {
         Task<int> AddChatAsync(ChatModel model);
 
+        Task<int> UpdateChatIsReadedAsync(ChatModel model);
         Task<int> AddChatScheduledAsync(ChatModel model);
         Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model);
     }

@@ -53,6 +53,23 @@ namespace TCM.Infrastructure.Data.Repository
             catch (Exception ex) { return default; }
         }
 
+        public async Task<int> UpdateChatIsReadedAsync(ChatModel model)
+        {
+            var query = @"PR_Chat_Update_IsReaded";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", model.ChatUserId, System.Data.DbType.Int32);
+            parameters.Add("@ConnectionUserId", model.ChatConnectionUserId, System.Data.DbType.Int32);
+        
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
         public async Task<IEnumerable<ChatModel>> GetChatAsync(ChatModel model)
         {
             var query = @"PR_Chat_Select";

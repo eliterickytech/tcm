@@ -50,6 +50,21 @@ namespace TCM.Presentation.Site.Controllers
 
             return View();
         }
+
+		//[Authorize]
+		public async Task<IActionResult> UpdateIsReaded([FromBody] int userId)
+		{
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
+            var result = await _chatServices.UpdateChatIsReadedAsync(new Services.Model.ChatModel()
+            {
+                ChatConnectionUserId = Convert.ToInt32(id),
+                ChatIsRead = true,
+                ChatUserId = userId
+            });
+
+            return new JsonResult(result);
+        }
         //[Authorize]
         public async Task<IActionResult> All()
         {
