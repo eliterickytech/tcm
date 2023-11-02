@@ -16,7 +16,7 @@
         </div>
     </div>
 </form>
-
+<input hidden id="hidConnectionUser" name="hidConnectionUser" value="@response.UserId" />
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (() => {
@@ -44,6 +44,12 @@
 </script> 
 <script>
     $(document).ready(function () {
+
+        //Rola para ultima mensagem
+        var chatContainer = document.getElementById("chatContainer");
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+
         var spinner = $('#loader');
         $("#btnAdd").click(function () {
             var connectionId = $(this).data("connectionid");
@@ -56,9 +62,9 @@
                 "Id": userId
             };
 
-            console.log(formData);
+            // console.log(formData);
             spinner.show();
-            event.preventDefault()
+            event.preventDefault();
 
             $.ajax({
                 url: "/Chat/Add",
@@ -75,6 +81,36 @@
                     console.log(error)
                 }
             });
+        });
+    });
+
+     $(document).ready(function () {
+        var spinner = $('#loader');
+      
+        var formData = {
+            "userId": $("#btnAdd").data("connectionid")
+        };
+
+         var userId = document.getElementById("hidConnectionUser").value;
+
+      //  console.log(formData)
+        spinner.show();
+       
+        $.ajax({
+            url: "/Chat/UpdateIsReaded" ,
+            type: "POST",
+            data: userId,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                spinner.hide();
+             
+            },
+            error: function (xhr, status, error) {
+                spinner.hide();
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
+            }
         });
     });
 
