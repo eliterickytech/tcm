@@ -55,6 +55,18 @@ namespace TCM.Presentation.Site.Controllers
 
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Adm(int connectionUserId, bool isConnection, bool fill = true)
+        {
+            if (!isConnection)
+            {
+                if (connectionUserId != 1)
+                    connectionUserId = int.Parse(HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2");
+            }
+            await FillProfiles(connectionUserId, isConnection);
+
+            return View();
+        }
         //[Authorize]
         private async Task FillProfiles(int userId, bool isConnection)
         {

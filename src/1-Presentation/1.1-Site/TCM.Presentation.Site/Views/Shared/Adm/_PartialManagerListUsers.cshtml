@@ -3,14 +3,12 @@
 }
 <div class="row">
 
-    <div class="area_chats_all">
+    <div class="area_chats_all mb-2">
         <div class="area_texts_chats">
 
-            <div class="my_invitations">
-                <a href="chats_unread.html">
+            <div class="my_invitations">     
                     <h2>Manage Users</h2>
-                    <div class="border_unread_u"></div>
-                </a>
+                    <div class="border_unread_u"></div>   
             </div>
         </div>
     </div>
@@ -19,8 +17,8 @@
         @foreach (var user in users.Where(x => x.Id != 1))
         {
 
-            <div class="col-md-7">@user.UserName</div>
-            <div class="col-md-5" style="text-align: right;">
+            <div class="col-md-7 mb-2">@user.UserName</div>
+            <div class="col-md-5 mb-2" style="text-align: right;">
 
                 <button class="invitation-circle-send desactivedUser" type="button" title="Desactived User" id="desactivedUser" data-userid="@user.Id">
                     <i class="bi bi-person-fill-slash"></i>

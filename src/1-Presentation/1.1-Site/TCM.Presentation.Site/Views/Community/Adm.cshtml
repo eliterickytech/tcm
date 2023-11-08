@@ -1,0 +1,19 @@
+﻿@model TCM.Presentation.Site.Models.CommunityModel
+
+@{
+    Layout = "_LayoutLogin";
+}
+
+
+@await Html.PartialAsync("~/Views/Shared/Adm/_PartialMenu.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/adm/_PartialAdm.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/User/_PartialSearch.cshtml")
+
+@await Html.PartialAsync("~/Views/Shared/User/_PartialCommunity.cshtml", Model.CollectionsItemModel.OrderByDescending(x => x.CollectionId).ToList())
+
+@await Html.PartialAsync("~/Views/Shared/User/_PartialActivityFriends.cshtml")
+@await Html.PartialAsync("~/Views/Shared/User/_PartialCommunityChatUnread.cshtml")
+@await Html.PartialAsync("~/Views/Shared/User/_PartialBanner.cshtml", Model.BannersModel)
+@await Html.PartialAsync("~/Views/Shared/Adm/_PartialFooter.cshtml")
