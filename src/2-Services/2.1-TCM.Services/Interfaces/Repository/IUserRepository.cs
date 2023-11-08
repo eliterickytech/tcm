@@ -16,7 +16,9 @@ namespace TCM.Services.Interfaces.Repository
         Task<DateTime> GetLastAccessDateAsync(int userId);
         Task<UserModel> GetLoginAsync(string user, string password);
         Task<IEnumerable<UserModel>> GetUserAsync(UserModel user);
+        Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user);
         Task<IEnumerable<UserModel>> ListUserAsync();
         Task<int> UpdateLastAccessDateAsync(int userId);
+        Task<int> UpdateUserEnabledAsync(int userId, int enabled);
     }
 }

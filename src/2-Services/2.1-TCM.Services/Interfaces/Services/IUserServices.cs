@@ -18,5 +18,9 @@ namespace TCM.Services.Interfaces.Services
         Task<IEnumerable<UserModel>> GetUserAsync(UserModel user);
         Task<IEnumerable<UserModel>> ListUserAsync();
         Task<int> UpdateLastAccessDateAsync(int userId);
+        Task<int> UpdateUserEnabledAsync(int userId, int enabled);
+
+        Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user);
+
     }
 }

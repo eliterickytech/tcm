@@ -52,5 +52,9 @@ namespace TCM.Services.Services
 
         public async Task<int> UpdateLastAccessDateAsync(int userId) => await _userRepository.UpdateLastAccessDateAsync(userId);
 
+        public Task<int> UpdateUserEnabledAsync(int userId, int enabled) => _userRepository.UpdateUserEnabledAsync(userId, enabled);
+
+        public Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user) => _userRepository.GetAllUsersAsync(user);
+     
     }
 }

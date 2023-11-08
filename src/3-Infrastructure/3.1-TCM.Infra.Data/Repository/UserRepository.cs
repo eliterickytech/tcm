@@ -55,6 +55,21 @@ namespace TCM.Infra.Repository
             return await QueryAsync<UserModel>(query, parameters);
         }
 
+        public async Task<IEnumerable<UserModel>> GetAllUserAsync(UserModel user)
+        {
+            var query = @"PR_User_Select";
+            var parameters = new DynamicParameters();
+
+            parameters.Add("@UserName", user.UserName, System.Data.DbType.String);
+            parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
+            parameters.Add("@Email", user.Email, System.Data.DbType.String);
+            parameters.Add("@Password", user.Password, System.Data.DbType.String);
+            parameters.Add("@ProfileId", user.ProfileId == null ? null : ((int)user.ProfileId), System.Data.DbType.Int32);
+            parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
+
+            return await QueryAsync<UserModel>(query, parameters);
+        }
+
         public async Task<IEnumerable<UserModel>> ListUserAsync()
         {
             var query = @"PR_User_Select";
@@ -159,5 +174,35 @@ namespace TCM.Infra.Repository
             catch (Exception ex) { return default; }
         }
 
+        public async Task<int> UpdateUserEnabledAsync(int userId, int enabled)
+        {
+            var query = @"PR_User_Enabled_Update";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
+            parameters.Add("@Enabled", enabled, System.Data.DbType.Int32);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user)
+        {
+            var query = @"PR_User_Select";
+            var parameters = new DynamicParameters();
+
+            parameters.Add("@UserName", user.UserName, System.Data.DbType.String);
+            parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
+            parameters.Add("@Email", user.Email, System.Data.DbType.String);
+            parameters.Add("@Password", user.Password, System.Data.DbType.String);
+            parameters.Add("@ProfileId", user.ProfileId == null ? null : ((int)user.ProfileId), System.Data.DbType.Int32);
+            parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
+
+            return await QueryAsync<UserModel>(query, parameters);
+        }
     }
 }

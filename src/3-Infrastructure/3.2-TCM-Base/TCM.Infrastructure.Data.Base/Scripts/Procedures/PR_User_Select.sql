@@ -14,6 +14,7 @@ SELECT
 ,	[User].UserName
 ,	[User].ProfileId
 ,	[User].FullName			AS Profile
+,	[User].[Enabled]
 FROM
 	[User]
 
