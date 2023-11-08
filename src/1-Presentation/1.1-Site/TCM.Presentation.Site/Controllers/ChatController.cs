@@ -186,6 +186,8 @@ namespace TCM.Presentation.Site.Controllers
 
 			var chats = new List<ChatViewModel>();
 
+			if(questions.Count > 0) {
+
             questions.ForEach(x =>
 			{
 				chats.Add(new ChatViewModel()
@@ -198,8 +200,20 @@ namespace TCM.Presentation.Site.Controllers
 					DateMessage =x.ChatCreatedDate.Value, 
 				});
 			} );
-
-			return chats;
+            }
+            else
+            {
+                chats.Add(new ChatViewModel()
+                {
+                    Message = null,
+                    Question = true,
+                    UserId = userId,
+                    Username = null,
+                    IsUnread = true,
+                    DateMessage = DateTime.Now,
+                });
+            }
+            return chats;
         }
         //[Authorize]
         private async Task<List<ChatViewModel>> GetChatResponseAsync(int userId)
@@ -208,6 +222,7 @@ namespace TCM.Presentation.Site.Controllers
 
             var chats = new List<ChatViewModel>();
 
+            if(questions.Count > 0) {  
             questions.ForEach(x =>
             {
                 chats.Add(new ChatViewModel()
@@ -220,7 +235,19 @@ namespace TCM.Presentation.Site.Controllers
                     DateMessage = x.ChatCreatedDate.Value,
                 });
             });
-
+            }
+            else
+            {
+                chats.Add(new ChatViewModel()
+                {
+                    Message = null,
+                    Question = false,
+                    UserId = userId,
+                    Username = null,
+                    IsUnread = true,
+                    DateMessage = DateTime.Now,
+                });
+            }
             return chats;
         }
     }
