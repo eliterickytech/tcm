@@ -51,20 +51,34 @@
 
 
         var spinner = $('#loader');
+
+        // Adiciona um manipulador de eventos ao campo de entrada txtMessage para a tecla Enter
+        $('#txtMessage').keypress(function (e) {
+           
+            if (e.which === 13) {
+                $('#btnAdd').click();
+               
+                e.preventDefault();
+            }
+        });
+
         $("#btnAdd").click(function () {
+      
             var connectionId = $(this).data("connectionid");
             var userId = $(this).data("userid");
             var message = $("#txtMessage").val();
-
+         //   console.log(connectionId);
+         //   console.log(userId);
+         //   console.log(message);
             var formData = {
                 "UserId": connectionId,
                 "Message": message,
                 "Id": userId
             };
 
-            // console.log(formData);
+       //     console.log(formData);
             spinner.show();
-            event.preventDefault();
+
 
             $.ajax({
                 url: "/Chat/Add",
@@ -72,7 +86,7 @@
                 data: formData,
                 success: function (data) {
                     spinner.hide();
-                    window.location.href = '/Chat/Detail?userId=' + connectionId
+                    window.location.href = '/Chat/Details?userId=' + connectionId
                 },
                 error: function (xhr, status, error) {
                     spinner.hide();
@@ -82,6 +96,9 @@
                 }
             });
         });
+
+
+        
     });
 
      $(document).ready(function () {

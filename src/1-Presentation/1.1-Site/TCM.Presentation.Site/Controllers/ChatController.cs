@@ -8,18 +8,21 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
+using TCM.Services.Model;
 
 namespace TCM.Presentation.Site.Controllers
 {
     public class ChatController : Controller
     {
         private readonly IChatServices _chatServices;
+        private readonly IUserServices _userServices;
         private readonly ILogger<ChatController> _logger;
         private string id = string.Empty;
 
-        public ChatController(IChatServices chatServices, ILogger<ChatController> logger)
+        public ChatController(IChatServices chatServices, IUserServices userServices, ILogger<ChatController> logger)
         {
             _chatServices = chatServices;
+            _userServices = userServices;
             _logger = logger;
         }
         //[Authorize]
@@ -203,12 +206,15 @@ namespace TCM.Presentation.Site.Controllers
             }
             else
             {
+                var user = await _userServices.GetUserAsync(new UserModel() { Id = userId });
+                string userName = null;
+                if (user != null) { userName = user.FirstOrDefault().UserName; };
                 chats.Add(new ChatViewModel()
                 {
                     Message = null,
                     Question = true,
                     UserId = userId,
-                    Username = null,
+                    Username = userName,
                     IsUnread = true,
                     DateMessage = DateTime.Now,
                 });
@@ -238,12 +244,15 @@ namespace TCM.Presentation.Site.Controllers
             }
             else
             {
+                var user = await _userServices.GetUserAsync(new UserModel() { Id = userId });
+                string userName = null;
+                if(user != null) { userName = user.FirstOrDefault().UserName; };
                 chats.Add(new ChatViewModel()
                 {
                     Message = null,
                     Question = false,
                     UserId = userId,
-                    Username = null,
+                    Username = userName,
                     IsUnread = true,
                     DateMessage = DateTime.Now,
                 });
