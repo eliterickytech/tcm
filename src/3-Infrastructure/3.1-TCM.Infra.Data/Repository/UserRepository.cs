@@ -115,6 +115,23 @@ namespace TCM.Infra.Repository
             catch (Exception ex) { return default; }
         }
 
+        public async Task<int> ChangeUserPasswordAsync(int userId, string password)
+        {
+            var query = @"PR_User_Password_Update";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", userId, System.Data.DbType.Int32);       
+            parameters.Add("@Password", password, System.Data.DbType.String);
+          
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
         public async Task<int> DeleteAdmAsync(int userId)
         {
             var query = @"PR_User_Adm_Delete";

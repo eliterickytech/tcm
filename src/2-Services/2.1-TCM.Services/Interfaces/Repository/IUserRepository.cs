@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace TCM.Services.Interfaces.Repository
 {
@@ -12,6 +13,7 @@ namespace TCM.Services.Interfaces.Repository
         Task<int> AddAdmAsync(int userId);
         Task<int> AddUserAsync(UserModel userModel);
         Task<int> ChangeUserAsync(UserModel userModel);
+    Task<int> ChangeUserPasswordAsync(int userId , string password);
         Task<int> DeleteAdmAsync(int userId);
         Task<DateTime> GetLastAccessDateAsync(int userId);
         Task<UserModel> GetLoginAsync(string user, string password);

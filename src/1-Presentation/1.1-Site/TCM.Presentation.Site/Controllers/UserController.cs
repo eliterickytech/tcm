@@ -33,6 +33,14 @@ namespace TCM.Presentation.Site.Controllers
             return View();
         }
 
+        public async Task<IActionResult> ChangePassword()
+        {
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
+            var user = (await _userServices.GetUserAsync(new UserModel() { Id = Convert.ToInt32(id) })).FirstOrDefault();
+            return View("ChangePassword",user);
+        }
+
         [HttpGet]
         public async Task<JsonResult> GetUserConnection([FromQuery] string userName)
         {
@@ -108,6 +116,41 @@ namespace TCM.Presentation.Site.Controllers
                 Data = result,
                 Redirect = "/Home"
             });
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> ChangePassawordUser([FromBody] UserModel userModel)
+        {
+            if (userModel.Password != userModel.ConfirmPassword)
+                return new JsonResult(new ResultModel()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Errors = "Senha não é igual",
+                    Type = "Password",
+                    IsOK = false
+                });
+
+            if(userModel.Id != 0) { 
+            var result = await _userServices.ChangeUserPasswordAsync((int)userModel.Id, userModel.Password);
+           
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = result > 0 ? HttpStatusCode.OK : HttpStatusCode.InternalServerError,
+                IsOK = true,
+                Data = result,
+                Redirect = "/Home"
+            });
+            }
+            else
+            {
+                return new JsonResult(new ResultModel()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Errors = "Não foi possivel identificar o usuário",
+                    Type = "Password",
+                    IsOK = false
+                });
+            }
         }
     }
 }

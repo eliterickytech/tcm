@@ -114,6 +114,7 @@
     <Build Include="Scripts\Procedures\PR_ChatScheduled_Insert.sql" />
     <Build Include="Scripts\Procedures\PR_Chat_Update_IsReaded.sql" />
     <Build Include="Scripts\Procedures\PR_User_Enabled_Update.sql" />
+    <Build Include="Scripts\Procedures\PR_User_Password_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Pos-Deployment\Scripts.sql" />

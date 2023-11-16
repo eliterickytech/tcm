@@ -42,6 +42,8 @@ namespace TCM.Services.Services
 
         public async Task<int> ChangeUserAsync(UserModel userModel) => await _userRepository.ChangeUserAsync(userModel);
 
+        public async Task<int> ChangeUserPasswordAsync(int userId, string password) => await _userRepository.ChangeUserPasswordAsync(userId, password);
+
         public async Task<int> DeleteUserAsync(int id) => await _userRepository.DeleteAdmAsync(id);
 
         public async Task<int> AddAdmAsync(int id) => await _userRepository.AddAdmAsync(id);

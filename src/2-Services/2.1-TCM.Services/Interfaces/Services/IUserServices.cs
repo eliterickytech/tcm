@@ -12,6 +12,7 @@ namespace TCM.Services.Interfaces.Services
         Task<int> AddAdmAsync(int id);
         Task<int> AddUserAsync(UserModel userModel);
         Task<int> ChangeUserAsync(UserModel userModel);
+        Task<int> ChangeUserPasswordAsync(int userId, string password);
         Task<int> DeleteUserAsync(int id);
         Task<DateTime> GetLastAccessDateAsync(int userId);
         Task<UserModel> GetLoginAsync(string user, string password);
