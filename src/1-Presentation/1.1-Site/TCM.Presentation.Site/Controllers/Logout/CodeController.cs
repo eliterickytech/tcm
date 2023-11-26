@@ -84,6 +84,8 @@ namespace TCM.Presentation.Controllers.Logout
                     if (userMode.Count() > 0) await _sendMail.SendWelcomeAsync(userMode.FirstOrDefault().Email, userMode.FirstOrDefault().FullName);
                 }
 
+                await _userServices.UpdateLastAccessDateAsync(userMode.FirstOrDefault().Id.Value);
+
                 if (userMode.FirstOrDefault().ProfileId == Services.Model.Enum.UserType.User)
                 {
                     resultModel.Redirect = "/Home";

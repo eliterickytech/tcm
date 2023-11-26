@@ -48,7 +48,7 @@ namespace TCM.Presentation.Controllers.Logout
             {
                 var userMode = await _userServices.GetUserAsync(new UserModel() { Id = result.Id });
 
-                if (result.LastAccessDate.AddDays(15) >= DateTime.Now)
+                if (DateTime.Now > result.LastAccessDate.AddDays(15))
                 {
 
                     if (result != null)

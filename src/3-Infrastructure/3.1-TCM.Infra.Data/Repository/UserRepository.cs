@@ -178,7 +178,7 @@ namespace TCM.Infra.Repository
 
         public async Task<int> UpdateLastAccessDateAsync(int userId)
         {
-            var query = @"PR_User_LastAccess_Update";
+            var query = @"PR_LastAccess_Update";
 
             var parameters = new DynamicParameters();
             parameters.Add("@UserId", userId, System.Data.DbType.Int32);
