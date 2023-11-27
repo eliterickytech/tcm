@@ -23,7 +23,7 @@ namespace TCM.Presentation.Site.Controllers
 
         public async Task<IActionResult> FriendsActivities()
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var responseActivity = await _activityUserServices.GetActivityFriendUserAsync(Convert.ToInt32(id));
            

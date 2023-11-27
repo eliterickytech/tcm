@@ -32,11 +32,11 @@ namespace TCM.Presentation.Controllers
             _collectionItemServices = collectionItemServices;
             _userServices = userServices;
         }
-        //[Authorize]
         public async Task<IActionResult> Index()
 		{
-            //if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var user = (await _userServices.GetUserAsync(new Services.Model.UserModel() { Id = Convert.ToInt32(id) })).FirstOrDefault();
 
@@ -62,10 +62,13 @@ namespace TCM.Presentation.Controllers
 
             return View(model);
 		}
-        //[Authorize]
+
+        [Authorize]
         public async Task<IActionResult> Adm()
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var user = (await _userServices.GetUserAsync(new Services.Model.UserModel() { Id = Convert.ToInt32(id) })).FirstOrDefault();
 

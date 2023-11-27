@@ -23,7 +23,9 @@ namespace TCM.Presentation.Site.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var user = (await _userServices.GetUserAsync(new UserModel() { Id = Convert.ToInt32(id) })).FirstOrDefault();
             return View(user);
@@ -35,7 +37,9 @@ namespace TCM.Presentation.Site.Controllers
 
         public async Task<IActionResult> ChangePassword()
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var user = (await _userServices.GetUserAsync(new UserModel() { Id = Convert.ToInt32(id) })).FirstOrDefault();
             return View("ChangePassword",user);

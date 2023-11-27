@@ -30,6 +30,8 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             if (HttpContext.Session.GetString("SearchConnectionUser") != null)
             {
                 TempData["SearchConnectionUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchConnectionUser"));
@@ -37,7 +39,7 @@ namespace TCM.Presentation.Site.Controllers
             }
             else
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 var resultSearchModels = new List<ResultSearchModel>();
                 var resultUsers = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));

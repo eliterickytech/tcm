@@ -32,6 +32,8 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             if (HttpContext.Session.GetString("SearchInvitationUser") != null)
             {
                 TempData["SearchInvitationUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchInvitationUser"));
@@ -39,7 +41,7 @@ namespace TCM.Presentation.Site.Controllers
             }
             else
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 var resultSearchModels = new List<ResultSearchModel>();
                 var resultUsers = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
@@ -84,6 +86,8 @@ namespace TCM.Presentation.Site.Controllers
         [HttpPost]
         public IActionResult Index([FromBody] List<ConnectionModel> models)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             TempData["Connection"] = models;
             return View();
         }
@@ -93,7 +97,7 @@ namespace TCM.Presentation.Site.Controllers
         {
             if (connetionuserid.ConnectionUserId > 0) 
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
                 var result = await _connectionService.AddConnectionAsync(Convert.ToInt32(id), connetionuserid.ConnectionUserId);
 
                 return new JsonResult(new ResultModel()
@@ -118,7 +122,7 @@ namespace TCM.Presentation.Site.Controllers
 
             if (!string.IsNullOrEmpty(search.SearchText))
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 results = await _searchServices.SearchUserAsync(search.SearchText, Convert.ToInt32(id));
             }

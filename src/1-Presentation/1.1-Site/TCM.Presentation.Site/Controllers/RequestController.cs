@@ -31,6 +31,8 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> Index()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             if (HttpContext.Session.GetString("SearchRequestUser") != null)
             {
                 TempData["SearchRequestUser"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultSearchModel>>(HttpContext.Session.GetString("SearchRequestUser"));
@@ -38,7 +40,7 @@ namespace TCM.Presentation.Site.Controllers
             }
             else
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 var resultSearchModels = new List<ResultSearchModel>(); 
                 var resultsUser = await _connectionService.GetConnectionAsync(Convert.ToInt32(id));
@@ -123,7 +125,7 @@ namespace TCM.Presentation.Site.Controllers
 
                 if(result >=1 && connectionStatusId == (int)ConnectionStatusType.Approved)
                 {
-                    var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                    var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
 
                     var resultConnections = await _connectionService.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = Convert.ToInt32(id) });

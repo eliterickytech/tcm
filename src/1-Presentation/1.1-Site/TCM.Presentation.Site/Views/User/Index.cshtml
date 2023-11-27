@@ -8,9 +8,9 @@
 }
 
 <div class="area_login">
-    <div class="logo">
-        <img width="100px" height="100px" src="~/img/Logo.png" alt="Patisserie">
-    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/User/_PartialMenu.cshtml")
+
     <form id="formUser" name="formUser" class="needs-validation" novalidate>
         <div id="fullname-group" class="area_form">
             <label for="fullname" class="password">

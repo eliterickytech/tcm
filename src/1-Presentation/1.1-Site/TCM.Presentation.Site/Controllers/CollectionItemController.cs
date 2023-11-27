@@ -26,6 +26,8 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> Index(int id)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             var collectionDetails = await Details(id);
 
             return View(collectionDetails);
@@ -34,7 +36,7 @@ namespace TCM.Presentation.Site.Controllers
         private async Task<CollectionDetails> Details(int itemId) 
         {
 
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var collections = await _collectionServices.GetCollectionAsync();
 

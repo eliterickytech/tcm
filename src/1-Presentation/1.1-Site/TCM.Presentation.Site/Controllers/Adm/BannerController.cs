@@ -30,6 +30,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
         public async Task<IActionResult> Adm()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
             var bannerTop = await GetBannerAsync(BannerType.Top);
             TempData["BannerTop"] = bannerTop;
             return View();
@@ -37,6 +38,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
         public async Task<IActionResult> AdmRequest([FromQuery] int bannerTypeId)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
             BannerType bannerType = (BannerType)bannerTypeId;
 
             if (bannerType == BannerType.Top)
@@ -59,7 +61,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
         [Route("Adm/BannerMiddle")]
         public async Task<IActionResult> BannerMiddle()
         {
-
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
             return View();
         }
 
@@ -73,10 +75,11 @@ namespace TCM.Presentation.Site.Controllers.Adm
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProcessForm(IFormFile imageUpload, string redirectTo, string password, BannerType bannertype)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
             string filePath = "";
             string bannerURL = "";
 
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             if (!await ValidatePassword(Convert.ToInt32(id), password))
             {

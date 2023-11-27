@@ -34,7 +34,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
         public async Task<IActionResult> Index()
         {
             TempData["CountCollection"] = await GetCountCollectionAsync();
-            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             return View();
         }

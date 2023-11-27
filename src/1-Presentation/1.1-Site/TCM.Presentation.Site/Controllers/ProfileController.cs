@@ -38,6 +38,8 @@ namespace TCM.Presentation.Site.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(int connectionUserId, bool isConnection)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             await FillProfiles(connectionUserId, isConnection);
 
             return View();
@@ -46,10 +48,12 @@ namespace TCM.Presentation.Site.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int connectionUserId, bool isConnection, bool fill = true)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             if (!isConnection)
             {
                 if (connectionUserId != 1)
-                    connectionUserId = int.Parse( HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2");
+                    connectionUserId = int.Parse( HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value);
             }
             await FillProfiles(connectionUserId, isConnection);
 
@@ -58,10 +62,12 @@ namespace TCM.Presentation.Site.Controllers
         [HttpGet]
         public async Task<IActionResult> Adm(int connectionUserId, bool isConnection, bool fill = true)
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
             if (!isConnection)
             {
                 if (connectionUserId != 1)
-                    connectionUserId = int.Parse(HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2");
+                    connectionUserId = int.Parse(HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value);
             }
             await FillProfiles(connectionUserId, isConnection);
 
@@ -70,7 +76,7 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         private async Task FillProfiles(int userId, bool isConnection)
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             HomeViewModel model = new HomeViewModel();
 

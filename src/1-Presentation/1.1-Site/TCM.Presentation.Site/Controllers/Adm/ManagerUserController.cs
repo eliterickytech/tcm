@@ -83,7 +83,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
         public async Task<IActionResult> ProcessForm(int userid, string password)
         {
 
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             if (!await ValidatePassword(Convert.ToInt32(id), password))
             {

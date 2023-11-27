@@ -28,7 +28,7 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> Unread()
         {
-
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
             var responses = await GroupDataResponse();
 
             var chatView = new List<ChatViewModel>();
@@ -57,7 +57,8 @@ namespace TCM.Presentation.Site.Controllers
 		//[Authorize]
 		public async Task<IActionResult> UpdateIsReaded([FromBody] int userId)
 		{
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var result = await _chatServices.UpdateChatIsReadedAsync(new Services.Model.ChatModel()
             {
@@ -71,9 +72,9 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> All()
         {
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
 
-
-			var responses = await GroupDataResponse();
+            var responses = await GroupDataResponse();
 
 			var chatView = new List<ChatViewModel>();
 
@@ -97,7 +98,9 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<IActionResult> Details(int userId)
         {
-			var questions = (await GetChatQuestionAsync(userId)).ToList();
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
+            var questions = (await GetChatQuestionAsync(userId)).ToList();
 
             var responses = (await GetChatResponseAsync(userId)).ToList();
 
@@ -110,7 +113,8 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         public async Task<JsonResult> Add(ChatViewModel model)
 		{
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
 			var result = await _chatServices.AddChatAsync(new Services.Model.ChatModel()
 			{
@@ -126,7 +130,7 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         private async Task<Dictionary<string, List<ChatViewModel>>> GroupDataQuestion()
         {
-            id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var resultUser = (await _chatServices.GetChatAsync(new Services.Model.ChatModel() { ChatUserId = Convert.ToInt32(id) })).ToList();
 
@@ -156,7 +160,8 @@ namespace TCM.Presentation.Site.Controllers
         //[Authorize]
         private async Task<Dictionary<string, List<ChatViewModel>>> GroupDataResponse()
 		{
-			id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+
+			id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
 			var resultConnection = (await _chatServices.GetChatAsync(new Services.Model.ChatModel() { ChatConnectionUserId = Convert.ToInt32(id) })).ToList();
 

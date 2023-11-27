@@ -44,7 +44,8 @@ namespace TCM.Presentation.Site.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             CommunityModel model = new CommunityModel();
 
@@ -94,7 +95,9 @@ namespace TCM.Presentation.Site.Controllers
 
         public async Task<IActionResult> Adm()
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
+
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             CommunityModel model = new CommunityModel();
 
@@ -144,7 +147,7 @@ namespace TCM.Presentation.Site.Controllers
 
         private async Task<int> ChatsUnread()
         {
-            id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             var resultConnection = (await _chatServices.GetChatAsync(new Services.Model.ChatModel() { ChatConnectionUserId = Convert.ToInt32(id) }))
                 .Where(chat => chat.ChatIsRead == false)

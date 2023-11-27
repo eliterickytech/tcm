@@ -42,7 +42,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
         public async Task<ActionResult> AddCollection()
         {
             TempData["CountCollection"] = await GetCountCollectionAsync();
-            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             return View();
         }
@@ -50,7 +50,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
         public async Task<ActionResult> RemoveCollection()
         {
             TempData["CountCollection"] = await GetCountCollectionAsync();
-            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
             try
             {
 
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 var collectionId = (await _collectionServices.AddCollectionAsync(new CollectionModel() { CollectionName = "", CollectionTypeId = 1, IsPhysicalAward = false, AvailableDate= DateTime.Now}));
 

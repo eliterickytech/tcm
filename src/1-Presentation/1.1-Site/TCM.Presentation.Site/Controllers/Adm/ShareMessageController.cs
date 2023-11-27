@@ -24,10 +24,11 @@ namespace TCM.Presentation.Site.Controllers.Adm
             _chatServices = chatServices;
 
         }
+
         public async Task<IActionResult> Index()
         {
             TempData["CountCollection"] = await GetCountCollectionAsync();
-            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             return View();
         }
@@ -60,7 +61,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
         public async Task<IActionResult> SendShareMessage(string myText, int userOption, int[] userList, int dateOption, DateTime date) 
         {
-            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value ?? "2";
+            var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
             IEnumerable<UserModel> userSendMessage = Enumerable.Empty<UserModel>();
 
