@@ -57,7 +57,13 @@
                                     <button @((int)ConnectionStatusType.Canceled != @item.ConnectionStatus ? "class=invitation-circle-send send_alert" : "disabled class=invitation-circle-send-disabled send_alert") id="cancel" data-value="@((int)ConnectionStatusType.Canceled)" type="button" title="Request cancel">
                                         <i class="bi bi-person-fill-x"></i>
                                     </button>                                    
-                                }                                
+                                }
+                                @if (item.ConnectionStatus == (int)ConnectionStatusType.Approved)
+                                {
+                                    <button class="invitation-circle send_alert viewChat" id="viewChat" data-userid="@item.ConnectionUserId" type="button" title="View Chat">
+                                        <i class="bi bi-chat-left"></i>
+                                    </button>
+                                }
                                 <input type="hidden" id="ConnectionId" value="@item.ConnectionId" />
                             </p>
                         </div>
@@ -75,8 +81,14 @@
 </div>
 <script>
     $(document).ready(function () {
+        $(".viewChat").click(function () {
+            event.preventDefault();
+            var userId = $(this).data("userid");
+            window.location.href = `/Chat/Details?userId=${userId}`;
+        });
 
         $(".invitation-circle-send").click(function () {
+           
             var connectionStatusId = $(this).data("value");
             var connectionId = $("#ConnectionId").val()
             var userId = $(this).data("userid");
