@@ -8,8 +8,10 @@
 }
 
 <div class="area_login">
-
-    @await Html.PartialAsync("~/Views/Shared/User/_PartialMenu.cshtml")
+    @{ 
+        var partMenu = TempData["ProfileId"].ToString() == "1" ? "Adm" : "User";
+    }
+    @await Html.PartialAsync($"~/Views/Shared/{partMenu}/_PartialMenu.cshtml")
 
     <form id="formUser" name="formUser" class="needs-validation" novalidate>
         <div id="fullname-group" class="area_form">

@@ -86,6 +86,8 @@ namespace TCM.Presentation.Controllers.Logout
 
                 await _userServices.UpdateLastAccessDateAsync(userMode.FirstOrDefault().Id.Value);
 
+                HttpContext.Session.SetString("ProfileId", ((int)userMode.FirstOrDefault().ProfileId).ToString());
+
                 if (userMode.FirstOrDefault().ProfileId == Services.Model.Enum.UserType.User)
                 {
                     resultModel.Redirect = "/Home";

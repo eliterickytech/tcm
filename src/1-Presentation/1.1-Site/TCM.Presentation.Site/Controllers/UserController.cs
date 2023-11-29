@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Net;
@@ -23,6 +24,8 @@ namespace TCM.Presentation.Site.Controllers
 
         public async Task<IActionResult> Index()
         {
+            TempData["ProfileId"] = HttpContext.Session.GetString("ProfileId");
+
             if (!User.Identity.IsAuthenticated) return RedirectToAction("Index", "Login");
 
             var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
