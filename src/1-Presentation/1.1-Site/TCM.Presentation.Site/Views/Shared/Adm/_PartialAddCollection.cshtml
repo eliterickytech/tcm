@@ -208,9 +208,9 @@
     });
 
     function Success(data) {
-        console.log(data)
+      //  console.log(data)
         var response = JSON.parse(JSON.stringify(data.data));
-        console.log(response);
+      //  console.log(response);
         //var imageMiniature = $("#imageMini");
         //imageMiniature.empty();
         //var imgMiniature = document.createElement("img");
@@ -232,9 +232,9 @@
         $("#containerSave").attr("style", "display:block");
         $("#containerVideo").attr("style", "display:block");
 
-        console.log("Antes do loadImages")
+      //  console.log("Antes do loadImages")
         //loadImages(response);
-        console.log("depois do loadImages")
+      //  console.log("depois do loadImages")
 
         $("#Upload").attr("Style", "display:none");
     }
@@ -260,6 +260,7 @@
         var videoMiniature = $("#video");
         videoMiniature.empty();
         $("#miniature").val('');
+        $("#piece1").val('');
         $("#piece1").val('');
         $("#piece2").val('');
         $("#piece3").val('');
