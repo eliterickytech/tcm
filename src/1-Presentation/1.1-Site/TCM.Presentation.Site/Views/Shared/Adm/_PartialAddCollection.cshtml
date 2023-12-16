@@ -35,6 +35,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
+                                    
                                     <input type="file" class="form-control mb-3" name="imagemInput" id="imagemInput" required">
 
                                     <input type="hidden" id="collectiontypeid" name="collectiontypeid" value="1" />
@@ -68,7 +69,7 @@
                             </tr>
                         </table>
                     </form>
-                    <form novalidate class="needs-validation" enctype="multipart/form-data"
+                    <form id="formInsertCollection" novalidate class="needs-validation" enctype="multipart/form-data"
                           data-ajax="true"
                           data-ajax-mode="replace"
                           data-ajax-loading="#loader"
@@ -130,6 +131,27 @@
             $('#video').text(fileName);
         });
 
+        var tempAjaxSuccess = "";
+
+        // Intercepta o clique no botão Add New Image
+        $("#btnAddNewImage").click(function () {
+            tempAjaxSuccess = "SuccessInsertAddImage";
+        });
+
+        // Intercepta o clique no botão Save and Close
+        $("#btnSaveClose").click(function () {
+            tempAjaxSuccess = "SuccessInsert";
+        });
+
+        // Intercepta o envio do formulário
+        $("#formInsertCollection").submit(function (event) {
+            // Altera o data-ajax-success com base no valor temporário
+            $(this).attr("data-ajax-success", tempAjaxSuccess);
+
+            // Continue com o envio normal do formulário
+            return true;
+        });
+
         $(document).on('ajaxSuccess', function (event, xhr, settings) {
             if (settings.url.indexOf("ProcessForm") > -1) {
                 var response = xhr.responseJSON;
@@ -156,6 +178,8 @@
             $("#page").text(text);
         });
 
+
+       
 
     });
 
@@ -216,8 +240,45 @@
     }
 
     function SuccessInsert(data) {
+        sessionStorage.removeItem('CollectionId');
         window.location.href = "/Home/adm";
     }
+
+    function SuccessInsertAddImage(data) {
+        var imageInput = document.querySelector("input[id='imagemInput']");
+        $("#Upload").attr("Style", "display:block");
+
+        $("#imagemInput").val('');
+        $("#imagemInput").trigger("input");
+        $("#imagemInput").attr("required", true);
+
+
+        var imagePreview = $("#resizeImage");
+        imagePreview.empty();
+        var imageMiniature = $("#imageMini");
+        imageMiniature.empty();
+        var videoMiniature = $("#video");
+        videoMiniature.empty();
+        $("#miniature").val('');
+        $("#piece1").val('');
+        $("#piece2").val('');
+        $("#piece3").val('');
+        $("#piece4").val('');
+        $("#piece5").val('');
+        $("#piece6").val('');
+        $("#piece7").val('');
+        $("#piece8").val('');
+        $("#piece9").val('');
+        $("#videoDescription").val('');
+
+        $("#scheduled").mask("00/00/0000 00:00");
+        $("#container1x1").attr("style", "display:none");
+        $("#container2x2").attr("style", "display:none");
+        $("#container3x3").attr("style", "display:none");
+        $("#containerSave").attr("style", "display:none");
+        $("#containerVideo").attr("style", "display:none");
+    }
+
 
     function loadImages(response) {
         const imageMini =$('#imageMini');

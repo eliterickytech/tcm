@@ -66,7 +66,7 @@ namespace TCM.CrossCutting.Helpers
             }
         }
 
-        public List<string> SplitImage(string originFilePath, string destinationFolderPath, int partsCount)
+        public List<string> SplitImage(string originFilePath, string destinationFolderPath, int partsCount, int countItems = 1)
         {
             List<string> result = new List<string>();
 
@@ -89,7 +89,7 @@ namespace TCM.CrossCutting.Helpers
                                 graphics.DrawImage(imageOriginal, new Rectangle(0, 0, partWidth, partHeight), partRect, GraphicsUnit.Pixel);
                             }
 
-                            string fileName = Path.Combine(destinationFolderPath, $"{order.ToString().PadLeft(2, '0')}.png");
+                            string fileName = Path.Combine(destinationFolderPath, $"{countItems.ToString().PadLeft(2,'0')}_{order.ToString().PadLeft(2, '0')}.png");
                             part.Save(fileName, ImageFormat.Png);
                             result.Add(fileName);
                         }

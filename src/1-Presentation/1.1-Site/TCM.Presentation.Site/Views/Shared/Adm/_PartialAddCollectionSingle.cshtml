@@ -249,7 +249,7 @@
                     <td>
                         <table width="100%">
                             <tr>
-                                <td colspan="2" class="text-default text-weight-bold">Upload the video here*</td>
+                                <td colspan="2" class="text-default text-weight-bold">Upload the video here</td>
                             </tr>
                             <tr>
                                 <td class="text-default">This is the video the My Collectables users are going to view at the
@@ -258,7 +258,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="text-default text-weight-bold">
-                                    Video title*
+                                    Video title
                                 </td>
                             </tr>
                             <tr>
@@ -266,12 +266,12 @@
                                     <table style="width:100%">
                                         <tr>
                                             <td>
-                                                <input type="file" name="fileInput" id="fileInput" style="display: none" required />
+                                                <input type="file" name="fileInput" id="fileInput" style="display: none" />
                                                 <div id="video" alt="Imagem" class="box_image" style="cursor: pointer; background:url(../../img/file-minier.png)" />
 
                                             </td>
                                             <td style="width:100%">
-                                                <input required class="collection_next" type="text" id="videoDescription" name="videoDescription" width="60" style="height:60px !important">
+                                                <input class="collection_next" type="text" id="videoDescription" name="videoDescription" width="60" style="height:60px !important">
                                             </td>
                                         </tr>
                                     </table>
@@ -283,8 +283,13 @@
 
                 <tr id="containerSave">
                     <td colspan="2" style="align-items:flex-end">
-
-                        <input type="submit" value="SAVE COLLECTION" class="next">
+                        <div style="display:flex">
+                       
+                            <input type="submit" id="btnAddNewImage" value="ADD NEW IMAGE" class="next"> 
+                              
+                            <input type="submit" id="btnSaveClose" value="SAVE AND CLOSE" class="next" style="align-self: flex-end;margin-left: 10px;">
+                        
+                        </div>
                     </td>
                 </tr>
             </table>

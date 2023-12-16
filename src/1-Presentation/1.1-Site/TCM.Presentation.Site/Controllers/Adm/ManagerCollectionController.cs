@@ -29,6 +29,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly CrossCutting.Helpers.Utils _utils;
         private string root = string.Empty;
+        private List<ColletionsPassToAddModel>  listCollectionsImage= null;
 
         public ManagerCollectionController(ICollectionServices collectionServices, IWebHostEnvironment webHostEnvironment, CrossCutting.Helpers.Utils utils, ICollectionItemServices collectionItem)
         {
@@ -37,13 +38,15 @@ namespace TCM.Presentation.Site.Controllers.Adm
             root = _webHostEnvironment.WebRootPath;
             _utils = utils;
             _collectionItem = collectionItem;
+            listCollectionsImage = new List<ColletionsPassToAddModel>();
         }
 
         public async Task<ActionResult> AddCollection()
         {
             TempData["CountCollection"] = await GetCountCollectionAsync();
             TempData["Id"] = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
-
+            TempData["CollectionId"] = 0;
+            TempData["CollectionItemCount"] = 0;
             return View();
         }
 
@@ -67,26 +70,29 @@ namespace TCM.Presentation.Site.Controllers.Adm
             {
 
                 var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+                var collectionItemsCount = Convert.ToInt32(TempData["CollectionItemCount"])+1;
 
-                var collectionId = (await _collectionServices.AddCollectionAsync(new CollectionModel() { CollectionName = "", CollectionTypeId = 1, IsPhysicalAward = false, AvailableDate= DateTime.Now}));
-
+                var collectionId = Convert.ToInt32(TempData["CollectionId"]);
+                if (collectionId == 0 ) { 
+                  collectionId = (await _collectionServices.AddCollectionAsync(new CollectionModel() { CollectionName = "", CollectionTypeId = 1, IsPhysicalAward = false, AvailableDate= DateTime.Now}));
+                }
                 var relativeFolder = $"/img/collection/{collectionId.ToString().PadLeft(6, '0')}/";
 
                 var folderCollection = string.Concat(root, relativeFolder);
 
-                var fullnameOrigin = string.Concat(folderCollection, "origin/", imagemInput.FileName);
+                var fullnameOrigin = string.Concat(folderCollection, $"{collectionItemsCount.ToString().PadLeft(6, '0')}_origin/", imagemInput.FileName);
 
-                var fullnameResize = string.Concat(folderCollection, "resize/", imagemInput.FileName);
+                var fullnameResize = string.Concat(folderCollection, $"{collectionItemsCount.ToString().PadLeft(6, '0')}_resize/", imagemInput.FileName);
 
-                var relativeFileOrigin = string.Concat(relativeFolder, "origin/", imagemInput.FileName);
+                var relativeFileOrigin = string.Concat(relativeFolder, $"{collectionItemsCount.ToString().PadLeft(6, '0')}_origin/", imagemInput.FileName);
 
-                _utils.CreateStructureFolder(folderCollection, true);
+                _utils.CreateStructureFolder(folderCollection, false);
 
                 _utils.CreateStructureFolder(fullnameResize, true);
 
-                _utils.CreateStructureFolder(string.Concat(folderCollection, "origin/"), false);
+                _utils.CreateStructureFolder(string.Concat(folderCollection, $"{collectionItemsCount.ToString().PadLeft(6, '0')}_origin/"), false);
 
-                _utils.CreateStructureFolder(string.Concat(folderCollection, "resize/"), false);
+                _utils.CreateStructureFolder(string.Concat(folderCollection, $"{collectionItemsCount.ToString().PadLeft(6, '0')}_resize/"), false);
 
                 using (var stream = new FileStream(fullnameOrigin, FileMode.Create))
                 {
@@ -95,7 +101,9 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
                 _utils.ResizeImage(fullnameOrigin, fullnameResize, 350, 350);
 
-                var splits = _utils.SplitImage(fullnameResize, folderCollection, collectiontypeid);
+                var splits = _utils.SplitImage(fullnameResize, folderCollection, collectiontypeid, collectionItemsCount);
+
+                
 
                 var colletionsPassToAddModel = new ColletionsPassToAddModel();
                 colletionsPassToAddModel.CollectionName = collectionName;
@@ -114,7 +122,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
                 TempData["Splits"] = colletionsPassToAddModel.SplitImages;
                 TempData["UrlResize"] = colletionsPassToAddModel.UrlResize;
                 TempData["CollectionId"] = collectionId;
-
+                TempData["CollectionItemCount"] = collectionItemsCount;
                 return Json(new { StatusCode = System.Net.HttpStatusCode.OK, IsOK = true, Data = colletionsPassToAddModel, Redirect = "" });
             }
             catch(Exception ex)
@@ -148,19 +156,22 @@ namespace TCM.Presentation.Site.Controllers.Adm
             var collectionId = Convert.ToInt32(TempData["CollectionId"]);
             var urlResize = TempData["UrlResize"].ToString();
             var splits = (string[])TempData["Splits"];
-
+          
             var collectionName = TempData["CollectionName"].ToString();
 
             var relativeFolder = $"/img/collection/{collectionId.ToString().PadLeft(6, '0')}/";
-            var relativeVideoOrigin = string.Concat(root, relativeFolder, "video/", fileInput.FileName);
-
-            _utils.CreateStructureFolder(string.Concat(root, relativeFolder, "video/"), true);
-
-            _utils.CreateStructureFolder(string.Concat(root, relativeFolder, "video/"), false);
-
-            using (var stream = new FileStream(relativeVideoOrigin, FileMode.Create))
+            if (fileInput != null)
             {
-                fileInput.CopyTo(stream);
+                var relativeVideoOrigin = string.Concat(root, relativeFolder, "video/", fileInput.FileName);
+
+                _utils.CreateStructureFolder(string.Concat(root, relativeFolder, "video/"), false);
+
+                _utils.CreateStructureFolder(string.Concat(root, relativeFolder, "video/"), false);
+
+                using (var stream = new FileStream(relativeVideoOrigin, FileMode.Create))
+                {
+                    fileInput.CopyTo(stream);
+                }
             }
 
             var resultUpdated = await _collectionServices.UpdateCollecitonAsync(new CollectionModel()
@@ -238,6 +249,10 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
                 }
             }
+
+            TempData["CollectionId"] = collectionId;
+
+          ;
 
             return Json(new { StatusCode = System.Net.HttpStatusCode.OK, IsOK = true, Data = true, Redirect = "" });
         }
