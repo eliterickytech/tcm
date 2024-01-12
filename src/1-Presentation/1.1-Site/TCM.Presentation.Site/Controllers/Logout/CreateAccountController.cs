@@ -40,12 +40,34 @@ namespace TCM.Presentation.Site.Controllers.Logout
                 return new JsonResult(new ResultModel()
                 {
                     StatusCode = HttpStatusCode.InternalServerError,
-                    Errors = "Senha não é igual",
+                    Errors = "Password not equal",
                     Type = "Password",
                     IsOK = false
                 }) ;
 
             var result = await _userServices.AddUserAsync(userModel);
+
+            if (result == -1)
+            {
+                return new JsonResult(new ResultModel()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Errors = "Email already exists in the database",
+                    Type = "EmailExists",
+                    IsOK = false
+                });
+            }
+
+            if (result == -2)
+            {
+                return new JsonResult(new ResultModel()
+                {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    Errors = "User already exists in the database",
+                    Type = "UserExists",
+                    IsOK = false
+                });
+            }
 
             var resultModel = new ResultModel();
             

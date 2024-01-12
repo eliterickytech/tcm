@@ -27,6 +27,14 @@ namespace TCM.Services.Services
 
         public async Task<int> AddUserAsync(UserModel userModel) 
         {
+            var user = await _userRepository.GetUserAsync(new UserModel() { Email = userModel.Email });
+
+            if (user != null)
+                return -1;
+
+            user = await _userRepository.GetUserAsync(new UserModel() { UserName = userModel.UserName });
+            if (user != null)
+                return -2;
 
             var userConnection = new ConnectionModel()
             {

@@ -1,7 +1,38 @@
 ﻿
 
-    <div class="container">
-        <table width="100%">
+<div class="container">
+    <form novalidate class="needs-validation"
+          data-ajax="true"
+          data-ajax-mode="replace"
+          data-ajax-loading="#loader"
+          asp-action="ProcessNameCollection"
+          asp-controller="ManagerCollection"
+          data-ajax-success="SuccessName">
+        @Html.AntiForgeryToken()
+            <table width="100%" id="tableCollectioName">
+                <tr>
+                    <td colspan="2" align="center">
+                        <table width="350px">
+                            <tr>
+                                <td colspan="2">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="area_next" style="margin:0 0 0 0 !important">
+                                    <input type="text" class="collection_next" id="collectionName" name="collectionName"
+                                           placeholder="Tap to give your collection a name*" required />
+                                </td>
+                                <td style="align-items:flex-end">
+                                    <input type="submit" value="NEXT" id="next" class="next operador">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <table width="100%" id="tableFormImage">
             <tr>
                 <td>
                     <form novalidate class="needs-validation" enctype="multipart/form-data"
@@ -16,6 +47,7 @@
                             <tr>
                                 <td class="title_collectible" style="width:50%;">
                                     <h2>Add collection</h2>
+                                    Select a collection: <select name="dropdownCollection" id="dropdownCollection"></select>
                                 </td>
                                 <td style="width:50%;">
                                     <ul id="nav" class="nav float-end">
@@ -35,7 +67,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    
+
                                     <input type="file" class="form-control mb-3" name="imagemInput" id="imagemInput" required">
 
                                     <input type="hidden" id="collectiontypeid" name="collectiontypeid" value="1" />
@@ -46,26 +78,14 @@
                                     <div id="resizeImage" class="area_collection_single"></div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="2" align="center">
-                                    <table width="350px">
-                                        <tr>
-                                            <td colspan="2">
-                                                &nbsp;
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="area_next" style="margin:0 0 0 0 !important">
-                                                <input type="text" class="collection_next" id="collectionName" name="collectionName"
-                                                       placeholder="Tap to give your collection a name*" required />
-                                            </td>
-                                            <td style="align-items:flex-end">
-                                                <input type="submit" value="NEXT" id="next" class="next operador">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
 
+                            <tr>
+                                <td class="area_next" style="width: 215px; margin:0 0 0 0 !important">
+                                    &nbsp;
+                                </td>
+                                <td style="align-items:flex-end">
+                                    <input type="submit" value="NEXT" id="next" class="next operador">
+                                </td>
                             </tr>
                         </table>
                     </form>
@@ -83,7 +103,7 @@
                 </td>
             </tr>
         </table>
-    </div>
+</div>
     <script>
     (() => {
         'use strict'
@@ -106,6 +126,8 @@
 
     $(document).ready(function () {
         $("#scheduled").mask("00/00/0000 00:00");
+        
+        $("#tableFormImage").attr("style", "display:none");
         $("#container1x1").attr("style", "display:none");
         $("#container2x2").attr("style", "display:none");
         $("#container3x3").attr("style", "display:none");
@@ -243,6 +265,12 @@
         sessionStorage.removeItem('CollectionId');
         window.location.href = "/Home/adm";
     }
+
+        function SuccessName(data) {
+            $("#tableFormImage").attr("Style", "display:block");
+            $("#tableCollectioName").attr("Style", "display:none");
+            
+        }
 
     function SuccessInsertAddImage(data) {
         var imageInput = document.querySelector("input[id='imagemInput']");

@@ -80,15 +80,19 @@ namespace TCM.Presentation.Controllers
 
             var collections = await _collectionServices.GetCollectionAsync();
 
-            model.CollectionsModel = collections.ToList();
-
-            foreach (var collection in collections)
+            if (collections != null)
             {
-                var collectionItems = await _collectionItemServices.GetCollectionItemAsync(collection.Id);
+                model.CollectionsModel = collections.ToList();
 
-                var collectionItem = collectionItems.Where(x => x.CollectionItemTypeId == (int)CollectionItemType.MiniImage).FirstOrDefault();
+                foreach (var collection in collections)
+                {
+                    var collectionItems = await _collectionItemServices.GetCollectionItemAsync(collection.Id);
 
-                model.CollectionsItemModel.Add(collectionItem);
+                    var collectionItem = collectionItems.Where(x => x.CollectionItemTypeId == (int)CollectionItemType.MiniImage).FirstOrDefault();
+
+                    model.CollectionsItemModel.Add(collectionItem);
+                }
+
             }
             string pathView = string.Empty;
 

@@ -3,8 +3,14 @@ function AjaxSucceeded(result) {
     var spinner = $('#loader');
     spinner.hide();
     if (!result.isOK) {
-        if (result.type == "Password") {
+        if (result.type == "EmailExists") {
+            $("#messageError-group").addClass("has-error");
+            $("#messageError-group").append(
+                '<div style="color:#C0694E;" class="help-block">' + result.errors + "</div>"
+            )
+        }
 
+        if (result.type == "Password") {
             $("#password-group").addClass("has-error");
             $("#password-group").append(
                 '<div style="color:#C0694E;" class="help-block">' + result.errors + "</div>"

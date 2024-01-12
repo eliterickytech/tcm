@@ -40,7 +40,7 @@ namespace TCM.Presentation.Controllers.Logout
             if (result is null)
             {
                 resultModel.StatusCode = System.Net.HttpStatusCode.OK;
-                resultModel.Errors = "Usuário/Senha inválido!";
+                resultModel.Errors = "User/Password Invalid!";
                 resultModel.Type = "InvalidPassword";
                 resultModel.IsOK = false;
             }

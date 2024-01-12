@@ -53,6 +53,9 @@
             <input type="password" minlength="5" pattern="[0-9]{5,12}" maxlength="12" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Repeat your password" required autocomplete="off">
             <span class="errorData" role="alert" id="passwordError" aria-hidden="true"></span>
         </div>
+        <div id="messageError-group" class="area_form">
+            <span class="errorData" role="alert" id="messageError" aria-hidden="true"></span>
+        </div>
         <input type="submit" name="submit" class="submit" value="SIGN UP" />
         <div class="sign_up">
             <p>New here? Tap to <a target="_self" asp-controller="Login" asp-action="Index"><b>sign in.</b></a></p>

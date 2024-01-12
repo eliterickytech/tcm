@@ -61,6 +61,22 @@ namespace TCM.Presentation.Site.Controllers.Adm
         {
             return (await _collectionServices.GetCollectionAsync()).Count(); 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProcessNameCollection(string collectionName)
+        {
+            try
+            {
+                HttpContext.Session.SetString("collectionName", collectionName); 
+                var collection = (await _collectionServices.GetCollectionAsync()).Where(x => x.Enabled == true).DistinctBy(x => x.CollectionName);
+
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,14 +84,16 @@ namespace TCM.Presentation.Site.Controllers.Adm
         {
             try
             {
+                collectionName = HttpContext.Session.GetString("collectionName");
 
                 var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
                 var collectionItemsCount = Convert.ToInt32(TempData["CollectionItemCount"])+1;
 
+
                 var collectionId = Convert.ToInt32(TempData["CollectionId"]);
-                if (collectionId == 0 ) { 
-                  collectionId = (await _collectionServices.AddCollectionAsync(new CollectionModel() { CollectionName = "", CollectionTypeId = 1, IsPhysicalAward = false, AvailableDate= DateTime.Now}));
-                }
+
+                collectionId = (await _collectionServices.AddCollectionAsync(new CollectionModel() { CollectionName = collectionName, CollectionTypeId = 1, IsPhysicalAward = false, AvailableDate = DateTime.Now }));
+
                 var relativeFolder = $"/img/collection/{collectionId.ToString().PadLeft(6, '0')}/";
 
                 var folderCollection = string.Concat(root, relativeFolder);
@@ -101,16 +119,13 @@ namespace TCM.Presentation.Site.Controllers.Adm
 
                 _utils.ResizeImage(fullnameOrigin, fullnameResize, 350, 350);
 
-                var splits = _utils.SplitImage(fullnameResize, folderCollection, collectiontypeid, collectionItemsCount);
-
-                
+                var splits = _utils.SplitImage(fullnameResize, folderCollection, collectiontypeid, collectionItemsCount);               
 
                 var colletionsPassToAddModel = new ColletionsPassToAddModel();
                 colletionsPassToAddModel.CollectionName = collectionName;
                 colletionsPassToAddModel.CollectionId = collectionId;
                 colletionsPassToAddModel.CollectionTypeId = collectiontypeid;
                 colletionsPassToAddModel.UrlResize = fullnameResize;
-
 
                 splits.ForEach(x =>
                 {
@@ -157,7 +172,7 @@ namespace TCM.Presentation.Site.Controllers.Adm
             var urlResize = TempData["UrlResize"].ToString();
             var splits = (string[])TempData["Splits"];
           
-            var collectionName = TempData["CollectionName"].ToString();
+            var collectionName = HttpContext.Session.GetString("collectionName");
 
             var relativeFolder = $"/img/collection/{collectionId.ToString().PadLeft(6, '0')}/";
             if (fileInput != null)
