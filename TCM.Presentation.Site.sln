@@ -31,6 +31,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TCM.Infrastructure.Data.Base", "src\3-Infrastructure\3.2-TCM-Base\TCM.Infrastructure.Data.Base\TCM.Infrastructure.Data.Base.sqlproj", "{EB2C0933-B991-4F5A-BB13-9B26DB677B1B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SiteV2", "SiteV2", "{222E7A8E-FFE7-41CB-9AF9-F7B475F558A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCM.Presentation.Site", "src\1-Presentation\1.2-SiteV2\TCM.Presentation.Site\TCM.Presentation.Site.csproj", "{6FAEB9E3-3C34-40CF-8B79-5D4AC9167C02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{EB2C0933-B991-4F5A-BB13-9B26DB677B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB2C0933-B991-4F5A-BB13-9B26DB677B1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB2C0933-B991-4F5A-BB13-9B26DB677B1B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6FAEB9E3-3C34-40CF-8B79-5D4AC9167C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FAEB9E3-3C34-40CF-8B79-5D4AC9167C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FAEB9E3-3C34-40CF-8B79-5D4AC9167C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FAEB9E3-3C34-40CF-8B79-5D4AC9167C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +88,8 @@ Global
 		{CA3E16AA-FD93-4A64-A055-8498202BF45A} = {DE619B97-755B-4F47-8A4F-8D1D012D498E}
 		{FF1B0390-058F-4E0D-B052-ECA0C299E3AD} = {7675B6D0-F3BC-408B-9C74-68591C10442E}
 		{EB2C0933-B991-4F5A-BB13-9B26DB677B1B} = {FF1B0390-058F-4E0D-B052-ECA0C299E3AD}
+		{222E7A8E-FFE7-41CB-9AF9-F7B475F558A7} = {E69B13C8-40B6-4F37-9C45-6494F54BC59C}
+		{6FAEB9E3-3C34-40CF-8B79-5D4AC9167C02} = {222E7A8E-FFE7-41CB-9AF9-F7B475F558A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CA8A129D-3CF0-4450-80C1-54041310C4E6}

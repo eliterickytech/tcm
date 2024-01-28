@@ -1,0 +1,3 @@
+TCM.Presentation.SiteApp.controller('pageWithTwoSidebarController', function ($scope, $rootScope, $state) {
+  $rootScope.setting.layout.appSidebarTwo = true;
+});

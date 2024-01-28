@@ -1,0 +1,114 @@
+﻿@inject TCM.Services.Interfaces.Services.IChatServices _chatServices
+@inject TCM.Services.Interfaces.Services.IUserServices _userServices
+
+@{
+    ViewData["Title"] = "ChefMelo - Chat";
+
+    var currentUser = _userServices.CurrentUserAsync();
+
+    var userId = ViewBag.ConnectionUserId;
+
+    var user = (await _userServices.GetUserAsync(new TCM.Services.Model.UserModel() { Id = userId })).FirstOrDefault();
+
+    var chatsUnread = await _chatServices.GetChatAsync(new TCM.Services.Model.ChatModel() { ChatConnectionUserId = currentUser.Id });
+
+    chatsUnread = chatsUnread.Where(x => x.ChatIsRead == false).ToList();
+
+}
+
+@model IEnumerable<TCM.Presentation.Site.Models.ChatViewModel>
+
+@section Styles {
+    <link href="~/lib/gritter/css/jquery.gritter.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/search.js"></script>
+    <script src="~/js/chat.js"></script>
+    <script src="~/lib/gritter/js/jquery.gritter.js"></script>
+    <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/js/demo/ui-modal-notification.demo.js"></script>
+    <script src="~/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/js/demo/render.highlight.js"></script>
+    <script src="~/lib/parsleyjs/dist/parsley.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+}
+
+<!-- BEGIN page-header -->
+<h1 class="page-header">Chats <small>details with chat...</small></h1>
+<!-- END page-header -->
+
+<div class="row">
+    <div class="col-xl-10">
+        <div class="widget-chat rounded mb-4" data-id="widget">
+            <!-- BEGIN widget-chat-header -->
+            <div class="widget-chat-header">
+                <div class="widget-chat-header-content">
+                    <h4 class="widget-chat-header-title">
+                        <button id="chatBack" class="btn btn-default btn-icon btn-circle "><i class="fa fa-angle-left"></i></button>
+                        @chatsUnread.Count()  &nbsp; <span id="usernameConnectionChat" data-usernameConnectionChat="@user.UserName">@user.UserName</span>
+                    </h4>
+                </div>
+            </div>
+            <!-- END widget-chat-header -->
+            <!-- BEGIN widget-chat-body -->
+            <div class="widget-chat-body" data-scrollbar="true" data-height="400px">
+                @{
+                    var date = string.Empty;
+
+                    foreach (var chat in Model)
+                    {
+                        var dateMessage = string.Empty;
+
+                        if (date != chat.DateMessage.ToString("MM/dd/yyyy"))
+                        {
+                            if (chat.DateMessage.ToString("MM/dd/yyyy") == DateTime.Now.ToString("MM/dd/yyyy"))
+                            {
+                                dateMessage = "Today";
+                            }
+                            else if (chat.DateMessage.ToString("MM/dd/yyyy") == DateTime.Now.AddDays(-1).ToString("MM/dd/yyyy"))
+                            {
+                                dateMessage = "Yesterday";
+                            }
+                            else
+                            {
+                                dateMessage = chat.DateMessage.ToString("MM/dd/yyyy");
+                            }
+
+                            <div class="text-center text-gray-500 m-2 fw-bold">@dateMessage</div>
+                        }
+
+                        date = chat.DateMessage.ToString("MM/dd/yyyy");
+
+                        <div class="widget-chat-item with-media @(chat.Question ? "start" : "end")">
+                            <div class="widget-chat-info">
+                                <div class="widget-chat-info-container">
+                                    <div class="widget-chat-message">@chat.Message</div>
+                                    <div class="widget-chat-time">@chat.DateMessage.ToString("HH:mm")</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+
+                <!-- END widget-chat-item -->
+            </div>
+            <!-- END widget-chat-body -->
+            <!-- BEGIN widget-input -->
+            <div class="widget-input">
+                <form name="formChat" id="formChat">
+                    <input type="hidden" id="userId" name="userId" value="@currentUser.Id" />
+                    <input type="hidden" id="connectionUserId" name="connectionUserId" value="@user.Id" />
+                    <div class="widget-input-container">
+                        <div class="widget-input-box">
+                            <input type="text" class="form-control" id="message" name="message" placeholder="Write a message..." />
+                        </div>
+                        <div class="widget-input-icon"><button type="submit" id="chatSend" class="btn btn-theme btn-icon btn-circle "><i class="fa fa-paper-plane"></i></button></div>
+                    </div>
+                </form>
+            </div>
+            <!-- END widget-input -->
+        </div>
+    </div>
+</div>

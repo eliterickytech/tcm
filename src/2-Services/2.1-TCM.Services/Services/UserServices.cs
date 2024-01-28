@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace TCM.Services.Services
 {
@@ -14,11 +16,13 @@ namespace TCM.Services.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IConnectionRepository _connectionRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserServices(IUserRepository userRepository, IConnectionRepository connectionRepository)
+        public UserServices(IUserRepository userRepository, IConnectionRepository connectionRepository, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
             _connectionRepository = connectionRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<UserModel> GetLoginAsync(string user, string password) => await _userRepository.GetLoginAsync(user, password);
@@ -29,11 +33,11 @@ namespace TCM.Services.Services
         {
             var user = await _userRepository.GetUserAsync(new UserModel() { Email = userModel.Email });
 
-            if (user != null)
+            if (user.Any())
                 return -1;
 
             user = await _userRepository.GetUserAsync(new UserModel() { UserName = userModel.UserName });
-            if (user != null)
+            if (user.Any())
                 return -2;
 
             var userConnection = new ConnectionModel()
@@ -65,6 +69,18 @@ namespace TCM.Services.Services
         public Task<int> UpdateUserEnabledAsync(int userId, int enabled) => _userRepository.UpdateUserEnabledAsync(userId, enabled);
 
         public Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user) => _userRepository.GetAllUsersAsync(user);
-     
+
+        public LoginIdentityModel CurrentUserAsync()
+        {
+            return new LoginIdentityModel()
+            {
+                Id = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetString("Id")),
+                Email = _httpContextAccessor.HttpContext.Session.GetString("Email"),
+                UserName = _httpContextAccessor.HttpContext.Session.GetString("UserName"),
+                ProfileId = Convert.ToInt32(_httpContextAccessor.HttpContext.Session.GetString("ProfileId")),
+                Name = _httpContextAccessor.HttpContext.Session.GetString("FullName"),                
+            };
+        }
+
     }
 }

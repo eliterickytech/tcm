@@ -40,7 +40,7 @@ namespace TCM.Infrastructure.Data.Repository
             catch (Exception ex) { return default; }
         }
 
-        public async Task<IEnumerable<CollectionItemModel>> GetCollectionItemAsync(int collectionId)
+        public async Task<IEnumerable<CollectionItemModel>> GetCollectionItemByCollectionIdAsync(int collectionId)
         {
             var query = @"PR_CollectionItem_Select";
 
@@ -50,6 +50,18 @@ namespace TCM.Infrastructure.Data.Repository
             try
             {
                 var result = await QueryAsync<CollectionItemModel>(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<IEnumerable<CollectionItemModel>> GetCollectionItemAsync()
+        {
+            var query = @"PR_CollectionItem_Select";
+            try
+            {
+                var result = await QueryAsync<CollectionItemModel>(query);
                 return result;
 
             }

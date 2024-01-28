@@ -1,0 +1,147 @@
+﻿@inject TCM.Services.Interfaces.Services.IUserServices _userServices
+@inject TCM.Services.Interfaces.Services.IConnectionServices _connectionServices
+@inject TCM.Services.Interfaces.Services.ICollectionServices _collectionServices
+@inject TCM.Services.Interfaces.Services.ICollectionItemServices _collectionItemServices
+@inject TCM.Services.Interfaces.Services.IChatServices _chatServices
+
+@using TCM.Services.Model.Enum;
+@using TCM.Services.Model; 
+@using System.Linq;
+@{ 
+
+    var connectionUserId = 0;
+    var user = new UserModel();
+
+    if (ViewBag.ConnectionUserId > 0)
+    {
+        user = (await _userServices.GetUserAsync(new UserModel() { Id = ViewBag.ConnectionUserId })).FirstOrDefault();
+
+        connectionUserId = user.Id.Value;
+    }
+    else
+    {
+        var currentUser = _userServices.CurrentUserAsync();
+
+        user.UserName = currentUser.UserName;
+        user.Id = currentUser.Id;
+        user.ProfileId = (TCM.Services.Model.Enum.UserType)currentUser.ProfileId;
+
+    }
+
+
+    var resultUsers = (await _connectionServices.GetConnectionAsync(user.Id.Value))
+        .Where(connection => connection.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved).ToList();
+
+
+    var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = user.Id }));
+
+    var chatUser = (await _chatServices.GetChatAsync(new ChatModel() { ChatUserId = user.Id }));
+
+    var chatConnection = (await _chatServices.GetChatAsync(new ChatModel() { ChatConnectionUserId = user.Id }));
+
+    var chatAll = chatUser.Concat(chatConnection).ToList().Where(x => x.ChatIsRead == false).ToList();
+
+    var results = resultUsers.Concat(resultConnections).ToList();
+
+    var countCollectionCompleted = await _collectionServices.GetCountCollectionCompletedAsync(user.Id.Value);
+    var countConnection = results.Count();
+    var countChateUnRead = chatAll.Count();
+    var collections = await _collectionServices.GetCollectionAsync();
+    var collectionsItens = await _collectionItemServices.GetCollectionItemAsync();
+
+
+
+}
+<!-- BEGIN page-header -->
+<h1 class="page-header">Profile <small>show profile...</small></h1>
+<!-- END page-header -->
+<div class="row">
+    <div class="col-xl-10">
+        @*<table class="table table-tbody-bordered table-sm fw-bold m-0">
+            <thead>
+                <tr>
+                    <td class="w-25"><h4>@user</h4><small>Connected since Aug 2022</small></td>
+                    <td class="w-25"></td>
+                    <td class="w-25">
+                        <h4>
+                            <a href="" class="btn-theme btn-icon btn-circle btn-sm" title="Blocked"><i class="fa fa-circle-xmark"></i></a>
+                            &nbsp;
+                            <a href="" class="btn-theme btn-icon btn-circle btn-sm" title="Cancelled"><i class="fa fa-circle-stop"></i></a>
+                        </h4>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3">
+                        <small>
+                            @user.UserName has <strong>@countCollectionCompleted</strong> completed collections.<br />
+                        </small>
+                    </td>
+                </tr>
+            </tbody>
+        </table>*@
+        <table class="table table-tbody-bordered table-sm fw-bold m-0 @(ViewBag.ConnectionUserId == null ? "style=display:block" : "style=display:none")">
+            <tbody>
+                <tr >
+                    <td class="h-50px">
+                        Hello, @user.UserName <a href="/Configuration"><i class="fa fa-pen"></i></a> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-tfoot-bordered table-sm fw-bold m-0">
+            <tbody>
+                <tr>
+                    <td class="w-25">
+                        <img src="~/img/collectibles.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countCollectionCompleted</span><br />
+                        collectibles
+
+                    </td>
+                    <td class="w-25">
+                        <img src="~/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countConnection</span><br />
+                        connections
+                    </td>
+                    <td class="w-25">
+                        <img src="~/img/chats.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countChateUnRead</span><br />
+                        chats
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="carouselCollectionIndicators" class="carousel" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="carouselIndicators">
+                @for (int i = 0; i < collectionsItens.Where(x => x.CollectionItemTypeId == (int)TCM.Services.Model.Enum.CollectionItemType.BackgroundImage).Count(); i++)
+                {
+                    <li data-bs-target="#carouselCollectionIndicators" data-bs-slide-to="@i" @(i == 0 ? "class=active" : "")></li>
+                }
+            </div>
+            <div class="carousel-inner" id="carouselInner">
+                <div class="carousel-item active">testes1</div>
+                <div class="carousel-item">testes2</div>
+                <div class="carousel-item">testes3</div>
+                <div class="carousel-item">teste4</div>
+            </div>
+        </div>
+        <table id="collectionOne" class="table table-responsive table-borderless align-middle ">
+            <thead>
+                <tr>
+                    <td class="fs-16 w-25">
+                        <strong>Nome da collection</strong>
+                    </td>
+                    <td class="w-25"></td>
+                    <td class="w-25">
+                        Page
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

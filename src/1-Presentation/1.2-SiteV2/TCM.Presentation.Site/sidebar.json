@@ -1,0 +1,51 @@
+﻿{
+  "sidebarMenu": [
+    {
+      "controller": "Collectible",
+      "action": "Index",
+      "icon": "fa fa-gem",
+      "text": "My Collectibles"
+    },
+    {
+      "controller": "Connection",
+      "action": "Index",
+      "icon": "fa fa-users",
+      "text": "My Connections",
+      "badge": "21"
+    },
+    {
+      "controller": "ConnectionBlocked",
+      "action": "Index",
+      "icon": "fa fa-user-xmark",
+      "text": "My Connections blocked",
+      "badge": "21"
+    },
+    {
+      "controller": "Invitation",
+      "action": "Index",
+      "icon": "fa fa-right-to-bracket",
+      "text": "My Invitations",
+      "badge": "1"
+    },
+    {
+      "controller": "ConnectionRequest",
+      "action": "Index",
+      "icon": "fa fa-right-to-bracket",
+      "text": "Connections requests ",
+      "badge": "1"
+    },
+    {
+      "controller": "Chat",
+      "action": "Index",
+      "icon": "fab fa-rocketchat",
+      "text": "Chats",
+      "badge": "2"
+    },
+    {
+      "controller": "Login",
+      "action": "Logoff",
+      "icon": "fa fa-circle-left",
+      "text": "Logoff"
+    }
+  ]
+}

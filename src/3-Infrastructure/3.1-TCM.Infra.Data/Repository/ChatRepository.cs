@@ -59,7 +59,7 @@ namespace TCM.Infrastructure.Data.Repository
 
             var parameters = new DynamicParameters();
             parameters.Add("@UserId", model.ChatUserId, System.Data.DbType.Int32);
-            parameters.Add("@ConnectionUserId", model.ChatConnectionUserId, System.Data.DbType.Int32);
+            parameters.Add("@UsernameConnectionChat", model.ConnectionUserUserName, System.Data.DbType.String);
         
             try
             {

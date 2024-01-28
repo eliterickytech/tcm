@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Chef Melo - Code";
+
+    ViewData["AppHeaderNone"] = "true";
+    ViewData["AppSidebarNone"] = "true";
+    ViewData["AppClass"] = "app-without-header app-without-sidebar";
+    ViewData["AppContentClass"] = "p-0";
+    ViewData["AppBodyClass"] = "pace-top";
+}
+@section Styles {
+    <link href="~/lib/gritter/css/jquery.gritter.css" rel="stylesheet" />    
+    <link href="~/css/site.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/js/validateCode.js"></script>
+    <script src="~/lib/gritter/js/jquery.gritter.js"></script>
+    <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/js/demo/ui-modal-notification.demo.js"></script>
+    <script src="~/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/js/demo/render.highlight.js"></script>
+    <script src="~/lib/parsleyjs/dist/parsley.min.js"></script>
+}
+<div class="login login-v2 fw-bold">
+    <div class="login-container">
+        <div class="login-header">
+            <div class="brand">
+                <div class="d-flex align-items-center">
+                    <img src="~/img/tcm/Logo.png" width="40" height="40" /><b>&nbsp; Chef </b> Melo
+                </div>
+                <small>Code validation</small>
+            </div>
+            <div class="icon">
+                <i class="fa fa-code"></i>
+            </div>
+        </div>
+        <div class="login-content">
+            <form id="formCode" name="formCode" class="needs-validation" novalidate>
+                <input type="hidden" name="token" id="token" value="@ViewBag.Token" />
+                <div class="row mb-10px">
+                    Please, verify your e-mail inbox.<br />We sent you a 6 digit code. Insert it here.
+                </div>
+                <div class="row mb-10px">
+                    <input type="text" class="form-control fs-13px h-45px border-1 code" placeholder="_ _ _ _ _ _" id="code" name="code" maxlength="6" autocomplete="off" required />
+                </div>
+                <div class="row mb-10px">
+                    Didn't receive the code? Tap here to <a target="_self" asp-controller="Code" asp-action="Mail" asp-route-token="@ViewBag.Token">send a new code to your e-mail.</a>
+                </div>
+                <div class="mb-10px">
+                    <button type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg">GO</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

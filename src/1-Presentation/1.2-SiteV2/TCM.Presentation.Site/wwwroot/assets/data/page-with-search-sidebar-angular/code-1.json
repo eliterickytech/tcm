@@ -1,0 +1,7 @@
+TCM.Presentation.SiteApp.controller('pageWithSearchSidebarController', function ($scope, $rootScope, $state) {
+  $rootScope.setting.layout.appSidebarSearch = true;
+  
+  angular.element(document).ready(function () {
+    App.initSidebar();
+  });
+});

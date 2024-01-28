@@ -40,7 +40,8 @@ namespace TCM.Infra.Repository
 
             var parameters = new DynamicParameters();
             parameters.Add("@User", user, System.Data.DbType.String);
-            return await QueryFirstOrDefaultAsync<CodeModel>(query, parameters);
+            var result = await QueryFirstOrDefaultAsync<CodeModel>(query, parameters);
+            return result;
         }
     }
 }

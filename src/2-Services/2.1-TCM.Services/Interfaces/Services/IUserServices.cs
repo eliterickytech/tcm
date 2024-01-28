@@ -22,6 +22,6 @@ namespace TCM.Services.Interfaces.Services
         Task<int> UpdateUserEnabledAsync(int userId, int enabled);
 
         Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user);
-
+        LoginIdentityModel CurrentUserAsync();
     }
 }

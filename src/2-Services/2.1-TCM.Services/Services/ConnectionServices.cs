@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -50,6 +52,21 @@ namespace TCM.Services.Services
 
             return distinct.ToList();
         }
+
+        public async Task<List<ConnectionsModel>> ListConnectionsByUserIdAsync(int userId)
+        {
+            var result = await _connectionRepository.ListConnectionsByUserIdAsync(userId, 0);
+
+            return result.ToList();
+        }
+
+        public async Task<List<ConnectionsModel>> ListConnectionsByConnectionUserIdAsync(int connectionUserId)
+        {
+            var result = await _connectionRepository.ListConnectionsByConnectionUserIdAsync(0, connectionUserId);
+
+            return result.ToList();
+        }
+
         public async Task<List<ConnectionModel>> GetConnectionIdAsync(ConnectionModel model)
         {
             var resultUser = await _connectionRepository.GetConnectionAsync(model);
@@ -68,12 +85,27 @@ namespace TCM.Services.Services
         public async Task<int> AddConnectionAsync(int userId, int connectionUserId, ConnectionStatusType connectionStatusType )
         {
             return await _connectionRepository.AddConnectionAsync(new ConnectionModel() { UserId = userId, ConnectionUserId = connectionUserId, ConnectionUserConnectionStatusId = (int)connectionStatusType });
-
         }
 
         public async Task<int> UpdateStatusConnectionAsync(int id, int connectionStatusId) => await _connectionRepository.UpdateStatusConnectionAsync(id, connectionStatusId);
 
         public async Task<int> DeleteConnectionAsync(int id, int connectionStatusId) => await _connectionRepository.DeleteConnectionAsync(id, connectionStatusId);
+
+        public async Task<List<int>> GetConnectionBlockedAsync(int userId, int? connectionUserId)
+        {
+            return (await _connectionRepository.GetConnectionBlockedAsync(userId, connectionUserId)).ToList();
+        }
+
+        public async Task<int> AddConnectionBlockedAsync(int userId, int connectionUserId)
+        {
+            return await _connectionRepository.AddConnectionBlockedAsync(userId, connectionUserId);
+        }
+
+        public async Task<int> DeleteConnectionBlockedAsync(int userId, int connectionUserId)
+        {
+            return await _connectionRepository.DeleteConnectionBlockedAsync(userId, connectionUserId);
+        }
+
     }
 }
 
