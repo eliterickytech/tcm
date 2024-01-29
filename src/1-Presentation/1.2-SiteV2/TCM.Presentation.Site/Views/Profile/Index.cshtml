@@ -57,35 +57,11 @@
 <!-- END page-header -->
 <div class="row">
     <div class="col-xl-10">
-        @*<table class="table table-tbody-bordered table-sm fw-bold m-0">
-            <thead>
-                <tr>
-                    <td class="w-25"><h4>@user</h4><small>Connected since Aug 2022</small></td>
-                    <td class="w-25"></td>
-                    <td class="w-25">
-                        <h4>
-                            <a href="" class="btn-theme btn-icon btn-circle btn-sm" title="Blocked"><i class="fa fa-circle-xmark"></i></a>
-                            &nbsp;
-                            <a href="" class="btn-theme btn-icon btn-circle btn-sm" title="Cancelled"><i class="fa fa-circle-stop"></i></a>
-                        </h4>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="3">
-                        <small>
-                            @user.UserName has <strong>@countCollectionCompleted</strong> completed collections.<br />
-                        </small>
-                    </td>
-                </tr>
-            </tbody>
-        </table>*@
         <table class="table table-tbody-bordered table-sm fw-bold m-0 @(ViewBag.ConnectionUserId == null ? "style=display:block" : "style=display:none")">
             <tbody>
-                <tr >
+                <tr>
                     <td class="h-50px">
-                        Hello, @user.UserName <a href="/Configuration"><i class="fa fa-pen"></i></a> 
+                        Hello, @user.UserName <a href="/Configuration"><i class="fa fa-pen"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -110,18 +86,17 @@
             </tbody>
         </table>
 
-        <div id="carouselCollectionIndicators" class="carousel" data-bs-ride="carousel">
-            <div class="carousel-indicators" id="carouselIndicators">
-                @for (int i = 0; i < collectionsItens.Where(x => x.CollectionItemTypeId == (int)TCM.Services.Model.Enum.CollectionItemType.BackgroundImage).Count(); i++)
-                {
-                    <li data-bs-target="#carouselCollectionIndicators" data-bs-slide-to="@i" @(i == 0 ? "class=active" : "")></li>
-                }
-            </div>
-            <div class="carousel-inner" id="carouselInner">
-                <div class="carousel-item active">testes1</div>
-                <div class="carousel-item">testes2</div>
-                <div class="carousel-item">testes3</div>
-                <div class="carousel-item">teste4</div>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                </div>
             </div>
         </div>
         <table id="collectionOne" class="table table-responsive table-borderless align-middle ">
