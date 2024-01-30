@@ -40,12 +40,16 @@ namespace TCM.Infrastructure.Data.Repository
             catch (Exception ex) { return default; }
         }
 
-        public async Task<IEnumerable<CollectionItemModel>> GetCollectionItemByCollectionIdAsync(int collectionId)
+        public async Task<IEnumerable<CollectionItemModel>> GetCollectionItemByCollectionIdAsync(int? collectionId, int? collectionItemId)
         {
             var query = @"PR_CollectionItem_Select";
 
             var parameters = new DynamicParameters();
-            parameters.Add("CollectionId", collectionId, System.Data.DbType.Int32);
+            if (collectionId.HasValue)
+                parameters.Add("CollectionId", collectionId, System.Data.DbType.Int32);
+
+            if (collectionItemId.HasValue)
+                parameters.Add("CollectionItemId", collectionItemId, System.Data.DbType.Int32);
 
             try
             {

@@ -16,6 +16,8 @@ namespace TCM.Services.Model
 
         public int UserId { get; set; }
 
+        public int Quantity { get; set; }   
+
         public bool Enabled { get; set; } = true;
     }
 }
