@@ -18,6 +18,8 @@
         user = (await _userServices.GetUserAsync(new UserModel() { Id = ViewBag.ConnectionUserId })).FirstOrDefault();
 
         connectionUserId = user.Id.Value;
+
+
     }
     else
     {
@@ -52,18 +54,22 @@
 
 }
 @section Scripts {
-    <script src="~/js/profile.js"></script>
+    <script src="~/StaticFiles/js/profile.js"></script>
 }
     <!-- BEGIN page-header -->
     <h1 class="page-header">Profile <small>show profile...</small></h1>
     <!-- END page-header -->
     <div class="row">
         <div class="col-xl-10 ">
-            <table class="table table-tbody-bordered table-sm fw-bold m-0 @(ViewBag.ConnectionUserId == 0 ? "visible" : "invisible")">
+            <table class="table table-tbody-bordered table-sm fw-bold m-0">
                 <tbody>
                     <tr>
                         <td class="h-50px">
-                            Hello, @user.UserName <a href="/Configuration"><i class="fa fa-pen"></i></a>
+                            Hello, @user.UserName  
+                            @if (ViewBag.ConnectionUserId == 0) 
+                            { 
+                                <a href="/Configuration"><i class='fa fa-pen'></i></a>
+                            } 
                         </td>
                     </tr>
                 </tbody>
@@ -72,7 +78,7 @@
                 <tbody>
                     <tr>
                         <td class="w-25 align-self-center">
-                            <img src="~/img/collectibles.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countCollectionCompleted</span><br />
+                            <img src="~/StaticFiles/img/collectibles.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countCollectionCompleted</span><br />
                             collectibles
 
                         </td>

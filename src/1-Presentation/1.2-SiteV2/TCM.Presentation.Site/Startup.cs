@@ -25,6 +25,8 @@ using TCM.Services.Services;
 using TCM.Infra.Repository;
 using TCM.Infrastructure.Data.Repository;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace TCM.Presentation.Site
 {
@@ -136,7 +138,14 @@ namespace TCM.Presentation.Site
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
+                RequestPath = "/StaticFiles"
+            });
+
             app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             app.UseRouting();

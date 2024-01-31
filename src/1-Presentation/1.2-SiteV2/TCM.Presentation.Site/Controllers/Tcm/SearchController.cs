@@ -30,6 +30,11 @@ namespace TCM.Presentation.Site.Controllers.Tcm
 
             var users = await _userServices.GetUserAsync(new UserModel() { UserName = username });
 
+            if (!users.Any())
+            {
+                users = await _userServices.GetUserAsync(new UserModel() { Email = username });
+            }
+
             if (users.Any()) 
             {
 

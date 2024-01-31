@@ -6,21 +6,21 @@
 @model IEnumerable<TCM.Services.Model.ConnectionsModel>
 
 @section Styles {
-    <link href="~/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link href="~/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
-    <link href="~/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
 
 }
 @section Scripts {
-    <script src="~/js/search.js"></script>
-    <script src="~/lib/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="~/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="~/js/demo/table-manage-responsive.demo.js"></script>
-    <script src="~/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
-    <script src="~/js/demo/render.highlight.js"></script>
-    <script src="~/assets/plugins/summernote/dist/summernote.js"></script>
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/js/demo/table-manage-responsive.demo.js"></script>
+    <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
 }
 <!-- BEGIN page-header -->
 <h1 class="page-header">Connections <small>show connections...</small></h1>
@@ -59,7 +59,7 @@
                                 <td width="30%">@connection.UserName</td>
                                 <td width="30%">@connection.CreatedDate.ToString("MM/dd/yyyy")</td>
                                 <td width="10%" class="align-center">
-                                    <a id="connectionProfile" @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "" : "href=/Profile") class="btn @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="View profile"><i class="fa fa-eye"></i></a>
+                                    <a id="connectionProfile" @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "" : "href=/Profile?connectionUserId=" + connection.UserId) class="btn @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="View profile"><i class="fa fa-eye"></i></a>
                                     &nbsp;
                                     <a id="connectionBlocked" @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "" : "href=/Connection/UpdateStatusIdConnection?id=" + connection.Id + "&connectionStatusType=3") class="btn @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="Block"><i class="fa fa-circle-xmark"></i></a>
                                     &nbsp;

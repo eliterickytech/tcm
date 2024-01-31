@@ -10,22 +10,22 @@
 
 @model IEnumerable<TCM.Services.Model.UserModel>
 @section Styles {
-    <link href="~/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link href="~/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
-    <link href="~/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
 
 }
 @section Scripts {
-    <script src="~/js/invitation.js"></script>
-    <script src="~/js/search.js"></script>
-    <script src="~/lib/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="~/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="~/js/demo/table-manage-responsive.demo.js"></script>
-    <script src="~/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
-    <script src="~/js/demo/render.highlight.js"></script>
-    <script src="~/assets/plugins/summernote/dist/summernote.js"></script>
+    <script src="~/StaticFiles/js/invitation.js"></script>
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/js/demo/table-manage-responsive.demo.js"></script>
+    <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
 }
 <!-- BEGIN page-header -->
 <h1 class="page-header">Search user <small>show user...</small></h1>
@@ -69,7 +69,7 @@
                                     <td class="align-center">
                                         <a href="/Invitation/Add?ConnectionUserId=@user.Id.Value" class="btn btn-theme btn-icon btn-circle btn-sm" title="Add invitation"><i class="fa fa-circle-check"></i></a>
 
-                                        <button id="connectionProfile" disabled="@(user.ProfileId == TCM.Services.Model.Enum.UserType.Administrative)" class="btn @(user.ProfileId == TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="View profile"><i class="fa fa-eye"></i></button>
+                                        <a id="connectionProfile" href="/Profile?connectionUserId=@user.Id.Value" class="btn @(user.ProfileId == TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="View profile"><i class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                             }
