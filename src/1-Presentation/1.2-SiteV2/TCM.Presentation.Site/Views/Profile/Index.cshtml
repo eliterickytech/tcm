@@ -83,11 +83,11 @@
 
                         </td>
                         <td class="w-25 align-self-center">
-                            <img src="~/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countConnection</span><br />
+                            <img src="~/StaticFiles/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countConnection</span><br />
                             connections
                         </td>
                         <td class="w-25 align-self-center">
-                            <img src="~/img/chats.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countChateUnRead</span><br />
+                            <img src="~/StaticFiles/img/chats.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countChateUnRead</span><br />
                             chats
                         </td>
                     </tr>
@@ -127,7 +127,7 @@
                                     @foreach (var itemCollectable in collectionsItemCollectable)
                                     {
                                         var existsCollectionItem = collectionItemUsers.Where(x => x.CollectionItemId == itemCollectable.Id).Any();
-                                        <img id="imgCollectionItem" onclick="showAlert('@itemCollectable.Id')" src="@(string.Concat("/tcm/", itemCollectable.Url ))" data-id="@itemCollectable.Id" data-url="@(string.Concat("/tcm/", itemCollectable.Url ))"
+                                        <img id="imgCollectionItem" onclick="showAlert('@itemCollectable.Id')" src="@(string.Concat("/StaticFiles/tcm/", itemCollectable.Url ))" data-id="@itemCollectable.Id" data-url="@(string.Concat("/tcm/", itemCollectable.Url ))"
                                              @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
                                              alt="@itemCollectable.Description"
                                              width="@itemCollectable.CollectionItemTypeWidth"
