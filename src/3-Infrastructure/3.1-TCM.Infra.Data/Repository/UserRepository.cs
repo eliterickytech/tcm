@@ -66,6 +66,8 @@ namespace TCM.Infra.Repository
             parameters.Add("@Password", user.Password, System.Data.DbType.String);
             parameters.Add("@ProfileId", user.ProfileId == null ? null : ((int)user.ProfileId), System.Data.DbType.Int32);
             parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
+            parameters.Add("@Enabled", user.Enabled, System.Data.DbType.Boolean);
+
 
             return await QueryAsync<UserModel>(query, parameters);
         }

@@ -2,6 +2,11 @@
     ViewData["Title"] = "ChefMelo - Home";
 
 }
+@model HomeViewModel
+@{
+    var topBanner = Model.BannersModel.Where(x => x.BannerTypeId == (int)TCM.Services.Model.Enum.BannerType.Top).FirstOrDefault();
+    var middleBanner = Model.BannersModel.Where(x => x.BannerTypeId == (int)TCM.Services.Model.Enum.BannerType.Middle).FirstOrDefault();
+}
 @section Styles {
     <link href="~/StaticFiles/lib/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
     <link href="~/StaticFiles/lib/nvd3/build/nv.d3.css" rel="stylesheet" />
@@ -20,12 +25,73 @@
 
 
 <!-- BEGIN page-header -->
-<h1 class="page-header mb-3">Home</h1>
+<h1 class="page-header">Home <small>show home...</small></h1>
 <!-- END page-header -->
 <!-- BEGIN row -->
 <div class="row">
     <!-- BEGIN col-6 -->
-    <div class="col-xl-6">
+    <div class="col-xl-10 align-self-center ">
+        <div class="text-center">
+            <a href="@topBanner.BannerRedirectTo">
+                <img width="@topBanner.BannerTypeWidth" height="@topBanner.BannerTypeHeight" src="/StaticFiles/tcm/@topBanner.BannerUrl" alt="">
+            </a>
+        </div>
+        <div class="row-cols-10 text-center align-self-center">
+            @if (middleBanner.BannerVideo)
+            {
+                <video controls autoplay width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")">
+                    <source width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="video/mp4">
+                    <object>
+                        <embed width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="application/x-shockwave-flash"
+                               allowfullscreen="false" allowscriptaccess="always">
+                    </object>
+                    Formato não suportado
+                </video>
+            }
+            else
+            {
+                <img width="@middleBanner.BannerTypeWidth" height="@middleBanner.BannerTypeHeight" src="/StaticFiles/tcm/@middleBanner.BannerUrl" alt="">
+            }
+        </div>
+        <div class="row-cols-6 mt-15px text-center">
+            <a href="https://melopatisserie.com" target="_blank" class="btn btn-theme w-50 h-40px">VISIT THE WEBSITE</a>
+        </div>
+        <div class="row-cols-10 mt-10 align-self-center text-center">
+            <hr class="my-4 bg-gray-500 align-self-center" />
+        </div>
+        <div class="row-cols-8 mt-10 mb-10 align-self-center text-center">
+            <div id="carouselCollectionIndicators" data-bs-touch="true" data-bs-ride="carousel">
+                <div class="carousel-inner  align-self-center text-center" id="carouselInner">
+                    @for (int i = 0; i < Model.CollectionsItemModel.Count; i++)
+                    {
+
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <div class="gallery-v2 align-self-center text-center">
+                                @for (int r = 0; r < (Model.CollectionsItemModel.Count() >= 4 ? 4 : Model.CollectionsItemModel.Count()); r++)
+                                {
+
+                                    <div class="w-25">
+
+                                        <img id="imgCollectionItem" src="~/StaticFiles/tcm/@Model.CollectionsItemModel[r].Url" data-id="@Model.CollectionsItemModel[r].Id"
+                                             alt="@Model.CollectionsItemModel[r].Description"
+                                             width="@Model.CollectionsItemModel[r].CollectionItemTypeWidth"
+                                             height="@Model.CollectionsItemModel[r].CollectionItemTypeHeigh" />
+                                    </div>
+
+                                }
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row-cols-10 mt-10 align-self-center text-center">
+            <hr class="my-4 bg-gray-500 align-self-center" />
+        </div>
+        <div class="row-cols-6 mt-25 text-center">
+            <a href="/Chat" target="_blank" class="btn btn-theme w-50 h-40px">CHAT WITH US</a>
+        </div>
     </div>
     <!-- END col-6 -->
 </div>

@@ -50,28 +50,32 @@ namespace TCM.Presentation.Site.Controllers
             {
                 var userMode = await _userServices.GetUserAsync(new UserModel() { Id = result.Id });
 
-                if (DateTime.Now > result.LastAccessDate.AddDays(15))
+                if (result.ProfileId == TCM.Services.Model.Enum.UserType.User)
                 {
 
-                    if (result != null)
+                    if (DateTime.Now > result.LastAccessDate.AddDays(15))
                     {
 
-                        var code = Code.GeneratedCode(6);
-
-                        var resultLogin = await _userServices.GetLoginAsync(user, password);
-
-                        var resultCode = await _codeServices.SaveCodeAsync(resultLogin?.Id, code);
-
-                        if (resultCode > 0)
+                        if (result != null)
                         {
-                            resultModel.StatusCode = System.Net.HttpStatusCode.OK;
-                            resultModel.Data = resultLogin;
-                            resultModel.IsOK = true;
-                            resultModel.Redirect = GeneratedToken(resultLogin.Email, code, false);
-                        }
-                    }
 
-                    return new JsonResult(resultModel);
+                            var code = Code.GeneratedCode(6);
+
+                            var resultLogin = await _userServices.GetLoginAsync(user, password);
+
+                            var resultCode = await _codeServices.SaveCodeAsync(resultLogin?.Id, code);
+
+                            if (resultCode > 0)
+                            {
+                                resultModel.StatusCode = System.Net.HttpStatusCode.OK;
+                                resultModel.Data = resultLogin;
+                                resultModel.IsOK = true;
+                                resultModel.Redirect = GeneratedToken(resultLogin.Email, code, false);
+                            }
+                        }
+
+                        return new JsonResult(resultModel);
+                    }
                 }
 
                 var tokenJWT = _utils.GenerateToken(userMode.FirstOrDefault());
@@ -88,9 +92,7 @@ namespace TCM.Presentation.Site.Controllers
                 HttpContext.Session.SetString("ProfileId", ((int)result.ProfileId).ToString());
                 HttpContext.Session.SetString("UserName", result.UserName);
                 HttpContext.Session.SetString("Email", result.Email);
-                HttpContext.Session.SetString("Id", result.Id.Value.ToString());
-                
-                
+                HttpContext.Session.SetString("Id", result.Id.Value.ToString());                               
 
                 if (result.ProfileId ==  TCM.Services.Model.Enum.UserType.User)
                 {

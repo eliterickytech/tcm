@@ -24,6 +24,10 @@ namespace ColorAdmin
                     config.AddJsonFile("sidebar.json",
                         optional: true,
                         reloadOnChange: true);
+
+                    config.AddJsonFile("sidebarAdm.json",
+                        optional: true,
+                        reloadOnChange: true);    
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

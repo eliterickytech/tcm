@@ -1,0 +1,46 @@
+﻿{
+  "sidebarMenuAdm": [
+    {
+      "controller": "ManageCollection",
+      "action": "Adm",
+      "icon": "fa fa-gem",
+      "text": "Manage Collection"
+    },
+    {
+      "controller": "SendDelights",
+      "action": "Adm",
+      "icon": "fa fa-users",
+      "text": "Send Delights"
+    },
+    {
+      "controller": "ManagerBanner",
+      "action": "Adm",
+      "icon": "fa fa-user-xmark",
+      "text": "Manage Banners"
+    },
+    {
+      "controller": "ManagerUser",
+      "action": "Adm",
+      "icon": "fa fa-user-xmark",
+      "text": "Manage User"
+    },
+    {
+      "controller": "ManagerPermission",
+      "action": "Adm",
+      "icon": "fa fa-right-to-bracket",
+      "text": "Permission"
+    },
+    {
+      "controller": "Support",
+      "action": "Adm",
+      "icon": "fab fa-rocketchat",
+      "text": "Support"
+    },
+    {
+      "controller": "Login",
+      "action": "Logoff",
+      "icon": "fa fa-circle-left",
+      "text": "Logoff"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<TCM.Services.Model.UserModel>
+
+@section Styles {
+    <link href="~/StaticFiles/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/gritter/css/jquery.gritter.css" rel="stylesheet" />
+
+}
+@section Scripts {
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/manageUser.js"></script>
+    <script src="~/StaticFiles/js/demo/ui-modal-notification.demo.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/js/demo/table-manage-responsive.demo.js"></script>
+    @*<script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+        <script src="~/StaticFiles/js/demo/render.highlight.js"></script>*@
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
+}
+<!-- BEGIN page-header -->
+<h1 class="page-header">Administrator <small>show users...</small></h1>
+<!-- END page-header -->
+<div class="row">
+    <div class="col-xl-10 ">
+        <div class="row">
+            <div class="col-xl-10">
+                <div class="panel text-white" data-sortable-id="ui-widget-21">
+                    <!-- BEGIN panel-heading -->
+                    <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                        <h4 class="panel-title">Users</h4>
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table id="data-table-responsive" class="table table-striped table-bordered align-middle" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @user.UserName
+                                        </td>
+                                        <td>
+                                            <div class="d-inline-flex">
+                                                <button name="cancelled" id="cancelled" data-userid="@user.Id" type="button" class="btn btn-theme btn-icon btn-circle btn-sm" style="@(user.Enabled ? "display:block" : "display:none")" title="Cancel">
+                                                    <i class="fa fa-circle-stop"></i>
+                                                </button>
+                                                <button name="enabled" id="enabled" data-userid="@user.Id" type="button" class="btn btn-theme btn-icon btn-circle btn-sm" style="@(user.Enabled ? "display:none" : "display:block")" title="Enable">
+                                                    <i class="fa fa-circle-check"></i>
+                                                </button>
+                                                &nbsp;
+                                                <button name="chat" id="chat" data-userid="@user.Id" type="button" class="btn btn-theme btn-icon btn-circle btn-sm" title="Chat">
+                                                    <i class="fa fa-message"></i>
+                                                </button>
+                                                &nbsp;
+                                                <button name="profile" id="profile" data-userid="@user.Id" type="button" class="btn btn-theme btn-icon btn-circle btn-sm" title="Profile">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@section Styles {
+    <link href="~/StaticFiles/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+
+}
+@section Scripts {
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/permission.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/js/demo/table-manage-responsive.demo.js"></script>
+    <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
+}
+
+<!-- BEGIN page-header -->
+<h1 class="page-header">Administrator <small>alter permission...</small></h1>
+<!-- END page-header -->
+<div class="row">
+    <div class="col-xl-10 ">
+        <div class="panel text-white" data-sortable-id="ui-widget-21">
+            <!-- BEGIN panel-heading -->
+            <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                <h4 class="panel-title">Permissions</h4>
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="panel-body text-black">
+                <div class="row">
+                    <h5 class="fw-bolder">
+                        Permissions
+                    </h5>
+                    <p>
+                        Tap the delete button to change the app permissions or add a new admin and confirm your password to apply the changes
+                    </p>
+                </div>
+                <div class="row">
+                    <hr class="my-4 bg-gray-500 align-self-center" />
+                </div>
+                <div class="row">
+                    <h5>Admin a new admin</h5>
+                </div>
+                <div>
+                    <form id="formPermission"
+                          name="formPermission"
+                          data-parsley-validate="true"
+                          class="needs-validation"
+                          method="post"
+                          novalidate>
+                        <div class="row mb-10px">
+                            <label class="form-label col-form-label col-md-3">E-mail*</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" id="email" name="email" placeholder="Enter your e-mail" required />
+                            </div>
+                        </div>
+                        <div class="row mb-10px">
+                            <label class="form-label col-form-label col-md-3">Confirm your e-mail*</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" id="confirmEmail" name="confirmEmail" placeholder="Confirm your e-mail" required />
+                            </div>
+                        </div>
+                        <div class="row mb-10px">
+                            <label class="form-label col-form-label col-md-3">Password*</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" id="password" name="password" placeholder="Enter your password" required />
+                            </div>
+                        </div>
+                        <div class="row mb-10px">
+                            <button type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg">SAVE CHANGES</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

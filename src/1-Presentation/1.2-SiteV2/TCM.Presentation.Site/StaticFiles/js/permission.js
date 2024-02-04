@@ -1,47 +1,46 @@
 ﻿function AjaxSucceeded(result) {
+    var form = $("#formUser")
 
     if (!result.isOK) {
         handleGritterNotificationMessages("Message warning", result.errors);
     }
     else {
-
-        handleGritterNotificationMessages("Message success", result.data);
-        setTimeout(function () {
-            window.location.href = result.redirect;
-        }, 3000);
-
+        window.location.href = result.redirect;
     }
+
 }
+
 function AjaxFailed(result) {
-
     if (result.errors != null) {
-
         handleGritterNotificationMessages("Message danger", result.errors);
     };
+
 }
 $(document).ready(function () {
 
-    $("#formPermission").submit(function (event) {
+    $("#formUser").submit(function (event) {
 
-        var form = $("#formPermission")
+        var form = $("#formUser")
         if (form[0].checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
         }
         else {
             var formData = {
-                password: $("#password").val(),
-                email: $("#email").val(),
-                confirmEmail: $("#confirmEmail").val(),
+                "Fullname": $("#fullname").val(),
+                "Email": $("#email").val(),
+                "Username": $("#username").val(),
+                "MobilePhone": $("#mobile").val().replace(/[+()\s-]/g, ''),
+                "Password": $("#password").val(),
+                "ConfirmPassword": $("#confirmPassword").val(),
             };
 
-            var dados = JSON.stringify(formData);
-
             $.ajax({
-                type: "GET",
-                url: `ManagerPassword/Update`,
-                data: dados,
-                dataType: "json",
+                type: 'POST',
+                url: "/CreateAccount/AddUser",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                contentType: 'application/json',
                 encode: true,
                 success: AjaxSucceeded,
                 error: AjaxFailed
@@ -50,8 +49,6 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {
     'use strict'
 
