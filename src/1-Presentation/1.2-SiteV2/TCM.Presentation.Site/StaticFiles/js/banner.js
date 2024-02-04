@@ -1,12 +1,11 @@
-﻿function AjaxSucceeded(result) {
+function AjaxSucceeded(result) {
+
+
     if (!result.isOK) {
         handleGritterNotificationMessages("Message warning", result.errors);
     }
     else {
-        handleGritterNotificationMessages("Message success", result.data);
-        setTimeout(function () {
-            window.location.href = result.redirect;
-        }, 3000);
+        window.location.href = result.redirect;
     }
 
 }
@@ -19,25 +18,27 @@ function AjaxFailed(result) {
 }
 $(document).ready(function () {
 
-    $("#formPermission").submit(function (event) {
+    $("#formBanner").submit(function (event) {
 
-        var form = $("#formPermission")
+        var form = $("#formBanner")
         if (form[0].checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
         }
         else {
             var formData = {
-                "email": $("#email").val(),
-                "confirmEmail": $("#confirmEmail").val(),
-                "password": $("#password").val(),
-                "userId": $("#userId").val()
+                "Fullname": $("#fullname").val(),
+                "Email": $("#email").val(),
+                "Username": $("#username").val(),
+                "MobilePhone": $("#mobile").val().replace(/[+()\s-]/g, ''),
+                "Password": $("#password").val(),
+                "ConfirmPassword": $("#confirmPassword").val(),
             };
 
 
             $.ajax({
                 type: 'POST',
-                url: "/ManagerPermission/Update",
+                url: "/ManagerBannerTop/GetBannerAsync",
                 data: JSON.stringify(formData),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -46,7 +47,7 @@ $(document).ready(function () {
                 error: AjaxFailed
             });
         }
-        event.preventDefault();
+      event.preventDefault();
     });
 });
 (() => {
@@ -67,3 +68,4 @@ $(document).ready(function () {
         }, false)
     })
 })()
+$('#mobile').inputmask('+1 (999) 999-9999');

@@ -14,9 +14,20 @@
     },
     {
       "controller": "ManagerBanner",
-      "action": "Adm",
       "icon": "fa fa-user-xmark",
-      "text": "Manage Banners"
+      "text": "Manage Banners",
+      "children": [
+        {
+          "controller": "ManagerBannerTop",
+          "action": "Adm",
+          "text": "Banner Top"
+        },
+        {
+          "controller": "ManagerBannerMiddle",
+          "action": "Adm",
+          "text": "Banner Middle"
+        }
+      ]
     },
     {
       "controller": "ManagerUser",

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<TCM.Services.Model.BannerModel>
+@{
+    var banner = Model.Where(x => x.BannerTypeId == (int)TCM.Services.Model.Enum.BannerType.Top)?.FirstOrDefault();
+}
+
+@section Styles {
+    <link href="~/StaticFiles/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+
+}
+@section Scripts {
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/banner.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/StaticFiles/lib/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/js/demo/table-manage-responsive.demo.js"></script>
+    <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
+}
+<!-- BEGIN page-header -->
+<h1 class="page-header">Administrator <small>show banner top...</small></h1>
+<!-- END page-header -->
+<div class="row">
+    <div class="col-xl-10 ">
+        <div class="panel text-white" data-sortable-id="ui-widget-21">
+            <!-- BEGIN panel-heading -->
+            <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                <h4 class="panel-title">Banners</h4>
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="panel-body text-black">
+                <div class="@(banner != null ? "visible": "invisible")">
+                    <div class="row">
+                        <h6>Current</h6>
+                        <div class="p-4">
+                            <img src="~/StaticFiles/tcm/@banner.BannerUrl" width="@banner.BannerTypeWidth" height="@banner.BannerTypeHeight" alt="Responsive image">
+                        </div>
+                        <h6>Redirect to: <span class="text-orange-600">@banner.BannerRedirectTo</span></h6>
+                    </div>
+                    <div class="row">
+                        <hr class="my-4 bg-gray-500" />
+                    </div>
+                </div>
+                <div class="row">
+                    <form id="formBanner"
+                          name="formBanner"
+                          data-parsley-validate="true"
+                          enctype="multipart/form-data"
+                          class="needs-validation"
+                          method="post"
+                          novalidate>
+                        <h6 class="mb-20px">New upload</h6>
+                        <div class="row mb-10px">
+                            <label class="form-label" for="imageUpload">Upload image</label>
+                            <input type="file" class="form-control fs-13px h-45px border-1" name="imageUpload" id="imageUpload" required>
+                        </div>
+                        <div class="row mb-10px">
+                            <label class="form-label" for="redirectTo">Redirect to</label>
+                            <input type="text" placeholder="Url for redirect" class="form-control fs-13px h-45px border-1" name="redirectTo" id="redirectTo">
+                        </div>
+                        <div class="row mb-10px">
+                            <label class="form-label" for="password">Confirm password</label>
+                            <input type="password"
+                                   class="form-control fs-13px h-45px border-1"
+                                   placeholder="PIN"
+                                   data-parsley-type="number"
+                                   data-parsley-minlength="5"
+                                   data-parsley-maxlength="12"
+                                   data-parsley-pattern="[0-9]{5,12}"
+                                   minlength="5"
+                                   pattern="[0-9]{5,12}"
+                                   maxlength="12"
+                                   name="password"
+                                   id="password"
+                                   required />
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
