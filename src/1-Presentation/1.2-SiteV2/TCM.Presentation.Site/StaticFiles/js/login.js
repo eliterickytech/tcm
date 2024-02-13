@@ -5,10 +5,8 @@
     }
     else {
 
-        handleGritterNotificationMessages("Message success", result.data);
-        setTimeout(function () {
-            window.location.href = result.redirect;
-        }, 3000);
+        window.location.href = result.redirect;
+
 
     }
 }
@@ -21,9 +19,9 @@ function AjaxFailed(result) {
 }
 $(document).ready(function () {
 
-    $("#formPermission").submit(function (event) {
+    $("#formLogin").submit(function (event) {
 
-        var form = $("#formPermission")
+        var form = $("#formLogin")
         if (form[0].checkValidity() === false) {
             event.preventDefault()
             event.stopPropagation()
@@ -31,17 +29,15 @@ $(document).ready(function () {
         else {
             var formData = {
                 password: $("#password").val(),
-                email: $("#email").val(),
-                confirmEmail: $("#confirmEmail").val(),
+                user: $("#username").val(),
             };
 
-            var dados = JSON.stringify(formData);
-
             $.ajax({
-                type: "GET",
-                url: `ManagerPassword/Update`,
-                data: dados,
+                type: "POST",
+                url: `Login/LoginUser`,
+                data: JSON.stringify(formData),
                 dataType: "json",
+                contentType: 'application/json',
                 encode: true,
                 success: AjaxSucceeded,
                 error: AjaxFailed
@@ -50,6 +46,8 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
+
+
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (() => {

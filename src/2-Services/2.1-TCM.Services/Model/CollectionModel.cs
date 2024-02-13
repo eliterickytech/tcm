@@ -25,5 +25,7 @@ namespace TCM.Services.Model
         public bool Enabled { get; set; } = true;
 
         public DateTime CollectionCreatedDate { get; set; } 
+
+        public string Description { get; set; } 
     }
 }

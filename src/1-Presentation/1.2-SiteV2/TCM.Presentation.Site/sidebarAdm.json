@@ -1,7 +1,7 @@
 ﻿{
   "sidebarMenuAdm": [
     {
-      "controller": "ManageCollection",
+      "controller": "ManagerCollection",
       "action": "Adm",
       "icon": "fa fa-gem",
       "text": "Manage Collection"

@@ -1,0 +1,111 @@
+﻿@section Styles {
+    <link href="~/StaticFiles/lib/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/gritter/css/jquery.gritter.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/StaticFiles/js/manageCollection.js"></script>
+
+    <script src="~/StaticFiles/assets/plugins/select2/dist/js/select2.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/moment/min/moment.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/StaticFiles/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.js"></script>
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/assets/plugins/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/assets/js/demo/render.highlight.js"></script>
+    <script src="~/StaticFiles/lib/gritter/js/jquery.gritter.js"></script>
+    <script src="~/StaticFiles/js/demo/ui-modal-notification.demo.js"></script>
+}
+
+<!-- BEGIN page-header -->
+<h1 class="page-header">Collection <small>add new collection...</small></h1>
+<!-- END page-header -->
+<!-- BEGIN row -->
+<div class="row">
+    <div class="col-xl-10">
+        <div class="panel panel-inverse">
+            <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                <h4 class="panel-title">Register new collection</h4>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xl-10">
+                        <div class="nav-wizards-container" style="overflow:hidden">
+                            <nav class="nav nav-wizards-1">
+                                <div class="nav-item">
+                                    <a class="nav-link active" href="#">
+                                        <div class="nav-no">1</div>
+                                        <div class="nav-text">Add new collection</div>
+                                    </a>
+                                </div>
+                                <div class="nav-item col">
+                                    <a class="nav-link disabled" href="#">
+                                        <div class="nav-no">2</div>
+                                        <div class="nav-text">Add new items</div>
+                                    </a>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <hr class="bg-gray-400" />
+                </div>
+                <form data-parsley-validate="true"
+                      class="needs-validation"
+                      method="post"
+                      novalidate
+                      id="formNewCollection"
+                      name="formNewCollection">
+                    <div class="form-floating mb-10px">
+                        <input type="text" class="form-control fs-13px  border-1" placeholder="Try typing collection name" id="collectionName" name="collectionName" required />
+                        <label for="collectionName" class="d-flex align-items-center text-gray-600 fs-13px">Collection name</label>
+                    </div>
+                    <div class="row mb-10px">
+                        <label class="form-label col-form-label col-md-2">Shortened name*</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="shortenedName" name="shortenedName" placeholder="Shortened name for home screen display" required />
+                        </div>
+                    </div>
+                    <div class="row mb-10px">
+                        <label class="form-label col-form-label col-md-2">Available at*</label>
+                        <div class="col-md-5">
+                            <div class="input-group date mb-20px" id="divavailableAt" data-date-format="mm/dd/yyyy" data-date-start-date="Date.default">
+                                <input type="text" class="form-control" id="availableAt" name="availableAt" placeholder="Select Date" required />
+                                <span class="input-group-text input-group-addon"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="input-group bootstrap-timepicker">
+                                <input id="timepicker" type="text" class="form-control" required />
+                                <span class="input-group-text input-group-addon"><i class="fa fa-clock"></i></span>
+                            </div>
+                        </div>
+                        <div class="row mb-10px">
+                            <label class="form-label col-form-label col-md-2">Collection type*</label>
+                            <div class="col-md-10">
+                                <select id="collectiontype" class="default-select2 form-control" required>
+                                    <option value="1">Single page</option>
+                                    <option value="2">2x2 grid</option>
+                                    <option value="3">3x3 grid</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-10px">
+                        <input type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg" value="SAVE" />
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -31,27 +31,29 @@
 <div class="row">
     <!-- BEGIN col-6 -->
     <div class="col-xl-10 align-self-center ">
-        <div class="text-center">
-            <a href="@topBanner.BannerRedirectTo">
+        <div class="row-cols-10 text-center align-self-center mb-10px">
+            <a href="@topBanner.BannerRedirectTo" target="_blank">
                 <img width="@topBanner.BannerTypeWidth" height="@topBanner.BannerTypeHeight" src="/StaticFiles/tcm/@topBanner.BannerUrl" alt="">
             </a>
         </div>
         <div class="row-cols-10 text-center align-self-center">
-            @if (middleBanner.BannerVideo)
-            {
-                <video controls autoplay width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")">
-                    <source width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="video/mp4">
-                    <object>
-                        <embed width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="application/x-shockwave-flash"
-                               allowfullscreen="false" allowscriptaccess="always">
-                    </object>
-                    Formato não suportado
-                </video>
-            }
-            else
-            {
-                <img width="@middleBanner.BannerTypeWidth" height="@middleBanner.BannerTypeHeight" src="/StaticFiles/tcm/@middleBanner.BannerUrl" alt="">
-            }
+            <a href="@middleBanner.BannerRedirectTo" target="_blank">
+                @if (middleBanner.BannerVideo)
+                {
+                    <video controls autoplay width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")">
+                        <source width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="video/mp4">
+                        <object>
+                            <embed width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="application/x-shockwave-flash"
+                                   allowfullscreen="false" allowscriptaccess="always">
+                        </object>
+                        Formato não suportado
+                    </video>
+                }
+                else
+                {
+                    <img width="@middleBanner.BannerTypeWidth" height="@middleBanner.BannerTypeHeight" src="/StaticFiles/tcm/@middleBanner.BannerUrl" alt="">
+                }
+            </a>
         </div>
         <div class="row-cols-6 mt-15px text-center">
             <a href="https://melopatisserie.com" target="_blank" class="btn btn-theme w-50 h-40px">VISIT THE WEBSITE</a>

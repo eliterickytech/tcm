@@ -1,23 +1,21 @@
 function AjaxSucceeded(result) {
-
-
     if (!result.isOK) {
         handleGritterNotificationMessages("Message warning", result.errors);
     }
     else {
-        window.location.href = result.redirect;
+        handleGritterNotificationMessages("Message success", result.data);
+        setTimeout(function () {
+            window.location.href = result.redirect;
+        }, 3000);
     }
-
 }
 
 function AjaxFailed(result) {
     if (result.errors != null) {
         handleGritterNotificationMessages("Message danger", result.errors);
     };
-
 }
 $(document).ready(function () {
-
     $("#formBanner").submit(function (event) {
 
         var form = $("#formBanner")
@@ -25,30 +23,70 @@ $(document).ready(function () {
             event.preventDefault()
             event.stopPropagation()
         }
-        else {
-            var formData = {
-                "Fullname": $("#fullname").val(),
-                "Email": $("#email").val(),
-                "Username": $("#username").val(),
-                "MobilePhone": $("#mobile").val().replace(/[+()\s-]/g, ''),
-                "Password": $("#password").val(),
-                "ConfirmPassword": $("#confirmPassword").val(),
-            };
+        else { 
 
+
+            var formU = $('#formBanner')[0];
+
+            var formData = new FormData(formU);
+
+            formData.append("redirectTo", $("#redirectTo").val())
+            formData.append("password", $("#password").val())
+            formData.append("imageUpload", $("#imageUpload")[0])
 
             $.ajax({
-                type: 'POST',
-                url: "/ManagerBannerTop/GetBannerAsync",
-                data: JSON.stringify(formData),
+                method: 'POST',
+                url: "/ManagerBannerTop/ProcessForm",
+                data: formData,
+                enctype: 'multipart/form-data',
                 dataType: 'json',
-                contentType: 'application/json',
+                contentType: false,
                 encode: true,
+                processData: false,
+                cache: false,
                 success: AjaxSucceeded,
                 error: AjaxFailed
             });
         }
       event.preventDefault();
     });
+
+    $("#formBannerMiddle").submit(function (event) {
+
+        var form = $("#formBannerMiddle")
+        if (form[0].checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+        else {
+
+
+            var formU = $('#formBannerMiddle')[0];
+
+            var formData = new FormData(formU);
+
+            formData.append("redirectTo", $("#redirectTo").val())
+            formData.append("password", $("#password").val())
+            formData.append("imageUpload", $("#imageUpload")[0])
+            formData.append("video", $("#typeBanner").is(':checked'))
+
+            $.ajax({
+                method: 'POST',
+                url: "/ManagerBannerMiddle/ProcessForm",
+                data: formData,
+                enctype: 'multipart/form-data',
+                dataType: 'json',
+                contentType: false,
+                encode: true,
+                processData: false,
+                cache: false,
+                success: AjaxSucceeded,
+                error: AjaxFailed
+            });
+        }
+        event.preventDefault();
+    });
+
 });
 (() => {
     'use strict'
@@ -68,4 +106,3 @@ $(document).ready(function () {
         }, false)
     })
 })()
-$('#mobile').inputmask('+1 (999) 999-9999');

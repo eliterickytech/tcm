@@ -28,6 +28,7 @@ namespace TCM.Infrastructure.Data.Repository
             parameters.Add("@BannerTypeId", banner.BannerTypeId, System.Data.DbType.Int32);
             parameters.Add("@BannerUrl", banner.BannerUrl, System.Data.DbType.String);
             parameters.Add("@BannerRedirectTo", banner.BannerRedirectTo, System.Data.DbType.String);
+            parameters.Add("@BannerVideo", banner.BannerVideo, System.Data.DbType.Boolean);
 
             return await ExecuteAsync(query, parameters);
         }

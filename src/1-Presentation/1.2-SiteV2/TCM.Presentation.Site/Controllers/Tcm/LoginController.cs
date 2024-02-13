@@ -6,6 +6,7 @@ using TCM.Services.Interfaces.Services;
 using TCM.CrossCutting.Helpers;
 using TCM.Services.Model;
 using System.Linq;
+using TCM.Presentation.Site.Models;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -32,10 +33,10 @@ namespace TCM.Presentation.Site.Controllers
 
             return RedirectToAction("Index", "Login");
         }
-
-        public async Task<JsonResult> GetUser(string user, string password)
+        [HttpPost]
+        public async Task<JsonResult> LoginUser([FromBody] LoginViewModel model)
         {
-            var result = await _userServices.GetLoginAsync(user, password);
+            var result = await _userServices.GetLoginAsync(model.User, model.Password);
 
             var resultModel = new ResultModel();
 
@@ -61,16 +62,14 @@ namespace TCM.Presentation.Site.Controllers
 
                             var code = Code.GeneratedCode(6);
 
-                            var resultLogin = await _userServices.GetLoginAsync(user, password);
-
-                            var resultCode = await _codeServices.SaveCodeAsync(resultLogin?.Id, code);
+                            var resultCode = await _codeServices.SaveCodeAsync(result?.Id, code);
 
                             if (resultCode > 0)
                             {
                                 resultModel.StatusCode = System.Net.HttpStatusCode.OK;
-                                resultModel.Data = resultLogin;
+                                resultModel.Data = result;
                                 resultModel.IsOK = true;
-                                resultModel.Redirect = GeneratedToken(resultLogin.Email, code, false);
+                                resultModel.Redirect = GeneratedToken(result.Email, code, false);
                             }
                         }
 

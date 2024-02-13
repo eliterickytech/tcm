@@ -11,6 +11,8 @@ namespace TCM.Services.Model
         public int Id { get; set; }
         public int CollectionId { get; set; }
 
+        public string CollectionName { get; set; }  
+
         public int CollectionItemTypeId { get; set; }
 
         public string CollectionItemTypeName { get; set; }

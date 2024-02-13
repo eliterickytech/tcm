@@ -31,6 +31,7 @@ namespace TCM.Infrastructure.Data.Repository
             parameters.Add("Name", model.CollectionName, System.Data.DbType.String);
             parameters.Add("AvailableDate", model.AvailableDate, System.Data.DbType.DateTime);
             parameters.Add("IsPhysicalAward", model.IsPhysicalAward, System.Data.DbType.Boolean);
+            parameters.Add("Description", model.Description, System.Data.DbType.String);
             try
             {
                 var result = await ExecuteScalarAsync(query, parameters);

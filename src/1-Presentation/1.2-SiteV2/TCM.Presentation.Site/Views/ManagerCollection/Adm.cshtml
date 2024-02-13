@@ -1,0 +1,75 @@
+﻿@model TCM.Presentation.Site.Models.HomeViewModel;
+
+@section Styles {
+    <link href="~/StaticFiles/lib/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+
+}
+@section Scripts {
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/manageCollection.js"></script>
+    <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
+    <script src="~/StaticFiles/lib/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/StaticFiles/js/demo/ui-modal-notification.demo.js"></script>
+}
+<!-- BEGIN page-header -->
+<h1 class="page-header">Collection <small>show all collections...</small></h1>
+<!-- END page-header -->
+<!-- BEGIN row -->
+<div class="row">
+    <div class="col-xl-10 mb-15px text-end">
+        <button class="btn btn-theme" id="btnAddCollection">Add new Collection</button>
+    </div>
+</div>
+@foreach (var collection in Model.CollectionsModel.ToList().Where(x => x.Enabled).DistinctBy(x => x.CollectionName))
+{
+    <div class="row">
+        <div class="col-xl-10">
+            <div class="panel panel-inverse">
+                <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                    <h4 class="panel-title">@collection.CollectionName</h4>
+                    <div class="btn-group btn-group-toggle my-n1" data-toggle="buttons">
+                        <input type="radio" name="delete" data-id="@collection.Id" class="btn-check" id="delete" autocomplete="off" checked />
+                        <label class="btn btn-danger btn-xs" for="delete">Delete</label>
+                    </div>
+                </div>
+                <div class="panel-body text-black">
+                    <table id="data-table-responsive" class="table table-striped align-middle" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Collection Name
+                                </th>
+                                <th>
+                                    Item
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CollectionsItemModel.Where(x => x.CollectionName == collection.CollectionName))
+                            {
+                                <tr>
+                                    <td>
+                                        @item.CollectionName
+                                    </td>
+                                    <td>
+                                        @item.Description
+                                    </td>
+                                    <td>
+                                        @item.CollectionItemTypeName
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
