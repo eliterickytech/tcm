@@ -1,0 +1,145 @@
+﻿@model TCM.Services.Model.CollectionModel
+@{
+    ViewData["Title"] = "Chef Melo - Collection new Item Surprise";
+}
+@section Styles {
+    <link href="~/StaticFiles/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="~/StaticFiles/lib/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/lightbox2/dist/css/lightbox.css" rel="stylesheet" />
+
+}
+@section Scripts {
+    <script src="~/StaticFiles/lib/gritter/js/jquery.gritter.js"></script>
+    <script src="~/StaticFiles/assets/plugins/select2/dist/js/select2.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/moment/min/moment.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/StaticFiles/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.js"></script>
+
+    <script src="~/StaticFiles/assets/plugins/isotope-layout/dist/isotope.pkgd.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/lightbox2/dist/js/lightbox.min.js"></script>
+    <script src="~/StaticFiles/assets/js/demo/gallery.demo.js"></script>
+
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/site.js"></script>
+    <script src="~/StaticFiles/js/manageCollectionSurprise.js"></script>
+}
+<!-- BEGIN page-header -->
+<h1 class="page-header">Collection <small>add new item surprise with collection...</small></h1>
+<!-- END page-header -->
+<!-- BEGIN row -->
+<div class="row">
+    <div class="col-xl-10">
+        <div class="panel panel-inverse">
+            <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                <h4 class="panel-title">Collection @Model.CollectionName</h4>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="nav-wizards-container" style="overflow:hidden">
+                <nav class="nav nav-wizards-1">
+                    <div class="nav-item col-xl-4">
+                        <a class="nav-link completed" href="#">
+                            <div class="nav-no">1</div>
+                            <div class="nav-text">Add new collection</div>
+                        </a>
+                    </div>
+                    <div class="nav-item col-xl-4">
+                        <a class="nav-link completed" href="#">
+                            <div class="nav-no">2</div>
+                            <div class="nav-text">Add new items</div>
+                        </a>
+                    </div>
+                    <div class="nav-item col-xl-4">
+                        <a class="nav-link active" href="#">
+                            <div class="nav-no">3</div>
+                            <div class="nav-text">Surprise item</div>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="row">
+                <hr class="bg-gray-400" />
+            </div>
+            <form id="fileuploadSurprise"
+                  name="fileuploadSurprise"
+                  data-parsley-validate="true"
+                  enctype="multipart/form-data"
+                  class="needs-validation"
+                  method="post"
+                  novalidate>
+                <input type="hidden" id="collectionId" name="collectionId" value="@Model.Id" />
+                <input type="hidden" id="collectionTypeId" name="collectionTypeId" value="@Model.CollectionTypeId" />
+                <input type="hidden" id="collectionName" name="collectionName" value="@Model.CollectionName" />
+                <div class="row fileupload-buttonbar">
+                    <div class="col-xl-7">
+                        <span class="btn btn-primary fileinput-button me-1">
+                            <i class="fa fa-fw fa-plus"></i>
+                            <span>Add file...</span>
+                            <input type="file" id="imagemInput" name="imagemInput">
+                        </span>
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-panel text-nowrap mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">PREVIEW</th>
+                                        <th width="10%">VIDEO DESCRIPTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="files">
+                                    <tr id="emptyFiles">
+                                        <td colspan="4" class="text-center text-gray-500 py-30px">
+                                            <div class="mb-10px"><i class="fa fa-file fa-3x"></i></div>
+                                            <div class="fw-bold">No file selected</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                        </div>
+                    </div>
+                    <div class="row" id="fullFiles" style="display:none">
+                        <div class="row">
+                            <div class="col-xl-10 text-center">
+                                <span id="preview" class="image-inner">
+
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-10 text-center">
+                                <div class="ps-3 form-floating">
+                                    <input class="form-control fs-13px h-45px border-1" type="text" id="collectionSurprise_description" name="collectionSurprise_description" placeholder="Enter text for this image" required />
+                                    <label for="collectionSurprise_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="button" class="btn mt-20px btn-theme d-block w-100 h-45px btn-lg" asp-controller="Home" asp-action="Adm" value="BACK">
+
+                            </td>
+                            <td>
+                                <input style="display:none" id="btn-save" type="submit" class="btn mt-20px btn-theme w-100 h-45px btn-lg" value="SAVE">
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

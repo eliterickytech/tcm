@@ -1,4 +1,12 @@
-﻿@section Styles {
+﻿@using Microsoft.AspNetCore.Http
+
+@model TCM.Services.Model.CollectionModel
+@{
+    ViewData["Title"] = "Chef Melo - Collection new Item";
+
+}
+@section Styles {
+    <link href="~/StaticFiles/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <link href="~/StaticFiles/lib/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
     <link href="~/StaticFiles/lib/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -6,18 +14,27 @@
     <link href="~/StaticFiles/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <link href="~/StaticFiles/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
     <link href="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/lightbox2/dist/css/lightbox.css" rel="stylesheet" />
+
 }
 @section Scripts {
-    <script src="~/StaticFiles/js/manageCollection.js"></script>
+
+    <script src="~/StaticFiles/lib/gritter/js/jquery.gritter.js"></script>
     <script src="~/StaticFiles/assets/plugins/select2/dist/js/select2.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/moment/min/moment.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script src="~/StaticFiles/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/isotope-layout/dist/isotope.pkgd.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/lightbox2/dist/js/lightbox.min.js"></script>
+    <script src="~/StaticFiles/assets/js/demo/gallery.demo.js"></script>
+
+    <script src="~/StaticFiles/js/site.js"></script>
     <script src="~/StaticFiles/js/search.js"></script>
-    <script src="~/StaticFiles/assets/plugins/@@highlightjs/cdn-assets/highlight.min.js"></script>
-    <script src="~/StaticFiles/assets/js/demo/render.highlight.js"></script>
-    <script src="~/StaticFiles/js/demo/ui-modal-notification.demo.js"></script>
+    <script src="~/StaticFiles/js/manageCollectionItem.js"></script>
+
 }
 <!-- BEGIN page-header -->
 <h1 class="page-header">Collection <small>add new items with collection...</small></h1>
@@ -27,33 +44,398 @@
     <div class="col-xl-10">
         <div class="panel panel-inverse">
             <div class="panel-heading bg-orange-700 ui-sortable-handle">
-                <h4 class="panel-title">Register new items with collection</h4>
+                <h4 class="panel-title">Collection @Model.CollectionName</h4>
             </div>
+
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-xl-10">
-                        <div class="nav-wizards-container" style="overflow:hidden">
-                            <nav class="nav nav-wizards-1">
-                                <div class="nav-item">
-                                    <a class="nav-link completed" href="#">
-                                        <div class="nav-no">1</div>
-                                        <div class="nav-text">Add new collection</div>
-                                    </a>
-                                </div>
-                                <div class="nav-item col">
-                                    <a class="nav-link active" href="#">
-                                        <div class="nav-no">2</div>
-                                        <div class="nav-text">Add new items</div>
-                                    </a>
-                                </div>
-                            </nav>
+                <div class="nav-wizards-container" style="overflow:hidden">
+                    <nav class="nav nav-wizards-1">
+                        <div class="nav-item col-xl-4">
+                            <a class="nav-link completed" href="#">
+                                <div class="nav-no">1</div>
+                                <div class="nav-text">Add new collection</div>
+                            </a>
                         </div>
-                    </div>
+                        <div class="nav-item col-xl-4">
+                            <a class="nav-link active" href="#">
+                                <div class="nav-no">2</div>
+                                <div class="nav-text">Add new items</div>
+                            </a>
+                        </div>
+                        <div class="nav-item col-xl-4">
+                            <a class="nav-link disabled" href="#">
+                                <div class="nav-no">3</div>
+                                <div class="nav-text">Surprise item</div>
+                            </a>
+                        </div>
+                    </nav>
                 </div>
                 <div class="row">
                     <hr class="bg-gray-400" />
                 </div>
+
+
+                <form id="fileupload"
+                      name="fileupload"
+                      data-parsley-validate="true"
+                      enctype="multipart/form-data"
+                      class="needs-validation"
+                      method="post"
+                      novalidate>
+                    <input type="hidden" id="collectionId" name="collectionId" value="@Model.Id" />
+                    <input type="hidden" id="collectionTypeId" name="collectionTypeId" value="@Model.CollectionTypeId" />
+                    <input type="hidden" id="collectionName" name="collectionName" value="@Model.CollectionName" />
+                    <div class="row fileupload-buttonbar">
+                        <div class="col-xl-7">
+                            <span class="btn btn-primary fileinput-button me-1">
+                                <i class="fa fa-fw fa-plus"></i>
+                                <span>Add file...</span>
+                                <input type="file" id="imagemInput" name="imagemInput">
+                            </span>
+                            <button type="submit" class="btn btn-primary start me-1">
+                                <i class="fa fa-fw fa-upload"></i>
+                                <span>Start upload</span>
+                            </button>
+                            <button type="reset" class="btn btn-default cancel me-1">
+                                <i class="fa fa-fw fa-ban"></i>
+                                <span>Cancel upload</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-panel text-nowrap mb-0">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">PREVIEW</th>
+                                        <th width="10%">FILE INFO</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="files">
+                                    <tr id="emptyFiles">
+                                        <td colspan="4" class="text-center text-gray-500 py-30px">
+                                            <div class="mb-10px"><i class="fa fa-file fa-3x"></i></div>
+                                            <div class="fw-bold">No file selected</div>
+                                        </td>
+                                    </tr>
+                                    <tr id="fullFiles" style="display:none">
+                                        <td>
+                                            <div id="gallery" class="gallery">
+                                                <div class="image gallery-group-1">
+                                                    <span id="preview" class="image-inner">
+
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="bg-light p-3 mb-2">
+                                                <dl class="mb-0">
+                                                    <dt class="text-dark">File Name:</dt>
+                                                    <dd id="fileName" class="name"></dd>
+                                                    <hr />
+                                                    <dt class="text-dark">File Size:</dt>
+                                                    <dd id="fileSize" class="size mb-0"></dd>
+                                                </dl>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <form id="formfileItems"
+                      name="formfileItems"
+                      data-parsley-validate="true"
+                      class="needs-validation"
+                      method="post"
+                      novalidate>
+                    <input type="hidden" id="collectionId" name="collectionId" />
+                    <input type="hidden" id="collectionTypeId" name="collectionTypeId" />
+                    <input type="hidden" id="urlimagedmini" name="urlimagedmini" />
+                    <input type="hidden" id="collectionDescription" name="collectionDescription" />
+                    <input type="hidden" id="urlimagecollection4_1" name="urlimagecollection4_1" />
+                    <input type="hidden" id="urlimagecollection4_2" name="urlimagecollection4_2" />
+                    <input type="hidden" id="urlimagecollection4_3" name="urlimagecollection4_3" />
+                    <input type="hidden" id="urlimagecollection4_4" name="urlimagecollection4_4" />
+                    <div class="row" id="registernewitems" style="display:none">
+
+                        <div class="row" style="@(Model.CollectionTypeId == 1 ? "block": "none")" id="collection1">
+                            <div class="row mt-20px mb-20px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection1_1">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection1_1_description" name="collection1_1_description" placeholder="Enter text for this image" required />
+                                                <label for="collection1_1_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row" style="@(Model.CollectionTypeId == 2 ? "block": "none")" id="collection4">
+                            <div class="row mt-20px mb-20px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection4_1">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection4_1_description" name="collection4_1_description" placeholder="Enter text for this image" required />
+                                                <label for="collection4_1_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row mb-20px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection4_2" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection4_2_description" name="collection4_2_description" placeholder="Enter text for this image" required />
+                                                <label for="collection4_2_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection4_3" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection4_3_description" name="collection4_3_description" placeholder="Enter text for this image" required />
+                                                <label for="collection4_3_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection4_4" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection4_4_description" name="collection4_4_description" placeholder="Enter text for this image" required />
+                                                <label for="collection4_4_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row" style="@(Model.CollectionTypeId == 3 ? "block": "none")" id="collection9">
+                            <div class="row mt-20px mb-20px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_1">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_1_description" name="collection9_1_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_1_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row mb-20px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_2" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_2_description" name="collection9_2_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_2_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_3" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_3_description" name="collection9_3_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_3_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_4" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_4_description" name="collection9_4_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_4_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_5" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_5_description" name="collection9_5_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_5_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_6" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_6_description" name="collection9_6_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_6_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_7" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_7_description" name="collection9_7_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_7_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_8" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_8_description" name="collection9_8_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_8_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="row mb-10px">
+                                <table>
+                                    <tr>
+                                        <td class="w-25">
+                                            <div id="collection9_9" class="col-md-3">
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="col-md-9 ps-3 form-floating">
+                                                <input class="form-control fs-13px h-45px border-1" type="text" id="collection9_9_description" name="collection9_9_description" placeholder="Enter text for this image" required />
+                                                <label for="collection9_9_description" class="d-flex ms-3 align-items-center text-gray-600 fs-13px">Enter text for this image</label>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <button type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
 </div>

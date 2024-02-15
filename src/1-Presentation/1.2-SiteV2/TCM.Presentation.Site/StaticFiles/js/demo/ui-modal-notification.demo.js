@@ -12,11 +12,11 @@ function handleGritterNotificationMessages(title, message) {
 	return false;
 }
 
-var handleGritterNotification = function() {
+var handlegritternotification = function() {
 	$('#add-sticky').click( function() {
 		$.gritter.add({
-			title: 'This is a sticky notice!',
-			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus lacus ut lectus rutrum placerat. ',
+			title: 'this is a sticky notice!',
+			text: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. sed tempus lacus ut lectus rutrum placerat. ',
 			image: '../assets/img/user/user-2.jpg',
 			sticky: true,
 			time: '',
@@ -26,8 +26,8 @@ var handleGritterNotification = function() {
 	});
 	$('#add-regular').click( function() {
 		$.gritter.add({
-			title: 'This is a regular notice!',
-			text: 'This will fade out after a certain amount of time. Sed tempus lacus ut lectus rutrum placerat. ',
+			title: 'this is a regular notice!',
+			text: 'this will fade out after a certain amount of time. sed tempus lacus ut lectus rutrum placerat. ',
 			image: '../assets/img/user/user-3.jpg',
 			sticky: false,
 			time: ''
@@ -36,8 +36,8 @@ var handleGritterNotification = function() {
 	});
 	$('#add-max').click( function() {
 		$.gritter.add({
-			title: 'This is a notice with a max of 3 on screen at one time!',
-			text: 'This will fade out after a certain amount of time. Sed tempus lacus ut lectus rutrum placerat. ',
+			title: 'this is a notice with a max of 3 on screen at one time!',
+			text: 'this will fade out after a certain amount of time. sed tempus lacus ut lectus rutrum placerat. ',
 			sticky: false,
 			image: '../assets/img/user/user-4.jpg',
 			before_open: function() {
@@ -50,198 +50,198 @@ var handleGritterNotification = function() {
 	});
 	$('#add-without-image').click(function(){
 		$.gritter.add({
-			title: 'This is a notice without an image!',
-			text: 'This will fade out after a certain amount of time.'
+			title: 'this is a notice without an image!',
+			text: 'this will fade out after a certain amount of time.'
 		});
 		return false;
 	});
 	$('#add-gritter-light').click(function(){
 		$.gritter.add({
-			title: 'This is a light notification',
-			text: 'Just add a \'gritter-light\' class_name to your $.gritter.add or globally to $.gritter.options.class_name',
+			title: 'this is a light notification',
+			text: 'just add a \'gritter-light\' class_name to your $.gritter.add or globally to $.gritter.options.class_name',
 			class_name: 'gritter-light'
 		});
 		return false;
 	});
 	$('#add-with-callbacks').click(function(){
 		$.gritter.add({
-			title: 'This is a notice with callbacks!',
-			text: 'The callback is...',
+			title: 'this is a notice with callbacks!',
+			text: 'the callback is...',
 			before_open: function(){
-				alert('I am called before it opens');
+				alert('i am called before it opens');
 			},
 			after_open: function(e){
-				alert('I am called after it opens: \nI am passed the jQuery object for the created Gritter element...\n' + e);
+				alert('i am called after it opens: \ni am passed the jquery object for the created gritter element...\n' + e);
 			},
 			before_close: function(manual_close) {
-				var manually = (manual_close) ? 'The \'X\' was clicked to close me!' : '';
-				alert('I am called before it closes: I am passed the jQuery object for the Gritter element... \n' + manually);
+				var manually = (manual_close) ? 'the \'x\' was clicked to close me!' : '';
+				alert('i am called before it closes: i am passed the jquery object for the gritter element... \n' + manually);
 			},
 			after_close: function(manual_close){
-				var manually = (manual_close) ? 'The \'X\' was clicked to close me!' : '';
-				alert('I am called after it closes. ' + manually);
+				var manually = (manual_close) ? 'the \'x\' was clicked to close me!' : '';
+				alert('i am called after it closes. ' + manually);
 			}
 		});
 		return false;
 	});
 	$('#add-sticky-with-callbacks').click(function(){
 		$.gritter.add({
-			title: 'This is a sticky notice with callbacks!',
-			text: 'Sticky sticky notice.. sticky sticky notice...',
+			title: 'this is a sticky notice with callbacks!',
+			text: 'sticky sticky notice.. sticky sticky notice...',
 			sticky: true,
 			before_open: function(){
-				alert('I am a sticky called before it opens');
+				alert('i am a sticky called before it opens');
 			},
 			after_open: function(e){
-				alert('I am a sticky called after it opens: \nI am passed the jQuery object for the created Gritter element...\n' + e);
+				alert('i am a sticky called after it opens: \ni am passed the jquery object for the created gritter element...\n' + e);
 			},
 			before_close: function(e){
-				alert('I am a sticky called before it closes: I am passed the jQuery object for the Gritter element... \n' + e);
+				alert('i am a sticky called before it closes: i am passed the jquery object for the gritter element... \n' + e);
 			},
 			after_close: function(){
-				alert('I am a sticky called after it closes');
+				alert('i am a sticky called after it closes');
 			}
 		});
 		return false;
 	});
 	$('#remove-all').click(function(){
-		$.gritter.removeAll();
+		$.gritter.removeall();
 		return false;
 	});
 	$('#remove-all-with-callbacks').click(function(){
-		$.gritter.removeAll({
+		$.gritter.removeall({
 			before_close: function(e){
-				alert('I am called before all notifications are closed.  I am passed the jQuery object containing all  of Gritter notifications.\n' + e);
+				alert('i am called before all notifications are closed.  i am passed the jquery object containing all  of gritter notifications.\n' + e);
 			},
 			after_close: function(){
-				alert('I am called after everything has been closed.');
+				alert('i am called after everything has been closed.');
 			}
 		});
 		return false;
 	});
 };
 
-var handleSweetNotification = function() {
+var handlesweetnotification = function() {
 	$('[data-click="swal-primary"]').click(function(e) {
-		e.preventDefault();
+		e.preventdefault();
 		swal({
-			title: 'Are you sure?',
-			text: 'You will not be able to recover this imaginary file!',
+			title: 'are you sure?',
+			text: 'you will not be able to recover this imaginary file!',
 			icon: 'info',
 			buttons: {
 				cancel: {
-					text: 'Cancel',
+					text: 'cancel',
 					value: null,
 					visible: true,
-					className: 'btn btn-default',
-					closeModal: true,
+					classname: 'btn btn-default',
+					closemodal: true,
 				},
 				confirm: {
-					text: 'Primary',
+					text: 'primary',
 					value: true,
 					visible: true,
-					className: 'btn btn-primary',
-					closeModal: true
+					classname: 'btn btn-primary',
+					closemodal: true
 				}
 			}
 		});
 	});
 
 	$('[data-click="swal-info"]').click(function(e) {
-		e.preventDefault();
+		e.preventdefault();
 		swal({
-			title: 'Are you sure?',
-			text: 'You will not be able to recover this imaginary file!',
+			title: 'are you sure?',
+			text: 'you will not be able to recover this imaginary file!',
 			icon: 'info',
 			buttons: {
 				cancel: {
-					text: 'Cancel',
+					text: 'cancel',
 					value: null,
 					visible: true,
-					className: 'btn btn-default',
-					closeModal: true,
+					classname: 'btn btn-default',
+					closemodal: true,
 				},
 				confirm: {
-					text: 'Info',
+					text: 'info',
 					value: true,
 					visible: true,
-					className: 'btn btn-info',
-					closeModal: true
+					classname: 'btn btn-info',
+					closemodal: true
 				}
 			}
 		});
 	});
 
 	$('[data-click="swal-success"]').click(function(e) {
-		e.preventDefault();
+		e.preventdefault();
 		swal({
-			title: 'Are you sure?',
-			text: 'You will not be able to recover this imaginary file!',
+			title: 'are you sure?',
+			text: 'you will not be able to recover this imaginary file!',
 			icon: 'success',
 			buttons: {
 				cancel: {
-					text: 'Cancel',
+					text: 'cancel',
 					value: null,
 					visible: true,
-					className: 'btn btn-default',
-					closeModal: true,
+					classname: 'btn btn-default',
+					closemodal: true,
 				},
 				confirm: {
-					text: 'Success',
+					text: 'success',
 					value: true,
 					visible: true,
-					className: 'btn btn-success',
-					closeModal: true
+					classname: 'btn btn-success',
+					closemodal: true
 				}
 			}
 		});
 	});
 
 	$('[data-click="swal-warning"]').click(function(e) {
-		e.preventDefault();
+		e.preventdefault();
 		swal({
-			title: 'Are you sure?',
-			text: 'You will not be able to recover this imaginary file!',
+			title: 'are you sure?',
+			text: 'you will not be able to recover this imaginary file!',
 			icon: 'warning',
 			buttons: {
 				cancel: {
-					text: 'Cancel',
+					text: 'cancel',
 					value: null,
 					visible: true,
-					className: 'btn btn-default',
-					closeModal: true,
+					classname: 'btn btn-default',
+					closemodal: true,
 				},
 				confirm: {
-					text: 'Warning',
+					text: 'warning',
 					value: true,
 					visible: true,
-					className: 'btn btn-warning',
-					closeModal: true
+					classname: 'btn btn-warning',
+					closemodal: true
 				}
 			}
 		});
 	});
 
 	$('[data-click="swal-danger"]').click(function(e) {
-		e.preventDefault();
+		e.preventdefault();
 		swal({
-			title: 'Are you sure?',
-			text: 'You will not be able to recover this imaginary file!',
+			title: 'are you sure?',
+			text: 'you will not be able to recover this imaginary file!',
 			icon: 'error',
 			buttons: {
 				cancel: {
-					text: 'Cancel',
+					text: 'cancel',
 					value: null,
 					visible: true,
-					className: 'btn btn-default',
-					closeModal: true,
+					classname: 'btn btn-default',
+					closemodal: true,
 				},
 				confirm: {
-					text: 'Warning',
+					text: 'warning',
 					value: true,
 					visible: true,
-					className: 'btn btn-danger',
-					closeModal: true
+					classname: 'btn btn-danger',
+					closemodal: true
 				}
 			}
 		});
@@ -249,17 +249,17 @@ var handleSweetNotification = function() {
 };
 
 
-var Notification = function () {
+var notification = function () {
 	"use strict";
 	return {
 		//main function
 		init: function () {
-			handleGritterNotification();
-			handleSweetNotification();
+			handlegritternotification();
+			handlesweetnotification();
 		}
 	};
 }();
 
 $(document).ready(function() {
-	Notification.init();
+	notification.init();
 });

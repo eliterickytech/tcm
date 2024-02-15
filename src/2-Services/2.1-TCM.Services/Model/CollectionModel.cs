@@ -26,6 +26,6 @@ namespace TCM.Services.Model
 
         public DateTime CollectionCreatedDate { get; set; } 
 
-        public string Description { get; set; } 
+        public string CollectionDescription { get; set; } 
     }
 }

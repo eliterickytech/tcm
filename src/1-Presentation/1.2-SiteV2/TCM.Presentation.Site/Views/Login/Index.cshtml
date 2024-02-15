@@ -11,19 +11,20 @@
 }
 
 @section Scripts {
+    <script src="~/StaticFiles/js/site.js"></script>
     <script src="~/StaticFiles/js/login.js"></script>
     <script src="~/StaticFiles/js/demo/login-v2.demo.js"></script>
     <script src="~/StaticFiles/lib/gritter/js/jquery.gritter.js"></script>
     <script src="~/StaticFiles/lib/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="~/StaticFiles/js/demo/ui-modal-notification.demo.js"></script>
     <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
     <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
     <script src="~/StaticFiles/lib/parsleyjs/dist/parsley.min.js"></script>
+
 }
 
 <!-- BEGIN login -->
 <div class="login login-v2 fw-bold">
-    
+
     <!-- BEGIN login-container -->
     <div class="login-container">
         <!-- BEGIN login-header -->
@@ -47,19 +48,19 @@
                     <label for="username" class="d-flex align-items-center text-gray-600 fs-13px">Username</label>
                 </div>
                 <div class="form-floating mb-20px">
-                    <input type="password" 
-                           class="form-control fs-13px h-45px border-1" 
-                           placeholder="PIN" 
-                           data-parsley-type="number" 
-                           data-parsley-minlength="5" 
-                           data-parsley-maxlength="12" 
-                           data-parsley-pattern="[0-9]{5,12}" 
-                           minlength="5" 
-                           pattern="[0-9]{5,12}" 
+                    <input type="password"
+                           class="form-control fs-13px h-45px border-1"
+                           placeholder="PIN"
+                           data-parsley-type="number"
+                           data-parsley-minlength="5"
+                           data-parsley-maxlength="12"
+                           data-parsley-pattern="[0-9]{5,12}"
+                           minlength="5"
+                           pattern="[0-9]{5,12}"
                            maxlength="12"
                            name="password"
                            id="password"
-                           required/>
+                           required />
                     <label for="password" class="d-flex align-items-center text-gray-600 fs-13px">PIN</label>
                 </div>
                 <div class="mb-20px">

@@ -4,7 +4,7 @@
       "controller": "ManagerCollection",
       "action": "Adm",
       "icon": "fa fa-gem",
-      "text": "Manage Collection"
+      "text": "Manager Collection"
     },
     {
       "controller": "SendDelights",
@@ -15,7 +15,7 @@
     {
       "controller": "ManagerBanner",
       "icon": "fa fa-user-xmark",
-      "text": "Manage Banners",
+      "text": "Manager Banners",
       "children": [
         {
           "controller": "ManagerBannerTop",
@@ -33,7 +33,7 @@
       "controller": "ManagerUser",
       "action": "Adm",
       "icon": "fa fa-user-xmark",
-      "text": "Manage User"
+      "text": "Manager User"
     },
     {
       "controller": "ManagerPermission",

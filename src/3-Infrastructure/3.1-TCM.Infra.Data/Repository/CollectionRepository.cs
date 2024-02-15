@@ -31,7 +31,7 @@ namespace TCM.Infrastructure.Data.Repository
             parameters.Add("Name", model.CollectionName, System.Data.DbType.String);
             parameters.Add("AvailableDate", model.AvailableDate, System.Data.DbType.DateTime);
             parameters.Add("IsPhysicalAward", model.IsPhysicalAward, System.Data.DbType.Boolean);
-            parameters.Add("Description", model.Description, System.Data.DbType.String);
+            parameters.Add("Description", model.CollectionDescription, System.Data.DbType.String);
             try
             {
                 var result = await ExecuteScalarAsync(query, parameters);
@@ -68,6 +68,22 @@ namespace TCM.Infrastructure.Data.Repository
             try
             {
                 var result = await QueryAsync<CollectionModel>(query);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<CollectionModel> GetCollectionByIdAsync(int id)
+        {
+            var query = @"PR_Collection_ById_Select";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("Id", id, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = await QueryFirstOrDefaultAsync<CollectionModel>(query, parameters);
                 return result;
 
             }

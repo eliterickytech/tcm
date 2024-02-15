@@ -1,4 +1,5 @@
 ﻿@section Styles {
+    <link href="~/StaticFiles/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <link href="~/StaticFiles/lib/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
     <link href="~/StaticFiles/lib/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -6,21 +7,24 @@
     <link href="~/StaticFiles/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <link href="~/StaticFiles/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
     <link href="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
-    <link href="~/StaticFiles/lib/gritter/css/jquery.gritter.css" rel="stylesheet" />
+
 }
 @section Scripts {
-    <script src="~/StaticFiles/js/manageCollection.js"></script>
 
+    <script src="~/StaticFiles/lib/gritter/js/jquery.gritter.js"></script>
     <script src="~/StaticFiles/assets/plugins/select2/dist/js/select2.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/moment/min/moment.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <script src="~/StaticFiles/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.js"></script>
-    <script src="~/StaticFiles/js/search.js"></script>
+
     <script src="~/StaticFiles/assets/plugins/@@highlightjs/cdn-assets/highlight.min.js"></script>
     <script src="~/StaticFiles/assets/js/demo/render.highlight.js"></script>
-    <script src="~/StaticFiles/lib/gritter/js/jquery.gritter.js"></script>
-    <script src="~/StaticFiles/js/demo/ui-modal-notification.demo.js"></script>
+
+    <script src="~/StaticFiles/js/site.js"></script>
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/manageCollection.js"></script>
+
 }
 
 <!-- BEGIN page-header -->
@@ -34,26 +38,29 @@
                 <h4 class="panel-title">Register new collection</h4>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-xl-10">
-                        <div class="nav-wizards-container" style="overflow:hidden">
-                            <nav class="nav nav-wizards-1">
-                                <div class="nav-item">
-                                    <a class="nav-link active" href="#">
-                                        <div class="nav-no">1</div>
-                                        <div class="nav-text">Add new collection</div>
-                                    </a>
-                                </div>
-                                <div class="nav-item col">
-                                    <a class="nav-link disabled" href="#">
-                                        <div class="nav-no">2</div>
-                                        <div class="nav-text">Add new items</div>
-                                    </a>
-                                </div>
-                            </nav>
+                <div class="nav-wizards-container" style="overflow:hidden">
+                    <nav class="nav nav-wizards-1">
+                        <div class="nav-item col-xl-4">
+                            <a class="nav-link active" href="#">
+                                <div class="nav-no">1</div>
+                                <div class="nav-text">Add new collection</div>
+                            </a>
                         </div>
-                    </div>
+                        <div class="nav-item col-xl-4" ">
+                            <a class="nav-link disabled" href="#">
+                                <div class="nav-no">2</div>
+                                <div class="nav-text">Add new items</div>
+                            </a>
+                        </div>
+                        <div class="nav-item col-xl-4">
+                            <a class="nav-link disabled" href="#">
+                                <div class="nav-no">3</div>
+                                <div class="nav-text">Surprise item</div>
+                            </a>
+                        </div>
+                    </nav>
                 </div>
+
                 <div class="row">
                     <hr class="bg-gray-400" />
                 </div>
@@ -67,16 +74,18 @@
                         <input type="text" class="form-control fs-13px  border-1" placeholder="Try typing collection name" id="collectionName" name="collectionName" required />
                         <label for="collectionName" class="d-flex align-items-center text-gray-600 fs-13px">Collection name</label>
                     </div>
+
                     <div class="row mb-10px">
                         <label class="form-label col-form-label col-md-2">Shortened name*</label>
                         <div class="col-md-10">
                             <input class="form-control" type="text" id="shortenedName" name="shortenedName" placeholder="Shortened name for home screen display" required />
                         </div>
                     </div>
+
                     <div class="row mb-10px">
                         <label class="form-label col-form-label col-md-2">Available at*</label>
                         <div class="col-md-5">
-                            <div class="input-group date mb-20px" id="divavailableAt" data-date-format="mm/dd/yyyy" data-date-start-date="Date.default">
+                            <div class="input-group date mb-20px" id="divavailableAt">
                                 <input type="text" class="form-control" id="availableAt" name="availableAt" placeholder="Select Date" required />
                                 <span class="input-group-text input-group-addon"><i class="fa fa-calendar"></i></span>
                             </div>
@@ -102,10 +111,8 @@
                     <div class="mb-10px">
                         <input type="submit" class="btn btn-theme d-block w-100 h-45px btn-lg" value="SAVE" />
                     </div>
-
                 </form>
             </div>
         </div>
-
     </div>
 </div>

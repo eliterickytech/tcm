@@ -49,7 +49,13 @@ namespace TCM.Presentation.Site
             Configuration.Bind("SmtpConfiguration", config);
 
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Secret:Authentication").Value);
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                // Configurações adicionais, se necessário
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Tempo limite da sessão
+                options.Cookie.HttpOnly = true; // Apenas acessível via HTTP
+                options.Cookie.IsEssential = true; // Indica se o cookie é essencial para o funcionamento do site
+            });
 
             services.AddScoped<ICodeServices, CodeServices>();
             services.AddScoped<IUserServices, UserServices>();

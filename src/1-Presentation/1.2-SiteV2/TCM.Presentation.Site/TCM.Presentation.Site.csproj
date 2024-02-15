@@ -67,4 +67,8 @@
     <ProjectReference Include="..\..\..\4-CrossCutting\4.1-CrossCutting\TCM.CrossCutting.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StaticFiles\tcm\video\" />
+  </ItemGroup>
+
 </Project>

@@ -25,6 +25,8 @@ namespace TCM.Services.Model
 
         public int Sort { get; set; }
 
+        public int Sequence { get; set; }   
+
         public string Url { get; set; }
 
         public DateTime CreatedDate { get; set; }

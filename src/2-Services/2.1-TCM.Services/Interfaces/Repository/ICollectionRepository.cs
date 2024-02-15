@@ -11,6 +11,7 @@ namespace TCM.Services.Interfaces.Repository
     {
         Task<int> AddCollectionAsync(CollectionModel model);
         Task<IEnumerable<CollectionModel>> GetCollectionAsync();
+        Task<CollectionModel> GetCollectionByIdAsync(int id);
         Task<IEnumerable< CollectionTypeModel>> GetCollectionTypeAsync();
         Task<int> RemoveCollectionAsync(int id);
         Task<int> UpdatedCollectionAsync(CollectionModel model);
