@@ -42,6 +42,12 @@
       "badge": "2"
     },
     {
+      "controller": "Support",
+      "action": "Adm",
+      "icon": "fab fa-rocketchat",
+      "text": "Support"
+    },
+    {
       "controller": "Login",
       "action": "Logoff",
       "icon": "fa fa-circle-left",

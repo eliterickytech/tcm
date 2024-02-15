@@ -41,12 +41,7 @@
       "icon": "fa fa-right-to-bracket",
       "text": "Permission"
     },
-    {
-      "controller": "Support",
-      "action": "Adm",
-      "icon": "fab fa-rocketchat",
-      "text": "Support"
-    },
+
     {
       "controller": "Login",
       "action": "Logoff",
