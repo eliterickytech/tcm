@@ -43,7 +43,7 @@
     },
     {
       "controller": "Support",
-      "action": "Adm",
+      "action": "Index",
       "icon": "fab fa-rocketchat",
       "text": "Support"
     },
