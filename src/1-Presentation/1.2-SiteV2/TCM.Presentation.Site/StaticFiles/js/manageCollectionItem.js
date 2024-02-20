@@ -5,9 +5,30 @@ function AjaxSucceeded(result) {
     else {
         handleGritterNotificationMessages("Message success", result.data);
         if (result.redirect != null) {
-            setTimeout(function () {
-                window.location.href = result.redirect;
-            }, 3000);
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    denyButton: "btn btn-danger btn-lg me-1 mb-1" ,
+                    confirmButton: "btn btn-theme btn-lg me-1 mb-1"
+
+                },
+                buttonsStyling: false
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to register the surprise item?',
+                icon: 'warning',
+                showDenyButton: true,
+                denyButtonText: `No`,
+                confirmButtonText: `Yes`
+            }).then((resultAlert) => {
+                if (resultAlert.isDenied) {
+                    window.location.href = "/ManagerCollection/Adm";
+                }
+                if (resultAlert.isConfirmed) {
+                    window.location.href = result.redirect;
+                }
+            });
         }
     }
 }
@@ -38,13 +59,8 @@ $(document).ready(function () {
         }
     });
 
-    $("#formfileItems").submit(function (event) {
-        var form = $("#formfileItems")
-        if (form[0].checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-        else {
+    $("#save").click(function () {
+
             var collId = $("#collectionId").val();
             var collectionTypeId = $("#collectionTypeId").val();
             if (collectionTypeId == 1) {
@@ -242,8 +258,6 @@ $(document).ready(function () {
                 });
             }
 
-            event.preventDefault();
-        }
     });
     $("#fileupload").submit(function (event) {
         var form = $("#fileupload")
@@ -276,6 +290,7 @@ $(document).ready(function () {
                     $("#registernewitems").removeAttr("style");
                     if (result.isOK) {
                         if (result.data.collectionTypeId == 1) {
+                            $("#collection1").attr("style", "display:block");
                             $("#collectionId").val(result.data.collectionId);
                             $("#collectionTypeId").val(result.data.collectionTypeId);
                             $("#urlimagedmini").val(result.data.url);
@@ -284,6 +299,8 @@ $(document).ready(function () {
                             $("#collection1_1").html('<img src="' + result.data.splitImages[0] + '" class="img" style="width: 100px; height: 100px;"/>')
                         }
                         if (result.data.collectionTypeId == 2) {
+                            $("#collection4").attr("style", "display:block");
+
                             $("#collectionId").val(result.data.collectionId);
                             $("#collectionTypeId").val(result.data.collectionTypeId);
                             $("#urlimagedmini").val(result.data.url);
@@ -298,6 +315,8 @@ $(document).ready(function () {
                             $("#collection4_4").html('<img src="' + result.data.splitImages[3] + '" class="img" style="width: 100px; height: 100px;"/>')
                         }
                         if (result.data.collectionTypeId == 3) {
+                            $("#collection9").attr("style", "display:block");
+
                             $("#collectionId").val(result.data.collectionId);
                             $("#collectionTypeId").val(result.data.collectionTypeId);
                             $("#urlimagedmini").val(result.data.url);

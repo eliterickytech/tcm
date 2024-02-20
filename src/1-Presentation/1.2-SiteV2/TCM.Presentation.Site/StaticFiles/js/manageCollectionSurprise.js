@@ -6,7 +6,7 @@ function AjaxSucceeded(result) {
         handleGritterNotificationMessages("Message success", result.data);
         if (result.redirect != null) {
             setTimeout(function () {
-                window.location.href = result.redirect;
+                window.location.href = "ManagerCollection/Adm";
             }, 3000);
         }
     }
@@ -37,78 +37,6 @@ $(document).ready(function () {
         }
     });
 
-    $("#formfileItems").submit(function (event) {
-        var form = $("#formfileItems")
-        if (form[0].checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-        else {
-            var collId = $("#collectionId").val();
-            var collectionTypeId = $("#collectionTypeId").val();
-            if (collectionTypeId == 2) {
-                var collectionItemModelView = {
-                    collectionId: collId, 
-                    collectionItems: [
-                        {
-                            CollectionItemTypeId: 6, 
-                            Url: $("#urlimagedmini").val(),
-                            Sequence: 0,
-                            Sort: 0,
-                            Description: $("#collectionDescription").val()
-                        },
-                        {
-                            CollectionItemTypeId: 4,
-                            Url: $("#urlimagedmini").val(),
-                            Sequence: 0,
-                            Sort: 0,
-                            Description: $("#collectionDescription").val()
-                        },
-                        {
-                            CollectionItemTypeId: 2,
-                            Url: $("#urlimagecollection4_1").val(),
-                            Sequence: 1,
-                            Sort: 1,
-                            Description: $("#collection4_1_description").val()
-                        },
-                        {
-                            CollectionItemTypeId: 2,
-                            Url: $("#urlimagecollection4_2").val(),
-                            Sequence: 2,
-                            Sort: 2,
-                            Description: $("#collection4_2_description").val()
-                        },
-                        {
-                            CollectionItemTypeId: 2,
-                            Url: $("#urlimagecollection4_3").val(),
-                            Sequence: 3,
-                            Sort: 3,
-                            Description: $("#collection4_3_description").val()
-                        },
-                        {
-                            CollectionItemTypeId: 2,
-                            Url: $("#urlimagecollection4_4").val(),
-                            Sequence: 4,
-                            Sort: 4,
-                            Description: $("#collection4_4_description").val()
-                        }
-                    ]
-                };
-
-                $.ajax({
-                    method: 'POST',
-                    url: "/ManagerCollection/SaveCollectionItem",
-                    data: JSON.stringify(collectionItemModelView),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    encode: true,
-                    success: AjaxSucceeded,
-                    error: AjaxFailed
-                });
-            }
-            event.preventDefault();
-        }
-    });
     $("#fileuploadSurprise").submit(function (event) {
         var form = $("#fileuploadSurprise")
         if (form[0].checkValidity() === false) {

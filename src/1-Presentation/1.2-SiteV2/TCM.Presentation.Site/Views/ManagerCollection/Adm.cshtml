@@ -8,14 +8,16 @@
 
 }
 @section Scripts {
-    <script src="~/StaticFiles/js/search.js"></script>
-    <script src="~/StaticFiles/js/manageCollection.js"></script>
+
     <script src="~/StaticFiles/lib/@@highlightjs/cdn-assets/highlight.min.js"></script>
     <script src="~/StaticFiles/js/demo/render.highlight.js"></script>
     <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
     <script src="~/StaticFiles/lib/sweetalert/dist/sweetalert.min.js"></script>
     <script src="~/StaticFiles/assets/plugins/lightbox2/dist/js/lightbox.min.js"></script>
     <script src="~/StaticFiles/js/site.js"></script>
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/manageCollection.js"></script>
+
 }
 <!-- BEGIN page-header -->
 <h1 class="page-header">Collection <small>show all collections...</small></h1>
@@ -33,10 +35,9 @@
             <div class="panel panel-inverse">
                 <div class="panel-heading bg-orange-700 ui-sortable-handle">
                     <h4 class="panel-title">@collection.CollectionName</h4>
-                    <div class="btn-group btn-group-toggle my-n1" data-toggle="buttons">
-                        <input type="radio" name="delete" onclick="javascript:DeleteCollection(@collection.Id)" class="btn-check delete-btn" id="delete" autocomplete="off" checked />
-                        <label class="btn btn-danger btn-xs" for="delete">Delete</label>
-                    </div>
+                    <button type="button" name="delete" data-id="@collection.Id" class="btn btn-danger btn-xs" id="delete" >
+                        Delete
+                    </button>
                 </div>
                 <div class="panel-body text-black">
                     <table id="data-table-responsive" class="table table-striped align-middle" style="width:100%">
@@ -63,7 +64,7 @@
                                         else
                                         {
                                             <a href="@item.Url" data-lightbox="gallery-group-1">
-                                                <img class="img" src=@item.Url width="100" height="100" />
+                                                <img class="img" src="@item.Url" width="100" height="100" />
                                             </a>
                                         }
 

@@ -19,43 +19,47 @@ function AjaxFailed(result) {
     };
 
 }
-function DeleteCollection(id) {
-
-    swal({
-        title: 'Are you sure?',
-        text: 'Are you sure you are going to delete the collection?',
-        icon: 'warning',
-        buttons: {
-            cancel: {
-                text: 'Cancel',
-                value: null,
-                visible: true,
-                className: 'btn btn-default',
-                closeModal: true,
-            },
-            confirm: {
-                text: 'Yes, delete it!',
-                value: true,
-                visible: true,
-                className: 'btn btn-theme',
-            }
-        }
-    }).then((result) => {
-        if (result == true) {
-            $.ajax({
-                type: 'GET',
-                url: `/ManagerCollection/DeleteCollection?id=${id}`,
-                dataType: 'json',
-                contentType: 'application/json',
-                encode: true,
-                success: AjaxSucceeded,
-                error: AjaxFailed
-            });
-        }
-    });
-}
 
 $(document).ready(function () {
+
+    $('button[name="delete"]').click(function () {
+
+        var id = $(this).data("id");
+        swal({
+            title: 'Are you sure?',
+            text: 'Are you sure you are going to delete the collection?',
+            icon: 'warning',
+            buttons: {
+                cancel: {
+                    text: 'Cancel',
+                    value: null,
+                    visible: true,
+                    className: 'btn btn-default',
+                    closeModal: true,
+                },
+                confirm: {
+                    text: 'Yes, delete it!',
+                    value: true,
+                    visible: true,
+                    className: 'btn btn-theme',
+                }
+            }
+        }).then((result) => {
+            if (result == true) {
+                $.ajax({
+                    type: 'GET',
+                    url: `/ManagerCollection/DeleteCollection?id=${id}`,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    encode: true,
+                    success: AjaxSucceeded,
+                    error: AjaxFailed
+                });
+            }
+        });
+
+    });
+
     if ($("#formNewCollection").length > 0) {
         $("#formNewCollection").submit(function (event) {
 

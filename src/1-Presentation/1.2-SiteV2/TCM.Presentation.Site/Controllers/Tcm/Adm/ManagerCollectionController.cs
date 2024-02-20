@@ -100,8 +100,6 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
         [HttpGet]
         public async Task<JsonResult> DeleteCollection(int id)
         {
-
-
             var resultDelete = await _collectionServices.RemoveCollectionAsync(id);
 
             return new JsonResult(new ResultModel()
