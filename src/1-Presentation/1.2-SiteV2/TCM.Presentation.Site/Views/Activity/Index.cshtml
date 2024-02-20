@@ -1,0 +1,168 @@
+﻿@model List<TCM.Services.Model.ActivityUserModel>
+@inject TCM.Services.Interfaces.Services.IUserServices _userServices
+@inject TCM.Services.Interfaces.Services.IActivityUserServices _ActivityUserServices
+@{
+    ViewData["Title"] = "Chef Melo - Activity";
+    string TimeStampDiff(DateTime dataInicio, DateTime dataFim)
+    {
+        TimeSpan diferenca = dataFim - dataInicio;
+
+        if (diferenca.TotalDays >= 1)
+        {
+            return $"{diferenca.TotalDays:F0} days";
+        }
+        else if (diferenca.TotalHours >= 1)
+        {
+            return $"{diferenca.TotalHours:F0} hours";
+        }
+        else
+        {
+            return $"{diferenca.TotalMinutes:F0} mins";
+        }
+    }
+
+    string FormatarNumero(int numero)
+    {
+        if (numero >= 1000)
+        {
+            double valorFormatado = numero / 1000.0;
+            string sufixo = "K";
+            return $"{valorFormatado:F1}{sufixo}";
+        }
+        else
+        {
+            return numero.ToString();
+        }
+    }
+
+    var currentUser = _userServices.CurrentUserAsync();
+
+}
+@section Styles {
+    <link href="~/StaticFiles/assets/plugins/lity/dist/lity.min.css" rel="stylesheet" />
+<style>
+    body {
+        background-color: #e9ecef;
+    }
+</style>
+}
+@section Scripts {
+    <script src="~/StaticFiles/assets/plugins/lity/dist/lity.min.js"></script>
+    <script src="~/StaticFiles/js/activityUser.js"></script>
+    <script src="~/StaticFiles/js/site.js"></script>
+}
+<!-- BEGIN page-header -->
+<h1 class="page-header">Activity <small>header small text goes here...</small></h1>
+<!-- END page-header -->
+<div class="timeline">
+
+        
+        @foreach (var item in Model)
+        {
+            var count = await _ActivityUserServices.CountActivityUserIterationAsync(item.Id);
+
+            <div class="timeline-item">
+                <div class="timeline-time">
+                    <span class="date">@(DateTime.Now.ToString("MM/dd/yyyy") == item.ActionDate.ToString("MM/dd/yyyy") ? "Today" : item.ActionDate.ToString("MM/dd/yy") )</span>
+                </div>
+                <div class="timeline-icon">
+                    <a href="javascript:;">&nbsp;</a>
+                </div>
+            </div>
+
+            <div class="timeline-content">
+                <!-- BEGIN timeline-header -->
+                <div class="timeline-header">
+                    <div class="userimage">@(currentUser.ProfileId == 1 ? "<img src='~/StaticFiles/tcm/img/profile.png' alt='' />" : "")</div>
+                    <div class="username">
+                        <a href="javascript:;">@item.UserName<i class="fa fa-check-circle text-blue ms-1"></i></a>
+                        <div class="text-muted fs-12px">@TimeStampDiff(item.ActionDate, DateTime.Now)<i class="fa fa-globe-americas opacity-5 ms-1"></i></div>
+                    </div>
+                </div>
+                <!-- END timeline-header -->
+                <!-- BEGIN timeline-body -->
+                <div class="timeline-body">
+                    <!-- timeline-post -->
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            @item.ActionDescription
+                        </div>
+                        @*<div class="row gx-1">
+                            <div class="col-6">
+                                <div class="ratio ratio-4x3">
+                                    <a href="../assets/img/gallery/gallery-14.jpg" data-lity class="bg-size-cover bg-position-center" style="background-image: url(../assets/img/gallery/gallery-14.jpg)"></a>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="ratio ratio-4x3 mb-3px">
+                                    <a href="../assets/img/gallery/gallery-12.jpg" data-lity class="bg-size-cover bg-position-center" style="background-image: url(../assets/img/gallery/gallery-12.jpg)"></a>
+                                </div>
+                                <div class="ratio ratio-4x3">
+                                    <a href="../assets/img/gallery/gallery-16.jpg" data-lity class="bg-size-cover bg-position-center" style="background-image: url(../assets/img/gallery/gallery-16.jpg)"></a>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="ratio ratio-4x3 mb-3px">
+                                    <a href="../assets/img/gallery/gallery-15.jpg" data-lity class="bg-size-cover bg-position-center" style="background-image: url(../assets/img/gallery/gallery-15.jpg)"></a>
+                                </div>
+                                <div class="ratio ratio-4x3">
+                                    <a href="../assets/img/gallery/gallery-11.jpg" data-lity class="bg-size-cover bg-position-center" style="background-image: url(../assets/img/gallery/gallery-11.jpg)"></a>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+
+                    <!-- timeline-stats -->
+                    <div class="d-flex align-items-center text-dark mb-2">
+                        <div class="d-flex align-items-center">
+                            <span class="fa-stack fs-10px">
+                                @*<i class="fa fa-circle fa-stack-2x text-danger"></i>*@
+                                <i class="fa fa-heart fa-stack-1x fa-inverse fs-11px"></i>
+                            </span>
+                            <span class="fa-stack fs-10px">
+                                <i class="fa fa-circle fa-stack-2x text-blue"></i>
+                                <i class="fa fa-thumbs-up fa-stack-1x fa-inverse fs-11px bottom-0 mb-1px"></i>
+                            </span>
+                            <span class="ms-1">@FormatarNumero(count)</span>
+                        </div>
+                        @*<div class="d-flex align-items-center ms-auto">
+                            <div>259 Shares</div>
+                            <div class="ms-3">21 Comments</div>
+                        </div>*@
+                    </div>
+
+                    <!-- timeline-action -->
+                    <hr class="my-10px" />
+                    <div class="d-flex align-items-center fw-bold">
+                        <button type="button" id="activity" name="activity" data-activityid="@item.Id" data-userid="@currentUser.Id" class="btn flex-fill text-decoration-none text-center text-gray-600">
+                            <i class="fa fa-thumbs-up fa-fw me-3px"></i> Like
+                        </button>
+                        @*<a href="javascript:;" class="flex-fill text-decoration-none text-center text-gray-600">
+            <i class="fa fa-comments fa-fw me-3px"></i> Comment
+        </a>
+        <a href="javascript:;" class="flex-fill text-decoration-none text-center text-gray-600">
+            <i class="fa fa-share fa-fw me-3px"></i> Share
+        </a>*@
+                    </div>
+                    @*<hr class="mt-10px mb-3" />*@
+
+                    <!-- timeline-input -->
+                    @*<form action="" class="d-flex align-items-center">
+                        <div><img src="../assets/img/user/user-13.jpg" height="35" class="rounded-pill" /></div>
+                        <div class="ps-2 flex-1">
+                            <div class="position-relative">
+                                <input type="text" class="form-control rounded-pill ps-3 py-2 fs-13px bg-light" placeholder="Write a comment..." />
+                                <div class="position-absolute end-0 top-0 bottom-0 d-flex align-items-center px-2">
+                                    <a href="#" class="btn bg-none text-gray-600 shadow-none px-1"><i class="far fa-smile fa-fw fa-lg d-block"></i></a>
+                                    <a href="#" class="btn bg-none text-gray-600 shadow-none px-1"><i class="fa fa-camera fa-fw fa-lg d-block"></i></a>
+                                    <a href="#" class="btn bg-none text-gray-600 shadow-none px-1"><i class="fa fa-film fa-fw fa-lg d-block"></i></a>
+                                    <a href="#" class="btn bg-none text-gray-600 shadow-none px-1"><i class="far fa-sticky-note fa-fw fa-lg d-block"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>*@
+                </div>
+                <!-- END timeline-body -->
+            </div>
+        }
+</div>

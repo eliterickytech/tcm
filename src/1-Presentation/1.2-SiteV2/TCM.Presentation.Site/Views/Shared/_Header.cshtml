@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
             </button>
         }
-        <a href="/" class="navbar-brand"><span><img src="~/StaticFiles/img/tcm/Logo.png" width="40" height="40" /></span>&nbsp;<b>Chef</b> Melo</a>
+        <a href="@(currentUser.ProfileId == 1 ? "/Home/Adm" : "/Home/Index" )" class="navbar-brand"><span><img src="~/StaticFiles/img/tcm/Logo.png" width="40" height="40" /></span>&nbsp;<b>Chef</b> Melo</a>
         @if (ViewData["AppHeaderMegaMenu"] != null && ViewData["AppSidebarTwo"] == null)
         {
             <button type="button" class="navbar-mobile-toggler" data-bs-toggle="collapse" data-bs-target="#top-navbar">

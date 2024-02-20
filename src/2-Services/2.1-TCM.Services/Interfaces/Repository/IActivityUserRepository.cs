@@ -7,11 +7,14 @@ using TCM.Services.Model;
 
 namespace TCM.Services.Interfaces.Repository
 {
-    public interface IActivityUserRepository
+    public interface IActivityUserService
     {
         Task<IEnumerable<ActivityUserModel>> GetActivityUserAsync(int userId);
 
         Task<IEnumerable<ActivityUserModel>> GetActivityFriendUserAsync(int userId);
         Task<int> InsertActivityUserAsync(int userId, string description);
+        Task<int> InsertActivityUserIterationAsync(int userId, int activityUserId, int typeId);
+        Task<int> DeleteActivityUserIterationAsync(int activityUserId, int userId, int typeId);
+        Task<int> CountActivityUserIterationAsync(int activityUserId);
     }
 }

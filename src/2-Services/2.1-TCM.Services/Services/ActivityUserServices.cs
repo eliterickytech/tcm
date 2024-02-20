@@ -13,9 +13,9 @@ namespace TCM.Services.Services
 {
     public class ActivityUserServices : IActivityUserServices
     {
-        private readonly IActivityUserRepository _activityUserRepository;
+        private readonly IActivityUserService _activityUserRepository;
 
-        public ActivityUserServices(IActivityUserRepository activityUserRepository)
+        public ActivityUserServices(IActivityUserService activityUserRepository)
         {
             _activityUserRepository = activityUserRepository;
         }
@@ -24,6 +24,12 @@ namespace TCM.Services.Services
         public async Task<IEnumerable<ActivityUserModel>> GetActivityFriendUserAsync(int userId) => await _activityUserRepository.GetActivityFriendUserAsync( userId);
    
         public async Task<int> InsertActivityUserAsync(int userId, string description) => await _activityUserRepository.InsertActivityUserAsync(userId, description);
+
+        public async Task<int> InsertActivityUserIterationAsync(int userId, int activityUserId, int typeId) => await _activityUserRepository.InsertActivityUserIterationAsync(userId, activityUserId, typeId);
+
+        public async Task<int> DeleteActivityUserInterationAsync(int userId, int activityUserId, int typeId) => await _activityUserRepository.DeleteActivityUserIterationAsync(userId, activityUserId, typeId);
+
+        public async Task<int> CountActivityUserIterationAsync(int activityUserId) => await _activityUserRepository.CountActivityUserIterationAsync(activityUserId);
 
     }
 }

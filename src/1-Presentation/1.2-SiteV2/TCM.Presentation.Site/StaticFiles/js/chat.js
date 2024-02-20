@@ -36,6 +36,13 @@ function AjaxFailed(result) {
 }
 $(document).ready(function () {
 
+    function atualizarPagina() {
+        location.reload();
+    }
+
+    // Chama a função de atualização a cada 1 minuto (60000 milissegundos)
+    setInterval(atualizarPagina, 60000);
+
     $("#chatBack").click(function (event) {
 
         window.location.href="/Chat/Index"

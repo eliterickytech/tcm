@@ -11,7 +11,7 @@ using TCM.Services.Model;
 
 namespace TCM.Infrastructure.Data.Repository
 {
-    public class ActivityUserRepository : BaseRepository, IActivityUserRepository
+    public class ActivityUserRepository : BaseRepository, IActivityUserService
     {
         public ActivityUserRepository(IConfiguration configuration) : base(configuration)
         {
@@ -71,8 +71,53 @@ namespace TCM.Infrastructure.Data.Repository
             catch (Exception ex) { return default; }
         }
 
-       
+        public async Task<int> InsertActivityUserIterationAsync(int userId, int activityUserId, int typeId)
+        {
+            var query = "PR_ActivityUser_Iteration_Insert";
 
-        
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
+            parameters.Add("@ActivityUserId", activityUserId, System.Data.DbType.Int32);
+            parameters.Add("@TypeId", typeId, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<int> DeleteActivityUserIterationAsync(int activityUserId, int userId, int typeId)
+        {
+            var query = "PR_ActivityUser_Iteration_Delete";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", userId, System.Data.DbType.Int32);
+            parameters.Add("@ActivityUserId", activityUserId, System.Data.DbType.Int32);
+            parameters.Add("@TypeId", typeId, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<int> CountActivityUserIterationAsync(int activityUserId)
+        {
+            var query = "PR_ActivityUser_Iteration_Select";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@ActivityUserId", activityUserId, System.Data.DbType.Int32);
+
+            try
+            {
+                var result = (await QueryAsync<int>(query, parameters))?.FirstOrDefault();
+                return result ?? 0;
+            }
+            catch (Exception ex) { return default; }
+        }
     }
 }

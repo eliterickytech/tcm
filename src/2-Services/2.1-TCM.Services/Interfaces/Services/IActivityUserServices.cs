@@ -12,5 +12,8 @@ namespace TCM.Services.Interfaces.Services
         Task<IEnumerable<ActivityUserModel>> GetActivityUserAsync(int userId);
         Task<IEnumerable<ActivityUserModel>> GetActivityFriendUserAsync(int userId);
         Task<int> InsertActivityUserAsync(int userId, string description);
+        Task<int> InsertActivityUserIterationAsync(int userId, int activityUserId, int typeId);
+        Task<int> DeleteActivityUserInterationAsync(int userId, int activityUserId, int typeId);
+        Task<int> CountActivityUserIterationAsync(int activityUserId);
     }
 }

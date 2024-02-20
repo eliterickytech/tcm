@@ -78,7 +78,7 @@ namespace TCM.Presentation.Site
             services.AddScoped<ICollectionItemRepository, CollectionItemRepository>();
             services.AddScoped<ICollectionItemUserRepository, CollectionItemUserRepository>();
             services.AddScoped<ICollectionItemSharedRepository, CollectionItemSharedRepository>();
-            services.AddScoped<IActivityUserRepository, ActivityUserRepository>();
+            services.AddScoped<IActivityUserService, ActivityUserRepository>();
             services.AddScoped<IBaseNotification, BaseNotification>();
 
             services.AddSingleton(config);

@@ -42,6 +42,12 @@
       "badge": "2"
     },
     {
+      "controller": "Activity",
+      "action": "Index",
+      "icon": "fas fa-users",
+      "text": "Community"
+    },
+    {
       "controller": "Support",
       "action": "Index",
       "icon": "fab fa-rocketchat",
