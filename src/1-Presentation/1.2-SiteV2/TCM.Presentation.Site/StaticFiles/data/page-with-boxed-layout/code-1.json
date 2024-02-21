@@ -1,3 +1,0 @@
-@{
-  ViewData["AppBodyClass"] = "boxed-layout";
-}
