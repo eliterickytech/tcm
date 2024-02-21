@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
@@ -52,9 +52,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1BD996311B5C46C1885FF58C3BB1208D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DF5AFB4746794933A3010B5C69FF3727 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_71CBD412FF004363800927AEA0E2C706 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BE72DDF417D644598264613C3429331B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_ADBD9508843242E19B32C219755E90AA }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E9D8B8DF55B749CCB9431AEFC91FD6D3 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
