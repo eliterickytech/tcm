@@ -3,7 +3,7 @@
     if (result.isOK) {
         
         swal({
-            icon: '/tcm/' + result.data.url,
+            icon: result.data.url,
             text: result.data.description,
             buttons: {
                 cancel: {
