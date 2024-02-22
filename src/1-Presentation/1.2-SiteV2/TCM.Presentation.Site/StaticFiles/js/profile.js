@@ -2,7 +2,7 @@
 
     if (result.isOK) {
         
-        swal({
+        swal.fire({
             icon: result.data.url,
             text: result.data.description,
             buttons: {

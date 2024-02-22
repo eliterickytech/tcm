@@ -25,27 +25,22 @@ $(document).ready(function () {
     $('button[name="delete"]').click(function () {
 
         var id = $(this).data("id");
-        swal({
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-theme me-1 mb-1",
+                cancelButton: "btn btn-default active me-1 mb-1"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
             text: 'Are you sure you are going to delete the collection?',
             icon: 'warning',
-            buttons: {
-                cancel: {
-                    text: 'Cancel',
-                    value: null,
-                    visible: true,
-                    className: 'btn btn-default',
-                    closeModal: true,
-                },
-                confirm: {
-                    text: 'Yes, delete it!',
-                    value: true,
-                    visible: true,
-                    className: 'btn btn-theme',
-                }
-            }
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!"
+
         }).then((result) => {
-            if (result == true) {
+            if (result.isConfirmed) {
                 $.ajax({
                     type: 'GET',
                     url: `/ManagerCollection/DeleteCollection?id=${id}`,
