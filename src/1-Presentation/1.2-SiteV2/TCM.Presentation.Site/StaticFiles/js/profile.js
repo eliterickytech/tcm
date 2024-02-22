@@ -1,19 +1,18 @@
 ﻿function AjaxSucceeded(result) {
 
     if (result.isOK) {
-        
-        swal.fire({
-            icon: result.data.url,
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                cancelButton: "btn btn-default active me-1 mb-1"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            imageUrl: result.data.url,
             text: result.data.description,
-            buttons: {
-                cancel: {
-                    text: 'Close',
-                    value: null,
-                    visible: true,
-                    className: 'btn btn-theme',
-                    closeModal: true,
-                }
-            }
+            showCancelButton: true,
+            showConfirmButton: false
+
         });
     }
     else {

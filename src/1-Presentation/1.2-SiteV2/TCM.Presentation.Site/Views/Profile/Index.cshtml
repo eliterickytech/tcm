@@ -54,7 +54,112 @@
 
 }
 @section Styles {
+<style>
+    .code {
+        text-align: center;
+        letter-spacing: 15px;
+    }
 
+    .message {
+        color: #000;
+        clear: both;
+        line-height: 18px;
+        font-size: 15px;
+        padding: 8px;
+        position: relative;
+        margin: 8px 0;
+        max-width: 85%;
+        word-wrap: break-word;
+        z-index: -1;
+    }
+
+        .message:after {
+            position: absolute;
+            content: "";
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .message.sent {
+            background: #e1ffc7;
+            border-radius: 5px 0px 5px 5px;
+            float: right;
+        }
+
+            .message.sent:after {
+                border-width: 0px 0 10px 10px;
+                border-color: transparent transparent transparent #e1ffc7;
+                top: 0;
+                right: -10px;
+            }
+
+        .message.received {
+            background: #000000;
+            border-radius: 0px 5px 5px 5px;
+            float: left;
+        }
+
+            .message.received .metadata {
+                padding: 0 0 0 16px;
+            }
+
+            .message.received:after {
+                border-width: 0px 10px 10px 0;
+                border-color: transparent #fff transparent transparent;
+                top: 0;
+                left: -10px;
+            }
+
+    .grid_template_collectible_3x3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        grid-gap: 2px;
+        margin-bottom: 16px;
+        grid-auto-columns: 175px;
+    }
+
+    .grid_template_collectible_2x2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        grid-gap: 2px;
+        margin-bottom: 16px;
+        grid-auto-columns: 117px;
+    }
+
+    .grid-auto-columns-1 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-columns: 348px;
+    }
+
+    .image-grid {
+        display: flex;
+        flex-wrap: nowrap; /* Impede que as imagens quebrem para a próxima linha */
+    }
+
+    .area_grid_collectible_int {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .area_grid_collectible {
+        display: block;
+    }
+
+    .opacityImage-collection-item {
+        opacity: 0.3;
+    }
+
+    .opacityImage-collection-item-display-full {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+</style>
 
 }
 @section Scripts {
@@ -84,16 +189,16 @@
             <tbody>
                 <tr>
                     <td class="w-25 align-self-center">
-                        <img src="~/StaticFiles/img/collectibles.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countCollectionCompleted</span><br />
+                        <img src="~/StaticFiles/tcm/img/collectibles.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countCollectionCompleted</span><br />
                         collectibles
 
                     </td>
                     <td class="w-25 align-self-center">
-                        <img src="~/StaticFiles/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countConnection</span><br />
+                        <img src="~/StaticFiles/tcm/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countConnection</span><br />
                         connections
                     </td>
                     <td class="w-25 align-self-center">
-                        <img src="~/StaticFiles/img/chats.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countChateUnRead</span><br />
+                        <img src="~/StaticFiles/tcm/img/chats.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countChateUnRead</span><br />
                         chats
                     </td>
                 </tr>
