@@ -7,6 +7,8 @@ using TCM.CrossCutting.Helpers;
 using TCM.Services.Model;
 using System.Linq;
 using TCM.Presentation.Site.Models;
+using System.Diagnostics;
+using System.Net;
 
 namespace TCM.Presentation.Site.Controllers
 {
@@ -106,7 +108,19 @@ namespace TCM.Presentation.Site.Controllers
             return new JsonResult(resultModel);
         }
 
-        private string GeneratedToken(string user, string code, bool firstAccess)
+        [HttpGet]
+        public async Task<JsonResult> Users()
+        {
+            var users = await _userServices.GetAllUsersAsync( new UserModel() { ProfileId = Services.Model.Enum.UserType.User });
+
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = HttpStatusCode.OK,
+                IsOK = true,
+                Data = users
+            });
+        }
+private string GeneratedToken(string user, string code, bool firstAccess)
         {
             var url = $"/Code/Mail?";
 
@@ -114,6 +128,7 @@ namespace TCM.Presentation.Site.Controllers
 
             return $"{url}token={Encrypt.EncodeBase64(param)}";
         }
+
 
 
     }

@@ -1,0 +1,96 @@
+﻿@model TCM.Presentation.Site.Models.HomeViewModel;
+
+@section Styles {
+
+
+}
+@section Scripts {
+
+    <script src="~/StaticFiles/js/search.js"></script>
+    <script src="~/StaticFiles/js/sendDelights.js"></script>
+
+}
+<form data-parsley-validate="true"
+      class="needs-validation"
+      method="post"
+      novalidate
+      id="formSendDelights"
+      name="formSendDelights">
+    <input type="hidden" id="hdnUserId" name="hdnUserId" value="@Model.UserModel.Id" />
+
+    <!-- BEGIN page-header -->
+    <h1 class="page-header">Send Delights <small>show all collections items...</small></h1>
+    <!-- END page-header -->
+    <!-- BEGIN row -->
+    <div class="row">
+        <div class="col-xl-10 mb-15px text-end">
+            <button class="btn btn-theme" id="btnRandomly">Randomly</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-10">
+            <hr class="my-4 bg-gray-500" />
+        </div>
+    </div>
+    <div class="row mb-10px">
+        <div class="form-label col-form-label col-lg-8 text-end">
+            User:
+        </div>
+        <div class="col-xl-2">
+            <select class="form-control" name="user" id="user" placeholder="Find a user"></select>
+        </div>
+
+    </div>
+    @foreach (var collection in Model.CollectionsModel.ToList().Where(x => x.Enabled).DistinctBy(x => x.CollectionName))
+    {
+        <div class="row">
+            <div class="col-xl-10">
+                <div class="panel panel-inverse">
+                    <div class="panel-heading bg-orange-700 ui-sortable-handle">
+                        <h4 class="panel-title">@collection.CollectionName</h4>
+                        <button type="submit" name="save" class="btn btn-danger btn-xs" id="Save">
+                            Save
+                        </button>
+                    </div>
+                    <div class="panel-body text-black">
+                        <table id="data-table-responsive" class="table table-striped align-middle" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="w-25"></th>
+                                    <th class="w-25">
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CollectionsItemModel.Where(x => x.CollectionName == collection.CollectionName && x.CollectionItemTypeIsCollectible))
+                                {
+                                    <tr>
+                                        <td>
+                                            @if (item.CollectionItemTypeId == 5)
+                                            {
+                                                <video width="100" height="100" src="@item.Url" controls><source width="100" height="100" src="@item.Url" type="video/mp4"><object><embed width="350" height="350" allowfullscreen="false" allowscriptaccess="always" type="application/x-shockwave-flash" src="@item.Url"></object></video>
+                                            }
+                                            else
+                                            {
+                                                <a href="@item.Url" data-lightbox="gallery-group-1">
+                                                    <img class="img" src="@item.Url" width="100" height="100" />
+                                                </a>
+                                            }
+
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" data-id="@item.Id" name="rdbSendDelights" value="@item.Id" id="rdbSendDelights" data-parsley-required="true" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</form>

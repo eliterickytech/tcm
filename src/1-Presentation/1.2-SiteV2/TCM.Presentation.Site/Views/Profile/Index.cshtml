@@ -4,6 +4,7 @@
 @inject TCM.Services.Interfaces.Services.ICollectionItemServices _collectionItemServices
 @inject TCM.Services.Interfaces.Services.ICollectionItemUserServices _collectionItemUserServices
 @inject TCM.Services.Interfaces.Services.IChatServices _chatServices
+@inject TCM.Services.Interfaces.Services.ICollectionItemSharedServices _collectionItemSharedServices
 
 @using TCM.Services.Model.Enum;
 @using TCM.Services.Model;
@@ -237,12 +238,25 @@
                             <div class="@styleGrid">
                                 @foreach (var itemCollectable in collectionsItemCollectable)
                                 {
-                                    var existsCollectionItem = collectionItemUsers.Where(x => x.CollectionItemId == itemCollectable.Id).Any();
-                                    <img id="imgCollectionItem" onclick="showAlert('@itemCollectable.Id')" src="@(string.Concat(itemCollectable.Url ))" data-id="@itemCollectable.Id" data-url="@(string.Concat(itemCollectable.Url ))"
-                                         @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
-                                         alt="@itemCollectable.Description"
-                                         width="@itemCollectable.CollectionItemTypeWidth"
-                                         height="@itemCollectable.CollectionItemTypeHeigh" />
+                                    var existsCollectionItem = (await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { UserId = user.Id.Value, CollectionItemId = itemCollectable.Id })).Any();
+                                    if (existsCollectionItem)
+                                    {
+                                        <img id="imgCollectionItem" onclick="showAlert('@itemCollectable.Id')" src="@(string.Concat(itemCollectable.Url ))" data-id="@itemCollectable.Id" data-url="@(string.Concat(itemCollectable.Url ))"
+                                             @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
+                                             alt="@itemCollectable.Description"
+                                             width="@itemCollectable.CollectionItemTypeWidth"
+                                             height="@itemCollectable.CollectionItemTypeHeigh" />
+
+                                    }
+                                    else
+                                    {
+                                        <img id="imgCollectionItem" src="@(string.Concat(itemCollectable.Url ))" data-id="@itemCollectable.Id" data-url="@(string.Concat(itemCollectable.Url ))"
+                                             @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
+                                             alt="@itemCollectable.Description"
+                                             width="@itemCollectable.CollectionItemTypeWidth"
+                                             height="@itemCollectable.CollectionItemTypeHeigh" />
+
+                                    }
                                 }
                             </div>
                         </div>

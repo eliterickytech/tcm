@@ -97,6 +97,9 @@
     <None Update="StaticFiles\js\login.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="StaticFiles\js\sendDelights.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="StaticFiles\js\manageCollection.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
