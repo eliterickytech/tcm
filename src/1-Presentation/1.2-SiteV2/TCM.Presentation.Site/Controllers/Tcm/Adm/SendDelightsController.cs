@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -68,6 +70,43 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
                 Data = "Successfully shared item"
             });
 
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SaveSharedRandomItem([FromBody] SendDelightsViewModel model)
+        {
+            var users = await _userServices.GetUserAsync(new UserModel() { ProfileId = Services.Model.Enum.UserType.User });
+
+            var items = (await _collectionItemServices.GetCollectionItemAsync()).Where(x => x.CollectionItemTypeIsCollectible).ToList();
+
+            var selectedUsers = SelectRandom(users.ToList(), 0.2);
+
+
+            foreach (var user in selectedUsers)
+            {
+                var selectedItems = SelectRandom(items, null);
+
+                await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
+                {
+                    CollectionItemId = selectedItems.FirstOrDefault().Id,
+                    ConnectionUserId = model.ConnectionUserId ,
+                    UserId = user.Id
+                });
+            }
+
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = HttpStatusCode.OK,
+                IsOK = true,
+                Data = "Successfully shared item"
+            });
+        }
+
+        private List<T> SelectRandom<T>(List<T> list, double? proportion)
+        {
+            Random random = new Random();
+            int quantity = proportion.HasValue ? (int)Math.Ceiling(list.Count * proportion.Value) : list.Count;
+            return list.OrderBy(x => random.Next()).Take(quantity).ToList();
         }
     }
 }

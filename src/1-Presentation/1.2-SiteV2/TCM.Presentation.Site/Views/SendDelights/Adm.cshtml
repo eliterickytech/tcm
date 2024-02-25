@@ -1,7 +1,11 @@
 ﻿@model TCM.Presentation.Site.Models.HomeViewModel;
 
 @section Styles {
-
+    <style>
+        .swal2-html-container {
+            overflow: hidden !important;
+        }
+    </style>
 
 }
 @section Scripts {
@@ -10,10 +14,8 @@
     <script src="~/StaticFiles/js/sendDelights.js"></script>
 
 }
-<form data-parsley-validate="true"
-      class="needs-validation"
+<form 
       method="post"
-      novalidate
       id="formSendDelights"
       name="formSendDelights">
     <input type="hidden" id="hdnUserId" name="hdnUserId" value="@Model.UserModel.Id" />

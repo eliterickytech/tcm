@@ -13,6 +13,23 @@ function AjaxSucceeded(result) {
         }
     }
 }
+
+function showSweetAlert() {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-theme me-1 mb-1"
+        },
+        buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+        title: "",
+        icon: "info",
+        html: `<div class="col-xl-12"><h4>Please wait while I distribute the collection items</h4><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></div>`,
+    });
+}
+function closeSweetAlert() {
+    Swal.close();
+}
 function stringToDate(dateString, hourString) {
     return moment(dateString + ' ' + hourString, 'MM/DD/YYYY hh:mm A').format('MM/DD/YYYY HH:mm:ss');
 }
@@ -60,16 +77,46 @@ $(document).ready(function () {
                 "collectionItemId": $('input[name="rdbSendDelights"]:checked').data('id')
             };
 
-            $.ajax({
-                type: 'POST',
-                url: "/SendDelights/SaveSharedItem",
-                data: JSON.stringify(formData),
-                dataType: 'json',
-                contentType: 'application/json',
-                encode: true,
-                success: AjaxSucceeded,
-                error: AjaxFailed
-            });
+
+            var buttonClicked = $(document.activeElement).attr('id');
+            if (buttonClicked === "Save") {
+                if (formData.collectionItemId == undefined || formData.collectionItemId == null) {
+                    AjaxFailed({ errors: "Please select a item", isOK: false })
+                    return;
+                } 
+                $.ajax({
+                    type: 'POST',
+                    url: "/SendDelights/SaveSharedItem",
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    encode: true,
+                    success: AjaxSucceeded,
+                    error: AjaxFailed
+                });
+            }
+            if (buttonClicked === "btnRandomly") {
+                showSweetAlert();
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/SendDelights/SaveSharedRandomItem",
+                    data: JSON.stringify(formData),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    encode: true,
+                    success: function (result) {
+                        AjaxSucceeded(result);
+                        closeSweetAlert();
+
+                    },
+                    error: function (result) {
+                        AjaxFailed(result);
+                        closeSweetAlert();
+                    }
+                });
+
+            }
         }
     });
 });
