@@ -29,7 +29,19 @@ namespace TCM.Presentation.Site.Controllers.Tcm
 
             return View(activities);
         }
+        public async Task<JsonResult> AddActivity([FromBody] ActivityUserModel model)
+        {
+            var activity = await _activityUserService.InsertActivityUserAsync(model.UserId, model.ActionDescription);
 
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = activity > 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+                IsOK = activity > 0 ? true : false,
+                Data = "Activity add successfuly",
+                Redirect = "/Activity/Index"
+            });
+
+        }
         [HttpPost]
         public async Task<JsonResult> AddActivityIteration([FromBody] ActivityUserIterationViewModel activityUserIterationViewModel)
         {

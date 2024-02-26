@@ -43,7 +43,7 @@
 
     var chatConnection = (await _chatServices.GetChatAsync(new ChatModel() { ChatConnectionUserId = user.Id }));
 
-    var chatAll = chatUser.Concat(chatConnection).ToList().Where(x => x.ChatIsRead == false).ToList();
+    var chatAll = chatUser.Concat(chatConnection).ToList().Where(x => x.ChatIsRead == false && (x.ChatUserId == user.Id || x.ChatConnectionUserId == user.Id)).ToList();
 
     var results = resultUsers.Concat(resultConnections).ToList();
 

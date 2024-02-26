@@ -51,6 +51,16 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 
             return View(model);
         }
+        public async Task<IActionResult> ShareDelightConnection(int collectionItemId)
+        {
+            var currentUser = _userServices.CurrentUserAsync();
+
+            if (currentUser.Id == 0) return RedirectToAction("Index", "Login");
+
+            var collectionItem = (await _collectionItemServices.GetCollectionItemAsync(null, collectionItemId)).FirstOrDefault();
+
+            return View(collectionItem);
+        }
 
         [HttpPost]
         public async Task<JsonResult> SaveSharedItem([FromBody] SendDelightsViewModel model)
@@ -71,6 +81,34 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
             });
 
         }
+        [HttpGet]
+        public async Task<JsonResult> ListSharedItemsByCollectionItemId(int collectionItemId)
+        {
+            var currentUser = _userServices.CurrentUserAsync();
+
+            var items = (await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { CollectionItemId = collectionItemId,  UserId = currentUser.Id }));
+
+            var connectionNameShared = (await _userServices.GetUserAsync(new UserModel() { Id = items.LastOrDefault().ConnectionUserId })).FirstOrDefault().UserName;
+
+            var collectionItem = (await _collectionItemServices.GetCollectionItemAsync(null, collectionItemId)).FirstOrDefault();
+
+            var quantityShared = items.Count();
+
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = HttpStatusCode.OK,
+                IsOK = true,
+                Data = new SendDelightsViewModel()
+                {
+                    CollectionItemId = collectionItemId,
+                    ConnectionUserId = items.LastOrDefault().ConnectionUserId ?? 0,
+                    ConnectionNameShared  = connectionNameShared,
+                    Quantity = quantityShared,
+                    Url = collectionItem.Url,
+                    Description = collectionItem.Description
+                }
+            });
+        } 
 
         [HttpPost]
         public async Task<JsonResult> SaveSharedRandomItem([FromBody] SendDelightsViewModel model)

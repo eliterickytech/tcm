@@ -63,6 +63,75 @@ $(document).ready(function () {
         error: AjaxFailed
     });
 
+    $("#formSharedSendDelights").submit(function (event) {
+        var form = $("#formSharedSendDelights")
+        if (form[0].checkValidity() === false) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+        else {
+            event.preventDefault()
+            var formData = {
+                "userId": $("#hdnUserId").val() ,
+                "connectionUserId": $("#user").val(),
+                "collectionItemId": $("#hdnCollectioItemId").val(),
+                "message": $("#message").val(),
+                "postMyActivity": $("#postMyActivity").is(":checked") ? true : false,
+                "userName": $("#hdnUserName").val(),
+                "connectionUserName": $("#user option:selected").text()
+            };
+            var formDataChat = {
+                "connectionUserId": formData.connectionUserId,
+                "userId": formData.userId,
+                "isUnread": false,
+                "message": formData.message,
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "/SendDelights/SaveSharedItem",
+                data: JSON.stringify(formData),
+                dataType: 'json',
+                contentType: 'application/json',
+                encode: true,
+                success: function (result) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Chat/Add",
+                        data: JSON.stringify(formDataChat),
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        encode: true,
+                        success: function (result) {
+                            var formDataActivity = {
+                                "userId": formData.userId,
+                                "actionDescription": `User ${formData.userName} has just shared an item with user ${formData.connectionUserName}`
+                            }
+                            if (formData.postMyActivity === true) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "/Activity/AddActivity",
+                                    data: JSON.stringify(formDataActivity),
+                                    dataType: 'json',
+                                    contentType: 'application/json',
+                                    encode: true,
+                                    success: AjaxSucceeded({ "isOK": true, "data": "Sharing was done successfully and we are already sending a message to your friend", redirect:"/Home/Index" }),
+                                    error: AjaxFailed
+                                });
+                            }
+                            else {
+                                AjaxSucceeded({
+                                    "isOK": true, "data": "Sharing was done successfully and we are already sending a message to your friend", redirect: "/Activity/index" });
+                            }
+                        },
+                        error: AjaxFailed
+                    });
+                },
+                error: AjaxFailed
+            });
+        }
+        
+    });
     $("#formSendDelights").submit(function (event) {
         var form = $("#formSendDelights")
         if (form[0].checkValidity() === false) {

@@ -7,5 +7,13 @@
         public int CollectionItemId { get; set; }
 
         public int ConnectionUserId { get; set; }
+
+        public int Quantity { get; set; }
+
+        public string ConnectionNameShared { get; set; }
+
+        public string Url { get; set; }
+
+        public string Description { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace TCM.Infrastructure.Data.Repository
             var query = "PR_CollectionitemShared_Select";
 
             DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@UserId", model.Id, System.Data.DbType.Int32);
+            parameters.Add("@UserId", model.UserId, System.Data.DbType.Int32);
             parameters.Add("@ConnectionUserId", model.ConnectionUserId, System.Data.DbType.Int32);
             parameters.Add("@CollectionItemId", model.CollectionItemId, System.Data.DbType.Int32);
 
