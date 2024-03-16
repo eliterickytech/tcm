@@ -25,18 +25,18 @@
     <!-- BEGIN col-6 -->
     <div class="col-xl-10 align-self-center ">
         <div class="row-cols-10 text-center align-self-center mb-10px">
-            <a href="@topBanner.BannerRedirectTo" target="_blank">
-                <img width="@topBanner.BannerTypeWidth" height="@topBanner.BannerTypeHeight" src="/StaticFiles/tcm/@topBanner.BannerUrl" alt="">
+            <a href="@topBanner?.BannerRedirectTo" target="_blank">
+                <img width="@topBanner?.BannerTypeWidth" height="@topBanner?.BannerTypeHeight" src="/StaticFiles/tcm/@topBanner?BannerUrl" alt="">
             </a>
         </div>
         <div class="row-cols-10 text-center align-self-center">
-            <a href="@middleBanner.BannerRedirectTo" target="_blank">
-                @if (middleBanner.BannerVideo)
+            <a href="@middleBanner?.BannerRedirectTo" target="_blank">
+                @if (middleBanner != null && middleBanner.BannerVideo)
                 {
-                    <video controls autoplay width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")">
-                        <source width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="video/mp4">
+                    <video controls autoplay width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")">
+                        <source width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner?.BannerUrl" type="video/mp4">
                         <object>
-                            <embed width="@string.Concat(middleBanner.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner.BannerUrl" type="application/x-shockwave-flash"
+                            <embed width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner?.BannerUrl" type="application/x-shockwave-flash"
                                    allowfullscreen="false" allowscriptaccess="always">
                         </object>
                         Formato não suportado
@@ -44,7 +44,7 @@
                 }
                 else
                 {
-                    <img width="@middleBanner.BannerTypeWidth" height="@middleBanner.BannerTypeHeight" src="/StaticFiles/tcm/@middleBanner.BannerUrl" alt="">
+                    <img width="@middleBanner?.BannerTypeWidth" height="@middleBanner?.BannerTypeHeight" src="/StaticFiles/tcm/@middleBanner?.BannerUrl" alt="">
                 }
             </a>
         </div>
