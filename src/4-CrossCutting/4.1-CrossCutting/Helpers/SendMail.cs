@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Azure.Communication.Email;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json.Linq;
 using SendGrid;
@@ -32,59 +31,128 @@ namespace TCM.CrossCutting.Helpers
 
             string root = _webHostEnvironment.ContentRootPath;
 
-            var connectionString = _smtpConfiguration.ConnectionString;
+            MailMessage message = new MailMessage();
 
-            var emailClient = new EmailClient(connectionString);
+            var from = new EmailAddress(_smtpConfiguration.Mail);
+
+            var to = new EmailAddress(mailTo);
+
+            message.Subject = "Team Chef Melo - Remmember password";
 
             var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLRememberPassword)).ToString().Replace("@url@", token).Replace("@username@", username), "<[^>]*>", "");
 
+            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectVerification, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLRememberPassword)).ToString().Replace("@username@", username));
 
-            EmailSendOperation emailSendOperation = await emailClient.SendAsync(Azure.WaitUntil.Completed,
-                senderAddress: _smtpConfiguration.Mail,
-                recipientAddress: mailTo,
-                subject: "Team Chef Melo - Remmember password - DoNotReply",
-                htmlContent: ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLRememberPassword)).ToString().Replace("@url@", token).Replace("@username@", username),
-                null);
+            message.To.Add(mailTo);
+
+            message.From = new MailAddress(_smtpConfiguration.Mail);
+
+            message.Body = msg.Contents.LastOrDefault().Value.Replace("@url@", token);
+
+            message.IsBodyHtml = true;
+
+            SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
+
+            try
+            {
+                smtpClient.UseDefaultCredentials = false;
+
+                smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
+
+                smtpClient.EnableSsl = false;
+
+                await smtpClient.SendMailAsync(message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
         }
 
         public async Task SendCodeAsync(string mailTo, string code)
-         {
+        {
             string root = _webHostEnvironment.ContentRootPath;
 
-            var connectionString = _smtpConfiguration.ConnectionString;
+            MailMessage message = new MailMessage();
 
-            var emailClient = new EmailClient(connectionString);
+            var from = new EmailAddress(_smtpConfiguration.Mail);
+
+            var to = new EmailAddress(mailTo);
+
+            message.Subject = _smtpConfiguration.SubjectVerification;
 
             var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code), "<[^>]*>", "");
 
+            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectVerification, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code));
 
-            EmailSendOperation emailSendOperation = await emailClient.SendAsync(Azure.WaitUntil.Completed,
-                senderAddress: _smtpConfiguration.Mail,
-                recipientAddress: mailTo,
-                subject: _smtpConfiguration.SubjectVerification,
-                htmlContent: ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLVerification)).ToString().Replace("@AccessCode@", code),
-                plainTextContent: plainTextContent);
+            message.To.Add(mailTo);
+
+            message.From = new MailAddress(_smtpConfiguration.Mail);
+
+            message.Body = msg.Contents.LastOrDefault().Value;
+
+            message.IsBodyHtml = true;
+
+            SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
+
+            try
+            {
+                smtpClient.UseDefaultCredentials = false;
+
+                smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
+
+                smtpClient.EnableSsl = false;
+
+                await smtpClient.SendMailAsync(message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public async Task SendWelcomeAsync(string mailTo, string fullname)
         {
             string root = _webHostEnvironment.ContentRootPath;
 
-            var connectionString = _smtpConfiguration.ConnectionString;
+            MailMessage message = new MailMessage();
 
-            var emailClient = new EmailClient(connectionString);
+            var from = new EmailAddress(_smtpConfiguration.Mail);
+
+            var to = new EmailAddress(mailTo);
+
+            message.Subject = _smtpConfiguration.SubjectWelcome;
 
             var plainTextContent = Regex.Replace(ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLWelcome)).ToString().Replace("@fullname@", fullname), "<[^>]*>", "");
 
+            var msg = MailHelper.CreateSingleEmail(from, to, _smtpConfiguration.SubjectWelcome, plainTextContent, ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLWelcome)).ToString().Replace("@fullname@", fullname));
 
-            EmailSendOperation emailSendOperation = await emailClient.SendAsync(Azure.WaitUntil.Completed,
-                senderAddress: _smtpConfiguration.Mail,
-                recipientAddress: mailTo,
-                subject: _smtpConfiguration.SubjectWelcome,
-                htmlContent: ReadHtmlFile(string.Concat(root, _smtpConfiguration.HTMLWelcome)).ToString().Replace("@fullname@", fullname),
-                plainTextContent: plainTextContent);
-                
+            message.To.Add(mailTo);
+
+            message.From = new MailAddress(_smtpConfiguration.Mail);
+
+            message.Body = msg.Contents.LastOrDefault().Value;
+
+            message.IsBodyHtml = true;
+
+            SmtpClient smtpClient = new SmtpClient(_smtpConfiguration.Host, _smtpConfiguration.Port);
+
+            try
+            {
+                smtpClient.UseDefaultCredentials = false;
+
+                smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
+
+                smtpClient.EnableSsl = false;
+
+                await smtpClient.SendMailAsync(message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         private string ReadHtmlFile(string filePath)
         {

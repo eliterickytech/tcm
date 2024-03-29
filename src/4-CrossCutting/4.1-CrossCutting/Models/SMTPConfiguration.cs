@@ -25,6 +25,8 @@ namespace TCM.CrossCutting.Model
 
         public string ConnectionString { get; set; }
 
+        public string UriEmail { get; set; }
+
         public SMTPConfiguration() { }
 
     }

@@ -42,17 +42,25 @@ namespace TCM.Infra.Repository
 
         public async Task<IEnumerable <UserModel>> GetUserAsync(UserModel user)
         {
-            var query = @"PR_User_Select";
-            var parameters = new DynamicParameters();
+            try
+            {
+                var query = @"PR_User_Select";
+                var parameters = new DynamicParameters();
 
-            parameters.Add("@UserName", user.UserName, System.Data.DbType.String);
-            parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
-            parameters.Add("@Email", user.Email, System.Data.DbType.String);
-            parameters.Add("@Password", user.Password, System.Data.DbType.String);
-            parameters.Add("@ProfileId", user.ProfileId == null ? null : ((int) user.ProfileId), System.Data.DbType.Int32);
-            parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
+                parameters.Add("@UserName", user.UserName, System.Data.DbType.String);
+                parameters.Add("@FullName", user.FullName, System.Data.DbType.String);
+                parameters.Add("@Email", user.Email, System.Data.DbType.String);
+                parameters.Add("@Password", user.Password, System.Data.DbType.String);
+                parameters.Add("@ProfileId", user.ProfileId == null ? null : ((int)user.ProfileId), System.Data.DbType.Int32);
+                parameters.Add("@Id", user.Id, System.Data.DbType.Int32);
 
-            return await QueryAsync<UserModel>(query, parameters);
+                return await QueryAsync<UserModel>(query, parameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<IEnumerable<UserModel>> GetAllUserAsync(UserModel user)
