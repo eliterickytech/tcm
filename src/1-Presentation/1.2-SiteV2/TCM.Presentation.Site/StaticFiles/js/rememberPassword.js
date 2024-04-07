@@ -1,25 +1,23 @@
 function AjaxSucceeded(result) {
 
     if (!result.isOK) {
-
+        console.log("Error:", result)
         handleGritterNotificationMessages("Message warning", result.errors);
     }
     else {
+        console.log("Success:", result.data);
+
         handleGritterNotificationMessages("Message success", result.data);
         if (result.type == "ChangedPIN") {
             setTimeout(function () {
                 window.location.href = result.redirect;
             }, 3000);
-
         }
-
-
     }
-
 }
 
 function AjaxFailed(result) {
-
+    console.log("Error:", result)
     if (result.errors != null) {
         handleGritterNotificationMessages("Message danger", result.errors);
     };
@@ -38,6 +36,8 @@ $(document).ready(function () {
                 "username": $("#username").val(),
             };
             var username = $("#username").val();
+
+            console.log("username", username);
 
             $.ajax({
                 type: 'GET',
