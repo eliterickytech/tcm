@@ -41,7 +41,7 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 
             var collections = await _collectionServices.GetCollectionAsync();
 
-            var collectionsItems = await _collectionItemServices.GetCollectionItemAsync();
+            var collectionsItems = (await _collectionItemServices.GetCollectionItemAsync()).Where(x => x.CollectionItemTypeIsCollectible);
 
             var model = new TCM.Presentation.Site.Models.HomeViewModel();
 

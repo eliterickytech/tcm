@@ -1,5 +1,7 @@
 ﻿@model TCM.Presentation.Site.Models.HomeViewModel;
-
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 @section Styles {
 
 
@@ -26,7 +28,7 @@
             <div class="panel panel-inverse">
                 <div class="panel-heading bg-orange-700 ui-sortable-handle">
                     <h4 class="panel-title">@collection.CollectionName</h4>
-                    <button type="button" name="delete" data-id="@collection.Id" class="btn btn-danger btn-xs" id="delete" >
+                    <button type="button" name="delete" data-id="@collection.Id" class="btn btn-danger btn-xs" id="delete">
                         Delete
                     </button>
                 </div>

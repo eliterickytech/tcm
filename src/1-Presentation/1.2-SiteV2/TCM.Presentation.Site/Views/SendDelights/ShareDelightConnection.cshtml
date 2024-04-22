@@ -1,6 +1,9 @@
 ﻿@model TCM.Services.Model.CollectionItemModel
 @inject TCM.Services.Interfaces.Services.IUserServices _userServices
 @{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
     var currentUser = _userServices.CurrentUserAsync();
 }
 @section Scripts {

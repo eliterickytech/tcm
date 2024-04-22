@@ -1,0 +1,148 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc
+@inject TCM.Services.Interfaces.Services.IUserServices _userServices
+
+@{
+    string appMode = "";
+    if (Context.Request.Cookies.TryGetValue("app-theme-dark-mode", out string appModeValue))
+    {
+        if (appModeValue == "dark-mode")
+        {
+            appMode = "dark";
+        }
+    }
+
+    var currentUser = _userServices.CurrentUserAsync();
+
+
+}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="@appMode" @ViewData["AppHtmlAttr"]>
+<head>
+
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="@ViewData["MetaDescription"]" />
+    <meta name="author" content="@ViewData["MetaAuthor"]" />
+    <meta name="keywords" content="@ViewData["MetaKeywords"]" />
+
+    @RenderSection("MetaTag", required: false)
+
+    <!-- ================== BEGIN core-css ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="~/StaticFiles/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/css/vendor.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/css/default/app.min.css" rel="stylesheet" />
+
+
+    <link href="~/StaticFiles/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+
+
+    <link href="~/StaticFiles/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/summernote/dist/summernote-lite.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/plugins/lightbox2/dist/css/lightbox.css" rel="stylesheet" />
+
+    <link href="~/StaticFiles/assets/plugins/lity/dist/lity.min.css" rel="stylesheet" />
+    <link href="~/StaticFiles/assets/css/tcm/site.css" />
+
+
+    <!-- ================== END core-css ================== -->
+
+    @RenderSection("Styles", required: false)
+</head>
+<body class="@ViewData["AppBodyClass"]">
+    <!-- BEGIN #app -->
+    <div id="app" class="app @(ViewData["AppSidebarNone"] == null ? "app-sidebar-fixed" : "") @(ViewData["AppHeaderNone"] == null ? "app-header-fixed" : "") @ViewData["AppClass"]">
+        @if (ViewData["AppHeaderNone"] == null)
+        {
+            <partial name="_HeaderAdmin" />
+        }
+
+        @if (ViewData["AppTopMenu"] != null)
+        {
+            <partial name="_TopMenu" />
+        }
+
+        @if (ViewData["AppSidebarNone"] == null)
+        {
+            if (currentUser.ProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative)
+            {
+                <partial name="_SidebarAdm" />
+            }
+            else
+            {
+                <partial name="_Sidebar" />
+            }
+        }
+
+        @if (ViewData["AppSidebarTwo"] != null)
+        {
+            <partial name="_SidebarRight" />
+        }
+
+        @if (ViewData["AppEmpty"] == null)
+        {
+            <div id="content" class="app-content @ViewData["AppContentClass"]" @ViewData["AppContentAttr"]>
+                @RenderBody()
+            </div>
+        }
+        else
+        {
+            @RenderBody()
+        }
+
+        @RenderSection("AppOutterContent", required: false)
+    </div>
+    <!-- END #app -->
+    <!-- ================== BEGIN core-js ================== -->
+    <script>
+        window.paceOptions = {
+            ajax: { ignoreURLs: ['mainHub', '__browserLink', 'browserLinkSignalR'], trackWebSockets: false }
+        };
+    </script>
+
+    <script src="~/StaticFiles/js/vendor.min.js"></script>
+    <script src="~/StaticFiles/js/app.min.js"></script>
+
+    <script src="~/StaticFiles/assets/plugins/parsleyjs/dist/parsley.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
+    <script src="~/StaticFiles/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/summernote/dist/summernote.js"></script>
+    <script src="~/StaticFiles/assets/plugins/select2/dist/js/select2.min.js"></script>
+
+    <script src="~/StaticFiles/assets/plugins/moment/min/moment.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="~/StaticFiles/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/select-picker/dist/picker.min.js"></script>
+
+
+    <script src="~/StaticFiles/assets/plugins/isotope-layout/dist/isotope.pkgd.min.js"></script>
+    <script src="~/StaticFiles/assets/plugins/lightbox2/dist/js/lightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="~/StaticFiles/assets/plugins/gritter/js/jquery.gritter.js"></script>
+
+    <script src="~/StaticFiles/assets/plugins/lity/dist/lity.min.js"></script>
+
+    <script src="~/StaticFiles/js/site.js"></script>
+    <!-- ================== END core-js ================== -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

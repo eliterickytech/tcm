@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<TCM.Services.Model.BannerModel>
 @{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
     var banner = Model.Where(x => x.BannerTypeId == (int)TCM.Services.Model.Enum.BannerType.Top)?.FirstOrDefault();
 }
 
@@ -30,13 +33,13 @@
                 </div>
             </div>
             <div class="panel-body text-black">
-                <div class="@(banner != null ? "visible": "invisible")">
+                <div style="@(banner != null ? "display:block": "display:none")">
                     <div class="row">
                         <h6>Current</h6>
                         <div class="p-4">
-                            <img src="~/StaticFiles/tcm/@banner.BannerUrl" width="@banner.BannerTypeWidth" height="@banner.BannerTypeHeight" alt="Responsive image">
+                            <img src="~/StaticFiles/tcm/@banner?.BannerUrl" width="@banner?.BannerTypeWidth" height="@banner?.BannerTypeHeight" alt="Responsive image">
                         </div>
-                        <h6>Redirect to: <span class="text-orange-600">@banner.BannerRedirectTo</span></h6>
+                        <h6>Redirect to: <span class="text-orange-600">@banner?.BannerRedirectTo</span></h6>
                     </div>
                     <div class="row">
                         <hr class="my-4 bg-gray-500" />

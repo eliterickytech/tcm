@@ -1,5 +1,7 @@
 ﻿@model TCM.Presentation.Site.Models.HomeViewModel;
-
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 @section Styles {
     <style>
         .swal2-html-container {
@@ -14,8 +16,7 @@
     <script src="~/StaticFiles/js/sendDelights.js"></script>
 
 }
-<form 
-      method="post"
+<form method="post"
       id="formSendDelights"
       name="formSendDelights">
     <input type="hidden" id="hdnUserId" name="hdnUserId" value="@Model.UserModel.Id" />

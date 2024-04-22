@@ -4,16 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using TCM.Services.Model;
-using System.Drawing;
-using System.Drawing.Imaging;
 using Microsoft.AspNetCore.Hosting;
-using System.Drawing.Drawing2D;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace TCM.CrossCutting.Helpers
 {
@@ -66,61 +62,52 @@ namespace TCM.CrossCutting.Helpers
             }
         }
 
-        public List<string> SplitImage(string originFilePath, string destinationFolderPath, string relativeFolder, int partsCount)
+
+
+    public void ResizeImage(string sourceImagePath, string destinationImagePath, int width, int height)
+    {
+        using (var sourceImage = Image.Load(sourceImagePath))
         {
-            List<string> result = new List<string>();
-
-            using (Bitmap imageOriginal = new Bitmap(originFilePath))
-            {
-                int partWidth = imageOriginal.Width / partsCount;
-                int partHeight = imageOriginal.Height / partsCount;
-
-                int order = 1;
-
-                for (int i = 0; i < partsCount; i++)
-                {
-                    for (int j = 0; j < partsCount; j++)
-                    {
-                        Rectangle partRect = new Rectangle(j * partWidth, i * partHeight, partWidth, partHeight);
-                        using (Bitmap part = new Bitmap(partWidth, partHeight))
-                        {
-                            using (Graphics graphics = Graphics.FromImage(part))
-                            {
-                                graphics.DrawImage(imageOriginal, new Rectangle(0, 0, partWidth, partHeight), partRect, GraphicsUnit.Pixel);
-                            }
-
-                            string fileName = Path.Combine(destinationFolderPath, $"{order.ToString().PadLeft(2, '0')}.png");
-                            part.Save(fileName, ImageFormat.Png);
-                            string fileRelativePath = Path.Combine(relativeFolder, $"{order.ToString().PadLeft(2, '0')}.png");
-                            result.Add(fileRelativePath);
-                        }
-
-                        order += 1;
-                    }
-                }
-            }
-
-            return result;
+            sourceImage.Mutate(x => x.Resize(width, height));
+            sourceImage.Save(destinationImagePath);
         }
+    }
 
-        public void ResizeImage(string sourceImagePath, string destinationImagePath, int width, int height)
+
+
+
+    public List<string> SplitImage(string originFilePath, string destinationFolderPath, string relativeFolder, int partsCount)
+    {
+        List<string> result = new List<string>();
+
+        using (Image imageOriginal = Image.Load(originFilePath))
         {
-            using (var sourceImage = Image.FromFile(sourceImagePath))
-            {
-                using (var resizedImage = new Bitmap(width, height))
-                {
-                    using (var graphics = Graphics.FromImage(resizedImage))
-                    {
-                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        graphics.DrawImage(sourceImage, 0, 0, width, height);
-                    }
+            int partWidth = imageOriginal.Width / partsCount;
+            int partHeight = imageOriginal.Height / partsCount;
 
-                    resizedImage.Save(destinationImagePath, sourceImage.RawFormat);
+            int order = 1;
+
+            for (int i = 0; i < partsCount; i++)
+            {
+                for (int j = 0; j < partsCount; j++)
+                {
+                    var clone = imageOriginal.Clone(img => img.Crop(new Rectangle(j * partWidth, i * partHeight, partWidth, partHeight)));
+
+                    string fileName = Path.Combine(destinationFolderPath, $"{order.ToString().PadLeft(2, '0')}.png");
+                    clone.Save(fileName);
+                    string fileRelativePath = Path.Combine(relativeFolder, $"{order.ToString().PadLeft(2, '0')}.png");
+                    result.Add(fileRelativePath);
+
+                    order += 1;
                 }
             }
         }
 
-        public List<int> Randomize(List<int> ints)
+        return result;
+    }
+
+
+    public List<int> Randomize(List<int> ints)
         {
             Random random = new Random();
 

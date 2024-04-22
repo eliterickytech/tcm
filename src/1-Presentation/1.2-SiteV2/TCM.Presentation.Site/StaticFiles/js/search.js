@@ -16,6 +16,13 @@ $(document).ready(function () {
 
     $("#formSearch").submit(function (event) {
 
+        if ($("#searchUser").val() == null || $("#searchUser").val() == "") {
+            handleGritterNotificationMessages("Message warning", "Please fill in the search field with username or email");
+            event.preventDefault()
+            event.stopPropagation()
+            return;
+        }
+
         var form = $("#formSearch")
         if (form[0].checkValidity() === false) {
             event.preventDefault()

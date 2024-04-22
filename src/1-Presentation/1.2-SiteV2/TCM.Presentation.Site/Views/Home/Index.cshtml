@@ -26,7 +26,7 @@
     <div class="col-xl-10 align-self-center ">
         <div class="row-cols-10 text-center align-self-center mb-10px">
             <a href="@topBanner?.BannerRedirectTo" target="_blank">
-                <img width="@topBanner?.BannerTypeWidth" height="@topBanner?.BannerTypeHeight" src="/StaticFiles/tcm/@topBanner?BannerUrl" alt="">
+                <img width="@topBanner?.BannerTypeWidth" height="@topBanner?.BannerTypeHeight" src="/StaticFiles/tcm/@topBanner?.BannerUrl" alt="">
             </a>
         </div>
         <div class="row-cols-10 text-center align-self-center">
@@ -70,7 +70,10 @@
                                         <img id="imgCollectionItem" src="@Model.CollectionsItemModel[r].Url" data-id="@Model.CollectionsItemModel[r].Id"
                                              alt="@Model.CollectionsItemModel[r].Description"
                                              width="@Model.CollectionsItemModel[r].CollectionItemTypeWidth"
-                                             height="@Model.CollectionsItemModel[r].CollectionItemTypeHeigh" />
+                                             height="@Model.CollectionsItemModel[r].CollectionItemTypeHeigh" /><br />
+                                        <span>@(Model.CollectionsModel.Where(x => x.Id == Model.CollectionsItemModel[r].CollectionId)?
+                                                    .FirstOrDefault()?
+                                                    .CollectionName)</span>
                                     </div>
 
                                 }

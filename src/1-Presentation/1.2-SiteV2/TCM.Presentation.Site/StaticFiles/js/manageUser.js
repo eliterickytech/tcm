@@ -19,12 +19,12 @@ function AjaxFailed(result) {
 
 }
 $(document).ready(function () {
-    $("#profile").click(function () {
+    $('button[name="profile"]').click(function () {
         var userId = $(this).data("userid");
         window.location.href = `/Profile/ProfileConnection?connectionUserId=${userId}`;
     });
 
-    $("#chat").click(function () {
+    $('button[name="chat"]').click(function () {
         var userId = $(this).data("userid");
         window.location.href = `/Chat/Details?connectionUserId=${userId}`;
     });
@@ -42,7 +42,7 @@ $(document).ready(function () {
         });
 
     });
-    $("#enabled").click(function (event) {
+    $('button[name="enabled"]').click(function (event) {
         event.preventDefault();
         var userId = $(this).data("userid");
         var dinamicText = ""
