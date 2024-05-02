@@ -13,6 +13,7 @@ namespace TCM.Presentation.Site.Models
 
         public List<CollectionItemUserModel> CollectionItemUsersModel { get; set; } = new List<CollectionItemUserModel>();
 
+        public List<CollectionItemSharedModel> CollectionItemSharedModel { get; set; } = new List<CollectionItemSharedModel>();
         public UserModel UserModel { get; set; } = new UserModel();
         public int Id { get; set; }
 

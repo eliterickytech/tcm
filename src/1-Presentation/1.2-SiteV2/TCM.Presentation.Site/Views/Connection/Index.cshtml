@@ -38,7 +38,6 @@
                     <thead>
                         <tr>
                             <th width="30%" class="text-nowrap">Username</th>
-                            <th width="30%" class="text-nowrap">Connection Date</th>
                             <th width="10%" class="text-nowrap">Action</th>
                         </tr>
                     </thead>
@@ -48,9 +47,8 @@
                         {
 
                             <tr class="odd gradeX">
-                                <td width="30%">@connection.UserName</td>
-                                <td width="30%">@connection.CreatedDate.ToString("MM/dd/yyyy")</td>
-                                <td width="10%" class="align-center">
+                                <td width="50%"><h6>@connection.UserName</h6><br /><small>Conected with @connection.CreatedDate.ToString("MM/dd/yyyy")</small></td>
+                                <td width="50%" class="align-center">
                                     <a id="connectionProfile" @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "" : "href=/Profile?connectionUserId=" + connection.UserId) class="btn @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="View profile"><i class="fa fa-eye"></i></a>
                                     &nbsp;
                                     <a id="connectionBlocked" @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "" : "href=/Connection/UpdateStatusIdConnection?id=" + connection.Id + "&connectionStatusType=3") class="btn @(connection.ConnectionProfileId == (int)TCM.Services.Model.Enum.UserType.Administrative ? "btn-gray" : "btn-theme" ) btn-icon btn-circle btn-sm" title="Block"><i class="fa fa-circle-xmark"></i></a>

@@ -21,7 +21,7 @@ function AjaxFailed(result) {
 $(document).ready(function () {
     $('button[name="profile"]').click(function () {
         var userId = $(this).data("userid");
-        window.location.href = `/Profile/ProfileConnection?connectionUserId=${userId}`;
+        window.location.href = `/ManagerProfile/Adm?connectionUserId=${userId}`;
     });
 
     $('button[name="chat"]').click(function () {

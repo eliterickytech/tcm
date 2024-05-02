@@ -40,6 +40,24 @@ namespace TCM.Presentation.Site.Controllers.Tcm
             return View(connectionAll);
         }
 
+        public async Task<IActionResult> ListMyConnection()
+        {
+            var currentUser = _userServices.CurrentUserAsync();
+
+            if (currentUser.Id == 0) return RedirectToAction("Index", "Login");
+
+            var connectionsYou = await _connectionServices.ListConnectionsByConnectionUserIdAsync(currentUser.Id);
+
+            var connectionMe = await _connectionServices.ListConnectionsByUserIdAsync(currentUser.Id);
+
+            var connectionAll = connectionsYou.Concat(connectionMe).ToList();
+
+            connectionAll = connectionAll.Where(x => x.ConnectionStatusId == (int)ConnectionStatusType.Approved).ToList();
+
+            return Json(new { IsOK = true, Data = connectionAll });
+
+        }
+
         public async Task<IActionResult> UpdateStatusConnection(int id, ConnectionStatusType connectionStatusType)
         {
             var currentUser = _userServices.CurrentUserAsync();

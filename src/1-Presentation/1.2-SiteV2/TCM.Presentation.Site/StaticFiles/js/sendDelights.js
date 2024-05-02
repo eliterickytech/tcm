@@ -42,17 +42,20 @@ function AjaxFailed(result) {
 }
 
 $(document).ready(function () {
+    var currentUserId = $("#hdnUserId").val();
 
     $.ajax({
         type: 'GET',
-        url: `/Login/Users`,
+        url: `/Connection/ListMyConnection`,
         dataType: 'json',
         contentType: 'application/json',
         encode: true,
         success: function (result) {
             var dataArray = [];
             $.each(result.data, function (index, item) {
-                dataArray.push({ id: item.id, text: item.userName });
+                if (item.userId != 1 && item.userId.toString() !== currentUserId) {
+                    dataArray.push({ id: item.userId, text: item.userName });
+                }
             });
 
             $("#user").select2({

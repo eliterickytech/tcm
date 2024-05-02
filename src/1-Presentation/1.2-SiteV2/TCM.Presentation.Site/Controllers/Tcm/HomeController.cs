@@ -5,6 +5,10 @@ using System.Linq;
 using TCM.Services.Model.Enum;
 using TCM.Presentation.Site.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Connections;
+using TCM.Services.Model;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace TCM.Presentation.Site.Controllers.Tcm
 {
@@ -14,13 +18,15 @@ namespace TCM.Presentation.Site.Controllers.Tcm
         private readonly IBannerServices _bannerServices;
         private readonly ICollectionServices _collectionServices;
         private readonly ICollectionItemServices _collectionItemServices;
+        private readonly ICollectionItemSharedServices _collectionItemSharedServices;
 
-        public HomeController(IUserServices userServices, IBannerServices bannerServices, ICollectionServices collectionServices, ICollectionItemServices collectionItemServices)
+        public HomeController(IUserServices userServices, IBannerServices bannerServices, ICollectionServices collectionServices, ICollectionItemServices collectionItemServices, ICollectionItemSharedServices collectionItemSharedServices)
         {
             _userServices = userServices;
             _bannerServices = bannerServices;
             _collectionServices = collectionServices;
             _collectionItemServices = collectionItemServices;
+            _collectionItemSharedServices = collectionItemSharedServices;
         }
 
         public async Task<IActionResult> Index()
@@ -36,16 +42,38 @@ namespace TCM.Presentation.Site.Controllers.Tcm
             model.BannersModel = banners.ToList();
 
             var collections = await _collectionServices.GetCollectionAsync();
-
+            
             model.CollectionsModel = collections.ToList();
+
+            model.CollectionItemSharedModel = (await _collectionItemSharedServices.GetCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel() { UserId = currentUser.Id })).ToList();
+
+            var collectionItems = new List<CollectionItemModel>();
+            var collectionFounded = new List<int>();
 
             foreach (var collection in collections)
             {
-                var collectionItems = await _collectionItemServices.GetCollectionItemAsync(collection.Id, null);
+                collectionItems = (await _collectionItemServices.GetCollectionItemAsync(collection.Id, null)).ToList();
 
-                var collectionItem = collectionItems.Where(x => x.CollectionItemTypeId == (int)CollectionItemType.MiniImage).FirstOrDefault();
+                foreach (var item in collectionItems)
+                {
+                    var colecaoCorrespondente = model.CollectionItemSharedModel.FirstOrDefault(c => c.CollectionItemId == item.Id);
+                    if (colecaoCorrespondente != null && !collectionFounded.Contains(colecaoCorrespondente.CollectionItemId.Value))
+                    {
+                        collectionFounded.Add(colecaoCorrespondente.CollectionItemId.Value);
+                    }
+                }
 
-                model.CollectionsItemModel.Add(collectionItem);
+                foreach (var item in collectionItems.Where(x => collectionFounded.Contains(x.Id)))
+                {
+                    var collectionItem = collectionItems.Where(x => x.CollectionItemTypeId == (int)CollectionItemType.MiniImage).FirstOrDefault();
+
+                    if (model.CollectionsItemModel.Any(x => x.CollectionId == item.CollectionId))
+                    {
+                        continue;
+                    }
+
+                    model.CollectionsItemModel.Add(collectionItem);
+                }
             }
             string pathView = string.Empty;
 

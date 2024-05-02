@@ -40,6 +40,8 @@ namespace TCM.Presentation.Site.Controllers.Tcm
             {
                 if (!chats.Where(x => x.ConnectionUserUserName == chat.ConnectionUserUserName).Any())
                 {
+                    if (chat.ChatConnectionUserId == currentUser.Id) continue;
+
                     var chatUnique = chatsALL.Where(x => x.ConnectionUserUserName == chat.ConnectionUserUserName).LastOrDefault();
 
                     chats.Add(chatUnique);
