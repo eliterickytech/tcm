@@ -6,6 +6,7 @@
 @inject TCM.Services.Interfaces.Services.IChatServices _chatServices
 @inject TCM.Services.Interfaces.Services.ICollectionItemSharedServices _collectionItemSharedServices
 
+
 @using TCM.Services.Model.Enum;
 @using TCM.Services.Model;
 @using System.Linq;
@@ -207,7 +208,7 @@
                     @foreach (var item in collections)
                     {
                         var collectionsItemCollectable = collectionsItens.Where(x => x.CollectionId == item.Id && x.CollectionItemTypeIsCollectible).ToList();
-                        var collectionItemUsers = await _collectionItemUserServices.GetCollectionItemUserAsync(item.Id, user.Id.Value);
+
                         var styleGrid = "";
                         var colspanGrid = 0;
 

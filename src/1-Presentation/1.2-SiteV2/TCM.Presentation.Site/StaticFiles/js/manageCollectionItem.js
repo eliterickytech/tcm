@@ -211,36 +211,36 @@ $(document).ready(function () {
                         {
                             CollectionItemTypeId: 2,
                             Url: $("#urlimagecollection9_5").val(),
-                            Sequence: 3,
-                            Sort: 3,
+                            Sequence: 5,
+                            Sort: 5,
                             Description: $("#collection9_5_description").val()
                         },
                         {
                             CollectionItemTypeId: 2,
                             Url: $("#urlimagecollection9_6").val(),
-                            Sequence: 3,
-                            Sort: 3,
+                            Sequence: 6,
+                            Sort: 6,
                             Description: $("#collection9_6_description").val()
                         },
                         {
                             CollectionItemTypeId: 2,
                             Url: $("#urlimagecollection9_7").val(),
-                            Sequence: 3,
-                            Sort: 3,
+                            Sequence: 7,
+                            Sort: 7,
                             Description: $("#collection9_7_description").val()
                         },
                         {
                             CollectionItemTypeId: 2,
                             Url: $("#urlimagecollection9_8").val(),
-                            Sequence: 3,
-                            Sort: 3,
+                            Sequence: 8,
+                            Sort: 8,
                             Description: $("#collection9_8_description").val()
                         },
                         {
                             CollectionItemTypeId: 2,
                             Url: $("#urlimagecollection9_9").val(),
-                            Sequence: 3,
-                            Sort: 3,
+                            Sequence: 9,
+                            Sort: 9,
                             Description: $("#collection9_9_description").val()
                         },
                     ]

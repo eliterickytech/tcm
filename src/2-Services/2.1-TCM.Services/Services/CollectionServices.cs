@@ -15,11 +15,15 @@ namespace TCM.Services.Services
     {
         private readonly ICollectionRepository _collectionRepository;
         private readonly ICollectionItemUserServices _collectionItemUserServices;
+        private readonly ICollectionItemSharedServices _collectionItemSharedServices;
+        private readonly ICollectionItemServices _collectionItemServices;
 
-        public CollectionServices(ICollectionRepository collectionRepository, ICollectionItemUserServices collectionItemUserServices)
+        public CollectionServices(ICollectionRepository collectionRepository, ICollectionItemUserServices collectionItemUserServices, ICollectionItemSharedServices collectionItemSharedServices, ICollectionItemServices collectionItemServices)
         {
             _collectionRepository = collectionRepository;
             _collectionItemUserServices = collectionItemUserServices;
+            _collectionItemSharedServices = collectionItemSharedServices;
+            _collectionItemServices = collectionItemServices;
         }
         public async Task<int> AddCollectionAsync(CollectionModel model) => await _collectionRepository.AddCollectionAsync(model);
         
@@ -32,17 +36,32 @@ namespace TCM.Services.Services
         {
             var collections = await GetCollectionAsync();
             
-            int count = 0;
+            List<int> countsCollectionsCompleted = new List<int>();
+
             foreach (var collection in collections)
             {
-                var collectionItem = await _collectionItemUserServices.GetCollectionItemUserAsync(collection.Id, userId);
+                var collectionItem = await _collectionItemServices.GetCollectionItemAsync(collection.Id, null);
 
-                if (collection.CollectionTypeQuantity <= collectionItem.Count())
+                collectionItem = collectionItem.Where(x => x.CollectionItemTypeIsCollectible);
+
+                int count = 0;
+
+                foreach (var item in collectionItem)
                 {
-                    count++;
+                    var collectionItemUser = await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { UserId = userId, CollectionItemId = item.Id});
+
+                    if (collectionItemUser.Any())
+                    {
+                        count++;
+                    }
+                }
+
+                if (collection.CollectionTypeQuantity == count)
+                {
+                    countsCollectionsCompleted.Add(collection.Id);
                 }
             }
-            return count;
+            return countsCollectionsCompleted.Distinct().Count();
         }
 
         public async Task<int> RemoveCollectionAsync(int id) => await _collectionRepository.RemoveCollectionAsync(id);

@@ -4,10 +4,16 @@ function AjaxSucceeded(result) {
     }
     else {
         handleGritterNotificationMessages("Message success", result.data);
-        if (result.redirect != null) {
+        if (result.redirect == null) {
             setTimeout(function () {
                 window.location.href = "ManagerCollection/Adm";
             }, 3000);
+        }
+        else {
+            setTimeout(function () {
+                window.location.href = result.redirect;
+            }, 3000);
+
         }
     }
 }

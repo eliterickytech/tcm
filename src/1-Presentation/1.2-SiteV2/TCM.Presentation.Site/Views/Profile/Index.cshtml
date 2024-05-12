@@ -52,6 +52,7 @@
     var countChateUnRead = chatAll.Count();
     var collections = await _collectionServices.GetCollectionAsync();
     var collectionsItens = await _collectionItemServices.GetCollectionItemAsync();
+    var urlVideo = "";
 
 }
 @section Styles {
@@ -214,10 +215,18 @@
                 <div class="carousel-inner">
                     @foreach (var item in collections)
                     {
-                        var collectionsItemCollectable = collectionsItens.Where(x => x.CollectionId == item.Id && x.CollectionItemTypeIsCollectible).ToList();
+                        var collectionsItemCollectable = collectionsItens.Where(x => x.CollectionId == item.Id).ToList();
+                        var hasVideo = false;
+                        int quantityCollectableItems = collectionsItemCollectable.Where(x => x.CollectionItemTypeIsCollectible).Count();
+                        if (collectionsItens.Where(x => x.CollectionId == item.Id && x.CollectionItemTypeId == (int)CollectionItemType.Video).ToList().Any())
+                        {
+                            hasVideo = true;
+                        }
                         var collectionItemUsers = await _collectionItemUserServices.GetCollectionItemUserAsync(item.Id, user.Id.Value);
                         var styleGrid = "";
                         var colspanGrid = 0;
+
+                        var counted = 0;
 
                         if (collections.Where(x => x.Id == item.Id).FirstOrDefault().CollectionTypeQuantity == 1)
                         {
@@ -238,9 +247,15 @@
                             <div class="@styleGrid">
                                 @foreach (var itemCollectable in collectionsItemCollectable)
                                 {
+                                    urlVideo = collectionsItens.Where(x => x.CollectionId == item.Id && x.CollectionItemTypeId == (int)CollectionItemType.Video)?.FirstOrDefault()?.Url;
+
+                                    if (!itemCollectable.CollectionItemTypeIsCollectible) continue;
+
                                     var existsCollectionItem = (await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { UserId = user.Id.Value, CollectionItemId = itemCollectable.Id })).Any();
+
                                     if (existsCollectionItem)
                                     {
+                                        counted++;
                                         <img id="imgCollectionItem" onclick="showAlert('@itemCollectable.Id')" src="@(string.Concat(itemCollectable.Url ))" data-id="@itemCollectable.Id" data-url="@(string.Concat(itemCollectable.Url ))"
                                              @(!existsCollectionItem ? "class=opacityImage-collection-item" : "class=opacityImage-collection-item-display-full")
                                              alt="@itemCollectable.Description"
@@ -259,10 +274,19 @@
                                     }
                                 }
                             </div>
+                            @if (counted == quantityCollectableItems && hasVideo)
+                            {
+                                <div class="row mt-10px" data-url="@urlVideo" id="surprise" name="surprise" style="cursor:pointer">
+                                    <p>View the surprise item <i class="fa fa-circle-play fa-lg"></i></p>
+                                </div>
+                            }
                         </div>
+
+
                     }
 
                 </div>
+
             </div>
 
         </div>

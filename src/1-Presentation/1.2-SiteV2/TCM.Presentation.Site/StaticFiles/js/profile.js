@@ -55,6 +55,27 @@ function AjaxFailed(result) {
         handleGritterNotificationMessages("Message danger", result.errors);
     };
 }
+$(document).ready(function () {
+    $("#surprise").click(function () {
+
+        var url = $(this).data("url");
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                closeButton: "btn btn-theme me-1 mb-1"
+            },
+            buttonsStyling: false
+        });
+
+        swalWithBootstrapButtons.fire({
+            html: '<video controls autoplay width="400px" height="300px"><source width="400px" height="300px" src=' + url + ' type="video/mp4"><object><embed width="400px" height="300px" src=' + url + ' type="application/x-shockwave-flash" allowfullscreen="false" allowscriptaccess="always"></object> Formato não suportado</video>',
+            showConfirmButton: false,
+            showCloseButton: true
+        })
+    });
+
+});
+
 function showAlert(id) {
 
     $.ajax({
