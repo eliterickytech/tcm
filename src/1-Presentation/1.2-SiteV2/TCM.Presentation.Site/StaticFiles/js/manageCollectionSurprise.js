@@ -36,7 +36,7 @@ $(document).ready(function () {
                 $("#fullFiles").addClass("fade show");
                 $("#btn-save").removeAttr("style");
                 $("#btn-save").addClass("d-block");
-                $("#preview").html('<video width="350px" height="350px" src="' + e.target.result + '" controls><source width="350px" height="350px" src="' + e.target.result + '" type="video/mp4"><object><embed width="350px" height="350px" allowfullscreen="false" allowscriptaccess="always" type="application/x-shockwave-flash" src="' + e.target.result + '"></object></video>');
+                $("#preview").html('<video width="350px" height="350px" src="' + e.target.result + '" controls><source width="350px" height="350px" src="' + e.target.result + '" ></video>');
             };
 
             reader.readAsDataURL(inputFile.files[0]);

@@ -36,12 +36,7 @@
                 @if (middleBanner != null && middleBanner.BannerVideo)
                 {
                     <video controls autoplay width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")">
-                        <source width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner?.BannerUrl" type="video/mp4">
-                        <object>
-                            <embed width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner?.BannerUrl" type="application/x-shockwave-flash"
-                                   allowfullscreen="false" allowscriptaccess="always">
-                        </object>
-                        Formato não suportado
+                        <source width="@string.Concat(middleBanner?.BannerTypeWidth.ToString(), "px")" height="@string.Concat(middleBanner?.BannerTypeHeight.ToString(), "px")" src="/StaticFiles/tcm/@middleBanner?.BannerUrl">
                     </video>
                 }
                 else
