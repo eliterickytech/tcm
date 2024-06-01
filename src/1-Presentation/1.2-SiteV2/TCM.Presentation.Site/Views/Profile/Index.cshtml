@@ -13,6 +13,7 @@
 
     var connectionUserId = 0;
     var user = new UserModel();
+    var currentUser = _userServices.CurrentUserAsync();
 
     if (ViewBag.ConnectionUserId > 0)
     {
@@ -24,7 +25,7 @@
     }
     else
     {
-        var currentUser = _userServices.CurrentUserAsync();
+
 
         user.UserName = currentUser.UserName;
         user.Id = currentUser.Id;
@@ -43,7 +44,12 @@
 
     var chatConnection = (await _chatServices.GetChatAsync(new ChatModel() { ChatConnectionUserId = user.Id }));
 
-    var chatAll = chatUser.Concat(chatConnection).ToList().Where(x => x.ChatIsRead == false && (x.ChatUserId == user.Id || x.ChatConnectionUserId == user.Id)).ToList();
+    List<ChatModel> chatAll = null;
+
+    if (currentUser.Id == user.Id)
+        chatAll = chatUser.ToList().Where(x => x.ChatIsRead == false && (x.ChatUserId == user.Id)).ToList();
+    else
+        chatAll = chatConnection.ToList().Where(x => x.ChatIsRead == false && (x.ChatConnectionUserId == user.Id)).ToList();
 
     var results = resultUsers.Concat(resultConnections).ToList();
 

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using TCM.Presentation.Site.Models;
@@ -28,6 +30,10 @@ namespace TCM.Presentation.Site.Controllers.Tcm
 
             var activities = await _activityUserService.GetActivityFriendUserAsync(currentUser.Id);
 
+            activities = activities.Where(x => x.ActionDate >= DateTime.Now.AddMonths(-1)).ToList();
+
+            activities = activities.ToList().OrderByDescending(x => x.ActionDate).ToList();
+            
             return View(activities);
         }
         public async Task<JsonResult> AddActivity([FromBody] ActivityUserModel model)
