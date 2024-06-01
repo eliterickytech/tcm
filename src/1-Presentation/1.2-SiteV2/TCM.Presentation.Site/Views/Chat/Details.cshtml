@@ -10,7 +10,7 @@
 
     var user = (await _userServices.GetUserAsync(new TCM.Services.Model.UserModel() { Id = userId })).FirstOrDefault();
 
-    var chatsUnread = await _chatServices.GetChatAsync(new TCM.Services.Model.ChatModel() { ChatConnectionUserId = currentUser.Id });
+    var chatsUnread = await _chatServices.GetChatAsync(new TCM.Services.Model.ChatModel() { ChatUserId = currentUser.Id });
 
     chatsUnread = chatsUnread.Where(x => x.ChatIsRead == false).ToList();
 

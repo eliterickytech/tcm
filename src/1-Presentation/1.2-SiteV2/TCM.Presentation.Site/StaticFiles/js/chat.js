@@ -36,6 +36,9 @@ function AjaxFailed(result) {
 }
 $(document).ready(function () {
 
+    var chatBody = $('.widget-chat-body');
+    chatBody.scrollTop(chatBody.prop("scrollHeight"));
+
     function atualizarPagina() {
         location.reload();
     }
@@ -60,9 +63,7 @@ $(document).ready(function () {
                 url: `/Chat/UpdateIsReaded?usernameConnectionChat=${username}`,
                 dataType: 'json',
                 contentType: 'application/json',
-                encode: true,
-                success: AjaxSucceededAdd,
-                error: AjaxFailed
+                encode: true
             });
         }
     });

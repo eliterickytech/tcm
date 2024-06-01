@@ -25,6 +25,7 @@ namespace TCM.Presentation.Site.Controllers.Tcm
 
             if (currentUser.Id == 0) return RedirectToAction("Index", "Login");
 
+
             var activities = await _activityUserService.GetActivityFriendUserAsync(currentUser.Id);
 
             return View(activities);

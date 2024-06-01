@@ -43,25 +43,21 @@
                                 <th class="w-25">
                                     Item
                                 </th>
+                                <th class="w-10px">
+                                    Has video?
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.CollectionsItemModel.Where(x => x.CollectionName == collection.CollectionName))
+                            @foreach (var item in Model.CollectionsItemModel.Where(x => x.CollectionName == collection.CollectionName && x.CollectionItemTypeIsCollectible))
                             {
                                 <tr>
                                     <td>
-                                        @if (item.CollectionItemTypeId == 5)
-                                        {
-                                            <video width="350" height="350" preload controls>
-                                                <source src="@item.Url">
-                                            </video>
-                                        }
-                                        else
-                                        {
+                                        
                                             <a href="@item.Url" data-lightbox="gallery-group-1">
                                                 <img class="img" src="@item.Url" width="100" height="100" />
                                             </a>
-                                        }
+                                        
 
                                     </td>
                                     <td>
@@ -69,6 +65,9 @@
                                     </td>
                                     <td>
                                         @item.Description
+                                    </td>
+                                    <td>
+                                        @(Model.CollectionsItemModel.Any(x => x.CollectionId == item.CollectionId && x.CollectionItemTypeId == (int)TCM.Services.Model.Enum.CollectionItemType.Video) ? "Yes" : "No")
                                     </td>
                                 </tr>
                             }
