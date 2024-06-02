@@ -56,7 +56,7 @@ function AjaxFailed(result) {
     };
 }
 $(document).ready(function () {
-    $("#surprise").click(function () {
+    $(".surprise").click(function () {
 
         var url = $(this).data("url");
 
@@ -68,7 +68,7 @@ $(document).ready(function () {
         });
 
         swalWithBootstrapButtons.fire({
-            html: '<video controls autoplay width="400px" height="300px"><source width="400px" height="300px" src=' + url + ' type="video/mp4"><object><embed width="400px" height="300px" src=' + url + ' type="application/x-shockwave-flash" allowfullscreen="false" allowscriptaccess="always"></object> Formato não suportado</video>',
+            html: '<video controls preload autoplay width="400px" height="300px" src=' + url + '></video>',
             showConfirmButton: false,
             showCloseButton: true
         })
