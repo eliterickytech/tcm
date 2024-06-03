@@ -4,6 +4,24 @@ function AjaxSucceeded(result) {
     }
     else {
         handleGritterNotificationMessages("Message success", result.data);
+
+        var collectionName = $('#collectionNameName').val();
+
+        var formDataActivity = {
+            "userId": 1,
+            "actionDescription": `Chef Melo just added a new item to his collection ${collectionName}`
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: "/Activity/AddActivity",
+            data: JSON.stringify(formDataActivity),
+            dataType: 'json',
+            contentType: 'application/json',
+            encode: true,
+            error: AjaxFailed
+        });
+
         if (result.redirect != null) {
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {

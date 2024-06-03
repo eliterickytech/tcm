@@ -250,6 +250,9 @@
                             colspanGrid = 3;
                         }
                         <div class="carousel-item @(collections.FirstOrDefault().Id == item.Id ? "active": "")">
+                            <div class="row mt-10px">
+                                <p>@item.CollectionName</p>
+                            </div>
                             <div class="@styleGrid">
                                 @foreach (var itemCollectable in collectionsItemCollectable)
                                 {
