@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /src/3-Infrastructure/3.2-TCM.Infra.BaseDados/TCM.Infrastructure.Data.Base/TCM.Infrastructure.Data.Base.sqlproj
 /src/1-Presentation/1.1-Site/TCM.Presentation.Site/wwwroot/img/collection
+/src/1-Presentation/1.2-SiteV2/TCM.Presentation.Site/StaticFiles/tcm/img/collection
