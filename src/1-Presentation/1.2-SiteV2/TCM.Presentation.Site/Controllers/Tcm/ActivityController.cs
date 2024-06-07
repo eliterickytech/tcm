@@ -30,10 +30,19 @@ namespace TCM.Presentation.Site.Controllers.Tcm
 
             var activities = await _activityUserService.GetActivityFriendUserAsync(currentUser.Id);
 
-            activities = activities.Where(x => x.ActionDate >= DateTime.Now.AddMonths(-1)).ToList();
+            if (activities is { })
+            {
+                activities = activities.Where(x => x.ActionDate >= DateTime.Now.AddMonths(-1)).ToList();
 
-            activities = activities.ToList().OrderByDescending(x => x.ActionDate).ToList();
-            
+                activities = activities.ToList().OrderByDescending(x => x.ActionDate).ToList();
+
+            }
+            else
+            {
+                activities = new System.Collections.Generic.List<ActivityUserModel>();
+            }
+
+
             return View(activities);
         }
         public async Task<JsonResult> AddActivity([FromBody] ActivityUserModel model)
