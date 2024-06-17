@@ -100,7 +100,7 @@ $(document).ready(function () {
                             Description: $("#collectionDescription").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 1,
                             Url: $("#urlimagecollection1_1").val(),
                             Sequence: 1,
                             Sort: 1,
@@ -199,63 +199,63 @@ $(document).ready(function () {
                             Description: $("#collectionDescription").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_1").val(),
                             Sequence: 1,
                             Sort: 1,
                             Description: $("#collection9_1_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_2").val(),
                             Sequence: 2,
                             Sort: 2,
                             Description: $("#collection9_2_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_3").val(),
                             Sequence: 3,
                             Sort: 3,
                             Description: $("#collection9_3_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_4").val(),
                             Sequence: 4,
                             Sort: 4,
                             Description: $("#collection9_4_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_5").val(),
                             Sequence: 5,
                             Sort: 5,
                             Description: $("#collection9_5_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_6").val(),
                             Sequence: 6,
                             Sort: 6,
                             Description: $("#collection9_6_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_7").val(),
                             Sequence: 7,
                             Sort: 7,
                             Description: $("#collection9_7_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_8").val(),
                             Sequence: 8,
                             Sort: 8,
                             Description: $("#collection9_8_description").val()
                         },
                         {
-                            CollectionItemTypeId: 2,
+                            CollectionItemTypeId: 3,
                             Url: $("#urlimagecollection9_9").val(),
                             Sequence: 9,
                             Sort: 9,
