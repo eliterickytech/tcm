@@ -19,16 +19,20 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
         private readonly ICollectionItemServices _collectionItemServices;
         private readonly ICollectionItemSharedServices _collectionItemSharedServices;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IChatServices _chatServices;
+        private readonly IActivityUserServices _activityUserServices;
         private readonly Utils _utils;
         private string root = string.Empty;
 
-        public SendDelightsController(IUserServices userServices, ICollectionServices collectionServices, ICollectionItemServices collectionItemServices, IWebHostEnvironment webHostEnvironment, ICollectionItemSharedServices collectionItemSharedServices)
+        public SendDelightsController(IUserServices userServices, ICollectionServices collectionServices, ICollectionItemServices collectionItemServices, IWebHostEnvironment webHostEnvironment, ICollectionItemSharedServices collectionItemSharedServices, IChatServices chatServices, IActivityUserServices activityUserServices)
         {
             _userServices = userServices;
             _collectionServices = collectionServices;
             _collectionItemServices = collectionItemServices;
             _webHostEnvironment = webHostEnvironment;
             _collectionItemSharedServices = collectionItemSharedServices;
+            _chatServices = chatServices;
+            _activityUserServices = activityUserServices;
         }
 
         public async Task<IActionResult> Adm()
@@ -72,6 +76,25 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
                 ConnectionUserId = model.ConnectionUserId,
                 UserId = model.UserId
             });
+
+            if (result is { })
+            {
+                var resultChat = await _chatServices.AddChatAsync(new Services.Model.ChatModel()
+                {
+                    ChatConnectionUserId = model.UserId,
+                    ChatUserId = model.ConnectionUserId,
+                    ChatMessage = model.Description ?? "I just shared an image with you, check it out in your collection",
+                });
+            }
+
+            if (result is { } && model.PostMyActivity)
+            {
+                var user = (await _userServices.GetUserAsync(new UserModel() { Id = model.UserId })).FirstOrDefault();
+
+                var connection = (await _userServices.GetUserAsync(new UserModel() { Id = model.ConnectionUserId })).FirstOrDefault();
+
+                var resultActivity = await _activityUserServices.InsertActivityUserAsync(model.ConnectionUserId, $"User {connection.UserName} has just shared an item with user {user.UserName}");
+            }
 
             return new JsonResult(new ResultModel()
             {
@@ -124,12 +147,31 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
             {
                 var selectedItems = SelectRandom(items, null);
 
-                await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
+                var result = await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
                 {
-                    CollectionItemId = selectedItems.FirstOrDefault().Id,
+                    CollectionItemId = model.CollectionItemId,
                     ConnectionUserId = model.ConnectionUserId ,
                     UserId = user.Id
                 });
+
+                if (result is { })
+                {
+                    var resultChat = await _chatServices.AddChatAsync(new Services.Model.ChatModel()
+                    {
+                        ChatConnectionUserId = model.ConnectionUserId,
+                        ChatUserId = user.Id,
+                        ChatMessage = "I just shared an image with you, check it out in your collection",
+                    });
+                }
+
+                if (result is { })
+                {
+                    var userLocal = (await _userServices.GetUserAsync(new UserModel() { Id = user.Id })).FirstOrDefault();
+
+                    var connection = (await _userServices.GetUserAsync(new UserModel() { Id = model.ConnectionUserId })).FirstOrDefault();
+
+                    var resultActivity = await _activityUserServices.InsertActivityUserAsync(model.ConnectionUserId, $"User {connection.UserName} has just shared an item with user {userLocal.UserName}");
+                }
             }
 
             return new JsonResult(new ResultModel()

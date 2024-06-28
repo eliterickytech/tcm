@@ -42,7 +42,13 @@ namespace TCM.Presentation.Site.Controllers.Tcm
                 {
                     if (chat.ChatConnectionUserId == currentUser.Id) continue;
 
-                    var chatUnique = chatsALL.Where(x => x.ConnectionUserUserName == chat.ConnectionUserUserName).LastOrDefault();
+                    var chatUniqueUser = chatsALL.Where(x => x.ConnectionUserUserName == chat.ConnectionUserUserName).LastOrDefault();
+
+                    var chatUniqueConnection = chatsALL.Where(x => x.ChatUserUserName == chat.ConnectionUserUserName).LastOrDefault();
+
+                    var chatUnique = chatUniqueUser.ChatCreatedDate > chatUniqueConnection.ChatCreatedDate ? chatUniqueUser : chatUniqueConnection;
+
+                    if (chats.Contains(chatUnique)) continue;
 
                     chats.Add(chatUnique);
                 }
