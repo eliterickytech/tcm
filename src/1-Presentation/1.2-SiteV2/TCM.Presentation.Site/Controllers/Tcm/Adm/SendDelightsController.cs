@@ -100,7 +100,8 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
             {
                 StatusCode = result > 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
                 IsOK = result > 0 ? true : false,
-                Data = "Successfully shared item"
+                Data = "Successfully shared item",
+                Redirect =  "/Profile/Index"
             });
 
         }

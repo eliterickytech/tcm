@@ -84,7 +84,7 @@
 
                                 date = chat.DateMessage.ToString("MM/dd/yyyy");
 
-                                <div class="widget-chat-item with-media @(chat.Question ? "start" : "end")">
+                                <div class="widget-chat-item with-media @(!chat.Question ? "start" : "end")">
                                     <div class="widget-chat-info">
                                         <div class="widget-chat-info-container">
                                             <div class="widget-chat-message">@chat.Message</div>

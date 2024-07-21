@@ -67,6 +67,9 @@ $(document).ready(function () {
     });
 
     $("#formSharedSendDelights").submit(function (event) {
+
+        $("#btnShareDelight").prop("disabled", true).removeClass("btn-theme").addClass("btn-default");
+
         var form = $("#formSharedSendDelights")
         if (form[0].checkValidity() === false) {
             event.preventDefault()
@@ -83,6 +86,8 @@ $(document).ready(function () {
                 "userName": $("#hdnUserName").val(),
                 "connectionUserName": $("#user option:selected").text()
             };
+
+
 
             $.ajax({
                 type: 'POST',
