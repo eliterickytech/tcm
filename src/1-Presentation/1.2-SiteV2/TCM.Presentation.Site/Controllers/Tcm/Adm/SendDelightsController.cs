@@ -9,6 +9,7 @@ using TCM.CrossCutting.Helpers;
 using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
+using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 {
@@ -89,11 +90,50 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 
             if (result is { } && model.PostMyActivity)
             {
-                var user = (await _userServices.GetUserAsync(new UserModel() { Id = model.UserId })).FirstOrDefault();
+                UserModel connection = new UserModel();
+                UserModel user = new UserModel();
 
-                var connection = (await _userServices.GetUserAsync(new UserModel() { Id = model.ConnectionUserId })).FirstOrDefault();
+                try
+                {
+                    user = (await _userServices.GetUserAsync(new UserModel() { Id = model.UserId })).FirstOrDefault();
+                }
+                catch(Exception ex)
+                {
+                    return new JsonResult(new ResultModel()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        IsOK = false,
+                        Data = ex.Message,
+                    });
+                }
 
-                var resultActivity = await _activityUserServices.InsertActivityUserAsync(model.ConnectionUserId, $"User {connection.UserName} has just shared an item with user {user.UserName}");
+                try
+                {
+                    connection = (await _userServices.GetUserAsync(new UserModel() { Id = model.ConnectionUserId })).FirstOrDefault();
+                }
+                catch(Exception ex)
+                {
+                    return new JsonResult(new ResultModel()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        IsOK = false,
+                        Data = ex.Message,
+                    });
+                }
+
+                try
+                {
+                    var resultActivity = await _activityUserServices.InsertActivityUserAsync(model.ConnectionUserId, $"User {connection.UserName} has just shared an item with user {user.UserName}");
+                }
+                catch(Exception ex)
+                {
+                    return new JsonResult(new ResultModel()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        IsOK = false,
+                        Data = ex.Message,
+                    });
+                }
             }
 
             return new JsonResult(new ResultModel()
@@ -101,7 +141,86 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
                 StatusCode = result > 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
                 IsOK = result > 0 ? true : false,
                 Data = "Successfully shared item",
-                Redirect =  "/Profile/Index"
+                Redirect = "/ManagerCollection/Adm"
+            });
+
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> SaveSharedUserItem([FromBody] SendDelightsViewModel model)
+        {
+
+            var result = await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
+            {
+                CollectionItemId = model.CollectionItemId,
+                ConnectionUserId = model.ConnectionUserId,
+                UserId = model.UserId
+            });
+
+            if (result is { })
+            {
+                var resultChat = await _chatServices.AddChatAsync(new Services.Model.ChatModel()
+                {
+                    ChatConnectionUserId = model.UserId,
+                    ChatUserId = model.ConnectionUserId,
+                    ChatMessage = model.Description ?? "I just shared an image with you, check it out in your collection",
+                });
+            }
+
+            UserModel connection = new UserModel();
+            UserModel user = new UserModel();
+
+            if (result is { } && model.PostMyActivity)
+            {
+                try
+                {
+                    user = (await _userServices.GetUserAsync(new UserModel() { Id = model.UserId })).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return new JsonResult(new ResultModel()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        IsOK = false,
+                        Data = ex.Message,
+                    });
+                }
+
+                try
+                {
+                    connection = (await _userServices.GetUserAsync(new UserModel() { Id = model.ConnectionUserId })).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    return new JsonResult(new ResultModel()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        IsOK = false,
+                        Data = ex.Message,
+                    });
+                }
+
+                try
+                {
+                    var resultActivity = await _activityUserServices.InsertActivityUserAsync(model.ConnectionUserId, $"User {connection.UserName} has just shared an item with user {user.UserName}");
+                }
+                catch (Exception ex)
+                {
+                    return new JsonResult(new ResultModel()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest,
+                        IsOK = false,
+                        Data = ex.Message,
+                    });
+                }
+
+            }
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = result > 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+                IsOK = result > 0 ? true : false,
+                Data = "Successfully shared item",
+                Redirect = "/home"
             });
 
         }

@@ -23,7 +23,7 @@ namespace TCM.Presentation.Site.Controllers.Tcm
         [HttpGet]
         public async Task<JsonResult> GetCollectionItemById(int id)
         {
-            var collectionItem = (await _collectionItemServices.GetCollectionItemAsync(null, id)).FirstOrDefault();
+            var collectionItem = (await _collectionItemServices.GetCollectionItemAsync(null, id)).Where(x => x.Enabled).FirstOrDefault();
 
             return new JsonResult(new ResultModel()
             {

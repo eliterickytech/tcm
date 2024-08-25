@@ -3,15 +3,20 @@ function AjaxSucceeded(result) {
         handleGritterNotificationMessages("Message warning", result.errors);
     }
     else {
-        handleGritterNotificationMessages("Message success", result.data);
+        if (result.redirect != null) {
 
-        if (result.redirect != null && result.redirect != "") {
-            setTimeout(function () {
-                window.location.href = result.redirect;
-            }, 3000);
-
+            window.location.href = result.redirect;
         }
     }
+}
+
+function AjaxFailed(result) {
+    console.log("Result Failed: ", result);
+
+    if (result.errors != null) {
+        handleGritterNotificationMessages("Message danger", result.errors);
+    };
+
 }
 
 function showSweetAlert() {
@@ -34,14 +39,94 @@ function stringToDate(dateString, hourString) {
     return moment(dateString + ' ' + hourString, 'MM/DD/YYYY hh:mm A').format('MM/DD/YYYY HH:mm:ss');
 }
 
-function AjaxFailed(result) {
-    if (result.errors != null) {
-        handleGritterNotificationMessages("Message danger", result.errors);
-    };
-
-}
 
 $(document).ready(function () {
+
+    $('button[name="share"]').click(function () {
+
+        $('button[name="share"]').prop("disabled", true).removeClass("btn-theme").addClass("btn-default");
+
+        var form = $("#formSharedSendDelights")
+
+        var formData = {
+            "userId": $("#hdnUserId").val(),
+            "connectionUserId": $("#user").val(),
+            "collectionItemId": $("#hdnCollectioItemId").val(),
+            "description": $("#message").val(),
+            "postMyActivity": $("#postMyActivity").is(":checked") ? true : false,
+            "userName": $("#hdnUserName").val(),
+            "connectionUserName": $("#user option:selected").text()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: "/SendDelights/SaveSharedUserItem",
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            contentType: 'application/json',
+            encode: true,
+            success: AjaxSucceeded,
+            error: AjaxFailed
+        });
+
+    });
+
+    $('button[name="btnRandomly"]').click(function () {
+
+        var form = $("#formSendDelights")
+
+        var formData = {
+            "userId": $("#user").val(),
+            "connectionUserId": $("#hdnUserId").val()
+        };
+
+        showSweetAlert();
+
+        $.ajax({
+            type: 'POST',
+            url: "/SendDelights/SaveSharedRandomItem",
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            contentType: 'application/json',
+            encode: true,
+            success: function (result) {
+                AjaxSucceeded(result);
+                closeSweetAlert();
+
+            },
+            error: function (result) {
+                AjaxFailed(result);
+                closeSweetAlert();
+            }
+        });
+    });
+
+    $('button[name="save"]').click(function () {
+
+        var form = $("#formSendDelights")
+
+        var formData = {
+            "userId": $("#user").val(),
+            "connectionUserId": $("#hdnUserId").val(),
+            "collectionItemId": $('input[name="rdbSendDelights"]:checked').data('id')
+        };
+
+        if (formData.collectionItemId == undefined || formData.collectionItemId == null) {
+            AjaxFailed({ errors: "Please select a item", isOK: false })
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/SendDelights/SaveSharedItem",
+            data: JSON.stringify(formData),
+            dataType: 'json',
+            contentType: 'application/json',
+            encode: true,
+            success: AjaxSucceeded,
+            error: AjaxFailed
+        }); 
+    });
+
     var currentUserId = $("#hdnUserId").val();
 
     $.ajax({
@@ -64,99 +149,6 @@ $(document).ready(function () {
             });
         },
         error: AjaxFailed
-    });
-
-    $("#formSharedSendDelights").submit(function (event) {
-
-        $("#btnShareDelight").prop("disabled", true).removeClass("btn-theme").addClass("btn-default");
-
-        var form = $("#formSharedSendDelights")
-        if (form[0].checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-        else {
-            event.preventDefault()
-            var formData = {
-                "userId": $("#hdnUserId").val() ,
-                "connectionUserId": $("#user").val(),
-                "collectionItemId": $("#hdnCollectioItemId").val(),
-                "description": $("#message").val(),
-                "postMyActivity": $("#postMyActivity").is(":checked") ? true : false,
-                "userName": $("#hdnUserName").val(),
-                "connectionUserName": $("#user option:selected").text()
-            };
-
-
-
-            $.ajax({
-                type: 'POST',
-                url: "/SendDelights/SaveSharedItem",
-                data: JSON.stringify(formData),
-                dataType: 'json',
-                contentType: 'application/json',
-                encode: true,
-                success: AjaxSucceeded,
-                error: AjaxFailed
-            });
-        }
-        
-    });
-    $("#formSendDelights").submit(function (event) {
-        var form = $("#formSendDelights")
-        if (form[0].checkValidity() === false) {
-            event.preventDefault()
-            event.stopPropagation()
-        }
-        else {
-            event.preventDefault()
-            var formData = {
-                "userId": $("#user").val(),
-                "connectionUserId": $("#hdnUserId").val(),
-                "collectionItemId": $('input[name="rdbSendDelights"]:checked').data('id')
-            };
-
-
-            var buttonClicked = $(document.activeElement).attr('id');
-            if (buttonClicked === "Save") {
-                if (formData.collectionItemId == undefined || formData.collectionItemId == null) {
-                    AjaxFailed({ errors: "Please select a item", isOK: false })
-                    return;
-                } 
-                $.ajax({
-                    type: 'POST',
-                    url: "/SendDelights/SaveSharedItem",
-                    data: JSON.stringify(formData),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    encode: true,
-                    success: AjaxSucceeded,
-                    error: AjaxFailed
-                });
-            }
-            if (buttonClicked === "btnRandomly") {
-                showSweetAlert();
-
-                $.ajax({
-                    type: 'POST',
-                    url: "/SendDelights/SaveSharedRandomItem",
-                    data: JSON.stringify(formData),
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    encode: true,
-                    success: function (result) {
-                        AjaxSucceeded(result);
-                        closeSweetAlert();
-
-                    },
-                    error: function (result) {
-                        AjaxFailed(result);
-                        closeSweetAlert();
-                    }
-                });
-
-            }
-        }
     });
 });
 (() => {
