@@ -28,7 +28,7 @@ $(document).ready(function () {
         var userId = $(this).data("userid");
         window.location.href = `/Chat/Details?connectionUserId=${userId}`;
     });
-    $("#cancelled").click(function (event) {
+    $('button[name="cancelled"]').click(function (event) {
         event.preventDefault();
         var userId = $(this).data("userid");
         var dinamicText = ""

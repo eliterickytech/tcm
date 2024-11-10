@@ -38,7 +38,16 @@
         .Where(connection => connection.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved).ToList();
 
 
-    var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = user.Id }));
+    var connectionsMe = await _connectionServices.ListConnectionsByUserIdAsync(currentUser.Id);
+
+    var connectionsYou = await _connectionServices.ListConnectionsByConnectionUserIdAsync(currentUser.Id);
+
+    var connections = connectionsYou.Union(connectionsMe).ToList();
+
+    connections = connections.Where(x => x.ConnectionStatusId == (int)TCM.Services.Model.Enum.ConnectionStatusType.Approved).ToList();
+
+
+
 
     var chatUser = (await _chatServices.GetChatAsync(new ChatModel() { ChatUserId = user.Id }));
 
@@ -51,10 +60,8 @@
     else
         chatAll = chatConnection.ToList().Where(x => x.ChatIsRead == false && (x.ChatConnectionUserId == user.Id)).ToList();
 
-    var results = resultUsers.Concat(resultConnections).ToList();
-
     var countCollectionCompleted = await _collectionServices.GetCountCollectionCompletedAsync(user.Id.Value);
-    var countConnection = results.Count();
+
     var countChateUnRead = chatAll.Count();
     var collections = await _collectionServices.GetCollectionAsync();
     var collectionsItens = await _collectionItemServices.GetCollectionItemAsync();
@@ -202,7 +209,7 @@
 
                     </td>
                     <td class="w-25 align-self-center">
-                        <img src="~/StaticFiles/tcm/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@countConnection</span><br />
+                        <img src="~/StaticFiles/tcm/img/connections.png" alt=""><span class="fs-22px fw-bold text-orange-700">@connections.Count()</span><br />
                         connections
                     </td>
                     <td class="w-25 align-self-center">

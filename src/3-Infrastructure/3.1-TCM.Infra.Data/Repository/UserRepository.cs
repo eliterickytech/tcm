@@ -155,7 +155,22 @@ namespace TCM.Infra.Repository
 
             }
             catch (Exception ex) { return default; }
-        }        
+        }
+        public async Task<int> DeleteAdmAsync(int userId, bool isLogic)
+        {
+            var query = @"PR_User_Adm_Delete";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", userId, System.Data.DbType.Int32);
+            parameters.Add("@IsLogic", isLogic, System.Data.DbType.Boolean);
+            try
+            {
+                var result = await ExecuteAsync(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
         public async Task<int> AddAdmAsync(int userId)
         {
             var query = @"PR_User_Adm_Insert";

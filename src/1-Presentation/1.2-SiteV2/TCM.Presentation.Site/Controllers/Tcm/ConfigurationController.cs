@@ -27,6 +27,19 @@ namespace TCM.Presentation.Site.Controllers.Tcm
 
             return View(user);
         }
+        [HttpPost]
+        public async Task<JsonResult> DeleteUser([FromBody] int id)
+        {
+            var result = await _userServices.DeleteUserFisicAsync(id);
+
+            return new JsonResult(new ResultModel()
+            {
+                StatusCode = result > 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
+                IsOK = result > 0,
+                Data = "User has been deleted successfully",
+                Redirect = "/Login"
+            });
+        }
 
         [HttpPost]
         public async Task<JsonResult> Settings([FromBody] UserModel userModel)

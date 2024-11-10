@@ -55,11 +55,9 @@ namespace TCM.CrossCutting.Helpers
 
             try
             {
-                smtpClient.UseDefaultCredentials = false;
-
                 smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
 
-                smtpClient.EnableSsl = false;
+                smtpClient.EnableSsl = true;
 
                 await smtpClient.SendMailAsync(message);
             }
@@ -98,11 +96,10 @@ namespace TCM.CrossCutting.Helpers
 
             try
             {
-                smtpClient.UseDefaultCredentials = false;
 
                 smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
 
-                smtpClient.EnableSsl = false;
+                smtpClient.EnableSsl = true;
 
                 await smtpClient.SendMailAsync(message);
             }
@@ -141,11 +138,10 @@ namespace TCM.CrossCutting.Helpers
 
             try
             {
-                smtpClient.UseDefaultCredentials = false;
 
                 smtpClient.Credentials = new NetworkCredential(_smtpConfiguration.Mail, _smtpConfiguration.Password);
 
-                smtpClient.EnableSsl = false;
+                smtpClient.EnableSsl = true;
 
                 await smtpClient.SendMailAsync(message);
             }

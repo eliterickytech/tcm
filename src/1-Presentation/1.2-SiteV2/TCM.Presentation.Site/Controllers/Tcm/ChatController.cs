@@ -45,6 +45,8 @@ namespace TCM.Presentation.Site.Controllers.Tcm
                     var chatUniqueUser = chatsALL.Where(x => x.ConnectionUserUserName == chat.ConnectionUserUserName).LastOrDefault();
 
                     var chatUniqueConnection = chatsALL.Where(x => x.ChatUserUserName == chat.ConnectionUserUserName).LastOrDefault();
+                    
+                    if (chatUniqueConnection is null) continue;
 
                     var chatUnique = chatUniqueUser.ChatCreatedDate > chatUniqueConnection.ChatCreatedDate ? chatUniqueUser : chatUniqueConnection;
 

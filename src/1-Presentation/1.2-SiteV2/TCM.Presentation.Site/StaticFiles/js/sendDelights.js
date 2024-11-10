@@ -3,9 +3,14 @@ function AjaxSucceeded(result) {
         handleGritterNotificationMessages("Message warning", result.errors);
     }
     else {
-        if (result.redirect != null) {
 
-            window.location.href = result.redirect;
+        handleGritterNotificationMessages("Message success", result.data);
+
+        if (result.redirect != null) {
+            setTimeout(function () {
+
+                window.location.href = result.redirect;
+            }, 3000);
         }
     }
 }

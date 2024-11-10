@@ -10,6 +10,7 @@ using TCM.Presentation.Site.Models;
 using TCM.Services.Interfaces.Services;
 using TCM.Services.Model;
 using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
+using TCM.Services.Model.Enum;
 
 namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 {
@@ -70,6 +71,7 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
         [HttpPost]
         public async Task<JsonResult> SaveSharedItem([FromBody] SendDelightsViewModel model)
         {
+            var currentUser = _userServices.CurrentUserAsync();
 
             var result = await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
             {
@@ -88,7 +90,7 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
                 });
             }
 
-            if (result is { } && model.PostMyActivity)
+            if (result is { } && (model.PostMyActivity || currentUser.ProfileId == (int) UserType.Administrative ))
             {
                 UserModel connection = new UserModel();
                 UserModel user = new UserModel();
@@ -141,7 +143,7 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
                 StatusCode = result > 0 ? HttpStatusCode.OK : HttpStatusCode.BadRequest,
                 IsOK = result > 0 ? true : false,
                 Data = "Successfully shared item",
-                Redirect = "/ManagerCollection/Adm"
+                Redirect = "/SendDelights/Adm"
             });
 
         }
@@ -265,11 +267,11 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 
             foreach (var user in selectedUsers)
             {
-                var selectedItems = SelectRandom(items, null);
+                var selectedItems = SelectRandom(items, null).FirstOrDefault();
 
                 var result = await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
                 {
-                    CollectionItemId = model.CollectionItemId,
+                    CollectionItemId = selectedItems.Id,
                     ConnectionUserId = model.ConnectionUserId ,
                     UserId = user.Id
                 });
@@ -298,7 +300,8 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
             {
                 StatusCode = HttpStatusCode.OK,
                 IsOK = true,
-                Data = "Successfully shared item"
+                Data = "Successfully shared item",
+                Redirect = "/SendDelights/Adm"
             });
         }
 

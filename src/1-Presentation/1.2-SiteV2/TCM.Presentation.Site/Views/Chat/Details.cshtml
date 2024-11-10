@@ -14,7 +14,13 @@
 
     chatsUnread = chatsUnread.Where(x => x.ChatIsRead == false).ToList();
 
-}
+    foreach (var item in chatsUnread)
+    {
+        await _chatServices.UpdateChatIsReadedAsync(item);
+    }
+
+
+}   
 
 @model IEnumerable<TCM.Presentation.Site.Models.ChatViewModel>
 

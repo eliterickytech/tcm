@@ -22,5 +22,6 @@ namespace TCM.Services.Interfaces.Repository
         Task<IEnumerable<UserModel>> ListUserAsync();
         Task<int> UpdateLastAccessDateAsync(int userId);
         Task<int> UpdateUserEnabledAsync(int userId, int enabled);
+        Task<int> DeleteAdmAsync(int userId, bool isLogic);
     }
 }

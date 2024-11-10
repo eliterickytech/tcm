@@ -58,6 +58,8 @@ namespace TCM.Services.Services
 
         public async Task<int> DeleteUserAsync(int id) => await _userRepository.DeleteAdmAsync(id);
 
+        public async Task<int> DeleteUserFisicAsync(int id) => await _userRepository.DeleteAdmAsync(id, false);
+
         public async Task<int> AddAdmAsync(int id) => await _userRepository.AddAdmAsync(id);
 
         public async Task<IEnumerable<UserModel>> ListUserAsync() => await _userRepository.ListUserAsync();

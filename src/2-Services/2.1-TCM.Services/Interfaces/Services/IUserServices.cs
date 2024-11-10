@@ -23,5 +23,6 @@ namespace TCM.Services.Interfaces.Services
 
         Task<IEnumerable<UserModel>> GetAllUsersAsync(UserModel user);
         LoginIdentityModel CurrentUserAsync();
+        Task<int> DeleteUserFisicAsync(int id);
     }
 }
