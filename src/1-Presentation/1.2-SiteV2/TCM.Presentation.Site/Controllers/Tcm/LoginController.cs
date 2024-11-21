@@ -49,6 +49,14 @@ namespace TCM.Presentation.Site.Controllers
                 resultModel.Type = "InvalidPassword";
                 resultModel.IsOK = false;
             }
+            else if (!result.Enabled)
+            {
+                resultModel.StatusCode = System.Net.HttpStatusCode.OK;
+                resultModel.Errors = $"Login Block Notice. Dear {result.UserName}, I hope this message finds you well. We inform you that your access to the system has been temporarily blocked. This measure is to protect your information and ensure the security of your account. If necessary, please contact technical support by email at info@thechefmelo.com . We are available to help with whatever is necessary and we apologize for any inconvenience caused.";
+                resultModel.Type = "InvalidPassword";
+                resultModel.IsOK = false;
+
+            }
             else
             {
                 var userMode = await _userServices.GetUserAsync(new UserModel() { Id = result.Id });

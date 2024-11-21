@@ -82,8 +82,14 @@ $(document).ready(function () {
 
         var formData = {
             "userId": $("#user").val(),
-            "connectionUserId": $("#hdnUserId").val()
+            "connectionUserId": $("#hdnUserId").val(),
+            "collectionItemId": $('input[name="rdbSendDelights"]:checked').data('id')
         };
+
+        if (formData.collectionItemId == undefined || formData.collectionItemId == null) {
+            AjaxFailed({ errors: "Please select the image to be distributed", isOK: false })
+            return;
+        }
 
         showSweetAlert();
 
@@ -117,7 +123,7 @@ $(document).ready(function () {
         };
 
         if (formData.collectionItemId == undefined || formData.collectionItemId == null) {
-            AjaxFailed({ errors: "Please select a item", isOK: false })
+            AjaxFailed({ errors: "Please select the image to be distributed", isOK: false })
             return;
         }
         $.ajax({

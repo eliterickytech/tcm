@@ -260,18 +260,18 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
         {
             var users = await _userServices.GetUserAsync(new UserModel() { ProfileId = Services.Model.Enum.UserType.User });
 
-            var items = (await _collectionItemServices.GetCollectionItemAsync()).Where(x => x.CollectionItemTypeIsCollectible).ToList();
+            //var items = (await _collectionItemServices.GetCollectionItemAsync()).Where(x => x.CollectionItemTypeIsCollectible).ToList();
 
             var selectedUsers = SelectRandom(users.ToList(), 0.2);
 
 
             foreach (var user in selectedUsers)
             {
-                var selectedItems = SelectRandom(items, null).FirstOrDefault();
+                //var selectedItems = model.CollectionItemId; /*SelectRandom(items, null).FirstOrDefault();*/
 
                 var result = await _collectionItemSharedServices.InsertCollectionItemSharedAsync(new Services.Model.CollectionItemSharedModel()
                 {
-                    CollectionItemId = selectedItems.Id,
+                    CollectionItemId = model.CollectionItemId,
                     ConnectionUserId = model.ConnectionUserId ,
                     UserId = user.Id
                 });
