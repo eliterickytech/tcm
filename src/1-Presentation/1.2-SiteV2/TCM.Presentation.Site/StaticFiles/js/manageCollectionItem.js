@@ -72,12 +72,14 @@ $(document).ready(function () {
                 $("#fileName").text(inputFile.files[0].name);
                 $("#fileSize").text((inputFile.files[0].size / 1024).toFixed(2) + " KB");
             };
-
+            $('#btnStartUpload').prop('disabled', false);
             reader.readAsDataURL(inputFile.files[0]);
         }
     });
 
     $("#save").click(function () {
+
+            $('#save').prop('disabled', true);
 
             var collId = $("#collectionId").val();
             var collectionTypeId = $("#collectionTypeId").val();
@@ -274,7 +276,9 @@ $(document).ready(function () {
                     success: AjaxSucceeded,
                     error: AjaxFailed
                 });
-            }
+        }
+
+            $('#save').prop('disabled', false);
 
     });
     $("#fileupload").submit(function (event) {
@@ -306,7 +310,6 @@ $(document).ready(function () {
                 cache: false,
                 success: function (result) {
                     $("#registernewitems").removeAttr("style");
-                    console.log("Result: ", result)
                     if (result.isOK) {
                         if (result.data.collectionTypeId == 1) {
                             $("#collection1").attr("style", "display:block");
@@ -318,10 +321,7 @@ $(document).ready(function () {
                             $("#collection1_1").html('<img src="' + result.data.splitImages[0] + '" class="img" style="width: 100px; height: 100px;"/>')
                         }
                         if (result.data.collectionTypeId == 2) {
-                            console.log("Selecionou o Item de 2x2");
                             $("#collection4").attr("style", "display:block");
-
-                            console.log("Estilo: ", $("#collection4").css(['display']));
 
                             $("#collectionId").val(result.data.collectionId);
                             $("#collectionTypeId").val(result.data.collectionTypeId);
