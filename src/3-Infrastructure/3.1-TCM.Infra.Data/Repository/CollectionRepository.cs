@@ -74,6 +74,21 @@ namespace TCM.Infrastructure.Data.Repository
             catch (Exception ex) { return default; }
         }
 
+        public async Task<IEnumerable<CollectionModel>> GetCollectionAdmAsync()
+        {
+            var query = @"PR_Collection_Adm_Select";
+
+
+            try
+            {
+                var result = await QueryAsync<CollectionModel>(query);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+
         public async Task<CollectionModel> GetCollectionByIdAsync(int id)
         {
             var query = @"PR_Collection_ById_Select";
