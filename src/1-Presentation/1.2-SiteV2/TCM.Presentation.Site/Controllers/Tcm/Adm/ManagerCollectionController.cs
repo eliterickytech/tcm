@@ -39,9 +39,9 @@ namespace TCM.Presentation.Site.Controllers.Tcm.Adm
 
             if (currentUser.Id == 0) return RedirectToAction("Index", "Login");
 
-            var collections = await _collectionServices.GetCollectionAsync();
+            var collections = await _collectionServices.GetCollectionAdmAsync();
 
-            var collectionsItems = (await _collectionItemServices.GetCollectionItemAsync());
+            var collectionsItems = (await _collectionItemServices.GetCollectionAdmItemAsync());
 
             var model = new TCM.Presentation.Site.Models.HomeViewModel();
 
