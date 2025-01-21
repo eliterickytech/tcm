@@ -114,6 +114,7 @@ namespace TCM.Infrastructure.Data.Repository
         {
             var query = @"PR_Connection_Select";
 
+            
             var parameters = new DynamicParameters();
             parameters.Add("@Id", connectionModel.ConnectionUserId, System.Data.DbType.Int32);
             parameters.Add("@UserId", connectionModel.UserId, System.Data.DbType.Int32);
@@ -122,6 +123,24 @@ namespace TCM.Infrastructure.Data.Repository
             parameters.Add("@Email", connectionModel.UserEmail, System.Data.DbType.String);
             parameters.Add("@UserName", connectionModel.UserUsername, System.Data.DbType.String);
 
+
+            try
+            {
+                var result = await QueryAsync<ConnectionModel>(query, parameters);
+                return result;
+
+            }
+            catch (Exception ex) { return default; }
+        }
+
+        public async Task<IEnumerable<ConnectionModel>> GetConnectionAdmProfileAsync(ConnectionModel connectionModel)
+        {
+            var query = @"PR_Connection_Adm_Select";
+
+
+            var parameters = new DynamicParameters();
+            parameters.Add("@UserId", connectionModel.ConnectionUserId, System.Data.DbType.Int32);
+            parameters.Add("@ConnectionUserId", connectionModel.UserId, System.Data.DbType.Int32);
 
             try
             {

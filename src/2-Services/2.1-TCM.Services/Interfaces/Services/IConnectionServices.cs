@@ -15,6 +15,7 @@ namespace TCM.Services.Interfaces.Services
         Task<int> AddConnectionBlockedAsync(int userId, int connectionUserId);
         Task<int> DeleteConnectionAsync(int id, int connectionStatusId);
         Task<int> DeleteConnectionBlockedAsync(int userId, int connectionUserId);
+        Task<List<ConnectionModel>> GetConnectionAdmProfileAsync(ConnectionModel model);
         Task<List<ConnectionModel>> GetConnectionAsync(int userId);
         Task<List<ConnectionModel>> GetConnectionAsync(ConnectionModel model);
         Task<List<int>> GetConnectionBlockedAsync(int userId, int? connectionUserId);

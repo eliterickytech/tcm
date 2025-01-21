@@ -13,6 +13,7 @@ namespace TCM.Services.Interfaces.Repository
         Task<int> AddConnectionBlockedAsync(int userId, int connectionUserId);
         Task<int> DeleteConnectionAsync(int id, int connectionStatusId);
         Task<int> DeleteConnectionBlockedAsync(int userId, int connectionUserId);
+        Task<IEnumerable<ConnectionModel>> GetConnectionAdmProfileAsync(ConnectionModel connectionModel);
         Task<IEnumerable<ConnectionModel>> GetConnectionAsync(ConnectionModel connectionModel);
         Task<IEnumerable<int>> GetConnectionBlockedAsync(int userId, int? connectionUserId);
         Task<IEnumerable<ConnectionsModel>> ListConnectionsByConnectionUserIdAsync(int userId, int connectionUserId);

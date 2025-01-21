@@ -76,6 +76,13 @@ namespace TCM.Services.Services
             return distinct.ToList();
         }
 
+        public async Task<List<ConnectionModel>> GetConnectionAdmProfileAsync(ConnectionModel model)
+        {
+            var resultUser = await _connectionRepository.GetConnectionAdmProfileAsync(model);
+
+            return resultUser.ToList();
+        }
+
         public async Task<int> AddConnectionAsync(int userId, int connectionUserId)
         {
             return await _connectionRepository.AddConnectionAsync(new ConnectionModel() { UserId = userId, ConnectionUserId = connectionUserId, ConnectionUserConnectionStatusId = (int) ConnectionStatusType.Requested });

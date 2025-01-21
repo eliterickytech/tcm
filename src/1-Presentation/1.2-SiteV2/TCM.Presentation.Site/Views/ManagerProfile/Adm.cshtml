@@ -21,34 +21,30 @@
     {
         user = (await _userServices.GetUserAsync(new UserModel() { Id = ViewBag.ConnectionUserId })).FirstOrDefault();
 
-        connectionUserId = user.Id.Value;
-
-
+        connectionUserId = ViewBag.ConnectionUserId;
     }
     else
     {
         user.UserName = currentUser.UserName;
         user.Id = currentUser.Id;
         user.ProfileId = (TCM.Services.Model.Enum.UserType)currentUser.ProfileId;
-
     }
 
-
-    var resultUsers = (await _connectionServices.GetConnectionAsync(user.Id.Value))
+    var resultUsers = (await _connectionServices.GetConnectionAsync(connectionUserId))
         .Where(connection => connection.ConnectionUserConnectionStatusId == (int)ConnectionStatusType.Approved).ToList();
 
 
-    var resultConnections = (await _connectionServices.GetConnectionAsync(new ConnectionModel() { ConnectionUserId = user.Id }));
+    var resultConnections = (await _connectionServices.GetConnectionAdmProfileAsync(new ConnectionModel() { ConnectionUserId = connectionUserId, UserId = currentUser.Id }));
 
-    var chatUser = (await _chatServices.GetChatAsync(new ChatModel() { ChatUserId = user.Id }));
+    var chatUser = (await _chatServices.GetChatAsync(new ChatModel() { ChatUserId = connectionUserId }));
 
-    var chatConnection = (await _chatServices.GetChatAsync(new ChatModel() { ChatConnectionUserId = user.Id }));
+    var chatConnection = (await _chatServices.GetChatAsync(new ChatModel() { ChatConnectionUserId = connectionUserId }));
 
-    var chatAll = chatUser.Concat(chatConnection).ToList().Where(x => x.ChatIsRead == false && (x.ChatUserId == user.Id )).ToList();
+    var chatAll = chatUser.Concat(chatConnection).ToList().Where(x => x.ChatIsRead == false && (x.ChatUserId == connectionUserId)).ToList();
 
-    var shared = (await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { UserId = user.Id.Value })).ToList();
+    var shared = (await _collectionItemSharedServices.GetCollectionItemSharedAsync(new CollectionItemSharedModel() { UserId = connectionUserId })).ToList();
 
-    var userShared = (await _userServices.GetUserAsync(new UserModel() { Id = shared.LastOrDefault().ConnectionUserId })).FirstOrDefault();
+    //var userShared = (await _userServices.GetUserAsync(new UserModel() { Id = shared.LastOrDefault().ConnectionUserId })).FirstOrDefault();
 
     var results = resultUsers.Concat(resultConnections).ToList();
 
